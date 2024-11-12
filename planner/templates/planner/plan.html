@@ -42,12 +42,13 @@
                 <div class="recipe-group" x-data>
                     <div class="recipe-group-header">
                         <h3 class="recipe-group-title" 
-                            contenteditable 
+                            :contenteditable="activeGrouping === 'custom'"
                             @input="updateGroupName($event)"
                             @keydown.enter.prevent="$el.blur()"
                             x-text="group.name">
                         </h3>
                         <button @click="$el.closest('.recipe-group').remove()" 
+                                x-show="activeGrouping === 'custom'"
                                 class="text-gray-400 hover:text-red-500 transition-colors">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -73,7 +74,8 @@
             </template>
             
             <!-- Add Group Button -->
-            <button hx-post="{% url 'action_add_group' %}"
+            <button x-show="activeGrouping === 'custom'"
+                    hx-post="{% url 'action_add_group' %}"
                     hx-target="#add-group-btn"
                     hx-swap="beforebegin"
                     hx-indicator="#loading"
@@ -89,11 +91,17 @@
             </button>
         </div>
 
-        <div class="mt-8">
-            <button class="save-plan-btn w-full px-6 py-4 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 font-semibold transition-colors">
-                Save Meal Plan
-            </button>
+        <!-- Replace the existing button div with this new fixed bottom nav -->
+        <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-lg">
+            <div class="container mx-auto max-w-5xl">
+                <button class="save-plan-btn w-full px-6 py-4 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 font-semibold transition-colors">
+                    Save Meal Plan
+                </button>
+            </div>
         </div>
+
+        <!-- Add padding to prevent content from being hidden behind fixed nav -->
+        <div class="h-24"></div>
     </div>
 
     <div id="loading" class="htmx-indicator">

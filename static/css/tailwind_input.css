@@ -41,7 +41,11 @@
     }
 
     .recipe-group-title {
-        @apply text-xl font-semibold text-gray-800 cursor-text hover:bg-gray-100 px-2 py-1 rounded transition-colors;
+        @apply text-xl font-semibold text-gray-800 px-2 py-1 rounded transition-colors;
+    }
+
+    .recipe-group-title[contenteditable="true"] {
+        @apply cursor-text hover:bg-gray-100;
     }
 
     .recipe-group-title:focus {
@@ -49,11 +53,12 @@
     }
 
     .recipe-list {
-        @apply divide-y divide-gray-100;
+        @apply space-y-2;
     }
 
     .recipe-item {
-        @apply flex items-center py-3 px-2 hover:bg-gray-50 rounded-md transition-colors;
+        @apply flex items-center py-3 px-2 hover:bg-gray-50 rounded-md transition-colors
+               border border-gray-100;
     }
 }
 
