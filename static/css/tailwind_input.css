@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+    .recipe-item {
+        @apply cursor-grab;
+    }
+
+    /* When hovering over drop target */
+    .recipe-item.sortable-ghost {
+        @apply bg-blue-50 cursor-grabbing;
+    }
+
+    /* Applied to the original element being dragged */
+    .recipe-item.sortable-chosen {
+        @apply opacity-50 cursor-grabbing;
+    }
+
+    /* Applied to the clone/helper element */
+    .recipe-item.sortable-drag {
+        @apply cursor-grabbing;
+    }
+
+    .group-by-btn {
+        @apply px-3 py-1.5 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 
+               hover:bg-gray-200 outline-none transition-colors;
+    }
+
+    .group-by-btn.active {
+        @apply bg-gray-300 text-gray-900 font-semibold;
+    }
+
+    .recipe-group {
+        @apply bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden;
+    }
+
+    .recipe-group-header {
+        @apply p-5 border-b border-gray-200 bg-gray-50;
+    }
+
+    .recipe-group-title {
+        @apply text-xl font-semibold text-gray-800;
+    }
+
+    .recipe-list {
+        @apply divide-y divide-gray-100;
+    }
+
+    .recipe-item {
+        @apply flex items-center py-3 px-2 hover:bg-gray-50 rounded-md transition-colors;
+    }
+}
+
+
+
+

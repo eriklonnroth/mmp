@@ -4,9 +4,13 @@
 <html lang="en">
     <head>
         <title>{% block title %}{% endblock %}</title>
-        <link rel="stylesheet" href="{% static 'planner/style.css' %}">
+        {% csrf_token %}
+        <link rel="stylesheet" type="text/css" href="{% static '/css/tailwind_output.css' %}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.14.3/cdn.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.3/Sortable.min.js"></script>
+        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
     </head>
-    <body>
+    <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' class="bg-slate-50 min-h-screen p-6">
         {% block body %}
         {% endblock %}
     </body>
