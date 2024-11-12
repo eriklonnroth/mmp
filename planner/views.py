@@ -1,12 +1,19 @@
 from django.shortcuts import render
 from django.http import HttpResponseNotAllowed, HttpResponse
 
-# Create your views here.
+# Import or define your initial_data and recipes here
+from .data import initial_data, recipes  # Assuming you have a data.py file with these variables
+
 def index(request):
     return render(request, "planner/index.html")
 
 def plan(request):
-    return render(request, "planner/plan.html")
+    context = {
+        'initial_groups': initial_data['weekday'].values(),
+        'initial_data': initial_data,
+        'recipes': recipes
+    }
+    return render(request, "planner/plan.html", context)
 
 def action_add_group(request):
     if request.method == 'POST':        

@@ -1,9 +1,16 @@
 {% extends "planner/layout.html" %}
 {% load static %}
 {% load partials %}
+{% load planner_extras %}
 
 
 {% block body %}
+    {{ initial_data|json_script:"initial-data" }}
+    {{ recipes|json_script:"recipes" }}
+    <script>
+        window.INITIAL_DATA = JSON.parse(document.getElementById('initial-data').textContent);
+        window.RECIPES = JSON.parse(document.getElementById('recipes').textContent);
+    </script>
     <script src="{% static 'planner/js/plan.js' %}"></script>
     <div x-data="mealPlan" class="container mx-auto max-w-5xl" x-init="init">
         <div class="mb-8">
@@ -17,9 +24,14 @@
                         Weekday
                     </button>
                     <button @click="groupBy('mealType')" 
-                            class="group-by-btn rounded-r-md"
+                            class="group-by-btn"
                             x-bind:class="{ 'active': activeGrouping === 'mealType' }">
                         Meal Type
+                    </button>
+                    <button @click="groupBy('custom')" 
+                            class="group-by-btn rounded-r-md"
+                            x-bind:class="{ 'active': activeGrouping === 'custom' }">
+                        Custom
                     </button>
                 </div>
             </div>
@@ -27,19 +39,25 @@
 
         <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3" id="groups-container">
             <template x-for="group in Object.values(groups)" :key="group.id">
-                <div class="recipe-group">
+                <div class="recipe-group" x-data>
                     <div class="recipe-group-header">
                         <h3 class="recipe-group-title" 
-                            x-text="group.name" 
                             contenteditable 
-                            @input="group.name = $event.target.innerText">
+                            @input="updateGroupName($event)"
+                            @keydown.enter.prevent="$el.blur()"
+                            x-text="group.name">
                         </h3>
+                        <button @click="$el.closest('.recipe-group').remove()" 
+                                class="text-gray-400 hover:text-red-500 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
                     </div>
                     <div class="p-5">
                         <ul class="recipe-list" :data-group-id="group.id">
-                            <template x-for="(recipeId, index) in group.recipeIds" :key="recipeId">
-                                <li class="recipe-item"
-                                    :data-recipe-id="recipeId">
+                            <template x-for="recipeId in group.recipeIds" :key="recipeId">
+                                <li class="recipe-item" :data-recipe-id="recipeId">
                                     <span class="text-gray-700 select-none" x-text="recipes[recipeId].name"></span>
                                 </li>
                             </template>
@@ -72,8 +90,8 @@
         </div>
 
         <div class="mt-8">
-            <button class="w-full px-6 py-4 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 font-semibold transition-colors">
-                Update Shopping List
+            <button class="save-plan-btn w-full px-6 py-4 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 font-semibold transition-colors">
+                Save Meal Plan
             </button>
         </div>
     </div>
@@ -88,13 +106,20 @@
 
 {% partialdef partial-recipe-group %}
 
-<div class="recipe-group">
+<div class="recipe-group" x-data>
     <div class="recipe-group-header">
         <h3 class="recipe-group-title" 
             contenteditable 
-            @input="updateGroupName($event)">
+            @input="updateGroupName($event)"
+            @keydown.enter.prevent="$el.blur()">
             New Group
         </h3>
+        <button @click="$el.closest('.recipe-group').remove()" 
+                class="text-gray-400 hover:text-red-500 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+        </button>
     </div>
     <div class="p-5">
         <ul class="recipe-list divide-y divide-gray-100" data-group-id="new-group">

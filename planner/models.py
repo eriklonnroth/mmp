@@ -127,21 +127,60 @@ class Plan(models.Model):
     class Meta:
         ordering = ['-modified_at']
 
+class Grouping(models.Model):
+    GROUPING_TYPES = [
+        ('weekday', 'Weekday'),
+        ('meal_type', 'Meal Type'),
+        ('custom', 'Custom'),
+    ]
 
-class Group(models.Model):
-    plan = models.ForeignKey(Plan, related_name='groups', on_delete=models.CASCADE)
+    plan = models.ForeignKey(Plan, related_name='groupings', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    order = models.PositiveIntegerField()
+    type = models.CharField(max_length=20, choices=GROUPING_TYPES, default='custom')
+    order = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
+    def save(self, *args, **kwargs):
+        if self.order == 0:  # If order not explicitly set
+            last_order = Grouping.objects.filter(
+                plan=self.plan
+            ).aggregate(
+                models.Max('order')
+            )['order__max'] or 0
+            self.order = last_order + 1
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return f"{self.name} (Plan: {self.plan.name})"
+        return f"{self.name} ({self.get_type_display()}) - Plan: {self.plan.name}"
 
     class Meta:
         ordering = ['order']
-        unique_together = ['plan', 'order']
+        unique_together = ['plan', 'type', 'order']
 
+class Group(models.Model):
+    grouping = models.ForeignKey(Grouping, related_name='groups', on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    order = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if self.order == 0:  # If order not explicitly set
+            last_order = Group.objects.filter(
+                grouping=self.grouping
+            ).aggregate(
+                models.Max('order')
+            )['order__max'] or 0
+            self.order = last_order + 1
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.name} (Grouping: {self.grouping.name})"
+
+    class Meta:
+        ordering = ['order']
+        unique_together = ['grouping', 'order']
 
 class GroupRecipe(models.Model):
     group = models.ForeignKey(Group, related_name='recipes', on_delete=models.CASCADE)

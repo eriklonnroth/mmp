@@ -37,11 +37,15 @@
     }
 
     .recipe-group-header {
-        @apply p-5 border-b border-gray-200 bg-gray-50;
+        @apply p-5 border-b border-gray-200 bg-gray-50 flex justify-between items-center;
     }
 
     .recipe-group-title {
-        @apply text-xl font-semibold text-gray-800;
+        @apply text-xl font-semibold text-gray-800 cursor-text hover:bg-gray-100 px-2 py-1 rounded transition-colors;
+    }
+
+    .recipe-group-title:focus {
+        @apply outline-none ring-2 ring-blue-300;
     }
 
     .recipe-list {
