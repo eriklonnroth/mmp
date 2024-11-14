@@ -1,14 +1,20 @@
+from django.contrib.staticfiles.finders import find
 from django.shortcuts import render
 from django.http import HttpResponseNotAllowed, HttpResponse
 import json
 
+
 def index(request):
     return render(request, "planner/index.html")
 
+
 def plan(request):
-    with open('planner/static/data/groupings.json') as f:
+    groupings_path = find('planner/data/groupings.json')
+    recipes_path = find('planner/data/recipes.json')
+
+    with open(groupings_path) as f:
         groupings = json.load(f)
-    with open('planner/static/data/recipes.json') as f:
+    with open(recipes_path) as f:
         recipes = json.load(f)
         
     context = {
