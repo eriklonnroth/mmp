@@ -1,17 +1,19 @@
 from django.shortcuts import render
 from django.http import HttpResponseNotAllowed, HttpResponse
-
-# Import or define your initial_data and recipes here
-from .data import initial_data, recipes  # Assuming you have a data.py file with these variables
+import json
 
 def index(request):
     return render(request, "planner/index.html")
 
 def plan(request):
+    with open('planner/static/data/groupings.json') as f:
+        groupings = json.load(f)
+    with open('planner/static/data/recipes.json') as f:
+        recipes = json.load(f)
+        
     context = {
-        'initial_groups': initial_data['weekday'].values(),
-        'initial_data': initial_data,
-        'recipes': recipes
+        'groupings': groupings,
+        'recipes': recipes,
     }
     return render(request, "planner/plan.html", context)
 
@@ -20,3 +22,9 @@ def action_add_group(request):
         html = render(request, 'planner/plan.html#partial-recipe-group').content.decode('utf-8')
         return HttpResponse(html)
     return HttpResponseNotAllowed(['POST'])
+
+def recipes(request):
+    return render(request, "planner/recipes.html")
+
+def shopping_list(request):
+    return render(request, "planner/shopping-list.html")

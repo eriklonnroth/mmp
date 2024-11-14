@@ -1,9 +1,19 @@
+const groupingsData = JSON.parse(document.getElementById('groupings').textContent);
+const recipesData = JSON.parse(document.getElementById('recipes').textContent);
+
 document.addEventListener('alpine:init', () => {
     Alpine.data('mealPlan', () => ({
-        recipes: window.RECIPES || {},
-        groups: window.INITIAL_DATA.weekday || {},
+        recipes: recipesData,
+        groups: groupingsData.weekday,
+        groupings: groupingsData,
         activeGrouping: 'weekday',
         isEmpty: true,
+
+        init() {
+            this.$nextTick(() => {
+                this.initSortable();
+            });
+        },
 
         initSortable() {
             const recipeLists = document.querySelectorAll('.recipe-list');
@@ -18,18 +28,8 @@ document.addEventListener('alpine:init', () => {
 
         groupBy(type) {
             this.activeGrouping = type;
-            this.groups = window.INITIAL_DATA[type];
+            this.groups = this.groupings[type];
             this.$nextTick(() => {
-                this.initSortable();
-            });
-        },
-
-        init() {
-            this.$nextTick(() => {
-                this.initSortable();
-            });
-
-            document.body.addEventListener('htmx:afterSwap', () => {
                 this.initSortable();
             });
         },
@@ -38,6 +38,15 @@ document.addEventListener('alpine:init', () => {
             const groupId = event.target.closest('.recipe-group').querySelector('.recipe-list').dataset.groupId;
             if (this.groups[groupId]) {
                 this.groups[groupId].name = event.target.innerText;
+            }
+        },
+
+        confirmRemoveRecipe(event, recipeName) {
+            if (confirm(`Remove ${recipeName}?`)) {
+                const recipeItem = event.target.closest('.recipe-item');
+                if (recipeItem) {
+                    recipeItem.remove();
+                }
             }
         },
     }));

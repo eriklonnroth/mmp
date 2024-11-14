@@ -1,20 +1,30 @@
 {% extends "planner/layout.html" %}
 {% load static %}
 {% load partials %}
-{% load planner_extras %}
+
+{% block title %}
+    Meal Plan
+{% endblock %}
+
+{% block head %}
+    {{ groupings|json_script:"groupings" }}
+    {{ recipes|json_script:"recipes" }}
+    <script src="{% static 'planner/js/plan.js' %}"></script>
+{% endblock %}
 
 
 {% block body %}
-    {{ initial_data|json_script:"initial-data" }}
-    {{ recipes|json_script:"recipes" }}
-    <script>
-        window.INITIAL_DATA = JSON.parse(document.getElementById('initial-data').textContent);
-        window.RECIPES = JSON.parse(document.getElementById('recipes').textContent);
-    </script>
-    <script src="{% static 'planner/js/plan.js' %}"></script>
     <div x-data="mealPlan" class="container mx-auto max-w-5xl" x-init="init">
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900 mb-6">My Meal Plan</h1>
+            <div class="flex justify-between items-center mb-6">
+                <h1 id="title" class="text-3xl font-bold text-gray-900">Meal Plan</h1>
+                <button class="inline-flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                    </svg>
+                    <span class="hidden sm:inline">My Meal Plans</span>
+                </button>
+            </div>
             <div class="inline-flex items-center space-x-3">
                 <h2 class="text-md font-semibold text-gray-700">Group By:</h2>
                 <div class="inline-flex rounded-md shadow-sm" role="group">
@@ -59,7 +69,19 @@
                         <ul class="recipe-list" :data-group-id="group.id">
                             <template x-for="recipeId in group.recipeIds" :key="recipeId">
                                 <li class="recipe-item" :data-recipe-id="recipeId">
-                                    <span class="text-gray-700 select-none" x-text="recipes[recipeId].name"></span>
+                                    <span class="text-gray-700 select-none flex-grow" 
+                                          x-text="(() => { 
+                                              console.log('Recipe ID:', recipeId); 
+                                              console.log('Recipe object:', recipes[recipeId]); 
+                                              return recipes[recipeId]?.name || 'Recipe not found';
+                                          })()">
+                                    </span>
+                                    <button @click.stop="confirmRemoveRecipe($event, recipes[recipeId].name)" 
+                                            class="text-gray-400 hover:text-red-500 transition-colors ml-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </button>
                                 </li>
                             </template>
                         </ul>
@@ -109,7 +131,6 @@
     </div>
 
 {% endblock %}
-
 
 
 {% partialdef partial-recipe-group %}

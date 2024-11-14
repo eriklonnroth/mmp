@@ -1,0 +1,62 @@
+{
+    "weekday": {
+        "monday": {
+            "id": "monday",
+            "name": "Monday",
+            "recipeIds": ["overnight-oats", "greek-yogurt", "pasta-carbonara"]
+        },
+        "tuesday": {
+            "id": "tuesday",
+            "name": "Tuesday",
+            "recipeIds": ["chicken-korma", "quinoa-salad", "beef-stir-fry"]
+        },
+        "wednesday": {
+            "id": "wednesday",
+            "name": "Wednesday",
+            "recipeIds": ["smoothie-bowl", "chicken-sandwich"]
+        },
+        "thursday": {
+            "id": "thursday",
+            "name": "Thursday",
+            "recipeIds": ["fish-curry", "pancakes"]
+        },
+        "friday": {
+            "id": "friday",
+            "name": "Friday",
+            "recipeIds": ["french-toast", "lentil-soup"]
+        },
+        "saturday": {
+            "id": "saturday",
+            "name": "Saturday",
+            "recipeIds": ["beef-lasagna", "sweet-potato-soup", "greek-salad"]
+        },
+        "sunday": {
+            "id": "sunday",
+            "name": "Sunday",
+            "recipeIds": ["lamb-roast", "succulent-brownies"]
+        }
+    },
+    "mealType": {
+        "breakfast": {
+            "id": "breakfast",
+            "name": "Breakfast",
+            "recipeIds": ["overnight-oats", "greek-yogurt", "pancakes", "french-toast"]
+        },
+        "lunch": {
+            "id": "lunch",
+            "name": "Lunch",
+            "recipeIds": ["quinoa-salad", "chicken-sandwich", "lentil-soup", "greek-salad"]
+        },
+        "dinner": {
+            "id": "dinner",
+            "name": "Dinner",
+            "recipeIds": ["beef-lasagna", "sweet-potato-soup", "lamb-roast"]
+        },
+        "snacks": {
+            "id": "snacks",
+            "name": "Snacks",
+            "recipeIds": ["greek-yogurt", "homemade-tortillas", "french-toast"]
+        }
+    },
+    "custom": {}
+} 

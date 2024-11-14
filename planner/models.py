@@ -1,11 +1,78 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.dispatch import receiver
 import hashlib
 import json
 
 from .utils import scale_quantity
+
+
+# Plan models
+class Plan(models.Model):
+    name = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.name}"
+
+    class Meta:
+        ordering = ['-modified_at']
+
+class Grouping(models.Model):
+    GROUPING_TYPES = [
+        ('weekday', 'Weekday'),
+        ('meal_type', 'Meal Type'),
+        ('custom', 'Custom'),
+    ]
+
+    name = models.CharField(max_length=255)
+    plan = models.ForeignKey(Plan, null=True, blank=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['name', 'user'],
+                condition=models.Q(plan__isnull=True),
+                name='unique_template_name'
+            ),
+            models.UniqueConstraint(
+                fields=['name', 'plan'],
+                name='unique_plan_name'
+            )
+        ]
+
+class Group(models.Model):
+    grouping = models.ForeignKey(Grouping, related_name='groups', on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    order = models.PositiveIntegerField(default=0)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if self.order == 0:  # If order not explicitly set
+            last_order = Group.objects.filter(
+                grouping=self.grouping
+            ).aggregate(
+                models.Max('order')
+            )['order__max'] or 0
+            self.order = last_order + 1
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.name} (Grouping: {self.grouping.name})"
+
+    class Meta:
+        ordering = ['order']
+        unique_together = ['grouping', 'order']
+
 
 # Recipe models
 class Recipe(models.Model):
@@ -16,18 +83,36 @@ class Recipe(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     modified_at = models.DateTimeField(auto_now=True)
     ingredients_digest = models.CharField(max_length=64, blank=True)
+    saved_by = models.ManyToManyField(
+        User,
+        through='SavedRecipe',
+        related_name='saved_recipes'
+    )
 
-    def get_scaled_ingredients(self, new_servings):
-        """Returns a list of ingredients with quantities scaled but NOT saved."""
-        scaled = []
+    def get_scaled_recipe(self, new_servings: int) -> dict:
+        """Returns a complete scaled version of the recipe."""
+        scaled_ingredients = []
         for ingredient in self.ingredients.all():
-            scaled.append({
-                'item': ingredient.item,
-                'quantity': scale_quantity(ingredient.quantity, self.servings, new_servings),
+            new_quantity, new_item = scale_quantity(
+                ingredient.quantity,
+                ingredient.item,
+                self.servings,
+                new_servings
+            )
+            scaled_ingredients.append({
+                'quantity': new_quantity,
+                'item': new_item,
                 'order': ingredient.order
             })
-        return scaled
-    
+        
+        return {
+            'name': self.name,
+            'servings': new_servings,
+            'notes': self.notes,
+            'ingredients': scaled_ingredients,
+            'instruction_sections': self.instruction_sections.all(),
+        }
+
     def scale_and_save(self, new_servings):
         """Permanently scales the recipe to a new serving size."""
         old_servings = self.servings
@@ -114,134 +199,42 @@ class InstructionStep(models.Model):
             models.Index(fields=['section', 'order']),
         ]
 
-# Plan models
-class Plan(models.Model):
-    name = models.CharField(max_length=100)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f"{self.name}"
+# Recipe saved by user
+class SavedRecipe(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    saved_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-modified_at']
-
-class Grouping(models.Model):
-    GROUPING_TYPES = [
-        ('weekday', 'Weekday'),
-        ('meal_type', 'Meal Type'),
-        ('custom', 'Custom'),
-    ]
-
-    plan = models.ForeignKey(Plan, related_name='groupings', on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    type = models.CharField(max_length=20, choices=GROUPING_TYPES, default='custom')
-    order = models.PositiveIntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
-
-    def save(self, *args, **kwargs):
-        if self.order == 0:  # If order not explicitly set
-            last_order = Grouping.objects.filter(
-                plan=self.plan
-            ).aggregate(
-                models.Max('order')
-            )['order__max'] or 0
-            self.order = last_order + 1
-        super().save(*args, **kwargs)
+        unique_together = ['user', 'recipe']
+        ordering = ['-saved_at']
 
     def __str__(self):
-        return f"{self.name} ({self.get_type_display()}) - Plan: {self.plan.name}"
+        return f"{self.recipe.name} saved by {self.user.username}"
 
-    class Meta:
-        ordering = ['order']
-        unique_together = ['plan', 'type', 'order']
 
-class Group(models.Model):
-    grouping = models.ForeignKey(Grouping, related_name='groups', on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    order = models.PositiveIntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
 
-    def save(self, *args, **kwargs):
-        if self.order == 0:  # If order not explicitly set
-            last_order = Group.objects.filter(
-                grouping=self.grouping
-            ).aggregate(
-                models.Max('order')
-            )['order__max'] or 0
-            self.order = last_order + 1
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return f"{self.name} (Grouping: {self.grouping.name})"
-
-    class Meta:
-        ordering = ['order']
-        unique_together = ['grouping', 'order']
-
-class GroupRecipe(models.Model):
+# Scaled recipe for specific meal plan
+class ScaledRecipe(models.Model):
     group = models.ForeignKey(Group, related_name='recipes', on_delete=models.CASCADE)
     recipe = models.ForeignKey('Recipe', on_delete=models.CASCADE)
     servings = models.PositiveIntegerField()
-
-    @property
-    def scaled_ingredients(self):
-        """Returns the recipe's ingredients scaled to group servings count."""
-        return self.recipe.get_scaled_ingredients(self.servings)
-
-    @property
-    def scaling_factor(self):
-        """Returns the ratio of group servings to recipe servings."""
-        return self.servings / self.recipe.servings
-
-    def preview_scaled_recipe(self):
-        """Returns dictionary with all recipe data scaled to group servings."""
-        return {
-            'title': self.recipe.title,
-            'servings': self.servings,
-            'notes': self.recipe.notes,
-            'ingredients': self.scaled_ingredients,
-            'instruction_sections': self.recipe.instruction_sections.all(),
-        }
-
-    def __str__(self):
-        return f"{self.recipe.name} (for {self.servings}) - {self.group.name}"
-
-
-
-# Shopping list models
-class ShoppingCategory(models.Model):
-    CATEGORIES = [
-        ('fruit_veg', 'Fruit & Vegetables'),
-        ('meat_fish', 'Meat & Fish'),
-        ('dairy', 'Dairy & Refrigerated'),
-        ('bakery', 'Bakery'),
-        ('pantry', 'Pantry'),
-        ('drinks', 'Drinks'),
-        ('snacks', 'Snacks'),
-        ('frozen', 'Frozen'),
-        ('non_food', 'Non-food'),
-        ('other', 'Other'),
-    ]
-
-    name = models.CharField(max_length=50, choices=CATEGORIES, unique=True)
-    order = models.PositiveIntegerField(unique=True)
-
-    def __str__(self):
-        return self.get_name_display()
+    order = models.PositiveIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    modified_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['order']
-        verbose_name_plural = 'Categories'
+        unique_together = ['group', 'order']
+        db_table = 'planner_scaledrecipe'  # Optional: keep old table name if preserving data
 
 
+# Shopping list models
 class ShoppingList(models.Model):
     plan = models.OneToOneField('Plan', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     modified_at = models.DateTimeField(auto_now=True)
     content_digest = models.CharField(max_length=64, blank=True)  # SHA-256 hash
 
@@ -271,6 +264,31 @@ class ShoppingList(models.Model):
         return f"Shopping List for {self.plan.name}"
 
 
+class ShoppingCategory(models.Model):
+    CATEGORIES = [
+        ('fruit_veg', 'Fruit & Vegetables'),
+        ('meat_fish', 'Meat & Fish'),
+        ('dairy', 'Dairy & Refrigerated'),
+        ('bakery', 'Bakery'),
+        ('pantry', 'Pantry'),
+        ('drinks', 'Drinks'),
+        ('snacks', 'Snacks'),
+        ('frozen', 'Frozen'),
+        ('non_food', 'Non-food'),
+        ('other', 'Other'),
+    ]
+
+    name = models.CharField(max_length=50, choices=CATEGORIES, unique=True)
+    order = models.PositiveIntegerField(unique=True)
+
+    def __str__(self):
+        return self.get_name_display()
+
+    class Meta:
+        ordering = ['order']
+        verbose_name_plural = 'Categories'
+
+
 class ShoppingItem(models.Model):
     shopping_list = models.ForeignKey(ShoppingList, related_name='items', on_delete=models.CASCADE)
     category = models.ForeignKey(ShoppingCategory, related_name='items', on_delete=models.PROTECT)
@@ -283,3 +301,4 @@ class ShoppingItem(models.Model):
 
     class Meta:
         ordering = ['category__order', 'item']
+

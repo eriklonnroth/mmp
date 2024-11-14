@@ -3,15 +3,64 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>{% block title %}{% endblock %}</title>
+        <title>{% block title %}Magic Meal Planner{% endblock %}</title>
         {% csrf_token %}
         <link rel="stylesheet" type="text/css" href="{% static '/css/tailwind_output.css' %}">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.14.3/cdn.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.3/Sortable.min.js"></script>
         <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-    </head>
-    <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' class="bg-slate-50 min-h-screen p-6">
-        {% block body %}
+        {% block head %}
         {% endblock %}
+    </head>
+    <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' class="bg-slate-50 min-h-screen">
+        <nav class="bg-white shadow-sm w-full mb-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="flex justify-between items-center w-full">
+                    <div class="flex-grow">
+                        <div class="flex h-16 space-x-8">
+                            {% with request.resolver_match.url_name as url_name %}
+                            <a href="{% url 'recipes' %}" 
+                               class="{% if url_name == 'recipes' %}nav-button-active{% else %}nav-button-inactive{% endif %}">
+                                {% include "planner/svg/recipe-book.svg" %}
+                                Recipes
+                            </a>
+                            <a href="{% url 'plan' %}" 
+                               class="{% if url_name == 'plan' %}nav-button-active{% else %}nav-button-inactive{% endif %}">
+                                {% include "planner/svg/calendar-alt.svg" %}
+                                Meal Plan
+                            </a>
+                            <a href="{% url 'shopping_list' %}" 
+                               class="{% if url_name == 'shopping_list' %}nav-button-active{% else %}nav-button-inactive{% endif %}">
+                                {% include "planner/svg/shopping-cart.svg" %}
+                                Shopping List
+                            </a>
+                            {% endwith %}
+                        </div>
+                    </div>
+                    
+                    <div class="relative" x-data="{ open: false }">
+                        <button @click="open = !open" class="p-2 text-gray-500 hover:text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </button>
+                        <div x-show="open" 
+                             @click.away="open = false" 
+                             class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+                             style="display: none;">
+                            <div class="py-1">
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dietary Preferences</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Billing</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="body-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {% block body %}
+            {% endblock %}
+        </div>
     </body>
 </html>
