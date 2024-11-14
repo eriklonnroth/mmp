@@ -8,4 +8,5 @@ urlpatterns= [
     path("action_add_group", views.action_add_group, name="action_add_group"),
     path("recipes", views.recipes, name="recipes"),
     path("shopping-list", views.shopping_list, name="shopping_list"),
+    path('api/generate-recipe/', views.GenerateRecipeView.as_view(), name='generate_recipe'),
 ]
