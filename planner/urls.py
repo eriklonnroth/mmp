@@ -9,4 +9,5 @@ urlpatterns= [
     path("recipes", views.recipes, name="recipes"),
     path("shopping-list", views.shopping_list, name="shopping_list"),
     path('api/generate-recipe/', views.GenerateRecipeView.as_view(), name='generate_recipe'),
+    path('api/generate-shopping-list/', views.GenerateShoppingListView.as_view(), name='generate_shopping_list'),
 ]

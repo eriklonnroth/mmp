@@ -26,8 +26,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'planner',
-    "template_partials",
-    "django_browser_reload",
+    'template_partials',
+    'django_browser_reload',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,0 +1,127 @@
+{
+    "recipe_name": "Gluten-Free Beef Lasagna",
+    "servings": 3,
+    "description": "A delicious and hearty gluten-free beef lasagna that's perfect for a cozy meal. Made with layers of tender gluten-free noodles, rich meat sauce, and a creamy cheese blend, this dish is both satisfying and comforting.",
+    "ingredients": [
+      {
+        "item": "Ground beef",
+        "quantity": "1 pound"
+      },
+      {
+        "item": "Olive oil",
+        "quantity": "2 tablespoons"
+      },
+      {
+        "item": "Onion, chopped",
+        "quantity": "1 medium"
+      },
+      {
+        "item": "Garlic cloves, minced",
+        "quantity": "2 cloves"
+      },
+      {
+        "item": "Tomato paste",
+        "quantity": "2 tablespoons"
+      },
+      {
+        "item": "Diced tomatoes (canned)",
+        "quantity": "14.5 ounces"
+      },
+      {
+        "item": "Gluten-free lasagna noodles",
+        "quantity": "6 noodles"
+      },
+      {
+        "item": "Ricotta cheese",
+        "quantity": "1 cup"
+      },
+      {
+        "item": "Egg",
+        "quantity": "1 large"
+      },
+      {
+        "item": "Shredded mozzarella cheese",
+        "quantity": "2 cups"
+      },
+      {
+        "item": "Grated Parmesan cheese",
+        "quantity": "1/2 cup"
+      },
+      {
+        "item": "Salt",
+        "quantity": "1 teaspoon"
+      },
+      {
+        "item": "Black pepper",
+        "quantity": "1/2 teaspoon"
+      },
+      {
+        "item": "Italian seasoning",
+        "quantity": "1 teaspoon"
+      }
+    ],
+    "instructions": [
+      {
+        "section_title": "Prepare the Meat Sauce",
+        "steps": [
+          {
+            "step": "In a large skillet over medium heat, add the olive oil. Once hot, add the chopped onion and garlic, and sauté until softened, about 3 minutes."
+          },
+          {
+            "step": "Add the ground beef to the skillet, breaking it apart with a spoon, and cook until browned throughout, approximately 5-6 minutes."
+          },
+          {
+            "step": "Stir in the tomato paste, diced tomatoes, salt, black pepper, and Italian seasoning. Reduce the heat to low and allow the sauce to simmer for about 15 minutes, stirring occasionally."
+          }
+        ]
+      },
+      {
+        "section_title": "Prepare the Cheese Mixture",
+        "steps": [
+          {
+            "step": "In a medium bowl, combine the ricotta cheese, egg, and 1/4 cup of the Parmesan cheese. Mix until well combined and set aside."
+          }
+        ]
+      },
+      {
+        "section_title": "Assemble the Lasagna",
+        "steps": [
+          {
+            "step": "Preheat your oven to 375°F (190°C)."
+          },
+          {
+            "step": "In a 9x9-inch baking dish, spread a thin layer of the meat sauce on the bottom."
+          },
+          {
+            "step": "Place 2 gluten-free lasagna noodles over the sauce. You may need to break them to fit."
+          },
+          {
+            "step": "Spread half of the ricotta mixture over the noodles, followed by a third of the mozzarella cheese."
+          },
+          {
+            "step": "Repeat with another layer of sauce, noodles, ricotta mixture, and mozzarella."
+          },
+          {
+            "step": "Add a final layer of noodles, then top with remaining meat sauce and mozzarella cheese."
+          }
+        ]
+      },
+      {
+        "section_title": "Bake",
+        "steps": [
+          {
+            "step": "Cover the baking dish with aluminum foil and bake in the preheated oven for 30 minutes."
+          },
+          {
+            "step": "Remove the foil and sprinkle the remaining 1/4 cup of Parmesan cheese on top."
+          },
+          {
+            "step": "Return to the oven, uncovered, and bake for an additional 10-15 minutes, or until the cheese is bubbly and golden."
+          },
+          {
+            "step": "Allow the lasagna to rest for 10 minutes before serving. This will help the layers set and make it easier to slice."
+          }
+        ]
+      }
+    ]
+  }

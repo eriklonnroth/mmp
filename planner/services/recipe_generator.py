@@ -1,5 +1,5 @@
 from openai import OpenAI
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel
 import os
 import argparse
 
@@ -25,7 +25,7 @@ class Recipe(BaseModel):
     instructions: list[InstructionSection]  # List of instruction sections, each containing ordered steps
 
 
-# Service functions
+# OpenAI API function
 def generate_recipe(dish_name, servings, notes="", country="UK", dietary_preferences=""):
     """
     Generates a recipe in JSON format. See https://platform.openai.com/docs/guides/structured-outputs
@@ -37,7 +37,7 @@ def generate_recipe(dish_name, servings, notes="", country="UK", dietary_prefere
     Servings: {servings}
     {f'Notes: {notes}' if notes else ''}
     {f'Dietary preferences: {dietary_preferences}' if dietary_preferences else ''}
-    Quantities should be in the measurement units of: {country}
+    Use measurement units (metric or imperial) suitable for: {country}
     """
 
     try:
@@ -45,7 +45,7 @@ def generate_recipe(dish_name, servings, notes="", country="UK", dietary_prefere
             model="gpt-4o",
             response_format=Recipe,
             messages=[
-                {"role": "system", "content": "You are an experienced home cook. Generate detailed recipes in JSON format."},
+                {"role": "system", "content": "You are an experienced home cook. Generate a detailed recipe in JSON format."},
                 {"role": "user", "content": user_input}
             ],
         )
@@ -69,7 +69,6 @@ def parse_arguments():
 
 def main():
     args = parse_arguments()
-    
     recipe = generate_recipe(
         args.dish_name,
         args.notes,
@@ -77,8 +76,8 @@ def main():
         args.country,
         args.dietary_preferences
     )
-    
-    print(recipe.model_dump_json(indent=2))
+    return recipe
 
 if __name__ == "__main__":
-    main()
+    recipe = main()
+    print(recipe.model_dump_json(indent=2))

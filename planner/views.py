@@ -1,12 +1,12 @@
 from django.contrib.staticfiles.finders import find
 from django.shortcuts import render
 from django.http import HttpResponseNotAllowed, HttpResponse
-
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views import View
-from planner.services.openai import generate_recipe
+from planner.services.recipe_generator import generate_recipe
+from planner.services.shopping_list_generator import generate_shopping_list
 
 import json
 
@@ -60,3 +60,31 @@ class GenerateRecipeView(View):
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
 
+@method_decorator(csrf_exempt, name='dispatch')
+class GenerateShoppingListView(View):
+    def post(self, request, *args, **kwargs):
+        try:
+            # Parse incoming data from the request
+            data = json.loads(request.body.decode('utf-8'))
+            recipe_files = data.get("recipes", [])
+
+            if not recipe_files:
+                return JsonResponse({
+                    "error": "No recipes provided"
+                }, status=400)
+
+            # Call the OpenAI service to generate the shopping list
+            shopping_list = generate_shopping_list(recipe_files)
+            
+            # Convert Pydantic model to dict for JsonResponse
+            return JsonResponse(shopping_list.model_dump())
+            
+        except FileNotFoundError as e:
+            return JsonResponse({
+                "error": f"Recipe file not found: {str(e)}"
+            }, status=404)
+            
+        except Exception as e:
+            return JsonResponse({
+                "error": f"Error generating shopping list: {str(e)}"
+            }, status=500)

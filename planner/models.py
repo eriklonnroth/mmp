@@ -1,7 +1,6 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
-from django.core.cache import cache
 from django.dispatch import receiver
 import hashlib
 import json
@@ -274,8 +273,7 @@ class ShoppingCategory(models.Model):
         ('drinks', 'Drinks'),
         ('snacks', 'Snacks'),
         ('frozen', 'Frozen'),
-        ('non_food', 'Non-food'),
-        ('other', 'Other'),
+        ('non_food', 'Non-food')
     ]
 
     name = models.CharField(max_length=50, choices=CATEGORIES, unique=True)
