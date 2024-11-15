@@ -4,7 +4,7 @@
   "main": "tailwind.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tailwindcss -i ./planner/static/planner/css/tailwind_input.css -o ./planner/static/planner/css/tailwind_output.css --watch"
+    "tailwind": "tailwindcss -i ./static/css/tailwind_input.css -o ./static/css/tailwind_output.css --watch"
   },
   "keywords": [],
   "author": "",

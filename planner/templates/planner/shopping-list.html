@@ -1,4 +1,5 @@
 {% extends "planner/layout.html" %}
+{% load static %}
 
 {% block title %}
     Shopping List
@@ -15,6 +16,101 @@
                     </svg>
                     <span class="hidden sm:inline">My Shopping Lists</span>
                 </button>
+            </div>
+            <!-- Shopping list table -->
+            <div class="shopping-list-wrapper mt-8">
+                <table class="shopping-list-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">☑</th>
+                            <th scope="col">Item</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Recipe Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="shopping-list-checkbox">
+                            </td>
+                            <td>Ground beef</td>
+                            <td>450g</td>
+                            <td>For Gluten-Free Beef Lasagna</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="shopping-list-checkbox">
+                            </td>
+                            <td>Olive oil</td>
+                            <td>2 tbsp</td>
+                            <td>For Gluten-Free Beef Lasagna</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="shopping-list-checkbox">
+                            </td>
+                            <td>Vegetable oil</td>
+                            <td>2 tbsp</td>
+                            <td>For Chicken Korma</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="shopping-list-checkbox">
+                            </td>
+                            <td>Onion</td>
+                            <td>2 large</td>
+                            <td>1 onion for Gluten-Free Beef Lasagna; 1 onion for Chicken Korma</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="shopping-list-checkbox">
+                            </td>
+                            <td>Garlic</td>
+                            <td>1 head</td>
+                            <td>5 cloves total; 2 cloves for Gluten-Free Beef Lasagna; 3 cloves for Chicken Korma</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="shopping-list-checkbox">
+                            </td>
+                            <td>Tomato paste</td>
+                            <td>2 tbsp</td>
+                            <td>For Gluten-Free Beef Lasagna</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="shopping-list-checkbox">
+                            </td>
+                            <td>Diced tomatoes (canned)</td>
+                            <td>411g</td>
+                            <td>For Gluten-Free Beef Lasagna</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="shopping-list-checkbox">
+                            </td>
+                            <td>Gluten-free lasagna noodles</td>
+                            <td>6 noodles</td>
+                            <td>For Gluten-Free Beef Lasagna</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="shopping-list-checkbox">
+                            </td>
+                            <td>Ricotta cheese</td>
+                            <td>240g</td>
+                            <td>For Gluten-Free Beef Lasagna</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="shopping-list-checkbox">
+                            </td>
+                            <td>Eggs</td>
+                            <td>1 large</td>
+                            <td>For Gluten-Free Beef Lasagna</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

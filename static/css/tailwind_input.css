@@ -70,8 +70,57 @@
     .nav-icon {
         @apply w-5 h-5;
     }
+
+    /* Shopping List Table Styles */
+    .shopping-list-wrapper {
+        @apply bg-white shadow overflow-hidden sm:rounded-lg;
+    }
+
+    .shopping-list-table {
+        @apply min-w-full divide-y divide-gray-200;
+    }
+
+    .shopping-list-table thead {
+        @apply bg-gray-50;
+    }
+
+    .shopping-list-table th {
+        @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+    }
+
+    .shopping-list-table tbody {
+        @apply bg-white divide-y divide-gray-200;
+    }
+
+    .shopping-list-table td {
+        @apply px-6 py-4 whitespace-nowrap;
+    }
+
+    .shopping-list-table td:last-child {
+        @apply whitespace-normal;
+    }
+
+    .shopping-list-table input[type="checkbox"] {
+        @apply h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500;
+    }
+
+    /* Shopping List Item States */
+    .item-checked {
+        @apply opacity-50;
+    }
+    
+    .item-checked .item-text {
+        @apply line-through;
+    }
+
+    /* Shopping List Checkboxes */
+    tr:has(.shopping-list-checkbox:checked) {
+        @apply opacity-50;
+    }
+
+    tr:has(.shopping-list-checkbox:checked) td {
+        @apply line-through;
+    }
 }
 
-
-
-
+    
