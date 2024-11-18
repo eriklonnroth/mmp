@@ -77,7 +77,7 @@ class Group(models.Model):
 class Recipe(models.Model):
     name = models.CharField(max_length=100)
     servings = models.PositiveIntegerField()
-    notes = models.TextField(blank=True)
+    description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     modified_at = models.DateTimeField(auto_now=True)
@@ -185,7 +185,7 @@ class InstructionSection(models.Model):
 
 class InstructionStep(models.Model):
     section = models.ForeignKey(InstructionSection, related_name='steps', on_delete=models.CASCADE)
-    text = models.TextField()
+    step = models.TextField()
     order = models.PositiveIntegerField()
 
     def __str__(self):
@@ -267,7 +267,7 @@ class ShoppingCategory(models.Model):
     CATEGORIES = [
         ('fruit_veg', 'Fruit & Vegetables'),
         ('meat_fish', 'Meat & Fish'),
-        ('dairy', 'Dairy & Refrigerated'),
+        ('dairy', 'Dairy & Deli'),
         ('bakery', 'Bakery'),
         ('pantry', 'Pantry'),
         ('drinks', 'Drinks'),

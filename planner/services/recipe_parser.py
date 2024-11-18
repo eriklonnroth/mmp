@@ -15,7 +15,7 @@ class RecipeParser:
         self.recipe_data = recipe_data
         
     @classmethod
-    def from_json_file(cls, file_path: str | Path):
+    def from_file(cls, file_path: str | Path):
         """Create parser instance from a JSON file"""
         with open(file_path, 'r') as f:
             recipe_data = json.load(f)
@@ -46,6 +46,7 @@ class RecipeParser:
     def validate_instructions(self) -> List[InstructionSection]:
         """Validate instruction sections data"""
         sections = []
+        
         for section_data in self.recipe_data.get('instructions', []):
             try:
                 # Validate steps first
@@ -62,6 +63,12 @@ class RecipeParser:
 
     def validate(self) -> Recipe:
         """Validate entire recipe data"""
+        # Check for required fields first
+        required_fields = ['recipe_name', 'servings', 'description', 'ingredients', 'instructions']
+        missing_fields = [field for field in required_fields if field not in self.recipe_data]
+        if missing_fields:
+            raise ValueError(f"Missing required fields: {', '.join(missing_fields)}")
+
         try:
             # Validate ingredients first
             validated_ingredients = self.validate_ingredients()
@@ -77,69 +84,31 @@ class RecipeParser:
                 ingredients=validated_ingredients,
                 instructions=validated_instructions
             )
-        except ValidationError as e:
-            raise ValueError(f"Invalid recipe format: {e}")
+        except KeyError as e:
+            raise ValueError(f"Missing required field: {str(e)}")
+# Helper functions
+def parse_recipe_file(file_path: str | Path) -> Recipe:
+    """Parse a recipe from a JSON file"""
+    parser = RecipeParser.from_file(file_path)
+    return parser.validate()
 
-    def save_to_db(self, user) -> DBRecipe:
-        """Save validated recipe to database"""
-        # Validate everything before saving anything
-        validated_recipe = self.validate()
+def parse_recipe_string(json_str: str) -> Recipe:
+    """Parse a recipe from a JSON string"""
+    recipe_data = json.loads(json_str)
+    parser = RecipeParser(recipe_data)
+    return parser.validate()
 
-        # Create the recipe
-        recipe = DBRecipe.objects.create(
-            name=validated_recipe.recipe_name,
-            servings=validated_recipe.servings,
-            description=validated_recipe.description,
-            created_by=user,
-            notes=""  # Optional field
-        )
-
-        # Create ingredients with order
-        for i, ing in enumerate(validated_recipe.ingredients, 1):
-            DBIngredient.objects.create(
-                recipe=recipe,
-                item=ing.item,
-                quantity=ing.quantity,
-                order=i
-            )
-
-        # Create instruction sections and steps
-        for section_data in self.recipe_data.get('instructions', []):
-            db_section = DBInstructionSection.objects.create(
-                recipe=recipe,
-                title=section_data['section_title'],
-                order=section_data.get('section_order', 1)  # Get order from JSON
-            )
-            
-            # Create steps for this section
-            for i, step in enumerate(section_data['steps'], 1):
-                DBInstructionStep.objects.create(
-                    section=db_section,
-                    text=step['instruction'],  # Changed from instruction to text
-                    order=i
-                )
-
-        # Update ingredients digest
-        recipe.update_ingredients_digest()
-        
-        return recipe
-
-def parse_recipe_file(file_path: str | Path, user) -> DBRecipe:
-    """Convenience function to parse and save a recipe file"""
-    parser = RecipeParser.from_json_file(file_path)
-    return parser.save_to_db(user)
-
-def parse_recipe_directory(directory: str | Path) -> list[DBRecipe]:
-    """Parse all JSON recipe files in a directory"""
-    directory = Path(directory)
-    recipes = []
+# def parse_recipe_directory(directory: str | Path) -> list[DBRecipe]:
+#     """Parse all JSON recipe files in a directory"""
+#     directory = Path(directory)
+#     recipes = []
     
-    for recipe_file in directory.glob('*.json'):
-        try:
-            recipe = parse_recipe_file(recipe_file)
-            recipes.append(recipe)
-        except Exception as e:
-            print(f"Error parsing {recipe_file}: {e}")
-            continue
+#     for recipe_file in directory.glob('*.json'):
+#         try:
+#             recipe = parse_recipe_file(recipe_file)
+#             recipes.append(recipe)
+#         except Exception as e:
+#             print(f"Error parsing {recipe_file}: {e}")
+#             continue
             
-    return recipes
+#     return recipes

@@ -37,19 +37,19 @@
         }
     },
     "mealType": {
-        "breakfast": {
-            "id": "breakfast",
-            "name": "Breakfast",
+        "breakfasts": {
+            "id": "breakfasts",
+            "name": "Breakfasts",
             "recipeIds": ["overnight-oats", "greek-yogurt", "pancakes", "french-toast"]
         },
-        "lunch": {
-            "id": "lunch",
-            "name": "Lunch",
+        "lunches": {
+            "id": "lunches",
+            "name": "Lunches",
             "recipeIds": ["quinoa-salad", "chicken-sandwich", "lentil-soup", "greek-salad"]
         },
-        "dinner": {
-            "id": "dinner",
-            "name": "Dinner",
+        "dinners": {
+            "id": "dinners",
+            "name": "Dinners",
             "recipeIds": ["beef-lasagna", "sweet-potato-soup", "lamb-roast"]
         },
         "snacks": {

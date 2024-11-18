@@ -1283,6 +1283,11 @@ tr:has(.shopping-list-checkbox:checked) td {
   padding-bottom: 100%;
 }
 
+.\!text-xl {
+  font-size: 1.25rem !important;
+  line-height: 1.75rem !important;
+}
+
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
