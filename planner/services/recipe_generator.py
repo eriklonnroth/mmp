@@ -1,7 +1,8 @@
 from openai import OpenAI
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 import os
 import argparse
+
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
@@ -19,25 +20,25 @@ class InstructionSection(BaseModel):
 
 class Recipe(BaseModel):
     recipe_name: str
-    servings: int
     description: str
+    servings: int
     ingredients: list[Ingredient]  # List of ingredient items with their quantities
     instructions: list[InstructionSection]  # List of instruction sections, each containing ordered steps
 
 
 # OpenAI API function
-def generate_recipe(dish_name, servings, notes="", country="UK", dietary_preferences=""):
+def generate_recipe(dish_idea, servings, notes="", dietary_preferences="", units="metric"):
     """
     Generates a recipe in JSON format. See https://platform.openai.com/docs/guides/structured-outputs
     """
     user_input = f"""
     Make me a recipe based on the following guidelines:
 
-    Dish name: {dish_name}
+    Dish idea: {dish_idea}
     Servings: {servings}
     {f'Notes: {notes}' if notes else ''}
     {f'Dietary preferences: {dietary_preferences}' if dietary_preferences else ''}
-    Use measurement units (metric or imperial) suitable for: {country}
+    Provide quantities in {units} units
     """
 
     try:

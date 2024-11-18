@@ -1,13 +1,7 @@
 from typing import Dict, Any, List
 import json
 from pathlib import Path
-from pydantic import BaseModel, ValidationError
-
-from planner.models import Recipe as DBRecipe
-from planner.models import Ingredient as DBIngredient
-from planner.models import InstructionSection as DBInstructionSection
-from planner.models import InstructionStep as DBInstructionStep
-
+from pydantic import ValidationError
 from .recipe_generator import Recipe, Ingredient, InstructionSection, InstructionStep
 
 class RecipeParser:
@@ -86,6 +80,7 @@ class RecipeParser:
             )
         except KeyError as e:
             raise ValueError(f"Missing required field: {str(e)}")
+
 # Helper functions
 def parse_recipe_file(file_path: str | Path) -> Recipe:
     """Parse a recipe from a JSON file"""

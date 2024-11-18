@@ -1,7 +1,7 @@
 {
-    "recipe_name": "Gluten-Free Beef Lasagna",
+    "recipe_name": "Classic Beef Lasagna",
+    "description": "A delicious and hearty beef lasagna that's perfect for a cozy meal. Made with layers of tender pasta, rich meat sauce, and a creamy ricotta-mozzarella-parmesan blend.",
     "servings": 3,
-    "description": "A delicious and hearty gluten-free beef lasagna that's perfect for a cozy meal. Made with layers of tender gluten-free noodles, rich meat sauce, and a creamy cheese blend, this dish is both satisfying and comforting.",
     "ingredients": [
       {
         "item": "Ground beef",
@@ -28,8 +28,8 @@
         "quantity": "14.5 ounces"
       },
       {
-        "item": "Gluten-free lasagna noodles",
-        "quantity": "6 noodles"
+        "item": "Lasagna sheets",
+        "quantity": "6 sheets"
       },
       {
         "item": "Ricotta cheese",
@@ -93,16 +93,16 @@
             "step": "In a 9x9-inch baking dish, spread a thin layer of the meat sauce on the bottom."
           },
           {
-            "step": "Place 2 gluten-free lasagna noodles over the sauce. You may need to break them to fit."
+            "step": "Place 2 pasta sheets over the sauce. You may need to break them to fit."
           },
           {
-            "step": "Spread half of the ricotta mixture over the noodles, followed by a third of the mozzarella cheese."
+            "step": "Spread half of the ricotta mixture over the sheets, followed by a third of the mozzarella cheese."
           },
           {
-            "step": "Repeat with another layer of sauce, noodles, ricotta mixture, and mozzarella."
+            "step": "Repeat with another layer of sauce, pasta, ricotta mixture, and mozzarella."
           },
           {
-            "step": "Add a final layer of noodles, then top with remaining meat sauce and mozzarella cheese."
+            "step": "Add a final layer of pasta, then top with remaining meat sauce and mozzarella cheese."
           }
         ]
       },

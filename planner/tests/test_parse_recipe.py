@@ -1,6 +1,5 @@
 import pytest
 from django.contrib.auth.models import User
-from django.conf import settings
 from pathlib import Path
 from planner.services.recipe_parser import RecipeParser, parse_recipe_file, parse_recipe_string
 import json
@@ -13,13 +12,13 @@ def recipe_path():
 
 class TestRecipeParser:
     def test_parse_basic_info(self, recipe_path):
-        recipe = parse_recipe_file(recipe_path('lasagna.json'))
-        assert recipe.recipe_name == "Gluten-Free Beef Lasagna"
+        recipe = parse_recipe_file(recipe_path('classic_beef_lasagna.json'))
+        assert recipe.recipe_name == "Classic Beef Lasagna"
         assert recipe.servings == 3
-        assert "delicious and hearty gluten-free beef lasagna" in recipe.description
+        assert "delicious and hearty beef lasagna" in recipe.description
 
     def test_parse_ingredients(self, recipe_path):
-        recipe = parse_recipe_file(recipe_path('lasagna.json'))
+        recipe = parse_recipe_file(recipe_path('classic_beef_lasagna.json'))
         
         assert len(recipe.ingredients) == 14
         
@@ -33,7 +32,7 @@ class TestRecipeParser:
         assert seasoning.item == "Italian seasoning"
 
     def test_parse_instructions(self, recipe_path):
-        recipe = parse_recipe_file(recipe_path('lasagna.json'))
+        recipe = parse_recipe_file(recipe_path('classic_beef_lasagna.json'))
         
         assert len(recipe.instructions) == 4
         
@@ -98,10 +97,10 @@ class TestRecipeParser:
 
 
     def test_parse_from_string(self, recipe_path):
-        with open(recipe_path('lasagna.json'), 'r') as f:
+        with open(recipe_path('classic_beef_lasagna.json'), 'r') as f:
             json_str = f.read()
         recipe_from_string = parse_recipe_string(json_str)
-        assert recipe_from_string.recipe_name == "Gluten-Free Beef Lasagna"
+        assert recipe_from_string.recipe_name == "Classic Beef Lasagna"
         assert len(recipe_from_string.instructions) == 4
         assert "Return to the oven" in recipe_from_string.instructions[3].steps[2].step
         

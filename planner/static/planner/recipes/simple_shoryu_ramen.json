@@ -1,0 +1,117 @@
+{
+  "recipe_name": "Simple Shoryu Ramen",
+  "description": "A straightforward and delicious version of Shoryu Ramen that's easy to prepare at home, perfect for ramen enthusiasts looking for a quick and tasty meal.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "item": "Chicken stock",
+      "quantity": "1.5 liters"
+    },
+    {
+      "item": "Soy sauce",
+      "quantity": "60 ml"
+    },
+    {
+      "item": "Mirin",
+      "quantity": "30 ml"
+    },
+    {
+      "item": "Garlic cloves, minced",
+      "quantity": "2 cloves"
+    },
+    {
+      "item": "Fresh ginger, grated",
+      "quantity": "1 tablespoon"
+    },
+    {
+      "item": "Boneless chicken thighs",
+      "quantity": "400 grams"
+    },
+    {
+      "item": "Ramen noodles",
+      "quantity": "400 grams"
+    },
+    {
+      "item": "Boiled eggs, soft or medium cooked",
+      "quantity": "4"
+    },
+    {
+      "item": "Spring onions, sliced",
+      "quantity": "2 stalks"
+    },
+    {
+      "item": "Nori sheets, cut into halves",
+      "quantity": "2 sheets"
+    },
+    {
+      "item": "Sesame oil",
+      "quantity": "1 tablespoon"
+    },
+    {
+      "item": "Salt",
+      "quantity": "to taste"
+    },
+    {
+      "item": "Ground black pepper",
+      "quantity": "to taste"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Prepare the Broth",
+      "steps": [
+        {
+          "step": "In a large pot, pour in the chicken stock and add the soy sauce, mirin, minced garlic, and grated ginger."
+        },
+        {
+          "step": "Bring the mixture to a gentle boil over medium heat, then reduce the heat to low and let it simmer for about 15 minutes."
+        },
+        {
+          "step": "While simmering, season with salt and pepper to taste."
+        }
+      ]
+    },
+    {
+      "section_title": "Cook the Chicken",
+      "steps": [
+        {
+          "step": "Warm the sesame oil in a frying pan over medium heat."
+        },
+        {
+          "step": "Add the boneless chicken thighs and cook until they are browned on all sides and fully cooked, about 7-10 minutes."
+        },
+        {
+          "step": "Remove the chicken from the pan and let it rest for a few minutes. Then, slice it into thin strips."
+        }
+      ]
+    },
+    {
+      "section_title": "Prepare the Ramen Noodles",
+      "steps": [
+        {
+          "step": "In a separate pot, bring water to a boil and cook the ramen noodles as per package instructions."
+        },
+        {
+          "step": "Drain the noodles and divide them evenly among four serving bowls."
+        }
+      ]
+    },
+    {
+      "section_title": "Assemble the Ramen Bowls",
+      "steps": [
+        {
+          "step": "Place the cooked chicken slices on top of the noodles in each bowl."
+        },
+        {
+          "step": "Pour the prepared broth over the chicken and noodles until the bowls are filled just below the brim."
+        },
+        {
+          "step": "Top each bowl with half of a boiled egg, sliced spring onions, and half a sheet of nori."
+        },
+        {
+          "step": "Serve immediately while hot, adding additional soy sauce or salt if desired."
+        }
+      ]
+    }
+  ]
+}

@@ -2,8 +2,8 @@ import pytest
 from django.contrib.auth.models import User
 from django.conf import settings
 from pathlib import Path
-from planner.services.recipe_parser import RecipeParser, parse_recipe_file, parse_recipe_string
-from planner.services.recipe_repository import RecipeRepository, save_recipe_to_db
+from planner.services.recipe_parser import parse_recipe_file
+from planner.services.recipe_repository import save_recipe_to_db
 
 pytestmark = pytest.mark.django_db
 
@@ -33,7 +33,7 @@ def recipe_path():
 class TestRecipeRepository:
     def test_save_recipe_to_db(self, recipe_path, user):
         # First parse the recipe
-        recipe = parse_recipe_file(recipe_path('lasagna.json'))
+        recipe = parse_recipe_file(recipe_path('classic_beef_lasagna.json'))
         
         # Then save it to DB
         db_recipe = save_recipe_to_db(recipe, user)

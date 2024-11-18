@@ -145,7 +145,7 @@ class Recipe(models.Model):
         self.save(update_fields=['ingredients_digest'])
 
     def __str__(self):
-        return f"{self.name} (for {self.servings})"
+        return f"{self.name}"
 
     class Meta:
         ordering = ['-modified_at']
@@ -176,7 +176,7 @@ class InstructionSection(models.Model):
     order = models.PositiveIntegerField()
 
     def __str__(self):
-        return f"{self.recipe.name} - {self.title}"
+        return f"{self.title}"
 
     class Meta:
         ordering = ['order']
@@ -189,7 +189,7 @@ class InstructionStep(models.Model):
     order = models.PositiveIntegerField()
 
     def __str__(self):
-        return f"{self.section.recipe.name} - {self.section.title} - Step {self.order}"
+        return f"{self.step}"
 
     class Meta:
         ordering = ['order']
@@ -209,7 +209,7 @@ class SavedRecipe(models.Model):
         ordering = ['-saved_at']
 
     def __str__(self):
-        return f"{self.recipe.name} saved by {self.user.username}"
+        return f"{self.recipe.name}"
 
 
 

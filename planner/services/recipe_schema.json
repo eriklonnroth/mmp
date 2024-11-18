@@ -1,0 +1,87 @@
+{
+    "type": "object",
+    "properties": {
+        "recipe_name": {
+            "type": "string",
+            "description": "A memorable recipe name",
+            "examples": [
+                "Mild Chicken Tikka Masala",
+                "Classic Beef Lasagna",
+                "Nonna's Creamy Mushroom Risotto"
+            ]
+        },
+        "description": {
+            "type": "string",
+            "description": "An enticing description of the recipe",
+            "examples": [
+                "A mild and creamy Chicken Tikka Masala that comes out really tender if you let it marinade overnight.",
+                "A delicious and hearty beef lasagna that's perfect for a cozy meal. Made with layers of tender pasta, rich meat sauce, and a creamy ricotta-mozzarella-parmesan blend."
+            ]
+        },
+        "servings": {
+            "type": "integer",
+            "description": "The number of servings this recipe makes."
+        },
+        "ingredients": {
+            "type": "array",
+            "description": "List of ingredient items with their quantities.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "item": {
+                        "type": "string",
+                        "description": "The name of the ingredient."
+                    },
+                    "quantity": {
+                        "type": "string",
+                        "description": "The quantity of the ingredient."
+                    }
+                },
+                "required": [
+                    "item",
+                    "quantity"
+                ]
+            }
+        },
+        "instructions": {
+            "type": "array",
+            "description": "List of instruction sections, each containing ordered steps.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "section_title": {
+                        "type": "string",
+                        "description": "The title of the instruction section."
+                    },
+                    "steps": {
+                        "type": "array",
+                        "description": "Ordered steps within the instruction section.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "step": {
+                                    "type": "string",
+                                    "description": "A single step in the instructions."
+                                }
+                            },
+                            "required": [
+                                "step"
+                            ]
+                        }
+                    }
+                },
+                "required": [
+                    "section_title",
+                    "steps"
+                ]
+            }
+        }
+    },
+    "required": [
+        "recipe_name",
+        "description",
+        "servings",
+        "ingredients",
+        "instructions"
+    ]
+}

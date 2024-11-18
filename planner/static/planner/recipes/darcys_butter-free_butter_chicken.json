@@ -1,0 +1,124 @@
+{
+  "recipe_name": "Darcy's Butter-free Butter Chicken",
+  "description": "A healthier version of the classic butter chicken that maintains rich flavors using yogurt and spices instead of butter. This recipe offers a low-fat alternative ideal for those looking to enjoy this dish without the extra calories.",
+  "servings": 3,
+  "ingredients": [
+    {
+      "item": "Boneless chicken thighs",
+      "quantity": "500 grams"
+    },
+    {
+      "item": "Greek yogurt",
+      "quantity": "200 ml"
+    },
+    {
+      "item": "Vegetable oil",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Garlic, minced",
+      "quantity": "4 cloves"
+    },
+    {
+      "item": "Ginger, minced",
+      "quantity": "2 teaspoons"
+    },
+    {
+      "item": "Onion, finely chopped",
+      "quantity": "1 large"
+    },
+    {
+      "item": "Tomato puree",
+      "quantity": "200 ml"
+    },
+    {
+      "item": "Coriander powder",
+      "quantity": "2 teaspoons"
+    },
+    {
+      "item": "Cumin powder",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Garam masala",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Turmeric powder",
+      "quantity": "1/2 teaspoon"
+    },
+    {
+      "item": "Red chili powder",
+      "quantity": "1 teaspoon (adjust to taste)"
+    },
+    {
+      "item": "Salt",
+      "quantity": "to taste"
+    },
+    {
+      "item": "Fresh coriander leaves, chopped",
+      "quantity": "for garnish"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Marinate Chicken",
+      "steps": [
+        {
+          "step": "Cut the chicken thighs into bite-sized pieces."
+        },
+        {
+          "step": "In a bowl, mix Greek yogurt, half of the garlic, half of the ginger, coriander powder, cumin powder, half of the garam masala, turmeric powder, red chili powder, and salt."
+        },
+        {
+          "step": "Add the chicken pieces to the marinade, ensuring each piece is well-coated. Cover and refrigerate for at least 30 minutes, or overnight for better flavor."
+        }
+      ]
+    },
+    {
+      "section_title": "Cook the Chicken",
+      "steps": [
+        {
+          "step": "Heat 1 tablespoon of vegetable oil in a large pan over medium heat."
+        },
+        {
+          "step": "Add the marinated chicken pieces to the pan. Cook until the chicken is mostly done, about 8-10 minutes. Remove the chicken from the pan and set aside."
+        }
+      ]
+    },
+    {
+      "section_title": "Prepare the Sauce",
+      "steps": [
+        {
+          "step": "In the same pan, add the remaining 1 tablespoon of vegetable oil."
+        },
+        {
+          "step": "Add the chopped onions and sauté until they are golden brown."
+        },
+        {
+          "step": "Add the remaining garlic and ginger, sautéing for an additional minute."
+        },
+        {
+          "step": "Stir in the tomato puree, then add salt to taste and the remaining garam masala. Simmer for 5-7 minutes, stirring occasionally."
+        }
+      ]
+    },
+    {
+      "section_title": "Combine and Serve",
+      "steps": [
+        {
+          "step": "Return the cooked chicken to the pan, ensuring it is fully coated in the sauce."
+        },
+        {
+          "step": "Cook for another 5-10 minutes, or until the chicken is fully cooked and tender."
+        },
+        {
+          "step": "Taste and adjust seasonings if necessary."
+        },
+        {
+          "step": "Garnish with freshly chopped coriander leaves before serving."
+        }
+      ]
+    }
+  ]
+}

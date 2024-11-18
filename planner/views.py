@@ -45,17 +45,17 @@ def shopping_list(request):
 @method_decorator(csrf_exempt, name='dispatch')
 class GenerateRecipeView(View):
     def post(self, request, *args, **kwargs):
-        # Parse incoming data from the request
+        # Parse user input from Magic Recipe generator
         data = json.loads(request.body.decode('utf-8'))
-        dish_name = data.get("dish_name")
+        dish_idea = data.get("dish_idea")
         notes = data.get("notes", "")
-        servings = data.get("servings")
-        country = data.get("country", "")
         dietary_preferences = data.get("dietary_preferences", "")
+        servings = data.get("servings")
+        units = data.get("units", "")
 
         try:
-            # Call the OpenAI service to generate the recipe
-            recipe = generate_recipe(dish_name, notes, servings, country, dietary_preferences)
+            # Pass user input to OpenAI to generate the recipe
+            recipe = generate_recipe(dish_idea, notes, servings, units, dietary_preferences)
             return JsonResponse(recipe)
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
