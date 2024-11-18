@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from pathlib import Path
 from planner.services.recipe_parser import RecipeParser, parse_recipe_file, parse_recipe_string
-from planner.services.recipe_repository import RecipeRepository, save_recipe_to_db
+import json
 
 @pytest.fixture
 def recipe_path():
@@ -47,6 +47,7 @@ class TestRecipeParser:
         assert len(bake_section.steps) == 4
         assert "bake for an additional 10-15 minutes" in bake_section.steps[2].step
         assert "Allow the lasagna to rest" in bake_section.steps[-1].step
+
 
     def test_validation_errors(self):
         # Test missing required fields first
@@ -94,3 +95,45 @@ class TestRecipeParser:
             parser = RecipeParser(bad_instructions_data)
             parser.validate()
         assert "Missing required field: 'section_title'" in str(exc_info.value)
+
+
+    def test_parse_from_string(self, recipe_path):
+        with open(recipe_path('lasagna.json'), 'r') as f:
+            json_str = f.read()
+        recipe_from_string = parse_recipe_string(json_str)
+        assert recipe_from_string.recipe_name == "Gluten-Free Beef Lasagna"
+        assert len(recipe_from_string.instructions) == 4
+        assert "Return to the oven" in recipe_from_string.instructions[3].steps[2].step
+        
+    def test_json_decode_errors(self):
+        # Test invalid JSON syntax (missing quotes around string)
+        invalid_syntax = '''{
+            recipe_name: "Test Recipe",
+            "servings": 4
+        }'''
+        with pytest.raises(json.JSONDecodeError, match="Expecting property name enclosed in double quotes"):
+            parse_recipe_string(invalid_syntax)
+            
+        # Test unclosed brackets
+        unclosed_brackets = '''{
+            "recipe_name": "Test Recipe",
+            "servings": 4,
+            "ingredients": [
+                {"item": "test", "quantity": "1 cup"
+        }'''
+        with pytest.raises(json.JSONDecodeError, match="Expecting ',' delimiter"):
+            parse_recipe_string(unclosed_brackets)
+            
+        # Test trailing comma
+        trailing_comma = '''{
+            "recipe_name": "Test Recipe",
+            "servings": 4,
+            "ingredients": [],
+        }'''
+        with pytest.raises(json.JSONDecodeError, match="Illegal trailing comma"):
+            parse_recipe_string(trailing_comma)
+            
+        # Test single quotes instead of double quotes
+        single_quotes = "{'recipe_name': 'Test Recipe'}"
+        with pytest.raises(json.JSONDecodeError, match="Expecting property name enclosed in double quotes"):
+            parse_recipe_string(single_quotes)
