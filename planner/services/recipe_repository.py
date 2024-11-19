@@ -1,4 +1,4 @@
-from typing import Dict, Any
+from django.contrib.auth.models import User
 from planner.models import Recipe as DBRecipe
 from planner.models import Ingredient as DBIngredient
 from planner.models import InstructionSection as DBInstructionSection
@@ -7,11 +7,15 @@ from .recipe_generator import Recipe
 
 class RecipeRepository:
     @staticmethod
-    def save_recipe(recipe: Recipe, user) -> DBRecipe:
+    def admin_user():
+        return User.objects.get(username='admin')
+
+    @staticmethod
+    def save_recipe(recipe: Recipe, user=admin_user) -> DBRecipe:
         """Save Recipe object to database"""
         # Create the recipe
         db_recipe = DBRecipe.objects.create(
-            name=recipe.recipe_name,
+            dish_name=recipe.dish_name,
             servings=recipe.servings,
             description=recipe.description,
             created_by=user,
@@ -48,7 +52,7 @@ class RecipeRepository:
         return db_recipe
 
 # Helper functions
-def save_recipe_to_db(recipe: Recipe, user) -> DBRecipe:
+def save_recipe_to_db(recipe: Recipe, user=RecipeRepository.admin_user) -> DBRecipe:
     """Helper function to save a Recipe to the database"""
     service = RecipeRepository()
-    return service.save_recipe(recipe, user) 
+    return service.save_recipe(recipe, user)

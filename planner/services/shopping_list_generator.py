@@ -60,7 +60,7 @@ def load_recipes():
             recipe = json.load(f)
             # Strip away unnecessary fields from recipe
             stripped_recipe = {
-                "recipe_name": recipe["recipe_name"],
+                "dish_name": recipe["dish_name"],
                 "servings": recipe["servings"],
                 "description": recipe["description"],
                 "ingredients": recipe["ingredients"]
@@ -77,7 +77,7 @@ def generate_shopping_list(recipe_files: list[str], preferred_units: str = "metr
         
     user_input = f"""
     Make me a JSON shopping list using shopping-appropriate quantities by grouping similar ingredients from the recipes below. 
-    Mention underlying recipes in recipe_notes using format "For <recipe_name>". 
+    Mention underlying recipes in recipe_notes using format "For <dish_name>". 
     Also add recipe_notes where recipe quantities have been combined or adapted for shopping, e.g. 5 cloves of garlic -> 1 head of garlic.
     Use {preferred_units} units for all quantities, converting where necessary.
     Categorize each item into one of the following categories: {[cat[1] for cat in ShoppingCategory.CATEGORIES]}.
@@ -108,7 +108,7 @@ def parse_arguments():
     parser.add_argument(
         '--recipes',
         required=True,
-        help='Comma-separated list of recipe names (e.g., korma.json,lasagna.json)',
+        help='Comma-separated list of filenames (e.g., korma.json,lasagna.json)',
         type=lambda x: [s.strip() for s in x.split(',')]
     )
     

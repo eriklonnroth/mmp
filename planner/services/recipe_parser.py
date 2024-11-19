@@ -58,7 +58,7 @@ class RecipeParser:
     def validate(self) -> Recipe:
         """Validate entire recipe data"""
         # Check for required fields first
-        required_fields = ['recipe_name', 'servings', 'description', 'ingredients', 'instructions']
+        required_fields = ['dish_name', 'servings', 'description', 'ingredients', 'instructions']
         missing_fields = [field for field in required_fields if field not in self.recipe_data]
         if missing_fields:
             raise ValueError(f"Missing required fields: {', '.join(missing_fields)}")
@@ -72,7 +72,7 @@ class RecipeParser:
             
             # Finally, create the complete recipe with validated components
             return Recipe(
-                recipe_name=self.recipe_data['recipe_name'],
+                dish_name=self.recipe_data['dish_name'],
                 servings=self.recipe_data['servings'],
                 description=self.recipe_data['description'],
                 ingredients=validated_ingredients,
@@ -92,18 +92,3 @@ def parse_recipe_string(json_str: str) -> Recipe:
     recipe_data = json.loads(json_str)
     parser = RecipeParser(recipe_data)
     return parser.validate()
-
-# def parse_recipe_directory(directory: str | Path) -> list[DBRecipe]:
-#     """Parse all JSON recipe files in a directory"""
-#     directory = Path(directory)
-#     recipes = []
-    
-#     for recipe_file in directory.glob('*.json'):
-#         try:
-#             recipe = parse_recipe_file(recipe_file)
-#             recipes.append(recipe)
-#         except Exception as e:
-#             print(f"Error parsing {recipe_file}: {e}")
-#             continue
-            
-#     return recipes

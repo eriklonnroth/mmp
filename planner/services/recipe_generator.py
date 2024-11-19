@@ -1,8 +1,6 @@
 from openai import OpenAI
 from pydantic import BaseModel, Field
 import os
-import argparse
-
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
@@ -19,7 +17,7 @@ class InstructionSection(BaseModel):
     steps: list[InstructionStep]
 
 class Recipe(BaseModel):
-    recipe_name: str
+    dish_name: str
     description: str
     servings: int
     ingredients: list[Ingredient]  # List of ingredient items with their quantities
@@ -38,7 +36,7 @@ def generate_recipe(dish_idea, servings, notes="", dietary_preferences="", units
     Servings: {servings}
     {f'Notes: {notes}' if notes else ''}
     {f'Dietary preferences: {dietary_preferences}' if dietary_preferences else ''}
-    Provide quantities in {units} units
+    Provide quantities in {units} units, but teaspoons and tablespoonss are acceptable
     """
 
     try:
@@ -51,34 +49,8 @@ def generate_recipe(dish_idea, servings, notes="", dietary_preferences="", units
             ],
         )
         
-        recipe = completion.choices[0].message.parsed
-        return recipe
+        recipe_str = completion.choices[0].message.content
+        return recipe_str
     except Exception as e:
         print(f"Error generating recipe: {e}")
         raise e
-
-# Parse command line arguments
-def parse_arguments():
-    parser = argparse.ArgumentParser(description='Generate a recipe')
-    parser.add_argument('--dish_name', required=True, help='Name of the dish')
-    parser.add_argument('--notes', default='', help='Additional notes')
-    parser.add_argument('--servings', type=int, required=True, help='Number of servings')
-    parser.add_argument('--country', default='UK', help='Country for measurement units')
-    parser.add_argument('--dietary_preferences', default='', help='Dietary preferences')
-    
-    return parser.parse_args()
-
-def main():
-    args = parse_arguments()
-    recipe = generate_recipe(
-        args.dish_name,
-        args.notes,
-        args.servings,
-        args.country,
-        args.dietary_preferences
-    )
-    return recipe
-
-if __name__ == "__main__":
-    recipe = main()
-    print(recipe.model_dump_json(indent=2))

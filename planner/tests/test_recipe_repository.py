@@ -1,24 +1,10 @@
 import pytest
 from django.contrib.auth.models import User
-from django.conf import settings
 from pathlib import Path
 from planner.services.recipe_parser import parse_recipe_file
 from planner.services.recipe_repository import save_recipe_to_db
 
 pytestmark = pytest.mark.django_db
-
-@pytest.fixture(scope='session')
-def django_db_setup():
-    settings.DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'test_mmp',
-        'USER': 'admin',  # superuser
-        'HOST': 'localhost',
-        'PORT': '5432',
-        'TEST': {
-            'SERIALIZE': False  # Optional: can speed up tests
-        }
-    }
 
 @pytest.fixture
 def user():
@@ -39,7 +25,7 @@ class TestRecipeRepository:
         db_recipe = save_recipe_to_db(recipe, user)
         
         # Test basic info was saved correctly
-        assert db_recipe.name == recipe.recipe_name
+        assert db_recipe.dish_name == recipe.dish_name
         assert db_recipe.servings == recipe.servings
         assert db_recipe.description == recipe.description
         assert db_recipe.created_by == user

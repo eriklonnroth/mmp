@@ -75,7 +75,7 @@ class Group(models.Model):
 
 # Recipe models
 class Recipe(models.Model):
-    name = models.CharField(max_length=100)
+    dish_name = models.CharField(max_length=100)
     servings = models.PositiveIntegerField()
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

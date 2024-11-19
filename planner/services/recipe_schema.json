@@ -1,9 +1,9 @@
 {
     "type": "object",
     "properties": {
-        "recipe_name": {
+        "dish_name": {
             "type": "string",
-            "description": "A memorable recipe name",
+            "description": "A memorable name for the dish",
             "examples": [
                 "Mild Chicken Tikka Masala",
                 "Classic Beef Lasagna",
@@ -78,7 +78,7 @@
         }
     },
     "required": [
-        "recipe_name",
+        "dish_name",
         "description",
         "servings",
         "ingredients",
