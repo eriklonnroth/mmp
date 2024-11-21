@@ -1,0 +1,117 @@
+{
+  "dish_name": "Swedish Cardamom Buns",
+  "description": "A traditional Swedish delicacy, these cardamom-infused buns are soft, fluffy, and perfect with a cup of coffee. Their aromatic flavor comes from freshly ground cardamom seeds, sugar, and butter, providing a delightful treat for any occasion.",
+  "servings": 10,
+  "ingredients": [
+    {
+      "item": "All-purpose flour",
+      "quantity": "500 g"
+    },
+    {
+      "item": "Sugar",
+      "quantity": "100 g"
+    },
+    {
+      "item": "Butter, softened",
+      "quantity": "75 g"
+    },
+    {
+      "item": "Milk",
+      "quantity": "250 ml"
+    },
+    {
+      "item": "Dry yeast",
+      "quantity": "7 g"
+    },
+    {
+      "item": "Salt",
+      "quantity": "1 tsp"
+    },
+    {
+      "item": "Cardamom seeds, ground",
+      "quantity": "2 tsp"
+    },
+    {
+      "item": "Egg",
+      "quantity": "1, beaten"
+    },
+    {
+      "item": "Sugar",
+      "quantity": "50 g"
+    },
+    {
+      "item": "Butter, softened",
+      "quantity": "75 g"
+    },
+    {
+      "item": "Cardamom seeds, ground",
+      "quantity": "1 tsp"
+    },
+    {
+      "item": "Egg",
+      "quantity": "1, beaten (for glazing)"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Dough Preparation",
+      "steps": [
+        {
+          "step": "In a small saucepan, heat the milk until lukewarm. Remove from heat and add the yeast, stirring until dissolved. Set aside for 5 minutes to activate."
+        },
+        {
+          "step": "In a large mixing bowl, combine flour, sugar, salt, and ground cardamom seeds. Add the softened butter and mix until the texture resembles breadcrumbs."
+        },
+        {
+          "step": "Pour the yeast mixture into the dry ingredients, followed by the beaten egg. Mix and knead the dough by hand or using a mixer with a dough hook for about 10 minutes until smooth and elastic."
+        },
+        {
+          "step": "Cover the bowl with plastic wrap or a clean towel and let the dough rise in a warm place for about 1 hour, or until it has doubled in size."
+        }
+      ]
+    },
+    {
+      "section_title": "Filling and Shaping Buns",
+      "steps": [
+        {
+          "step": "In a separate bowl, prepare the filling by combining sugar, softened butter, and ground cardamom seeds. Mix until smooth."
+        },
+        {
+          "step": "Punch down the risen dough and turn it out onto a lightly floured surface. Roll it into a rectangle approximately 30 cm x 50 cm."
+        },
+        {
+          "step": "Spread the cardamom filling evenly over the entire surface of the dough rectangle."
+        },
+        {
+          "step": "Fold one-third of the dough over towards the center, and then fold the opposite third over that to create a letter fold."
+        },
+        {
+          "step": "Using a sharp knife or pizza cutter, slice the folded dough into 10 even strips."
+        },
+        {
+          "step": "Take each strip and twist them, then tie them into a knot. Place each knot onto a baking sheet lined with parchment paper."
+        }
+      ]
+    },
+    {
+      "section_title": "Baking",
+      "steps": [
+        {
+          "step": "Preheat the oven to 200°C (392°F)."
+        },
+        {
+          "step": "Cover the baking sheet with a clean towel and let the buns rise for about 30 minutes."
+        },
+        {
+          "step": "Brush each bun with the beaten egg for a glossy finish."
+        },
+        {
+          "step": "Bake in the preheated oven for 10-12 minutes, or until golden brown."
+        },
+        {
+          "step": "Remove from the oven and let cool on a wire rack. Serve warm or at room temperature."
+        }
+      ]
+    }
+  ]
+}

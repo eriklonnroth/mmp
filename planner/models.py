@@ -87,10 +87,10 @@ class Recipe(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='published')
     ingredients_digest = models.CharField(max_length=64, blank=True)
-    saved_by = models.ManyToManyField(
+    saved_to_my_recipes_by = models.ManyToManyField(
         User,
-        through='SavedRecipe',
-        related_name='saved_recipes'
+        through='MyRecipe',
+        related_name='my_recipes'
     )
 
     def get_scaled_recipe(self, new_servings: int) -> dict:
@@ -206,8 +206,8 @@ class InstructionStep(models.Model):
             models.Index(fields=['section', 'order']),
         ]
 
-# Recipe saved by user
-class SavedRecipe(models.Model):
+# Recipe saved to My Recipes by user
+class MyRecipe(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     saved_at = models.DateTimeField(auto_now_add=True)
@@ -217,7 +217,7 @@ class SavedRecipe(models.Model):
         ordering = ['-saved_at']
 
     def __str__(self):
-        return f"{self.recipe.name}"
+        return f"{self.recipe.dish_name}"
 
 
 

@@ -1,0 +1,155 @@
+{
+  "dish_name": "Traditional Moussaka",
+  "description": "A classic Greek dish featuring layers of eggplant, rich meat sauce, and creamy béchamel sauce, baked to golden perfection.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "item": "Eggplant, sliced",
+      "quantity": "2 large"
+    },
+    {
+      "item": "Olive oil",
+      "quantity": "4 tablespoons"
+    },
+    {
+      "item": "Onion, chopped",
+      "quantity": "1 large"
+    },
+    {
+      "item": "Garlic, minced",
+      "quantity": "3 cloves"
+    },
+    {
+      "item": "Ground lamb",
+      "quantity": "500 grams"
+    },
+    {
+      "item": "Tomato paste",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Red wine",
+      "quantity": "150 ml"
+    },
+    {
+      "item": "Canned tomatoes, crushed",
+      "quantity": "400 grams"
+    },
+    {
+      "item": "Cinnamon",
+      "quantity": "1/2 teaspoon"
+    },
+    {
+      "item": "Allspice",
+      "quantity": "1/2 teaspoon"
+    },
+    {
+      "item": "Salt",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Black pepper",
+      "quantity": "1/2 teaspoon"
+    },
+    {
+      "item": "Butter",
+      "quantity": "60 grams"
+    },
+    {
+      "item": "All-purpose flour",
+      "quantity": "60 grams"
+    },
+    {
+      "item": "Milk",
+      "quantity": "500 ml"
+    },
+    {
+      "item": "Egg yolks, beaten",
+      "quantity": "2"
+    },
+    {
+      "item": "Nutmeg, ground",
+      "quantity": "1/4 teaspoon"
+    },
+    {
+      "item": "Parmesan cheese, grated",
+      "quantity": "50 grams"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Prepare the Eggplants",
+      "steps": [
+        {
+          "step": "Sprinkle sliced eggplants with salt and let them sit for 30 minutes to draw out moisture."
+        },
+        {
+          "step": "Rinse the eggplants and pat them dry with paper towels."
+        },
+        {
+          "step": "Heat 2 tablespoons of olive oil in a pan over medium heat and fry the eggplant slices until golden on both sides. Set aside on paper towels to drain."
+        }
+      ]
+    },
+    {
+      "section_title": "Make the Meat Sauce",
+      "steps": [
+        {
+          "step": "In the same pan, add 2 tablespoons of olive oil and sauté the chopped onion until soft."
+        },
+        {
+          "step": "Add minced garlic and cook for an additional 1 minute."
+        },
+        {
+          "step": "Add the ground lamb and cook until browned."
+        },
+        {
+          "step": "Stir in the tomato paste, red wine, crushed tomatoes, cinnamon, allspice, salt, and black pepper."
+        },
+        {
+          "step": "Reduce the heat and let simmer for 20 minutes until the sauce thickens. Set aside."
+        }
+      ]
+    },
+    {
+      "section_title": "Prepare the Béchamel Sauce",
+      "steps": [
+        {
+          "step": "Melt butter in a saucepan over medium heat."
+        },
+        {
+          "step": "Whisk in flour and cook for 1-2 minutes, stirring continuously."
+        },
+        {
+          "step": "Slowly add milk while whisking to prevent lumps. Continue cooking until the sauce thickens."
+        },
+        {
+          "step": "Remove the saucepan from heat and stir in beaten egg yolks, nutmeg, and half of the grated Parmesan cheese. Adjust seasoning with salt to taste."
+        }
+      ]
+    },
+    {
+      "section_title": "Assemble and Bake",
+      "steps": [
+        {
+          "step": "Preheat oven to 180°C (350°F)."
+        },
+        {
+          "step": "Layer half of the eggplant slices in the bottom of an oiled baking dish."
+        },
+        {
+          "step": "Spread the meat sauce over the eggplants, then add the remaining eggplant slices on top of the sauce."
+        },
+        {
+          "step": "Pour the béchamel sauce evenly over the layers and sprinkle with the rest of the Parmesan cheese."
+        },
+        {
+          "step": "Bake in the preheated oven for 40 minutes or until the top is golden brown."
+        },
+        {
+          "step": "Allow to cool for 10 minutes before serving."
+        }
+      ]
+    }
+  ]
+}

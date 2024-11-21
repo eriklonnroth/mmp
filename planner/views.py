@@ -1,6 +1,8 @@
+from django.contrib.auth.models import User
 from django.contrib.staticfiles.finders import find
+from django.db import IntegrityError
 from django.shortcuts import render
-from django.http import HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -12,7 +14,7 @@ from planner.services.recipe_repository import save_recipe_to_db
 from planner.services.recipe_to_file import save_recipe_to_file
 from planner.services.shopping_list_generator import generate_shopping_list
 from planner import forms
-from planner.models import Recipe
+from planner.models import Recipe, MyRecipe
 import json
 
 
@@ -36,6 +38,31 @@ def plan(request):
         'recipes': recipes,
     }
     return render(request, "planner/plan.html", context)
+
+
+def recipes(request):
+    return render(request, "planner/recipes/index.html")
+
+def shopping_list(request):
+    return render(request, "planner/shopping-list.html")
+
+def magic_recipe(request):
+    # Initialize form
+    form = forms.MagicRecipeForm()
+    context = {'form': form}
+    
+    # Check for recipe ID in query params
+    recipe_id = request.GET.get('id')
+    if recipe_id:
+        try:
+            recipe = Recipe.objects.get(id=recipe_id)
+            # Add recipe to context and render it in the target div
+            context['id_in_url'] = recipe
+        except (Recipe.DoesNotExist, ValueError):
+            # Silently ignore invalid IDs
+            pass
+    
+    return render(request, "planner/recipes/magic_recipe.html", context)
 
 @require_http_methods(['POST'])
 def action_add_group(request):   
@@ -65,29 +92,22 @@ def action_generate_recipe(request):
     else:
         return HttpResponseBadRequest("Invalid form data")
 
-def recipes(request):
-    return render(request, "planner/recipes/index.html")
-
-def shopping_list(request):
-    return render(request, "planner/shopping-list.html")
-
-def magic_recipe(request):
-    # Initialize form
-    form = forms.MagicRecipeForm()
-    context = {'form': form}
-    
-    # Check for recipe ID in query params
-    recipe_id = request.GET.get('id')
-    if recipe_id:
-        try:
-            recipe = Recipe.objects.get(id=recipe_id)
-            # Add recipe to context and render it in the target div
-            context['id_in_url'] = recipe
-        except (Recipe.DoesNotExist, ValueError):
-            # Silently ignore invalid IDs
-            pass
-    
-    return render(request, "planner/recipes/magic_recipe.html", context)
+@require_http_methods(['POST'])
+def action_save_to_my_recipes(request, recipe_id):
+    try:
+        user = request.user if request.user.is_authenticated else User.objects.get(username='admin')
+        recipe = Recipe.objects.get(id=recipe_id)
+        MyRecipe.objects.get_or_create(recipe=recipe, user=user)
+        response = HttpResponse('Saved to My Recipes')
+        response['HX-Trigger'] = 'recipeSaved'
+        response['HX-Classes'] = 'recipe-saved'
+        return response
+    except Recipe.DoesNotExist:
+        return HttpResponseBadRequest('Recipe not found')
+    except IntegrityError:
+        return HttpResponseBadRequest('Recipe already in My Recipes')
+    except ValueError:
+        return HttpResponseBadRequest('Invalid recipe ID')
 
 @method_decorator(csrf_exempt, name='dispatch')
 class GenerateRecipeView(View):

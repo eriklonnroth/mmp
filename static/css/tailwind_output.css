@@ -998,6 +998,48 @@ tr:has(.shopping-list-checkbox:checked) td {
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
+.generated-recipe-control-button {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  display: flex;
+  flex: 1 1 0%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.generated-recipe-control-button:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.generated-recipe-control-button.recipe-saved {
+  pointer-events: none;
+  cursor: not-allowed;
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+  opacity: 0.75;
+}
+
+.generated-recipe-control-button.recipe-saved:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+
 .static {
   position: static;
 }
@@ -1095,6 +1137,10 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .mt-8 {
   margin-top: 2rem;
+}
+
+.mb-16 {
+  margin-bottom: 4rem;
 }
 
 .line-clamp-2 {
@@ -1224,10 +1270,6 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .animate-spin {
   animation: spin 1s linear infinite;
-}
-
-.cursor-not-allowed {
-  cursor: not-allowed;
 }
 
 .select-none {
@@ -1612,10 +1654,6 @@ tr:has(.shopping-list-checkbox:checked) td {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.opacity-50 {
-  opacity: 0.5;
-}
-
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
@@ -1658,6 +1696,10 @@ tr:has(.shopping-list-checkbox:checked) td {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+[x-cloak] {
+  display: none !important;
 }
 
 .hover\:border-gray-400:hover {

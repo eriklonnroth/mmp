@@ -1,4 +1,4 @@
-<div class="recipe-detail">
+<div class="recipe-detail" id="recipe-{{ recipe.id }}" data-testid="recipe-{{ recipe.id }}" x-init="$dispatch('recipe-loaded', { recipeId: {{ recipe.id }} })">
     <!-- Recipe Header -->
     <div class="mb-6">
         <h1 class="text-3xl font-bold text-gray-900">{{ recipe.dish_name }}</h1>

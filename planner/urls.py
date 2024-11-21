@@ -8,6 +8,7 @@ urlpatterns= [
     path("plan", views.plan, name="plan"),
     path("action_add_group", views.action_add_group, name="action_add_group"),
     path("action_generate_recipe", views.action_generate_recipe, name="action_generate_recipe"),
+    path("action_save_to_my_recipes/<int:recipe_id>", views.action_save_to_my_recipes, name="action_save_to_my_recipes"),
     path("recipes/", views.recipes, name="recipes"),
     path("recipes/magic_recipe", views.magic_recipe, name="magic_recipe"),
     path("shopping-list", views.shopping_list, name="shopping_list"),
