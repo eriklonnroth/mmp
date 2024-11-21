@@ -6,7 +6,6 @@ from planner.services.recipe_parser import parse_recipe_string
 from planner.services.recipe_repository import save_recipe_to_db
 from planner.services.recipe_to_file import save_recipe_to_file
 
-
 class Command(BaseCommand):
     help = 'Generates a recipe using OpenAI and saves it to database and/or file.'
 
@@ -31,15 +30,15 @@ class Command(BaseCommand):
                 units=options['units']
             )
 
-            recipe = parse_recipe_string(recipe_str)
+            parsed_recipe = parse_recipe_string(recipe_str)
             
             # Print the generated dish name
-            self.stdout.write(self.style.SUCCESS(f"Generated recipe: {recipe.dish_name}"))
+            self.stdout.write(self.style.SUCCESS(f"Generated recipe: {parsed_recipe.dish_name}"))
             
             # Save to database if requested
             if options['db']:                               
                 try:
-                    db_recipe = save_recipe_to_db(recipe)
+                    db_recipe = save_recipe_to_db(parsed_recipe, status='published')
                     self.stdout.write(self.style.SUCCESS(
                         f"Saved recipe to database with ID: {db_recipe.id}"
                     ))                    
@@ -53,7 +52,7 @@ class Command(BaseCommand):
             # Save to file if requested
             if options['file']:                            
                 try:
-                    file_path = save_recipe_to_file(recipe)
+                    file_path = save_recipe_to_file(parsed_recipe)
                     self.stdout.write(self.style.SUCCESS(
                         f"Saved recipe to file at {file_path}"
                     ))                    

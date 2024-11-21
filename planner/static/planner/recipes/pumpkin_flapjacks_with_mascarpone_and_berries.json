@@ -1,0 +1,119 @@
+{
+  "dish_name": "Pumpkin Flapjacks with Mascarpone and Berries",
+  "description": "Delicious pumpkin-flavored flapjacks perfect for a cozy morning, topped with creamy mascarpone and fresh berries.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "item": "Pumpkin puree",
+      "quantity": "200 grams"
+    },
+    {
+      "item": "All-purpose flour",
+      "quantity": "150 grams"
+    },
+    {
+      "item": "Baking powder",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Ground cinnamon",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Ground nutmeg",
+      "quantity": "1/2 teaspoon"
+    },
+    {
+      "item": "Salt",
+      "quantity": "1/4 teaspoon"
+    },
+    {
+      "item": "Granulated sugar",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Eggs, large",
+      "quantity": "2"
+    },
+    {
+      "item": "Milk",
+      "quantity": "150 milliliters"
+    },
+    {
+      "item": "Vanilla extract",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Butter, melted",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Mascarpone cheese",
+      "quantity": "120 grams"
+    },
+    {
+      "item": "Mixed berries (e.g., strawberries, blueberries, raspberries), fresh",
+      "quantity": "150 grams"
+    },
+    {
+      "item": "Maple syrup",
+      "quantity": "for serving (optional)"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Prepare the Batter",
+      "steps": [
+        {
+          "step": "In a large bowl, whisk together the all-purpose flour, baking powder, ground cinnamon, ground nutmeg, and salt."
+        },
+        {
+          "step": "In another bowl, mix the pumpkin puree, granulated sugar, eggs, milk, and vanilla extract until well combined."
+        },
+        {
+          "step": "Add the wet ingredients to the dry ingredients and stir until just combined. Do not overmix."
+        },
+        {
+          "step": "Fold in the melted butter until incorporated."
+        }
+      ]
+    },
+    {
+      "section_title": "Cook the Flapjacks",
+      "steps": [
+        {
+          "step": "Heat a non-stick frying pan or griddle over medium heat. Lightly grease with butter if needed."
+        },
+        {
+          "step": "Pour about 60 milliliters (approximately 1/4 cup) of batter onto the pan for each flapjack."
+        },
+        {
+          "step": "Cook until bubbles start to form on the surface and the edges look set, about 2-3 minutes. Flip and cook for another 2 minutes until golden brown."
+        },
+        {
+          "step": "Transfer the cooked flapjacks to a warm plate and keep covered. Repeat with the remaining batter."
+        }
+      ]
+    },
+    {
+      "section_title": "Assemble and Serve",
+      "steps": [
+        {
+          "step": "Place a stack of flapjacks on each serving plate."
+        },
+        {
+          "step": "Top each stack with a dollop of mascarpone cheese."
+        },
+        {
+          "step": "Scatter the mixed fresh berries over the top."
+        },
+        {
+          "step": "Drizzle with maple syrup if desired."
+        },
+        {
+          "step": "Serve immediately and enjoy your pumpkin flapjacks with mascarpone and berries."
+        }
+      ]
+    }
+  ]
+}

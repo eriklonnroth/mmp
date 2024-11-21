@@ -1,0 +1,100 @@
+{
+  "dish_name": "Breakfast Burrito",
+  "description": "A hearty and satisfying breakfast wrap filled with scrambled eggs, crispy bacon, cheese, and creamy avocado, all wrapped in a warm tortilla.",
+  "servings": 2,
+  "ingredients": [
+    {
+      "item": "Large eggs",
+      "quantity": "4"
+    },
+    {
+      "item": "Milk",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Salt",
+      "quantity": "1/2 teaspoon"
+    },
+    {
+      "item": "Black pepper",
+      "quantity": "1/4 teaspoon"
+    },
+    {
+      "item": "Olive oil",
+      "quantity": "1 tablespoon"
+    },
+    {
+      "item": "Bacon",
+      "quantity": "4 slices"
+    },
+    {
+      "item": "Grated cheddar cheese",
+      "quantity": "50 grams"
+    },
+    {
+      "item": "Avocado",
+      "quantity": "1, sliced"
+    },
+    {
+      "item": "Large flour tortillas",
+      "quantity": "2"
+    },
+    {
+      "item": "Fresh salsa",
+      "quantity": "4 tablespoons"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Prepare the Bacon",
+      "steps": [
+        {
+          "step": "Heat a large skillet over medium heat."
+        },
+        {
+          "step": "Place the bacon slices in the skillet and cook until crispy, turning occasionally (about 5-7 minutes)."
+        },
+        {
+          "step": "Once cooked, transfer the bacon to a plate lined with paper towels to drain excess grease."
+        }
+      ]
+    },
+    {
+      "section_title": "Cook the Eggs",
+      "steps": [
+        {
+          "step": "In a bowl, whisk together the eggs, milk, salt, and pepper until well combined."
+        },
+        {
+          "step": "In the same skillet used for the bacon, heat olive oil over medium heat."
+        },
+        {
+          "step": "Pour the egg mixture into the skillet and cook, stirring gently, until soft curds form and the eggs are cooked through (about 3-5 minutes)."
+        }
+      ]
+    },
+    {
+      "section_title": "Assemble the Burritos",
+      "steps": [
+        {
+          "step": "Warm the flour tortillas in the microwave for about 20 seconds or in a dry skillet for 30 seconds on each side."
+        },
+        {
+          "step": "Lay each warm tortilla on a flat surface and evenly divide the scrambled eggs between them."
+        },
+        {
+          "step": "Crumble two slices of bacon atop the eggs on each tortilla."
+        },
+        {
+          "step": "Sprinkle half of the grated cheddar cheese over the bacon on each tortilla."
+        },
+        {
+          "step": "Add slices of avocado over the cheese, and finish with two tablespoons of fresh salsa on each."
+        },
+        {
+          "step": "Carefully roll up the tortillas burrito-style, tucking in the sides as you go to keep the filling secure."
+        }
+      ]
+    }
+  ]
+}

@@ -75,12 +75,17 @@ class Group(models.Model):
 
 # Recipe models
 class Recipe(models.Model):
+    STATUS_CHOICES = [
+        ('draft', 'Draft'),
+        ('published', 'Published'),
+    ]
     dish_name = models.CharField(max_length=100)
     servings = models.PositiveIntegerField()
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     modified_at = models.DateTimeField(auto_now=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='published')
     ingredients_digest = models.CharField(max_length=64, blank=True)
     saved_by = models.ManyToManyField(
         User,
@@ -105,7 +110,7 @@ class Recipe(models.Model):
             })
         
         return {
-            'name': self.name,
+            'dish_name': self.dish_name,
             'servings': new_servings,
             'notes': self.notes,
             'ingredients': scaled_ingredients,
@@ -145,10 +150,13 @@ class Recipe(models.Model):
         self.save(update_fields=['ingredients_digest'])
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.dish_name}"
 
     class Meta:
         ordering = ['-modified_at']
+        indexes = [
+            models.Index(fields=['created_by', 'created_at', 'status']),
+        ]
 
 @receiver(post_save, sender='planner.Ingredient')
 def update_recipe_digest(sender, instance, **kwargs):

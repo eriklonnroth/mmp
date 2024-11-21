@@ -1,0 +1,81 @@
+{
+  "dish_name": "Cherry Nut Butter Energy Balls",
+  "description": "These cherry nut butter energy balls are perfect for a quick snack or pre-workout boost. They combine the tartness of dried cherries with the creamy and nutty flavor of almond butter, creating a delicious and nutritious snack.",
+  "servings": 8,
+  "ingredients": [
+    {
+      "item": "Dried cherries, chopped",
+      "quantity": "100 grams"
+    },
+    {
+      "item": "Oats, rolled",
+      "quantity": "150 grams"
+    },
+    {
+      "item": "Almond butter",
+      "quantity": "125 grams"
+    },
+    {
+      "item": "Honey",
+      "quantity": "3 tablespoons"
+    },
+    {
+      "item": "Flaxseeds, ground",
+      "quantity": "30 grams"
+    },
+    {
+      "item": "Chia seeds",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Vanilla extract",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Sea salt",
+      "quantity": "1/4 teaspoon"
+    },
+    {
+      "item": "Dark chocolate chips, optional",
+      "quantity": "50 grams"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Preparing the mixture",
+      "steps": [
+        {
+          "step": "In a large mixing bowl, combine the rolled oats, chopped dried cherries, ground flaxseeds, chia seeds, and sea salt."
+        },
+        {
+          "step": "In a separate bowl, mix together the almond butter, honey, and vanilla extract until smooth."
+        }
+      ]
+    },
+    {
+      "section_title": "Combining and shaping the energy balls",
+      "steps": [
+        {
+          "step": "Pour the almond butter mixture into the dry ingredients and mix well until all ingredients are evenly combined. The mixture should be sticky enough to hold together. If it's too dry, add a bit more almond butter or honey."
+        },
+        {
+          "step": "If using, gently fold in the dark chocolate chips."
+        },
+        {
+          "step": "Scoop approximately a tablespoon of the mixture and roll it between your palms to form a ball. Repeat with the remaining mixture."
+        }
+      ]
+    },
+    {
+      "section_title": "Cooling and storage",
+      "steps": [
+        {
+          "step": "Place the energy balls on a tray lined with parchment paper and refrigerate for at least 30 minutes to set."
+        },
+        {
+          "step": "Once set, store the energy balls in an airtight container in the refrigerator for up to two weeks."
+        }
+      ]
+    }
+  ]
+}

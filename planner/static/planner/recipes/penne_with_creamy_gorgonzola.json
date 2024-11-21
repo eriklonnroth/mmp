@@ -1,0 +1,104 @@
+{
+  "dish_name": "Penne with Creamy Gorgonzola",
+  "description": "A rich and flavorful pasta dish featuring penne in a creamy gorgonzola sauce, accented with fresh herbs.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "item": "Penne pasta",
+      "quantity": "400 g"
+    },
+    {
+      "item": "Gorgonzola cheese, crumbled",
+      "quantity": "150 g"
+    },
+    {
+      "item": "Heavy cream",
+      "quantity": "200 ml"
+    },
+    {
+      "item": "Garlic cloves, minced",
+      "quantity": "2"
+    },
+    {
+      "item": "Olive oil",
+      "quantity": "2 tbsp"
+    },
+    {
+      "item": "Fresh parsley, chopped",
+      "quantity": "2 tbsp"
+    },
+    {
+      "item": "Fresh basil, chopped",
+      "quantity": "2 tbsp"
+    },
+    {
+      "item": "Salt",
+      "quantity": "to taste"
+    },
+    {
+      "item": "Black pepper",
+      "quantity": "to taste"
+    },
+    {
+      "item": "Parmesan cheese, grated",
+      "quantity": "50 g"
+    },
+    {
+      "item": "Walnuts, toasted and chopped",
+      "quantity": "50 g"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Cook the Penne Pasta",
+      "steps": [
+        {
+          "step": "Bring a large pot of salted water to a boil."
+        },
+        {
+          "step": "Add the penne pasta and cook according to the package instructions until al dente."
+        },
+        {
+          "step": "Drain the pasta and set aside, reserving a cup of the pasta water."
+        }
+      ]
+    },
+    {
+      "section_title": "Prepare the Creamy Gorgonzola Sauce",
+      "steps": [
+        {
+          "step": "In a large skillet, heat the olive oil over medium heat."
+        },
+        {
+          "step": "Add the minced garlic and sauté until fragrant, about 1 minute."
+        },
+        {
+          "step": "Pour in the heavy cream and bring it to a gentle simmer, stirring occasionally."
+        },
+        {
+          "step": "Add the crumbled gorgonzola cheese to the skillet, stirring constantly until the cheese has melted and the sauce is smooth."
+        }
+      ]
+    },
+    {
+      "section_title": "Combine and Serve",
+      "steps": [
+        {
+          "step": "Return the cooked penne to the pot or a large serving bowl."
+        },
+        {
+          "step": "Pour the creamy gorgonzola sauce over the pasta, tossing to coat. If the sauce is too thick, add some reserved pasta water to reach the desired consistency."
+        },
+        {
+          "step": "Season the pasta with salt and black pepper to taste."
+        },
+        {
+          "step": "Gently mix in the chopped parsley and basil."
+        },
+        {
+          "step": "Serve the pasta hot, garnished with grated Parmesan cheese and chopped toasted walnuts for added texture and flavor."
+        }
+      ]
+    }
+  ]
+}

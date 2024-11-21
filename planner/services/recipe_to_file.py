@@ -6,7 +6,7 @@ from .recipe_parser import parse_recipe_string, Recipe
 
 def save_recipe_to_file(recipe: Recipe):
     recipes_dir = Path("planner/static/planner/recipes")
-    filename = unidecode(recipe.dish_name).lower().replace(" ", "_").replace("'", "").replace(' & ', '-and-') + ".json"
+    filename = unidecode(recipe.dish_name).lower().replace(" ", "_").replace("'", "").replace('&', 'and') + ".json"
     file_path = recipes_dir / filename
 
     try:

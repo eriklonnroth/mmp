@@ -1,0 +1,107 @@
+{
+  "dish_name": "Classic Cheesecake",
+  "description": "A creamy and smooth classic cheesecake with a buttery graham cracker crust, perfect for any dessert occasion.",
+  "servings": 8,
+  "ingredients": [
+    {
+      "item": "Graham crackers, crushed",
+      "quantity": "200 grams"
+    },
+    {
+      "item": "Unsalted butter, melted",
+      "quantity": "75 grams"
+    },
+    {
+      "item": "Cream cheese, softened",
+      "quantity": "900 grams"
+    },
+    {
+      "item": "Granulated sugar",
+      "quantity": "200 grams"
+    },
+    {
+      "item": "Vanilla extract",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Eggs",
+      "quantity": "4"
+    },
+    {
+      "item": "Heavy cream",
+      "quantity": "120 milliliters"
+    },
+    {
+      "item": "All-purpose flour",
+      "quantity": "1 tablespoon"
+    },
+    {
+      "item": "Salt",
+      "quantity": "1/4 teaspoon"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Prepare the Crust",
+      "steps": [
+        {
+          "step": "Preheat the oven to 180°C (350°F)."
+        },
+        {
+          "step": "In a bowl, combine the crushed graham crackers and melted butter until evenly moistened."
+        },
+        {
+          "step": "Press the mixture firmly into the bottom of a 23cm (9-inch) springform pan to form the crust."
+        },
+        {
+          "step": "Bake the crust in the preheated oven for 10 minutes to set. Remove and let it cool while preparing the filling."
+        }
+      ]
+    },
+    {
+      "section_title": "Make the Cheesecake Filling",
+      "steps": [
+        {
+          "step": "In a large mixing bowl, beat the softened cream cheese with an electric mixer until smooth and creamy."
+        },
+        {
+          "step": "Gradually add the granulated sugar, beating until fully incorporated."
+        },
+        {
+          "step": "Mix in the vanilla extract, followed by the eggs, adding them one at a time and mixing well after each addition."
+        },
+        {
+          "step": "Add the heavy cream, flour, and salt to the mixture, and beat just until combined and smooth."
+        }
+      ]
+    },
+    {
+      "section_title": "Assemble and Bake the Cheesecake",
+      "steps": [
+        {
+          "step": "Pour the cheesecake filling over the cooled crust in the springform pan."
+        },
+        {
+          "step": "Smooth the top with a spatula or the back of a spoon to ensure even baking."
+        },
+        {
+          "step": "Place the filled pan on a baking sheet and bake in the preheated oven for about 50-60 minutes, until the edges are set but the center slightly jiggles."
+        }
+      ]
+    },
+    {
+      "section_title": "Cool and Serve the Cheesecake",
+      "steps": [
+        {
+          "step": "Turn off the oven and leave the cheesecake inside with the oven door slightly ajar for about 1 hour to cool slowly and prevent cracking."
+        },
+        {
+          "step": "Transfer the cheesecake to a refrigerator and chill for at least 4 hours or overnight before serving."
+        },
+        {
+          "step": "Remove the cheesecake from the springform pan, slice, and enjoy your Classic Cheesecake."
+        }
+      ]
+    }
+  ]
+}

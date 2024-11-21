@@ -1,0 +1,69 @@
+{
+  "dish_name": "Iced Ginger Matcha Latte",
+  "description": "A refreshing and energizing latte combining the earthy flavors of matcha with a hint of spicy ginger, served over ice and made with creamy almond milk.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "item": "Matcha powder",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Ginger, grated",
+      "quantity": "1 tablespoon"
+    },
+    {
+      "item": "Almond milk",
+      "quantity": "800 ml"
+    },
+    {
+      "item": "Honey",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Ice cubes",
+      "quantity": "2 cups"
+    },
+    {
+      "item": "Vanilla extract",
+      "quantity": "1 teaspoon"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Prepare the Ginger Matcha Mix",
+      "steps": [
+        {
+          "step": "In a small bowl, combine the matcha powder and grated ginger."
+        },
+        {
+          "step": "Add a small amount of almond milk (about 50 ml) to the matcha-ginger mix and whisk until smooth to form a paste."
+        }
+      ]
+    },
+    {
+      "section_title": "Prepare the Almond Milk Base",
+      "steps": [
+        {
+          "step": "In a medium saucepan, heat the remaining almond milk over medium heat until just warm, not boiling."
+        },
+        {
+          "step": "Stir in the honey and vanilla extract until dissolved."
+        }
+      ]
+    },
+    {
+      "section_title": "Combine and Serve",
+      "steps": [
+        {
+          "step": "Pour the warm almond milk mixture into the bowl containing the matcha paste and whisk until well combined."
+        },
+        {
+          "step": "Fill four glasses with ice cubes."
+        },
+        {
+          "step": "Pour the iced ginger matcha latte mix over the ice in each glass evenly."
+        }
+      ]
+    }
+  ]
+}

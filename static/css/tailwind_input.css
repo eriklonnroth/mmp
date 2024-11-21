@@ -4,6 +4,7 @@
 
 @layer components {
 
+    /* Meal Plan Styles */
     .recipe-item {
         @apply flex items-center justify-between py-3 px-2 hover:bg-gray-50 rounded-md transition-colors
                border border-gray-100 cursor-grab;
@@ -120,6 +121,48 @@
 
     tr:has(.shopping-list-checkbox:checked) td {
         @apply line-through;
+    }
+
+    /* Magic Recipe Form Styles */
+    .form-field {
+        @apply w-full px-4 py-2 border rounded-md border-gray-300
+               focus:ring-violet-500 focus:border-violet-500;
+    }
+
+    .form-field:disabled {
+        @apply bg-gray-100 cursor-not-allowed border-gray-200 text-gray-500;
+    }
+
+    .form-group {
+        @apply mb-4 last:mb-0;
+    }
+
+    .form-group label {
+        @apply block text-sm font-medium text-gray-700 mb-2;
+    }
+
+    /* Style labels when their input is disabled */
+    .form-group:has(input:disabled) label,
+    .form-group:has(select:disabled) label {
+        @apply text-gray-500;
+    }
+
+    .form-submit {
+        @apply w-full px-4 py-2 !mt-6 bg-gradient-to-r from-violet-600 to-violet-800 
+               hover:from-violet-700 hover:to-violet-900 text-white rounded-md 
+               focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2
+               transition-all duration-200;
+    }
+
+    .form-submit:disabled {
+        @apply from-violet-400 to-violet-600 
+               cursor-not-allowed 
+               hover:from-violet-400 hover:to-violet-600 
+               opacity-75;
+    }
+
+    .form-section-title {
+        @apply text-lg font-semibold text-gray-900 mb-2;
     }
 }
 

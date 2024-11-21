@@ -1,0 +1,110 @@
+{
+  "dish_name": "Air Fryer Crispy Chilli Beef",
+  "description": "A flavorful and crispy beef dish with a spicy chili sauce, cooked to perfection using an air fryer.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "item": "Beef sirloin, sliced",
+      "quantity": "500 grams"
+    },
+    {
+      "item": "Cornstarch",
+      "quantity": "60 grams"
+    },
+    {
+      "item": "Salt",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Black pepper, ground",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Vegetable oil",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Garlic, minced",
+      "quantity": "4 cloves"
+    },
+    {
+      "item": "Red chilies, sliced",
+      "quantity": "2"
+    },
+    {
+      "item": "Soy sauce",
+      "quantity": "3 tablespoons"
+    },
+    {
+      "item": "Rice vinegar",
+      "quantity": "1 tablespoon"
+    },
+    {
+      "item": "Brown sugar",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Spring onions, sliced",
+      "quantity": "2"
+    },
+    {
+      "item": "Sesame seeds, toasted",
+      "quantity": "1 tablespoon"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Preparing the Beef",
+      "steps": [
+        {
+          "step": "In a large bowl, combine sliced beef sirloin, cornstarch, salt, and black pepper. Toss until the beef is evenly coated."
+        },
+        {
+          "step": "Preheat the air fryer to 200°C (392°F)."
+        }
+      ]
+    },
+    {
+      "section_title": "Frying the Beef",
+      "steps": [
+        {
+          "step": "Place the coated beef in the air fryer basket in a single layer."
+        },
+        {
+          "step": "Lightly spray the beef with vegetable oil to ensure crispiness."
+        },
+        {
+          "step": "Air fry the beef at 200°C (392°F) for 12-15 minutes, turning halfway through, until beef is crisp and golden brown."
+        }
+      ]
+    },
+    {
+      "section_title": "Making the Chilli Sauce",
+      "steps": [
+        {
+          "step": "In a small saucepan, heat 2 tablespoons of vegetable oil over medium heat."
+        },
+        {
+          "step": "Add minced garlic and sliced red chilies, and sauté for 2-3 minutes until fragrant."
+        },
+        {
+          "step": "Stir in soy sauce, rice vinegar, and brown sugar. Cook for another 2-3 minutes until the sauce thickens slightly."
+        }
+      ]
+    },
+    {
+      "section_title": "Combining and Serving",
+      "steps": [
+        {
+          "step": "Transfer the crispy beef from the air fryer to a large mixing bowl."
+        },
+        {
+          "step": "Pour the chilli sauce over the fried beef, tossing until well combined."
+        },
+        {
+          "step": "Garnish with sliced spring onions and toasted sesame seeds before serving."
+        }
+      ]
+    }
+  ]
+}

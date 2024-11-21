@@ -33,10 +33,12 @@ def generate_recipe(dish_idea, servings, notes="", dietary_preferences="", units
     Make me a recipe based on the following guidelines:
 
     Dish idea: {dish_idea}
-    Servings: {servings}
     {f'Notes: {notes}' if notes else ''}
     {f'Dietary preferences: {dietary_preferences}' if dietary_preferences else ''}
-    Provide quantities in {units} units, but teaspoons and tablespoonss are acceptable
+    Servings: {servings}
+    Place ingredient modifiers like "diced" after the item name (e.g. "Carrots, diced")
+    Provide quantities in {units} units; teaspoons and tablespoons are acceptable
+    Group instructions into a limited number of instruction sections
     """
 
     try:

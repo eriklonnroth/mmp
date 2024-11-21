@@ -1,0 +1,124 @@
+{
+  "dish_name": "Spatchcock Chicken with Roasted Root Vegetables",
+  "description": "A succulent spatchcock chicken roasted to perfection alongside a medley of flavorful root vegetables, making a hearty and delicious meal for any occasion.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "item": "Whole chicken",
+      "quantity": "1.5 kg"
+    },
+    {
+      "item": "Olive oil",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Salt",
+      "quantity": "2 teaspoons"
+    },
+    {
+      "item": "Freshly ground black pepper",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Lemon",
+      "quantity": "1, juiced"
+    },
+    {
+      "item": "Garlic cloves",
+      "quantity": "4, minced"
+    },
+    {
+      "item": "Fresh rosemary",
+      "quantity": "2 sprigs"
+    },
+    {
+      "item": "Carrots",
+      "quantity": "300 grams, peeled and sliced"
+    },
+    {
+      "item": "Parsnips",
+      "quantity": "300 grams, peeled and chopped"
+    },
+    {
+      "item": "Red onions",
+      "quantity": "2, quartered"
+    },
+    {
+      "item": "Potatoes",
+      "quantity": "400 grams, chopped"
+    },
+    {
+      "item": "Olive oil for vegetables",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Salt for vegetables",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Freshly ground black pepper for vegetables",
+      "quantity": "1 teaspoon"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Preparation",
+      "steps": [
+        {
+          "step": "Preheat your oven to 220°C (430°F)."
+        },
+        {
+          "step": "Place the chicken breast-side down. Using kitchen shears, cut along both sides of the backbone to remove it."
+        },
+        {
+          "step": "Turn the chicken over and press down firmly on the breastbone to flatten the chicken."
+        },
+        {
+          "step": "In a small bowl, mix 2 tablespoons of olive oil, lemon juice, minced garlic, rosemary leaves stripped from the sprigs, 2 teaspoons of salt, and 1 teaspoon of black pepper."
+        },
+        {
+          "step": "Rub the mixture all over the chicken, ensuring even coverage, and set aside."
+        }
+      ]
+    },
+    {
+      "section_title": "Vegetable Preparation",
+      "steps": [
+        {
+          "step": "In a large bowl, combine carrots, parsnips, red onions, and potatoes."
+        },
+        {
+          "step": "Drizzle with 2 tablespoons of olive oil, and sprinkle with 1 teaspoon of salt and 1 teaspoon of black pepper. Toss well to coat the vegetables evenly."
+        }
+      ]
+    },
+    {
+      "section_title": "Roasting",
+      "steps": [
+        {
+          "step": "On a large baking tray, arrange the root vegetables in an even layer."
+        },
+        {
+          "step": "Place the spatchcocked chicken on top of the vegetables, breast side up."
+        },
+        {
+          "step": "Transfer to the preheated oven and roast for 45-50 minutes, or until the chicken is golden brown and the internal temperature reaches 75°C (165°F)."
+        },
+        {
+          "step": "For a crispy skin, turn on the broiler in the last 5 minutes of cooking time while keeping a close eye to prevent burning."
+        }
+      ]
+    },
+    {
+      "section_title": "Serving",
+      "steps": [
+        {
+          "step": "Remove the roasting pan from the oven and let the chicken rest for 10 minutes before carving."
+        },
+        {
+          "step": "Serve the chicken with the roasted root vegetables, and enjoy your meal!"
+        }
+      ]
+    }
+  ]
+}

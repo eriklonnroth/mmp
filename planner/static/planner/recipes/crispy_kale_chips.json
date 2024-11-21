@@ -1,0 +1,72 @@
+{
+  "dish_name": "Crispy Kale Chips",
+  "description": "These crispy kale chips are light, healthy, and flavorful, making them an addictive and nutritious snack that's perfect for any occasion.",
+  "servings": 6,
+  "ingredients": [
+    {
+      "item": "Kale, leaves removed from stems and torn into large pieces",
+      "quantity": "200 grams"
+    },
+    {
+      "item": "Olive Oil",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Sea Salt, fine",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Garlic Powder",
+      "quantity": "1/2 teaspoon"
+    },
+    {
+      "item": "Paprika",
+      "quantity": "1/4 teaspoon"
+    },
+    {
+      "item": "Black Pepper, freshly ground",
+      "quantity": "1/4 teaspoon"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Preparation",
+      "steps": [
+        {
+          "step": "Preheat your oven to 150°C (300°F) and line two large baking sheets with parchment paper."
+        },
+        {
+          "step": "Wash the kale leaves thoroughly and dry them using a salad spinner or pat dry with a clean kitchen towel to remove all moisture."
+        }
+      ]
+    },
+    {
+      "section_title": "Seasoning the Kale",
+      "steps": [
+        {
+          "step": "Place the dried kale leaves into a large mixing bowl."
+        },
+        {
+          "step": "Drizzle the olive oil over the kale leaves and gently massage with your fingers to ensure all leaves are evenly coated with oil."
+        },
+        {
+          "step": "Sprinkle the sea salt, garlic powder, paprika, and freshly ground black pepper over the oiled kale and toss the leaves to evenly distribute the seasonings."
+        }
+      ]
+    },
+    {
+      "section_title": "Baking the Kale Chips",
+      "steps": [
+        {
+          "step": "Spread the seasoned kale leaves in a single layer on the prepared baking sheets, ensuring they do not overlap."
+        },
+        {
+          "step": "Bake the kale in the preheated oven for 20-25 minutes, turning the trays halfway through baking, until the leaves are crispy and slightly browned but not burnt."
+        },
+        {
+          "step": "Remove the baking sheets from the oven and allow the kale chips to cool on the sheets for a few minutes before serving."
+        }
+      ]
+    }
+  ]
+}

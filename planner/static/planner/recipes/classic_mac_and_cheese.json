@@ -1,0 +1,93 @@
+{
+  "dish_name": "Classic Mac & Cheese",
+  "description": "A creamy and cheesy classic macaroni and cheese recipe, perfect for a comforting and delicious meal.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "item": "Macaroni",
+      "quantity": "250 grams"
+    },
+    {
+      "item": "Butter",
+      "quantity": "50 grams"
+    },
+    {
+      "item": "All-purpose flour",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Milk",
+      "quantity": "500 milliliters"
+    },
+    {
+      "item": "Cheddar cheese, grated",
+      "quantity": "200 grams"
+    },
+    {
+      "item": "Parmesan cheese, grated",
+      "quantity": "50 grams"
+    },
+    {
+      "item": "Salt",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Black pepper, freshly ground",
+      "quantity": "1/2 teaspoon"
+    },
+    {
+      "item": "Breadcrumbs",
+      "quantity": "50 grams"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Preparation",
+      "steps": [
+        {
+          "step": "Preheat oven to 180°C (350°F)."
+        },
+        {
+          "step": "Cook the macaroni according to package instructions until al dente, then drain and set aside."
+        }
+      ]
+    },
+    {
+      "section_title": "Make the Cheese Sauce",
+      "steps": [
+        {
+          "step": "In a medium saucepan, melt the butter over medium heat."
+        },
+        {
+          "step": "Add the flour and stir continuously for about 2 minutes to form a roux."
+        },
+        {
+          "step": "Slowly add the milk, whisking continuously to prevent lumps from forming, and cook until the mixture thickens."
+        },
+        {
+          "step": "Reduce the heat and add the grated Cheddar and Parmesan cheeses, stirring until the cheese is completely melted and the sauce is smooth."
+        },
+        {
+          "step": "Season the sauce with salt and freshly ground black pepper to taste."
+        }
+      ]
+    },
+    {
+      "section_title": "Combine and Bake",
+      "steps": [
+        {
+          "step": "Add the cooked macaroni to the cheese sauce and stir well to coat the pasta evenly."
+        },
+        {
+          "step": "Transfer the macaroni and cheese mixture to a baking dish."
+        },
+        {
+          "step": "Sprinkle the top with breadcrumbs for a crispy topping."
+        },
+        {
+          "step": "Bake in the preheated oven for 20-25 minutes or until the top is golden brown and the sauce is bubbling."
+        }
+      ]
+    }
+  ]
+}

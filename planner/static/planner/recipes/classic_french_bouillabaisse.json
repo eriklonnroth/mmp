@@ -1,0 +1,139 @@
+{
+  "dish_name": "Classic French Bouillabaisse",
+  "description": "A traditional Provençal fish stew originating from the port city of Marseille, made with a variety of fish, shellfish, and a flavorful broth infused with saffron and herbs.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "item": "Olive oil",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Onion, finely chopped",
+      "quantity": "1 large"
+    },
+    {
+      "item": "Leek, white part only, sliced",
+      "quantity": "1"
+    },
+    {
+      "item": "Fennel bulb, thinly sliced",
+      "quantity": "1 small"
+    },
+    {
+      "item": "Garlic cloves, minced",
+      "quantity": "4"
+    },
+    {
+      "item": "Tomatoes, chopped",
+      "quantity": "4 medium"
+    },
+    {
+      "item": "Fresh thyme leaves",
+      "quantity": "1 tablespoon"
+    },
+    {
+      "item": "Bay leaf",
+      "quantity": "1"
+    },
+    {
+      "item": "Saffron threads",
+      "quantity": "1 pinch"
+    },
+    {
+      "item": "Fish stock",
+      "quantity": "1 liter"
+    },
+    {
+      "item": "Dry white wine",
+      "quantity": "250 milliliters"
+    },
+    {
+      "item": "Orange zest, grated",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Red mullet, filleted",
+      "quantity": "300 grams"
+    },
+    {
+      "item": "Monkfish, cut into pieces",
+      "quantity": "300 grams"
+    },
+    {
+      "item": "Sea bass, filleted",
+      "quantity": "300 grams"
+    },
+    {
+      "item": "Mussels, cleaned and debearded",
+      "quantity": "500 grams"
+    },
+    {
+      "item": "Fresh parsley, chopped",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Salt",
+      "quantity": "to taste"
+    },
+    {
+      "item": "Black pepper, freshly ground",
+      "quantity": "to taste"
+    },
+    {
+      "item": "Baguette slices, toasted",
+      "quantity": "optional"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Prepare the Aromatic Base",
+      "steps": [
+        {
+          "step": "In a large, heavy pot, heat olive oil over medium heat."
+        },
+        {
+          "step": "Add the finely chopped onion, sliced leek, and thinly sliced fennel bulb to the pot. Sauté until soft and translucent, about 5-7 minutes."
+        },
+        {
+          "step": "Stir in the minced garlic, chopped tomatoes, fresh thyme leaves, bay leaf, and saffron threads. Cook for another 3 minutes until fragrant."
+        }
+      ]
+    },
+    {
+      "section_title": "Build the Broth",
+      "steps": [
+        {
+          "step": "Pour in the fish stock and dry white wine, then add the grated orange zest. Bring the mixture to a simmer."
+        },
+        {
+          "step": "Season with salt and freshly ground black pepper to taste. Allow the broth to simmer gently for about 20 minutes to develop flavors."
+        }
+      ]
+    },
+    {
+      "section_title": "Cook the Seafood",
+      "steps": [
+        {
+          "step": "Add the red mullet, monkfish, and sea bass to the simmering broth. Cook for 5 minutes until the fish begins to flake."
+        },
+        {
+          "step": "Add the mussels to the pot and cover with a lid. Cook for an additional 5 minutes until the mussels have opened."
+        }
+      ]
+    },
+    {
+      "section_title": "Serve the Bouillabaisse",
+      "steps": [
+        {
+          "step": "Discard any unopened mussels and the bay leaf."
+        },
+        {
+          "step": "Ladle the bouillabaisse into warm bowls, garnishing each serving with freshly chopped parsley."
+        },
+        {
+          "step": "Serve with toasted baguette slices on the side, if desired."
+        }
+      ]
+    }
+  ]
+}

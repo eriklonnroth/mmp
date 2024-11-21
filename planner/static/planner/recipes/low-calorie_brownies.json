@@ -1,0 +1,99 @@
+{
+  "dish_name": "Low-Calorie Brownies",
+  "description": "A healthier twist on classic brownies, these low-calorie brownies are rich in chocolate flavor while being mindful of caloric intake. Perfect for satisfying your sweet tooth without the guilt.",
+  "servings": 6,
+  "ingredients": [
+    {
+      "item": "almond flour",
+      "quantity": "100 grams"
+    },
+    {
+      "item": "unsweetened cocoa powder",
+      "quantity": "30 grams"
+    },
+    {
+      "item": "baking powder",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "salt",
+      "quantity": "1/4 teaspoon"
+    },
+    {
+      "item": "granulated erythritol or sweetener of choice",
+      "quantity": "75 grams"
+    },
+    {
+      "item": "unsweetened applesauce",
+      "quantity": "100 grams"
+    },
+    {
+      "item": "large eggs",
+      "quantity": "2"
+    },
+    {
+      "item": "vanilla extract",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "dark chocolate chips (optional)",
+      "quantity": "30 grams"
+    },
+    {
+      "item": "non-stick cooking spray",
+      "quantity": "as needed"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Prepare Dry Ingredients",
+      "steps": [
+        {
+          "step": "Preheat your oven to 180°C (350°F)."
+        },
+        {
+          "step": "In a medium bowl, combine almond flour, unsweetened cocoa powder, baking powder, and salt. Stir well to ensure all dry ingredients are mixed thoroughly."
+        }
+      ]
+    },
+    {
+      "section_title": "Mix Wet Ingredients",
+      "steps": [
+        {
+          "step": "In a separate large bowl, mix together the granulated erythritol, unsweetened applesauce, eggs, and vanilla extract until smooth and well combined."
+        }
+      ]
+    },
+    {
+      "section_title": "Combine and Bake",
+      "steps": [
+        {
+          "step": "Gradually add the dry ingredient mixture into the wet ingredients. Stir until you have a smooth batter."
+        },
+        {
+          "step": "If using, fold in dark chocolate chips."
+        },
+        {
+          "step": "Lightly spray a square baking dish (approximately 20x20 cm) with non-stick cooking spray."
+        },
+        {
+          "step": "Pour the brownie batter into the prepared dish and spread evenly."
+        },
+        {
+          "step": "Bake in the preheated oven for 20-25 minutes, or until a toothpick inserted into the center comes out mostly clean."
+        }
+      ]
+    },
+    {
+      "section_title": "Cool and Serve",
+      "steps": [
+        {
+          "step": "Remove from the oven and allow the brownies to cool in the dish for at least 10 minutes."
+        },
+        {
+          "step": "Cut into 6 equal pieces and serve. Enjoy your guilt-free treat!"
+        }
+      ]
+    }
+  ]
+}

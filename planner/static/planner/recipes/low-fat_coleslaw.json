@@ -1,0 +1,95 @@
+{
+  "dish_name": "Low-Fat Coleslaw",
+  "description": "A crisp and refreshing low-fat coleslaw that's perfect for a healthy side dish or a light lunch. This recipe cuts down on fat without sacrificing flavor, combining fresh vegetables with a tangy dressing.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "item": "Cabbage, shredded",
+      "quantity": "300 grams"
+    },
+    {
+      "item": "Carrots, grated",
+      "quantity": "2 medium"
+    },
+    {
+      "item": "Green onions, chopped",
+      "quantity": "2"
+    },
+    {
+      "item": "Red bell pepper, diced",
+      "quantity": "1 small"
+    },
+    {
+      "item": "Low-fat plain yogurt",
+      "quantity": "120 ml"
+    },
+    {
+      "item": "Light mayonnaise",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Apple cider vinegar",
+      "quantity": "1 tablespoon"
+    },
+    {
+      "item": "Honey",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Dijon mustard",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Salt",
+      "quantity": "1/2 teaspoon"
+    },
+    {
+      "item": "Black pepper",
+      "quantity": "1/4 teaspoon"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Prepare the Vegetables",
+      "steps": [
+        {
+          "step": "Shred the cabbage and place it in a large mixing bowl."
+        },
+        {
+          "step": "Grate the carrots using a box grater and add them to the bowl."
+        },
+        {
+          "step": "Chop the green onions into thin slices and dice the red bell pepper, then add both to the bowl with the cabbage and carrots."
+        }
+      ]
+    },
+    {
+      "section_title": "Make the Dressing",
+      "steps": [
+        {
+          "step": "In a small bowl, combine the low-fat plain yogurt, light mayonnaise, apple cider vinegar, honey, and Dijon mustard. Whisk until smooth."
+        }
+      ]
+    },
+    {
+      "section_title": "Combine and Serve",
+      "steps": [
+        {
+          "step": "Pour the dressing over the shredded vegetables."
+        },
+        {
+          "step": "Season with salt and black pepper to taste."
+        },
+        {
+          "step": "Toss everything together until the vegetables are well coated with the dressing."
+        },
+        {
+          "step": "Cover the bowl with plastic wrap and refrigerate for at least 30 minutes to allow the flavors to meld."
+        },
+        {
+          "step": "Serve chilled as a side dish or as a topping for sandwiches."
+        }
+      ]
+    }
+  ]
+}
