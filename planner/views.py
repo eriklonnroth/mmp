@@ -6,8 +6,9 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from django.views import View
 from django.views.decorators.http import require_http_methods
+from django.views import View
+from django.views.generic import DetailView, ListView
 from planner.services.recipe_generator import generate_recipe
 from planner.services.recipe_parser import parse_recipe_string
 from planner.services.recipe_repository import save_recipe_to_db
@@ -62,7 +63,7 @@ def magic_recipe(request):
             # Silently ignore invalid IDs
             pass
     
-    return render(request, "planner/recipes/magic_recipe.html", context)
+    return render(request, "planner/recipes/magic.html", context)
 
 @require_http_methods(['POST'])
 def action_add_group(request):   
@@ -83,7 +84,7 @@ def action_generate_recipe(request):
             parsed_recipe = parse_recipe_string(recipe_string)
             save_recipe_to_file(parsed_recipe)
             saved_recipe = save_recipe_to_db(parsed_recipe, status='draft')
-            response = render(request, 'planner/partials/partial_recipe.html', 
+            response = render(request, 'planner/recipes/partial_recipe_detail.html', 
                             {'recipe': saved_recipe})
             response['HX-Push'] = f'?id={saved_recipe.id}'
             return response
@@ -159,3 +160,39 @@ class GenerateShoppingListView(View):
             return JsonResponse({
                 "error": f"Error generating shopping list: {str(e)}"
             }, status=500)
+
+class RecipeDetailView(DetailView):
+    model = Recipe
+    template_name = 'planner/recipes/detail.html'
+    context_object_name = 'recipe'
+
+    def get_queryset(self):
+        return Recipe.objects.prefetch_related(
+            'ingredients',
+            'instruction_sections',
+            'instruction_sections__steps'
+        )
+
+
+class RecipeCardListView(ListView):
+    model = Recipe
+    template_name = 'planner/recipes/partial_recipe_card_list.html'
+    context_object_name = 'recipes'
+
+    def get_queryset(self):
+        queryset = Recipe.objects.all()
+        
+        # Get sort parameter (default to -created_at if not specified)
+        sort_by = self.request.GET.get('sort', '-created_at')
+        queryset = queryset.order_by(sort_by)
+        
+        # Get limit parameter
+        try:
+            limit = int(self.request.GET.get('limit', 10))
+            queryset = queryset[:limit]
+        except ValueError:
+            queryset = queryset[:10]  # Fallback to 10 if invalid limit
+            
+        return queryset
+    
+

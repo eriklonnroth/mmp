@@ -1,0 +1,27 @@
+<!-- Grid Layout-->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 mx-4 sm:mx-0">
+    
+    {% for recipe in recipes %}
+    
+        <!-- Recipe Card -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="relative">
+                <div class="pb-[100%]"></div>
+                <img src="https://placehold.co/400x300" alt="Recipe" class="absolute inset-0 w-full h-full object-cover">
+                <button class="absolute top-2 right-2 p-2 rounded-full bg-white/50 hover:bg-white shadow-sm text-gray-600 hover:text-rose-500 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="p-4 h-[120px]">
+                <a href="{% url 'recipe_detail' recipe.id %}">
+                    <h3 class="text-md font-semibold text-gray-900 line-clamp-2">{{ recipe.dish_name }}</h3>
+                </a>
+                <button class="text-sm text-gray-600 mt-3">+ Add to meal plan</button>
+            </div>
+        </div>
+        
+    {% endfor %}
+
+</div>
