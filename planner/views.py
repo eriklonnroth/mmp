@@ -1,9 +1,11 @@
 from django.contrib.auth.models import User
 from django.contrib.staticfiles.finders import find
 from django.db import IntegrityError
+from django.db.models import Exists, OuterRef
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
@@ -94,21 +96,28 @@ def action_generate_recipe(request):
         return HttpResponseBadRequest("Invalid form data")
 
 @require_http_methods(['POST'])
-def action_save_to_my_recipes(request, recipe_id):
-    try:
-        user = request.user if request.user.is_authenticated else User.objects.get(username='admin')
-        recipe = Recipe.objects.get(id=recipe_id)
-        MyRecipe.objects.get_or_create(recipe=recipe, user=user)
-        response = HttpResponse('Saved to My Recipes')
-        response['HX-Trigger'] = 'recipeSaved'
-        response['HX-Classes'] = 'recipe-saved'
-        return response
-    except Recipe.DoesNotExist:
-        return HttpResponseBadRequest('Recipe not found')
-    except IntegrityError:
-        return HttpResponseBadRequest('Recipe already in My Recipes')
-    except ValueError:
-        return HttpResponseBadRequest('Invalid recipe ID')
+def action_toggle_my_recipes(request, recipe_id):
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+    
+    user = request.user if request.user.is_authenticated else None
+    if not user:
+        admin_user = User.objects.get(username='admin')
+        user = admin_user
+    #     return JsonResponse({
+    #         'error': 'Authentication required'
+    # }, status=401)
+
+
+    if user in recipe.saved_to_my_recipes_by.all():
+        # Remove from My Recipes
+        recipe.saved_to_my_recipes_by.remove(user)
+        saved = False
+    else:
+        # Add to My Recipes
+        recipe.saved_to_my_recipes_by.add(user)
+        saved = True
+
+    return JsonResponse({'saved': saved})
 
 @method_decorator(csrf_exempt, name='dispatch')
 class GenerateRecipeView(View):
@@ -186,13 +195,28 @@ class RecipeCardListView(ListView):
         sort_by = self.request.GET.get('sort', '-created_at')
         queryset = queryset.order_by(sort_by)
         
-        # Get limit parameter
-        try:
-            limit = int(self.request.GET.get('limit', 10))
-            queryset = queryset[:limit]
-        except ValueError:
-            queryset = queryset[:10]  # Fallback to 10 if invalid limit
-            
+        # Get limit parameter (default to 10 if not specified)
+        limit = int(self.request.GET.get('limit', 10))
+        queryset = queryset[:limit]
+
+        user = self.request.user if self.request.user.is_authenticated else None
+        if not user:
+            admin_user = User.objects.get(username='admin')
+            user = admin_user
+        #     return JsonResponse({
+        #         'error': 'Authentication required'
+        # }, status=401)
+
+        # Check if saved to My Recipes
+        queryset = queryset.annotate(
+            is_saved=Exists(
+                MyRecipe.objects.filter(
+                    user=user,
+                    recipe=OuterRef('pk')
+                )
+            )
+        )
+    
         return queryset
     
 

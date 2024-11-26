@@ -31,7 +31,7 @@
               hx-swap="innerHTML"
               hx-push-url="true"
               hx-disabled-elt="#recipe-form-fieldset"
-              x-on:htmx:after-swap.window="recipeGenerated = true"
+              @htmx:after-swap.window="recipeGenerated = true"
               class="space-y-2">
             
             <fieldset id="recipe-form-fieldset">
@@ -119,7 +119,7 @@
     <div id="generated-recipe" class="mb-16"
          x-on:recipe-loaded.window="recipeId = $event.detail.recipeId">
         {% if id_in_url %}
-            {% include "planner/partials/partial_recipe.html" with recipe=id_in_url %}
+            {% include "planner/recipes/partial_recipe_detail.html" with recipe=id_in_url %}
         {% endif %}
     </div>
 </div>

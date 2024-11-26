@@ -181,6 +181,24 @@
         @apply bg-gray-50 text-gray-400 cursor-not-allowed hover:bg-gray-50
                pointer-events-none opacity-75;
     }
+
+
+    .toggle-my-recipes-button--unsaved {
+        @apply bg-white/50 text-gray-400 hover:bg-white/75
+               backdrop-blur-sm;
+    }
+
+    .toggle-my-recipes-button--unsaved svg {
+        @apply fill-gray-400;
+    }
+
+    .toggle-my-recipes-button--saved {
+        @apply bg-white text-gray-600;
+    }
+
+    .toggle-my-recipes-button--saved svg {
+        @apply fill-gray-600;
+    }
 }
 
     
