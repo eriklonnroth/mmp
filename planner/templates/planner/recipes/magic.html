@@ -119,7 +119,7 @@
     <div id="generated-recipe" class="mb-16"
          x-on:recipe-loaded.window="recipeId = $event.detail.recipeId">
         {% if id_in_url %}
-            {% include "planner/recipes/partial_recipe_detail.html" with recipe=id_in_url %}
+            {% include "planner/recipes/partial_recipe.html" with recipe=id_in_url %}
         {% endif %}
     </div>
 </div>

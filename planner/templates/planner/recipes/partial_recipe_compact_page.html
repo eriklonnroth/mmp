@@ -1,0 +1,34 @@
+{% for recipe in recipes %}
+    <div id="recipe-{{ recipe.id }}" class="bg-white rounded-lg shadow-md overflow-hidden mb-2">
+        <div class="flex items-center p-2">
+            <!-- Left: Image thumbnail -->
+            <div class="relative w-16 h-16 flex-shrink-0">
+                <img src="https://placehold.co/400x300" alt="Recipe" class="w-full h-full object-cover rounded">
+            </div>
+            
+            <!-- Middle: Recipe name -->
+            <div class="flex-grow px-4">
+                <a href="{% url 'recipe_detail' recipe.id %}" class="hover:text-gray-600">
+                    <h3 class="text-md font-semibold text-gray-900 line-clamp-1">{{ recipe.dish_name }}</h3>
+                </a>
+            </div>
+            
+            <!-- Right: Toggle button -->
+            <div class="flex-shrink-0">
+                {% include "planner/recipes/partial_toggle_my_recipes.html" with recipe=recipe %}
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+{% if page_obj.has_next %}
+
+    <div id="scroll-sentinel"
+        class="h-0 w-0 col-span-full"
+        hx-trigger="intersect once"
+        hx-get="{% url 'recipe_cards_page' %}?page={{ page_obj.number|add:1 }}&sort={{ sort }}"
+        hx-target="#recipe-compact-list"
+        hx-swap="beforeend">
+    </div>
+
+{% endif %}

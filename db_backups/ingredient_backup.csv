@@ -1,0 +1,494 @@
+id,item,quantity,order,modified_at,recipe_id
+1,Rolled oats,250 ml,1,2024-11-20 17:13:57.953168+02,1
+2,Cottage cheese,250 ml,2,2024-11-20 17:13:57.957373+02,1
+3,Eggs,4 large,3,2024-11-20 17:13:57.958886+02,1
+4,Baking powder,5 ml,4,2024-11-20 17:13:57.960531+02,1
+5,Ground cinnamon,1 teaspoon,5,2024-11-20 17:13:57.961993+02,1
+6,Vanilla extract,1 teaspoon,6,2024-11-20 17:13:57.966158+02,1
+7,Salt,A pinch,7,2024-11-20 17:13:57.967534+02,1
+8,"Olive oil or coconut oil, for cooking",1 tablespoon,8,2024-11-20 17:13:57.968858+02,1
+9,"Berries, for serving",as desired,9,2024-11-20 17:13:57.970281+02,1
+10,"Greek yogurt, for serving",as desired,10,2024-11-20 17:13:57.973012+02,1
+11,Ground beef,1 pound,1,2024-11-20 17:13:57.986932+02,2
+12,Olive oil,2 tablespoons,2,2024-11-20 17:13:57.989606+02,2
+13,"Onion, chopped",1 medium,3,2024-11-20 17:13:57.990999+02,2
+14,"Garlic cloves, minced",2 cloves,4,2024-11-20 17:13:57.992985+02,2
+15,Tomato paste,2 tablespoons,5,2024-11-20 17:13:57.998399+02,2
+16,Diced tomatoes (canned),14.5 ounces,6,2024-11-20 17:13:58.000229+02,2
+17,Lasagna sheets,6 sheets,7,2024-11-20 17:13:58.001999+02,2
+18,Ricotta cheese,1 cup,8,2024-11-20 17:13:58.003515+02,2
+19,Egg,1 large,9,2024-11-20 17:13:58.008176+02,2
+20,Shredded mozzarella cheese,2 cups,10,2024-11-20 17:13:58.00954+02,2
+21,Grated Parmesan cheese,1/2 cup,11,2024-11-20 17:13:58.010862+02,2
+22,Salt,1 teaspoon,12,2024-11-20 17:13:58.012212+02,2
+23,Black pepper,1/2 teaspoon,13,2024-11-20 17:13:58.014298+02,2
+24,Italian seasoning,1 teaspoon,14,2024-11-20 17:13:58.015661+02,2
+25,"Prawns, peeled and deveined",500 grams,1,2024-11-20 17:13:58.028802+02,3
+26,Fresh lime juice,120 ml (about 4 limes),2,2024-11-20 17:13:58.031419+02,3
+27,Fresh lemon juice,60 ml (about 2 lemons),3,2024-11-20 17:13:58.033048+02,3
+28,"Red onion, finely chopped",1 medium,4,2024-11-20 17:13:58.041992+02,3
+29,"Red chili, finely chopped",1,5,2024-11-20 17:13:58.044233+02,3
+30,"Cucumber, diced",1 medium,6,2024-11-20 17:13:58.045576+02,3
+31,"Cherry tomatoes, halved",200 grams,7,2024-11-20 17:13:58.050922+02,3
+32,"Fresh coriander leaves, chopped",30 grams,8,2024-11-20 17:13:58.052331+02,3
+33,"Avocado, diced",1 large,9,2024-11-20 17:13:58.053657+02,3
+34,Olive oil,2 tablespoons,10,2024-11-20 17:13:58.056523+02,3
+35,Salt,1 teaspoon,11,2024-11-20 17:13:58.057861+02,3
+36,Black pepper,1/2 teaspoon,12,2024-11-20 17:13:58.060485+02,3
+37,Sugar,1/2 teaspoon,13,2024-11-20 17:13:58.061858+02,3
+38,Boneless chicken thighs,500 grams,1,2024-11-20 17:13:58.073161+02,4
+39,Greek yogurt,200 ml,2,2024-11-20 17:13:58.07441+02,4
+40,Vegetable oil,2 tablespoons,3,2024-11-20 17:13:58.075664+02,4
+41,"Garlic, minced",4 cloves,4,2024-11-20 17:13:58.077378+02,4
+42,"Ginger, minced",2 teaspoons,5,2024-11-20 17:13:58.079461+02,4
+43,"Onion, finely chopped",1 large,6,2024-11-20 17:13:58.083177+02,4
+44,Tomato puree,200 ml,7,2024-11-20 17:13:58.084581+02,4
+45,Coriander powder,2 teaspoons,8,2024-11-20 17:13:58.085801+02,4
+46,Cumin powder,1 teaspoon,9,2024-11-20 17:13:58.087945+02,4
+47,Garam masala,1 teaspoon,10,2024-11-20 17:13:58.090864+02,4
+48,Turmeric powder,1/2 teaspoon,11,2024-11-20 17:13:58.092438+02,4
+49,Red chili powder,1 teaspoon (adjust to taste),12,2024-11-20 17:13:58.093844+02,4
+50,Salt,to taste,13,2024-11-20 17:13:58.09542+02,4
+51,"Fresh coriander leaves, chopped",for garnish,14,2024-11-20 17:13:58.098049+02,4
+52,Green beans,200 grams,1,2024-11-20 17:13:58.113918+02,5
+53,New potatoes,400 grams,2,2024-11-20 17:13:58.115328+02,5
+54,Mixed salad leaves,200 grams,3,2024-11-20 17:13:58.116465+02,5
+55,Ripe tomatoes,200 grams,4,2024-11-20 17:13:58.117921+02,5
+56,Canned tuna in olive oil,240 grams (2 cans),5,2024-11-20 17:13:58.119627+02,5
+57,Hard-boiled eggs,4,6,2024-11-20 17:13:58.121079+02,5
+58,Black olives,50 grams,7,2024-11-20 17:13:58.122691+02,5
+59,Red onion,1 small,8,2024-11-20 17:13:58.124638+02,5
+60,Extra virgin olive oil,60 milliliters (4 tablespoons),9,2024-11-20 17:13:58.125872+02,5
+61,Red wine vinegar,30 milliliters (2 tablespoons),10,2024-11-20 17:13:58.130895+02,5
+62,Dijon mustard,10 grams (2 teaspoons),11,2024-11-20 17:13:58.139934+02,5
+63,Garlic,1 clove,12,2024-11-20 17:13:58.143382+02,5
+64,Salt,To taste,13,2024-11-20 17:13:58.146437+02,5
+65,Freshly ground black pepper,To taste,14,2024-11-20 17:13:58.149263+02,5
+66,Chicken stock,1.5 liters,1,2024-11-20 17:13:58.161483+02,6
+67,Soy sauce,60 ml,2,2024-11-20 17:13:58.162638+02,6
+68,Mirin,30 ml,3,2024-11-20 17:13:58.163877+02,6
+69,"Garlic cloves, minced",2 cloves,4,2024-11-20 17:13:58.165105+02,6
+70,"Fresh ginger, grated",1 tablespoon,5,2024-11-20 17:13:58.166397+02,6
+71,Boneless chicken thighs,400 grams,6,2024-11-20 17:13:58.167826+02,6
+72,Ramen noodles,400 grams,7,2024-11-20 17:13:58.169108+02,6
+73,"Boiled eggs, soft or medium cooked",4,8,2024-11-20 17:13:58.170503+02,6
+74,"Spring onions, sliced",2 stalks,9,2024-11-20 17:13:58.172632+02,6
+75,"Nori sheets, cut into halves",2 sheets,10,2024-11-20 17:13:58.174147+02,6
+76,Sesame oil,1 tablespoon,11,2024-11-20 17:13:58.175493+02,6
+77,Salt,to taste,12,2024-11-20 17:13:58.177776+02,6
+78,Ground black pepper,to taste,13,2024-11-20 17:13:58.182439+02,6
+79,"Salmon fillets, skinless",4 pieces (about 150g each),1,2024-11-20 17:13:58.204699+02,7
+80,Water,1 liter,2,2024-11-20 17:13:58.206394+02,7
+81,"Lemon, sliced",1 whole,3,2024-11-20 17:13:58.207524+02,7
+82,Bay leaves,2 leaves,4,2024-11-20 17:13:58.209077+02,7
+83,Black peppercorns,1 teaspoon,5,2024-11-20 17:13:58.210414+02,7
+84,Salt,1 teaspoon,6,2024-11-20 17:13:58.211922+02,7
+85,Olive oil,2 tablespoons,7,2024-11-20 17:13:58.213303+02,7
+86,"Garlic, minced",2 cloves,8,2024-11-20 17:13:58.214813+02,7
+87,Spinach leaves,300 grams,9,2024-11-20 17:13:58.216504+02,7
+88,"Kale leaves, chopped",200 grams,10,2024-11-20 17:13:58.217853+02,7
+89,Butter,30 grams,11,2024-11-20 17:13:58.222699+02,7
+90,Salt and black pepper,to taste,12,2024-11-20 17:13:58.224102+02,7
+91,Large eggs,4,1,2024-11-20 17:13:58.235521+02,8
+92,Milk,2 tablespoons,2,2024-11-20 17:13:58.236709+02,8
+93,Salt,1/2 teaspoon,3,2024-11-20 17:13:58.238832+02,8
+94,Black pepper,1/4 teaspoon,4,2024-11-20 17:13:58.240343+02,8
+95,Olive oil,1 tablespoon,5,2024-11-20 17:13:58.242474+02,8
+96,Bacon,4 slices,6,2024-11-20 17:13:58.244332+02,8
+97,Grated cheddar cheese,50 grams,7,2024-11-20 17:13:58.245638+02,8
+98,Avocado,"1, sliced",8,2024-11-20 17:13:58.247141+02,8
+99,Large flour tortillas,2,9,2024-11-20 17:13:58.248977+02,8
+100,Fresh salsa,4 tablespoons,10,2024-11-20 17:13:58.250736+02,8
+101,almond flour,100 grams,1,2024-11-20 17:13:58.264196+02,9
+102,unsweetened cocoa powder,30 grams,2,2024-11-20 17:13:58.265642+02,9
+103,baking powder,1 teaspoon,3,2024-11-20 17:13:58.267181+02,9
+104,salt,1/4 teaspoon,4,2024-11-20 17:13:58.268773+02,9
+105,granulated erythritol or sweetener of choice,75 grams,5,2024-11-20 17:13:58.2704+02,9
+106,unsweetened applesauce,100 grams,6,2024-11-20 17:13:58.272116+02,9
+107,large eggs,2,7,2024-11-20 17:13:58.273689+02,9
+108,vanilla extract,1 teaspoon,8,2024-11-20 17:13:58.275268+02,9
+109,dark chocolate chips (optional),30 grams,9,2024-11-20 17:13:58.276685+02,9
+110,non-stick cooking spray,as needed,10,2024-11-20 17:13:58.27791+02,9
+111,Whole chicken,1.5 kg,1,2024-11-20 17:29:08.138936+02,10
+112,Olive oil,2 tablespoons,2,2024-11-20 17:29:08.146163+02,10
+113,Salt,2 teaspoons,3,2024-11-20 17:29:08.148934+02,10
+114,Freshly ground black pepper,1 teaspoon,4,2024-11-20 17:29:08.1512+02,10
+115,Lemon,"1, juiced",5,2024-11-20 17:29:08.15349+02,10
+116,Garlic cloves,"4, minced",6,2024-11-20 17:29:08.158068+02,10
+117,Fresh rosemary,2 sprigs,7,2024-11-20 17:29:08.162173+02,10
+118,Carrots,"300 grams, peeled and sliced",8,2024-11-20 17:29:08.167579+02,10
+119,Parsnips,"300 grams, peeled and chopped",9,2024-11-20 17:29:08.171433+02,10
+120,Red onions,"2, quartered",10,2024-11-20 17:29:08.174195+02,10
+121,Potatoes,"400 grams, chopped",11,2024-11-20 17:29:08.189371+02,10
+122,Olive oil for vegetables,2 tablespoons,12,2024-11-20 17:29:08.191673+02,10
+123,Salt for vegetables,1 teaspoon,13,2024-11-20 17:29:08.206712+02,10
+124,Freshly ground black pepper for vegetables,1 teaspoon,14,2024-11-20 17:29:08.211178+02,10
+125,Tuna steaks,4 x 200g each,1,2024-11-20 17:32:47.350722+02,11
+126,Olive oil,2 tablespoons,2,2024-11-20 17:32:47.355425+02,11
+127,Salt,1 teaspoon,3,2024-11-20 17:32:47.357129+02,11
+128,Black pepper,1 teaspoon,4,2024-11-20 17:32:47.358886+02,11
+129,Lemon juice,2 tablespoons,5,2024-11-20 17:32:47.36052+02,11
+130,Unsalted butter,60g,6,2024-11-20 17:32:47.36699+02,11
+131,"Garlic cloves, minced",3 cloves,7,2024-11-20 17:32:47.369017+02,11
+132,"Fresh parsley, chopped",2 tablespoons,8,2024-11-20 17:32:47.3704+02,11
+133,Lemon zest,1 teaspoon,9,2024-11-20 17:32:47.371937+02,11
+134,"Capers, drained",1 tablespoon,10,2024-11-20 17:32:47.373983+02,11
+135,Chili flakes (optional),1/2 teaspoon,11,2024-11-20 17:32:47.377052+02,11
+136,Fresh rocket leaves,100 g,1,2024-11-20 18:38:02.37266+02,12
+137,Raw cashews,100 g,2,2024-11-20 18:38:02.378905+02,12
+138,Extra virgin olive oil,3 tablespoons,3,2024-11-20 18:38:02.381907+02,12
+139,Lemon juice,2 tablespoons,4,2024-11-20 18:38:02.383786+02,12
+140,"Garlic clove, minced",1,5,2024-11-20 18:38:02.388742+02,12
+141,Salt,1/2 teaspoon,6,2024-11-20 18:38:02.390359+02,12
+142,Black pepper,1/4 teaspoon,7,2024-11-20 18:38:02.391912+02,12
+143,Water,2-3 tablespoons,8,2024-11-20 18:38:02.395825+02,12
+144,Arborio rice,300 grams,1,2024-11-20 18:41:37.642974+02,13
+145,"Mixed mushrooms (e.g., cremini, shiitake, button), sliced",250 grams,2,2024-11-20 18:41:37.652149+02,13
+146,Olive oil,2 tablespoons,3,2024-11-20 18:41:37.65669+02,13
+147,Butter,2 tablespoons,4,2024-11-20 18:41:37.661582+02,13
+148,"Onion, finely chopped",1 medium,5,2024-11-20 18:41:37.664977+02,13
+149,"Garlic cloves, minced",2 cloves,6,2024-11-20 18:41:37.66753+02,13
+150,Dry white wine,120 ml,7,2024-11-20 18:41:37.669824+02,13
+151,Vegetable or chicken broth,1 liter,8,2024-11-20 18:41:37.67405+02,13
+152,"Parmesan cheese, grated",60 grams,9,2024-11-20 18:41:37.676668+02,13
+153,"Fresh parsley, chopped",2 tablespoons,10,2024-11-20 18:41:37.678478+02,13
+154,Salt,To taste,11,2024-11-20 18:41:37.680583+02,13
+155,Black pepper,To taste,12,2024-11-20 18:41:37.684384+02,13
+156,Lemon zest,1 teaspoon,13,2024-11-20 18:41:37.686314+02,13
+157,Oxtail,1 kg,1,2024-11-20 18:44:09.56032+02,14
+158,Olive oil,2 tablespoons,2,2024-11-20 18:44:09.571676+02,14
+159,"Large onion, chopped",1,3,2024-11-20 18:44:09.57754+02,14
+160,"Carrots, sliced",2,4,2024-11-20 18:44:09.583775+02,14
+161,"Celery stalks, chopped",2,5,2024-11-20 18:44:09.593451+02,14
+162,"Garlic cloves, minced",3,6,2024-11-20 18:44:09.597001+02,14
+163,Tomato paste,2 tablespoons,7,2024-11-20 18:44:09.60361+02,14
+164,Red wine,250 ml,8,2024-11-20 18:44:09.612053+02,14
+165,Beef stock,500 ml,9,2024-11-20 18:44:09.615303+02,14
+166,Bay leaves,2,10,2024-11-20 18:44:09.619277+02,14
+167,Thyme,1 teaspoon,11,2024-11-20 18:44:09.622267+02,14
+168,Salt,to taste,12,2024-11-20 18:44:09.626886+02,14
+169,Black pepper,to taste,13,2024-11-20 18:44:09.629762+02,14
+170,Flour,2 tablespoons,14,2024-11-20 18:44:09.632995+02,14
+171,"Potatoes, peeled and cubed",3,15,2024-11-20 18:44:09.636156+02,14
+172,Frozen peas,100 g,16,2024-11-20 18:44:09.640515+02,14
+173,Chopped parsley for garnish,as needed,17,2024-11-20 18:44:09.644002+02,14
+174,Potatoes,"500 grams, peeled and cubed",1,2024-11-20 19:58:18.09026+02,15
+175,"White fish fillets (e.g., cod or haddock)","400 grams, skinless and boneless",2,2024-11-20 19:58:18.100953+02,15
+176,Salt,1 teaspoon,3,2024-11-20 19:58:18.103555+02,15
+177,Black pepper,1/2 teaspoon,4,2024-11-20 19:58:18.106257+02,15
+178,Butter,50 grams,5,2024-11-20 19:58:18.112344+02,15
+179,Parsley,"2 tablespoons, finely chopped",6,2024-11-20 19:58:18.115301+02,15
+180,All-purpose flour,50 grams,7,2024-11-20 19:58:18.123982+02,15
+181,Eggs,"2, beaten",8,2024-11-20 19:58:18.137638+02,15
+182,Breadcrumbs,150 grams,9,2024-11-20 19:58:18.139526+02,15
+183,Vegetable oil,for frying,10,2024-11-20 19:58:18.148042+02,15
+184,Mayonnaise,120 ml,11,2024-11-20 19:58:18.150536+02,15
+185,Dijon mustard,1 teaspoon,12,2024-11-20 19:58:18.151938+02,15
+186,Capers,"1 tablespoon, finely chopped",13,2024-11-20 19:58:18.153559+02,15
+187,Gherkins,"1 tablespoon, finely chopped",14,2024-11-20 19:58:18.15527+02,15
+188,Lemon juice,1 tablespoon,15,2024-11-20 19:58:18.157336+02,15
+189,Chives,"1 tablespoon, finely chopped",16,2024-11-20 19:58:18.159488+02,15
+190,"Zucchini, spiralized",4 large zucchini,1,2024-11-20 20:08:05.741084+02,16
+191,"Cashews, soaked",150 grams (about 1 cup),2,2024-11-20 20:08:05.746311+02,16
+192,Nutritional yeast,3 tablespoons,3,2024-11-20 20:08:05.748777+02,16
+193,"Lemon juice, freshly squeezed",2 tablespoons,4,2024-11-20 20:08:05.750324+02,16
+194,"Garlic clove, minced",1 clove,5,2024-11-20 20:08:05.752096+02,16
+195,Water,120 ml (1/2 cup),6,2024-11-20 20:08:05.754569+02,16
+196,Olive oil,2 tablespoons,7,2024-11-20 20:08:05.756156+02,16
+197,Salt,1 teaspoon,8,2024-11-20 20:08:05.757848+02,16
+198,"Black pepper, ground",1/2 teaspoon,9,2024-11-20 20:08:05.759401+02,16
+199,Fresh basil leaves,Handful for garnish,10,2024-11-20 20:08:05.761541+02,16
+200,"Cherry tomatoes, halved",150 grams,11,2024-11-20 20:08:05.763311+02,16
+201,Olive oil,2 tablespoons,1,2024-11-20 20:39:55.050971+02,17
+202,"Onion, diced",1 large,2,2024-11-20 20:39:55.055907+02,17
+203,"Garlic cloves, minced",3,3,2024-11-20 20:39:55.05749+02,17
+204,"Carrots, diced",3 medium,4,2024-11-20 20:39:55.059066+02,17
+205,"Parsnips, diced",2 medium,5,2024-11-20 20:39:55.061872+02,17
+206,"Butternut squash, cubed",500 grams,6,2024-11-20 20:39:55.063839+02,17
+207,"Sweet potato, cubed",1 large,7,2024-11-20 20:39:55.065661+02,17
+208,Vegetable stock,1.5 litres,8,2024-11-20 20:39:55.067569+02,17
+209,Bay leaves,2,9,2024-11-20 20:39:55.070289+02,17
+210,"Thyme, dried",1 teaspoon,10,2024-11-20 20:39:55.071818+02,17
+211,Salt,to taste,11,2024-11-20 20:39:55.073487+02,17
+212,"Black pepper, ground",to taste,12,2024-11-20 20:39:55.075099+02,17
+213,"Nutmeg, ground",1/4 teaspoon,13,2024-11-20 20:39:55.077687+02,17
+214,"Cream, optional",100 millilitres,14,2024-11-20 20:39:55.079417+02,17
+215,"Parsley, chopped",for garnish,15,2024-11-20 20:39:55.080777+02,17
+216,"Dried cherries, chopped",100 grams,1,2024-11-20 20:49:13.100486+02,18
+217,"Oats, rolled",150 grams,2,2024-11-20 20:49:13.104281+02,18
+218,Almond butter,125 grams,3,2024-11-20 20:49:13.107547+02,18
+219,Honey,3 tablespoons,4,2024-11-20 20:49:13.109429+02,18
+220,"Flaxseeds, ground",30 grams,5,2024-11-20 20:49:13.111785+02,18
+221,Chia seeds,2 tablespoons,6,2024-11-20 20:49:13.114429+02,18
+222,Vanilla extract,1 teaspoon,7,2024-11-20 20:49:13.120171+02,18
+223,Sea salt,1/4 teaspoon,8,2024-11-20 20:49:13.122572+02,18
+224,"Dark chocolate chips, optional",50 grams,9,2024-11-20 20:49:13.125405+02,18
+225,"Kale, leaves removed from stems and torn into large pieces",200 grams,1,2024-11-20 21:20:59.485978+02,19
+226,Olive Oil,2 tablespoons,2,2024-11-20 21:20:59.489712+02,19
+227,"Sea Salt, fine",1 teaspoon,3,2024-11-20 21:20:59.491428+02,19
+228,Garlic Powder,1/2 teaspoon,4,2024-11-20 21:20:59.493381+02,19
+229,Paprika,1/4 teaspoon,5,2024-11-20 21:20:59.495469+02,19
+230,"Black Pepper, freshly ground",1/4 teaspoon,6,2024-11-20 21:20:59.503318+02,19
+231,Penne pasta,400 g,1,2024-11-20 21:27:00.408118+02,20
+232,"Gorgonzola cheese, crumbled",150 g,2,2024-11-20 21:27:00.413011+02,20
+233,Heavy cream,200 ml,3,2024-11-20 21:27:00.415334+02,20
+234,"Garlic cloves, minced",2,4,2024-11-20 21:27:00.419534+02,20
+235,Olive oil,2 tbsp,5,2024-11-20 21:27:00.422291+02,20
+236,"Fresh parsley, chopped",2 tbsp,6,2024-11-20 21:27:00.425314+02,20
+237,"Fresh basil, chopped",2 tbsp,7,2024-11-20 21:27:00.429025+02,20
+238,Salt,to taste,8,2024-11-20 21:27:00.432135+02,20
+239,Black pepper,to taste,9,2024-11-20 21:27:00.434908+02,20
+240,"Parmesan cheese, grated",50 g,10,2024-11-20 21:27:00.442809+02,20
+241,"Walnuts, toasted and chopped",50 g,11,2024-11-20 21:27:00.444716+02,20
+242,Olive oil,2 tablespoons,1,2024-11-20 21:52:33.043296+02,21
+243,"Onion, chopped",1 large,2,2024-11-20 21:52:33.051881+02,21
+244,"Garlic cloves, minced",2,3,2024-11-20 21:52:33.056453+02,21
+245,"Carrots, diced",2 medium,4,2024-11-20 21:52:33.067735+02,21
+246,"Celery stalks, diced",2,5,2024-11-20 21:52:33.072678+02,21
+247,"Dried split peas, rinsed",250 grams,6,2024-11-20 21:52:33.076154+02,21
+248,Smoked ham hock or bone,1,7,2024-11-20 21:52:33.080167+02,21
+249,Bay leaf,1,8,2024-11-20 21:52:33.085898+02,21
+250,Dried thyme,1 teaspoon,9,2024-11-20 21:52:33.088711+02,21
+251,Vegetable stock or water,1.5 litres,10,2024-11-20 21:52:33.091293+02,21
+252,Salt,To taste,11,2024-11-20 21:52:33.094633+02,21
+253,"Black pepper, ground",To taste,12,2024-11-20 21:52:33.101179+02,21
+254,Macaroni,250 grams,1,2024-11-20 21:57:54.166202+02,22
+255,Butter,50 grams,2,2024-11-20 21:57:54.180895+02,22
+256,All-purpose flour,2 tablespoons,3,2024-11-20 21:57:54.185809+02,22
+257,Milk,500 milliliters,4,2024-11-20 21:57:54.189838+02,22
+258,"Cheddar cheese, grated",200 grams,5,2024-11-20 21:57:54.195188+02,22
+259,"Parmesan cheese, grated",50 grams,6,2024-11-20 21:57:54.200454+02,22
+260,Salt,1 teaspoon,7,2024-11-20 21:57:54.210967+02,22
+261,"Black pepper, freshly ground",1/2 teaspoon,8,2024-11-20 21:57:54.219661+02,22
+262,Breadcrumbs,50 grams,9,2024-11-20 21:57:54.223343+02,22
+263,"Beef sirloin, sliced",500 grams,1,2024-11-21 09:47:17.680224+02,23
+264,Cornstarch,60 grams,2,2024-11-21 09:47:17.690926+02,23
+265,Salt,1 teaspoon,3,2024-11-21 09:47:17.696747+02,23
+266,"Black pepper, ground",1 teaspoon,4,2024-11-21 09:47:17.700394+02,23
+267,Vegetable oil,2 tablespoons,5,2024-11-21 09:47:17.709731+02,23
+268,"Garlic, minced",4 cloves,6,2024-11-21 09:47:17.715286+02,23
+269,"Red chilies, sliced",2,7,2024-11-21 09:47:17.720183+02,23
+270,Soy sauce,3 tablespoons,8,2024-11-21 09:47:17.72324+02,23
+271,Rice vinegar,1 tablespoon,9,2024-11-21 09:47:17.729832+02,23
+272,Brown sugar,2 tablespoons,10,2024-11-21 09:47:17.73293+02,23
+273,"Spring onions, sliced",2,11,2024-11-21 09:47:17.737522+02,23
+274,"Sesame seeds, toasted",1 tablespoon,12,2024-11-21 09:47:17.740269+02,23
+275,"Cabbage, shredded",300 grams,1,2024-11-21 10:09:06.590282+02,24
+276,"Carrots, grated",2 medium,2,2024-11-21 10:09:06.599546+02,24
+277,"Green onions, chopped",2,3,2024-11-21 10:09:06.60171+02,24
+278,"Red bell pepper, diced",1 small,4,2024-11-21 10:09:06.60443+02,24
+279,Low-fat plain yogurt,120 ml,5,2024-11-21 10:09:06.606112+02,24
+280,Light mayonnaise,2 tablespoons,6,2024-11-21 10:09:06.608556+02,24
+281,Apple cider vinegar,1 tablespoon,7,2024-11-21 10:09:06.612337+02,24
+282,Honey,1 teaspoon,8,2024-11-21 10:09:06.614154+02,24
+283,Dijon mustard,1 teaspoon,9,2024-11-21 10:09:06.61578+02,24
+284,Salt,1/2 teaspoon,10,2024-11-21 10:09:06.618889+02,24
+285,Black pepper,1/4 teaspoon,11,2024-11-21 10:09:06.621957+02,24
+286,"Tortillas, large",4,1,2024-11-21 10:11:42.953226+02,25
+287,Bacon strips,8,2,2024-11-21 10:11:42.957532+02,25
+288,"Eggs, large",6,3,2024-11-21 10:11:42.959799+02,25
+289,Milk,60 ml (4 tablespoons),4,2024-11-21 10:11:42.961795+02,25
+290,"Cheddar cheese, shredded",200 g,5,2024-11-21 10:11:42.963995+02,25
+291,Butter,15 g (1 tablespoon),6,2024-11-21 10:11:42.966899+02,25
+292,Black pepper,1/2 teaspoon,7,2024-11-21 10:11:42.969013+02,25
+293,Salt,1/2 teaspoon,8,2024-11-21 10:11:42.973168+02,25
+294,"Chives, chopped",2 tablespoons,9,2024-11-21 10:11:42.980221+02,25
+295,Duck breasts,4 pieces,1,2024-11-21 10:30:41.180575+02,26
+296,Salt,to taste,2,2024-11-21 10:30:41.189371+02,26
+297,"Black pepper, freshly ground",to taste,3,2024-11-21 10:30:41.19349+02,26
+298,Butter,30g,4,2024-11-21 10:30:41.196561+02,26
+299,"Garlic, minced",2 cloves,5,2024-11-21 10:30:41.201529+02,26
+300,Heavy cream,300ml,6,2024-11-21 10:30:41.209723+02,26
+301,Whole milk,100ml,7,2024-11-21 10:30:41.21301+02,26
+302,"Potatoes, thinly sliced",800g,8,2024-11-21 10:30:41.216396+02,26
+303,"Gruyère cheese, grated",100g,9,2024-11-21 10:30:41.219823+02,26
+304,Olive oil,1 tablespoon,10,2024-11-21 10:30:41.223686+02,26
+305,Redcurrant jelly,3 tablespoons,11,2024-11-21 10:30:41.227685+02,26
+306,Dijon mustard,1 tablespoon,12,2024-11-21 10:30:41.232924+02,26
+307,Chicken stock,150ml,13,2024-11-21 10:30:41.236896+02,26
+308,"Shallots, finely chopped",2,14,2024-11-21 10:30:41.245351+02,26
+309,"Graham crackers, crushed",200 grams,1,2024-11-21 10:44:40.413678+02,27
+310,"Unsalted butter, melted",75 grams,2,2024-11-21 10:44:40.419695+02,27
+311,"Cream cheese, softened",900 grams,3,2024-11-21 10:44:40.422993+02,27
+312,Granulated sugar,200 grams,4,2024-11-21 10:44:40.424784+02,27
+313,Vanilla extract,1 teaspoon,5,2024-11-21 10:44:40.427354+02,27
+314,Eggs,4,6,2024-11-21 10:44:40.433183+02,27
+315,Heavy cream,120 milliliters,7,2024-11-21 10:44:40.436804+02,27
+316,All-purpose flour,1 tablespoon,8,2024-11-21 10:44:40.441846+02,27
+317,Salt,1/4 teaspoon,9,2024-11-21 10:44:40.446177+02,27
+318,Pumpkin puree,200 grams,1,2024-11-21 10:55:00.02688+02,28
+319,All-purpose flour,150 grams,2,2024-11-21 10:55:00.030378+02,28
+320,Baking powder,1 teaspoon,3,2024-11-21 10:55:00.032239+02,28
+321,Ground cinnamon,1 teaspoon,4,2024-11-21 10:55:00.03374+02,28
+322,Ground nutmeg,1/2 teaspoon,5,2024-11-21 10:55:00.035951+02,28
+323,Salt,1/4 teaspoon,6,2024-11-21 10:55:00.038212+02,28
+324,Granulated sugar,2 tablespoons,7,2024-11-21 10:55:00.040035+02,28
+325,"Eggs, large",2,8,2024-11-21 10:55:00.0415+02,28
+326,Milk,150 milliliters,9,2024-11-21 10:55:00.043644+02,28
+327,Vanilla extract,1 teaspoon,10,2024-11-21 10:55:00.045353+02,28
+328,"Butter, melted",2 tablespoons,11,2024-11-21 10:55:00.047384+02,28
+329,Mascarpone cheese,120 grams,12,2024-11-21 10:55:00.049233+02,28
+330,"Mixed berries (e.g., strawberries, blueberries, raspberries), fresh",150 grams,13,2024-11-21 10:55:00.053032+02,28
+331,Maple syrup,for serving (optional),14,2024-11-21 10:55:00.05547+02,28
+332,Matcha powder,2 tablespoons,1,2024-11-21 10:59:21.458032+02,29
+333,"Ginger, grated",1 tablespoon,2,2024-11-21 10:59:21.466388+02,29
+334,Almond milk,800 ml,3,2024-11-21 10:59:21.470179+02,29
+335,Honey,2 tablespoons,4,2024-11-21 10:59:21.475463+02,29
+336,Ice cubes,2 cups,5,2024-11-21 10:59:21.481021+02,29
+337,Vanilla extract,1 teaspoon,6,2024-11-21 10:59:21.484595+02,29
+338,Rolled oats,250 g,1,2024-11-21 11:02:47.849235+02,30
+339,"Almonds, chopped",100 g,2,2024-11-21 11:02:47.859628+02,30
+340,"Walnuts, chopped",100 g,3,2024-11-21 11:02:47.864447+02,30
+341,Sunflower seeds,50 g,4,2024-11-21 11:02:47.869436+02,30
+342,"Dried apricots, diced",100 g,5,2024-11-21 11:02:47.872459+02,30
+343,Dried cranberries,100 g,6,2024-11-21 11:02:47.876918+02,30
+344,Honey,120 ml (approximately 8 tbsp),7,2024-11-21 11:02:47.880371+02,30
+345,"Coconut oil, melted",60 ml (approximately 4 tbsp),8,2024-11-21 11:02:47.882647+02,30
+346,Vanilla extract,2 tsp,9,2024-11-21 11:02:47.887983+02,30
+347,"Cinnamon, ground",1 tsp,10,2024-11-21 11:02:47.889886+02,30
+348,Salt,1/2 tsp,11,2024-11-21 11:02:47.893746+02,30
+349,Spaghetti,400 grams,1,2024-11-21 11:11:24.604727+02,31
+350,"Pecorino Romano cheese, finely grated",150 grams,2,2024-11-21 11:11:24.608744+02,31
+351,"Black pepper, freshly ground",2 teaspoons,3,2024-11-21 11:11:24.611474+02,31
+352,Salt,to taste,4,2024-11-21 11:11:24.613961+02,31
+353,Water,as needed,5,2024-11-21 11:11:24.615782+02,31
+354,"Beef tenderloin, diced",500 grams,1,2024-11-21 11:14:30.97711+02,32
+355,"Potatoes, peeled and diced",600 grams,2,2024-11-21 11:14:30.982318+02,32
+356,"Yellow onion, finely chopped",1 large,3,2024-11-21 11:14:30.984824+02,32
+357,Butter,4 tablespoons,4,2024-11-21 11:14:30.987252+02,32
+358,Vegetable oil,2 tablespoons,5,2024-11-21 11:14:30.988904+02,32
+359,Salt,To taste,6,2024-11-21 11:14:30.990351+02,32
+360,"Black pepper, freshly ground",To taste,7,2024-11-21 11:14:30.99248+02,32
+361,Dijon mustard,2 tablespoons,8,2024-11-21 11:14:30.995445+02,32
+362,Heavy cream,100 milliliters,9,2024-11-21 11:14:30.997031+02,32
+363,"Fresh parsley, chopped",2 tablespoons,10,2024-11-21 11:14:30.998573+02,32
+364,Capers,2 tablespoons,11,2024-11-21 11:14:31.00076+02,32
+365,Olive oil,2 tablespoons,1,2024-11-21 11:41:18.195001+02,33
+366,"Onion, finely chopped",1 large,2,2024-11-21 11:41:18.208604+02,33
+367,"Leek, white part only, sliced",1,3,2024-11-21 11:41:18.213227+02,33
+368,"Fennel bulb, thinly sliced",1 small,4,2024-11-21 11:41:18.215857+02,33
+369,"Garlic cloves, minced",4,5,2024-11-21 11:41:18.217742+02,33
+370,"Tomatoes, chopped",4 medium,6,2024-11-21 11:41:18.220166+02,33
+371,Fresh thyme leaves,1 tablespoon,7,2024-11-21 11:41:18.223961+02,33
+372,Bay leaf,1,8,2024-11-21 11:41:18.226329+02,33
+373,Saffron threads,1 pinch,9,2024-11-21 11:41:18.228504+02,33
+374,Fish stock,1 liter,10,2024-11-21 11:41:18.231833+02,33
+375,Dry white wine,250 milliliters,11,2024-11-21 11:41:18.234463+02,33
+376,"Orange zest, grated",1 teaspoon,12,2024-11-21 11:41:18.236722+02,33
+377,"Red mullet, filleted",300 grams,13,2024-11-21 11:41:18.240369+02,33
+378,"Monkfish, cut into pieces",300 grams,14,2024-11-21 11:41:18.243337+02,33
+379,"Sea bass, filleted",300 grams,15,2024-11-21 11:41:18.248455+02,33
+380,"Mussels, cleaned and debearded",500 grams,16,2024-11-21 11:41:18.251492+02,33
+381,"Fresh parsley, chopped",2 tablespoons,17,2024-11-21 11:41:18.253935+02,33
+382,Salt,to taste,18,2024-11-21 11:41:18.259272+02,33
+383,"Black pepper, freshly ground",to taste,19,2024-11-21 11:41:18.261749+02,33
+384,"Baguette slices, toasted",optional,20,2024-11-21 11:41:18.264714+02,33
+385,Heavy cream,500 ml,1,2024-11-21 12:05:49.467258+02,34
+386,Granulated sugar,100 g,2,2024-11-21 12:05:49.483088+02,34
+387,Vanilla extract,1 tsp,3,2024-11-21 12:05:49.487829+02,34
+388,Gelatin sheets,3 sheets,4,2024-11-21 12:05:49.489888+02,34
+389,"Raspberries, fresh",200 g,5,2024-11-21 12:05:49.50687+02,34
+390,Granulated sugar,50 g,6,2024-11-21 12:05:49.511813+02,34
+391,"Lemon juice, freshly squeezed",1 tbsp,7,2024-11-21 12:05:49.513739+02,34
+392,Water,2 tbsp,8,2024-11-21 12:05:49.51547+02,34
+393,Bulgur wheat,120 grams (¾ cup),1,2024-11-21 12:36:03.580284+02,35
+394,"Water, boiling",250 ml (1 cup),2,2024-11-21 12:36:03.588828+02,35
+395,"Tomatoes, diced",150 grams (about 2 medium),3,2024-11-21 12:36:03.592308+02,35
+396,"Cucumber, diced",100 grams (1 small),4,2024-11-21 12:36:03.59695+02,35
+397,"Fresh parsley, finely chopped",50 grams (about 1 cup loosely packed),5,2024-11-21 12:36:03.600503+02,35
+398,"Fresh mint leaves, finely chopped",15 grams (about ¼ cup loosely packed),6,2024-11-21 12:36:03.603314+02,35
+399,"Green onions, finely sliced",3 stalks,7,2024-11-21 12:36:03.610619+02,35
+400,"Lemon juice, freshly squeezed",60 ml (4 tablespoons),8,2024-11-21 12:36:03.61245+02,35
+401,Olive oil,60 ml (4 tablespoons),9,2024-11-21 12:36:03.615463+02,35
+402,Salt,1 teaspoon,10,2024-11-21 12:36:03.617681+02,35
+403,"Black pepper, freshly ground",to taste,11,2024-11-21 12:36:03.619865+02,35
+404,Pork tenderloin,500g,1,2024-11-21 12:46:41.596859+02,36
+405,Salt,1 teaspoon,2,2024-11-21 12:46:41.602054+02,36
+406,Ground black pepper,1/2 teaspoon,3,2024-11-21 12:46:41.604037+02,36
+407,Olive oil,2 tablespoons,4,2024-11-21 12:46:41.606813+02,36
+408,"Garlic cloves, minced",4,5,2024-11-21 12:46:41.60877+02,36
+409,Honey,4 tablespoons,6,2024-11-21 12:46:41.611726+02,36
+410,Soy sauce,2 tablespoons,7,2024-11-21 12:46:41.613998+02,36
+411,Apple cider vinegar,1 tablespoon,8,2024-11-21 12:46:41.61597+02,36
+412,Cornstarch,1 teaspoon,9,2024-11-21 12:46:41.61782+02,36
+413,Water,2 tablespoons,10,2024-11-21 12:46:41.619662+02,36
+414,"Fresh parsley, chopped",2 tablespoons,11,2024-11-21 12:46:41.621388+02,36
+415,"Prawns, peeled and deveined",500 grams,1,2024-11-21 15:38:03.046009+02,37
+416,Olive oil,2 tablespoons,2,2024-11-21 15:38:03.05112+02,37
+417,Lemon juice,2 tablespoons,3,2024-11-21 15:38:03.052978+02,37
+418,"Garlic cloves, minced",3 cloves,4,2024-11-21 15:38:03.056891+02,37
+419,"Red chili, chopped",1,5,2024-11-21 15:38:03.058841+02,37
+420,Paprika,1 teaspoon,6,2024-11-21 15:38:03.060845+02,37
+421,Cayenne pepper,1/2 teaspoon,7,2024-11-21 15:38:03.065285+02,37
+422,Salt,1 teaspoon,8,2024-11-21 15:38:03.067302+02,37
+423,Black pepper,1/2 teaspoon,9,2024-11-21 15:38:03.068898+02,37
+424,"Fresh parsley, chopped",2 tablespoons,10,2024-11-21 15:38:03.071898+02,37
+425,"Red bell pepper, diced",1 small,11,2024-11-21 15:38:03.074032+02,37
+426,"White Onion, finely chopped",1 small,12,2024-11-21 15:38:03.076823+02,37
+427,All-purpose flour,500 g,1,2024-11-21 16:36:41.201961+02,38
+428,Sugar,100 g,2,2024-11-21 16:36:41.211825+02,38
+429,"Butter, softened",75 g,3,2024-11-21 16:36:41.21414+02,38
+430,Milk,250 ml,4,2024-11-21 16:36:41.216098+02,38
+431,Dry yeast,7 g,5,2024-11-21 16:36:41.222886+02,38
+432,Salt,1 tsp,6,2024-11-21 16:36:41.228154+02,38
+433,"Cardamom seeds, ground",2 tsp,7,2024-11-21 16:36:41.230948+02,38
+434,Egg,"1, beaten",8,2024-11-21 16:36:41.235911+02,38
+435,Sugar,50 g,9,2024-11-21 16:36:41.239132+02,38
+436,"Butter, softened",75 g,10,2024-11-21 16:36:41.242036+02,38
+437,"Cardamom seeds, ground",1 tsp,11,2024-11-21 16:36:41.244892+02,38
+438,Egg,"1, beaten (for glazing)",12,2024-11-21 16:36:41.24925+02,38
+439,"Avocado, ripe",3 large,1,2024-11-21 17:13:23.218169+02,39
+440,"Red onion, finely diced",1 medium,2,2024-11-21 17:13:23.235362+02,39
+441,"Tomato, diced",1 medium,3,2024-11-21 17:13:23.239522+02,39
+442,"Cilantro, chopped",30 g,4,2024-11-21 17:13:23.242116+02,39
+443,"Lime juice, freshly squeezed",2 tablespoons,5,2024-11-21 17:13:23.244745+02,39
+444,"Jalapeño, finely chopped",1 small,6,2024-11-21 17:13:23.250409+02,39
+445,"Garlic, minced",2 cloves,7,2024-11-21 17:13:23.253704+02,39
+446,Salt,1 teaspoon,8,2024-11-21 17:13:23.255604+02,39
+447,"Pepper, ground",1/2 teaspoon,9,2024-11-21 17:13:23.257369+02,39
+448,"Chicken breasts, boneless and skinless",500 g,1,2024-11-21 17:17:30.164185+02,40
+449,Vegetable oil,2 tablespoons,2,2024-11-21 17:17:30.169494+02,40
+450,"Onion, large, sliced",1,3,2024-11-21 17:17:30.171881+02,40
+451,"Bell peppers, mixed colors, large, sliced",2,4,2024-11-21 17:17:30.174373+02,40
+452,"Garlic, minced",4 cloves,5,2024-11-21 17:17:30.177117+02,40
+453,"Ginger, minced",1 tablespoon,6,2024-11-21 17:17:30.179661+02,40
+454,"Tomato, chopped",2,7,2024-11-21 17:17:30.186619+02,40
+455,Tomato puree,200 ml,8,2024-11-21 17:17:30.189461+02,40
+456,Garam masala,1 teaspoon,9,2024-11-21 17:17:30.192512+02,40
+457,Ground cumin,1 teaspoon,10,2024-11-21 17:17:30.194407+02,40
+458,Ground coriander,1 teaspoon,11,2024-11-21 17:17:30.196496+02,40
+459,Turmeric powder,1/2 teaspoon,12,2024-11-21 17:17:30.19867+02,40
+460,Red chili powder,1/2 teaspoon,13,2024-11-21 17:17:30.200405+02,40
+461,Salt,to taste,14,2024-11-21 17:17:30.201865+02,40
+462,"Fresh coriander leaves, chopped",for garnish,15,2024-11-21 17:17:30.203596+02,40
+463,"Eggplant, sliced",2 large,1,2024-11-21 18:43:09.798681+02,41
+464,Olive oil,4 tablespoons,2,2024-11-21 18:43:09.805471+02,41
+465,"Onion, chopped",1 large,3,2024-11-21 18:43:09.807564+02,41
+466,"Garlic, minced",3 cloves,4,2024-11-21 18:43:09.809241+02,41
+467,Ground lamb,500 grams,5,2024-11-21 18:43:09.811047+02,41
+468,Tomato paste,2 tablespoons,6,2024-11-21 18:43:09.814987+02,41
+469,Red wine,150 ml,7,2024-11-21 18:43:09.817442+02,41
+470,"Canned tomatoes, crushed",400 grams,8,2024-11-21 18:43:09.819029+02,41
+471,Cinnamon,1/2 teaspoon,9,2024-11-21 18:43:09.820698+02,41
+472,Allspice,1/2 teaspoon,10,2024-11-21 18:43:09.826739+02,41
+473,Salt,1 teaspoon,11,2024-11-21 18:43:09.830581+02,41
+474,Black pepper,1/2 teaspoon,12,2024-11-21 18:43:09.832561+02,41
+475,Butter,60 grams,13,2024-11-21 18:43:09.834749+02,41
+476,All-purpose flour,60 grams,14,2024-11-21 18:43:09.836862+02,41
+477,Milk,500 ml,15,2024-11-21 18:43:09.83878+02,41
+478,"Egg yolks, beaten",2,16,2024-11-21 18:43:09.840695+02,41
+479,"Nutmeg, ground",1/4 teaspoon,17,2024-11-21 18:43:09.842633+02,41
+480,"Parmesan cheese, grated",50 grams,18,2024-11-21 18:43:09.845525+02,41
+481,Eggs,4,1,2024-11-22 11:20:00.358723+02,42
+482,Butter,1 tablespoon,2,2024-11-22 11:20:00.377328+02,42
+483,"Spinach, fresh",50 grams,3,2024-11-22 11:20:00.380563+02,42
+484,Milk,2 tablespoons,4,2024-11-22 11:20:00.38255+02,42
+485,Salt,1/2 teaspoon,5,2024-11-22 11:20:00.383973+02,42
+486,"Black pepper, ground",1/4 teaspoon,6,2024-11-22 11:20:00.385774+02,42
+487,"Avocado, ripe, peeled and pitted",1,7,2024-11-22 11:20:00.387608+02,42
+488,Sourdough bread,4 slices,8,2024-11-22 11:20:00.38903+02,42
+489,"Rocket, fresh",60 grams,9,2024-11-22 11:20:00.391362+02,42
+490,Lemon juice,1 teaspoon,10,2024-11-22 11:20:00.3932+02,42
+491,Olive oil,1 tablespoon,11,2024-11-22 11:20:00.396127+02,42
+492,"Salt, for seasoning",to taste,12,2024-11-22 11:20:00.39793+02,42
+493,"Black pepper, for seasoning",to taste,13,2024-11-22 11:20:00.399789+02,42

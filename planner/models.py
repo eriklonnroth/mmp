@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.signals import post_save
+from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 import hashlib
@@ -8,70 +9,84 @@ import json
 from .utils import scale_quantity
 
 
-# Plan models
-class Plan(models.Model):
+# Meal plan models
+class Template(models.Model):
+    TEMPLATE_TYPES = [
+        ('weekday', 'Weekday'),
+        ('meal_type', 'Meal Type'),
+        ('custom', 'Custom'),
+    ]
+    
+    name = models.CharField(max_length=255)
+    template_type = models.CharField(max_length=20, choices=TEMPLATE_TYPES)
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    def clean(self):
+        # Custom templates must have a user
+        if self.template_type == 'custom' and not self.user:
+            raise ValidationError("Custom templates must have a user.")
+    
+    def save(self, *args, **kwargs):
+        self.clean()
+        super().save(*args, **kwargs)
+        
+    def get_default_groups(self):        
+        if self.template_type == 'weekday':
+            return ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+        elif self.template_type == 'meal_type':
+            return ['Breakfasts', 'Lunches', 'Dinners', 'Snacks', 'Drinks']
+        else:
+            return [] # Custom templates have no predefined groups
+
+
+class MealPlan(models.Model):
     name = models.CharField(max_length=100)
+    template = models.ForeignKey(Template, on_delete=models.PROTECT)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        is_new = not self.pk
+
+        # When creating a new meal plan, copy the groups from the chosen template
+        if is_new and self.template:
+            for order, name in enumerate(self.template.get_default_groups()):
+                Group.objects.create(
+                    meal_plan=self,
+                    name=name,
+                    order=order
+                )
+
+    class Meta:
+        ordering = ['-modified_at']
+
+class Group(models.Model):
+    name = models.CharField(max_length=100)
+    meal_plan = models.ForeignKey(MealPlan, related_name='groups', on_delete=models.CASCADE)
+    order = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.name}"
 
     class Meta:
-        ordering = ['-modified_at']
-
-class Grouping(models.Model):
-    GROUPING_TYPES = [
-        ('weekday', 'Weekday'),
-        ('meal_type', 'Meal Type'),
-        ('custom', 'Custom'),
-    ]
-
-    name = models.CharField(max_length=255)
-    plan = models.ForeignKey(Plan, null=True, blank=True, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
+        ordering = ['order']
         constraints = [
+            # Ensure unique ordering within a meal plan
             models.UniqueConstraint(
-                fields=['name', 'user'],
-                condition=models.Q(plan__isnull=True),
-                name='unique_template_name'
-            ),
-            models.UniqueConstraint(
-                fields=['name', 'plan'],
-                name='unique_plan_name'
+                fields=['meal_plan', 'order'],
+                name='unique_meal_plan_group_order'
             )
         ]
-
-class Group(models.Model):
-    grouping = models.ForeignKey(Grouping, related_name='groups', on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    order = models.PositiveIntegerField(default=0)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
-
-    def save(self, *args, **kwargs):
-        if self.order == 0:  # If order not explicitly set
-            last_order = Group.objects.filter(
-                grouping=self.grouping
-            ).aggregate(
-                models.Max('order')
-            )['order__max'] or 0
-            self.order = last_order + 1
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return f"{self.name} (Grouping: {self.grouping.name})"
-
-    class Meta:
-        ordering = ['order']
-        unique_together = ['grouping', 'order']
-
 
 # Recipe models
 class Recipe(models.Model):
@@ -239,7 +254,7 @@ class ScaledRecipe(models.Model):
 
 # Shopping list models
 class ShoppingList(models.Model):
-    plan = models.OneToOneField('Plan', on_delete=models.CASCADE)
+    meal_plan = models.OneToOneField('MealPlan', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     modified_at = models.DateTimeField(auto_now=True)
@@ -248,7 +263,7 @@ class ShoppingList(models.Model):
     def update_content_digest(self):
         # Collect all recipe digests and servings counts
         digest_data = []
-        for group in self.plan.groups.all():
+        for group in self.meal_plan.groups.all():
             for group_recipe in group.recipes.all():
                 digest_data.append({
                     'recipe_digest': group_recipe.recipe.ingredients_digest,
@@ -268,7 +283,7 @@ class ShoppingList(models.Model):
 
 
     def __str__(self):
-        return f"Shopping List for {self.plan.name}"
+        return f"Shopping List for {self.meal_plan.name}"
 
 
 class ShoppingCategory(models.Model):

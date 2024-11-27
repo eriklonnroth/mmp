@@ -26,7 +26,7 @@
                 </button>
             </div>
             <div class="inline-flex items-center space-x-3">
-                <h2 class="text-md font-semibold text-gray-700">Group By:</h2>
+                <h2 class="text-md font-semibold text-gray-700">Template:</h2>
                 <div class="inline-flex rounded-md shadow-sm" role="group">
                     <button @click="groupBy('weekday')" 
                             class="group-by-btn rounded-l-md"
@@ -86,9 +86,10 @@
                             </template>
                         </ul>
                         <div class="py-3 px-2">
-                            <button class="add-recipe-btn text-gray-400 hover:text-gray-500 font-medium inline-flex items-center space-x-1 whitespace-nowrap text-sm">
-                                <span>+</span>
-                                <span>Add recipe</span>
+                            <button hx-get="{% url 'add_recipe_modal' group.id %}"
+                                    hx-target="body"
+                                    hx-swap="beforeend">
+                                + Add recipe
                             </button>
                         </div>
                     </div>

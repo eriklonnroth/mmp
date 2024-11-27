@@ -1040,7 +1040,7 @@ tr:has(.shopping-list-checkbox:checked) td {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
-/* My Recipes Button Styles */
+/* My Recipes Toggle Styles */
 
 .toggle-my-recipes-button {
   border-radius: 9999px;
@@ -1086,8 +1086,8 @@ tr:has(.shopping-list-checkbox:checked) td {
   border-radius: 0.375rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-  padding-top: 0.375rem;
-  padding-bottom: 0.375rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 500;
@@ -1246,6 +1246,13 @@ tr:has(.shopping-list-checkbox:checked) td {
   -webkit-line-clamp: 2;
 }
 
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
 .block {
   display: block;
 }
@@ -1310,6 +1317,14 @@ tr:has(.shopping-list-checkbox:checked) td {
   height: 100%;
 }
 
+.h-6 {
+  height: 1.5rem;
+}
+
+.max-h-\[70vh\] {
+  max-height: 70vh;
+}
+
 .min-h-\[200px\] {
   min-height: 200px;
 }
@@ -1346,6 +1361,14 @@ tr:has(.shopping-list-checkbox:checked) td {
   width: 100%;
 }
 
+.w-16 {
+  width: 4rem;
+}
+
+.w-6 {
+  width: 1.5rem;
+}
+
 .min-w-full {
   min-width: 100%;
 }
@@ -1360,6 +1383,10 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .max-w-7xl {
   max-width: 80rem;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
 }
 
 .flex-grow {
@@ -1484,6 +1511,10 @@ tr:has(.shopping-list-checkbox:checked) td {
   overflow: hidden;
 }
 
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
 .whitespace-nowrap {
   white-space: nowrap;
 }
@@ -1498,6 +1529,10 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .rounded-md {
   border-radius: 0.375rem;
+}
+
+.rounded {
+  border-radius: 0.25rem;
 }
 
 .rounded-l-md {
@@ -1524,6 +1559,10 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .border-t {
   border-top-width: 1px;
+}
+
+.border-b {
+  border-bottom-width: 1px;
 }
 
 .border-dashed {
@@ -1567,6 +1606,15 @@ tr:has(.shopping-list-checkbox:checked) td {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-gray-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+}
+
+.bg-opacity-75 {
+  --tw-bg-opacity: 0.75;
 }
 
 .bg-gradient-to-r {
@@ -1771,6 +1819,12 @@ tr:has(.shopping-list-checkbox:checked) td {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.shadow-xl {
+  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .ring-1 {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
@@ -1859,6 +1913,11 @@ tr:has(.shopping-list-checkbox:checked) td {
 .hover\:text-violet-600:hover {
   --tw-text-opacity: 1;
   color: rgb(124 58 237 / var(--tw-text-opacity));
+}
+
+.hover\:text-gray-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
 .focus\:border-blue-500:focus {

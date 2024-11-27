@@ -1,9 +1,11 @@
-<button class="toggle-my-recipes-button" 
-:class="saved ? 'toggle-my-recipes-button--saved' : 'toggle-my-recipes-button--unsaved'"
-hx-post="{% url 'action_toggle_my_recipes' recipe.id %}"
-hx-trigger="click"
-hx-swap="none"
-x-data="{ saved: {{ recipe.is_saved|yesno:'true,false' }} }"
-@htmx:after-request="saved = JSON.parse(event.detail.xhr.response).saved">
+<button 
+    x-cloak
+    class="toggle-my-recipes-button" 
+    :class="saved ? 'toggle-my-recipes-button--saved' : 'toggle-my-recipes-button--unsaved'"
+    hx-post="{% url 'action_toggle_my_recipes' recipe.id %}"
+    hx-swap="none"
+    x-data="{ saved: {{ recipe.is_saved|yesno:'true,false' }} }"
+    @htmx:after-request="saved = JSON.parse(event.detail.xhr.response).saved"
+>
     {% include "planner/svg/bookmark.svg" %}
 </button>

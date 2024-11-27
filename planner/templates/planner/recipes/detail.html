@@ -16,9 +16,7 @@
             Back to Recipes
         </a>
 
-        <div class="recipe-detail">
-            {% include "planner/recipes/partial_recipe_detail.html" with recipe=recipe %}
-        </div>
+        {% include "planner/recipes/partial_recipe.html" with recipe=recipe %}
             
     </div>
 {% endblock %}

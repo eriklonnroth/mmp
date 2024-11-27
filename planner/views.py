@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from django.db import IntegrityError
 from django.db.models import Exists, OuterRef, Q
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
@@ -18,7 +18,7 @@ from planner.services.recipe_repository import save_recipe_to_db
 from planner.services.recipe_to_file import save_recipe_to_file
 from planner.services.shopping_list_generator import generate_shopping_list
 from planner import forms
-from planner.models import Recipe, MyRecipe
+from planner.models import Recipe, MyRecipe, MealPlan, Template, Group
 import json
 
 
@@ -28,27 +28,52 @@ def index(request):
 def profile(request):
     return render(request, "planner/settings/profile.html")
 
-def plan(request):
-    groupings_path = find('planner/data/groupings.json')
-    recipes_path = find('planner/data/recipes.json')
+def meal_plan(request):
+    user = request.user if request.user.is_authenticated else None
+    if not user:
+        admin_user = User.objects.get(username='admin')
+        user = admin_user
 
-    with open(groupings_path) as f:
-        groupings = json.load(f)
-    with open(recipes_path) as f:
-        recipes = json.load(f)
+    meal_plan = MealPlan.objects.filter(user=user).first() # Currently only one meal plan per user
+    if meal_plan:
+        # Efficiently fetch templates and their groups in a single query
+        templates = Template.objects.filter(
+            meal_plan=meal_plan
+        ).prefetch_related(
+            'groups',
+            'groups__recipes'
+        )
         
-    context = {
-        'groupings': groupings,
-        'recipes': recipes,
-    }
-    return render(request, "planner/plan.html", context)
+        context = {
+            'meal_plan': meal_plan,
+            'templates': templates,
+        }
+    else:
+        # Handle case where user has no meal plan
+        context = {
+            'meal_plan': None,
+            'templates': [],
+        }
+    
+    return render(request, "planner/meal-plan/index.html", context)
 
+def add_recipe_modal(request, group_id):
+    group = get_object_or_404(Group, id=group_id)
+    # Verify the user has access to this group
+    if request.user.is_authenticated:
+        if not group.template.meal_plan.user == request.user:
+            return HttpResponseForbidden("You don't have access to this group")
+    
+    context = {
+        'group': group,
+    }
+    return render(request, "planner/meal-plan/add-recipe-to-group-modal.html", context)
 
 def recipes(request):
     return render(request, "planner/recipes/index.html")
 
 def shopping_list(request):
-    return render(request, "planner/shopping-list.html")
+    return render(request, "planner/shopping-list/index.html")
 
 def magic_recipe(request):
     # Initialize form
@@ -87,7 +112,7 @@ def action_generate_recipe(request):
             parsed_recipe = parse_recipe_string(recipe_string)
             save_recipe_to_file(parsed_recipe)
             saved_recipe = save_recipe_to_db(parsed_recipe, status='draft')
-            response = render(request, 'planner/recipes/partial_recipe_detail.html', 
+            response = render(request, 'planner/recipes/partial_recipe.html', 
                             {'recipe': saved_recipe})
             response['HX-Push'] = f'?id={saved_recipe.id}'
             return response
@@ -177,16 +202,34 @@ class RecipeDetailView(DetailView):
     context_object_name = 'recipe'
 
     def get_queryset(self):
-        return Recipe.objects.prefetch_related(
+        queryset = Recipe.objects.prefetch_related(
             'ingredients',
             'instruction_sections',
             'instruction_sections__steps'
         )
+        
+        user = self.request.user if self.request.user.is_authenticated else None
+        if not user:
+            admin_user = User.objects.get(username='admin')
+            user = admin_user
+        #     return JsonResponse({
+        #     'error': 'Authentication required'
+        # }, status=401)
+            
+        queryset = queryset.annotate(
+            is_saved=Exists(
+                MyRecipe.objects.filter(
+                    user=user,
+                    recipe=OuterRef('pk')
+                )
+            )
+        )
+        
+        return queryset
 
 
-class RecipeCardsListView(ListView):
+class RecipeListView(ListView):
     model = Recipe
-    template_name = 'planner/recipes/partial_recipe_cards_list.html'
     context_object_name = 'recipes'
     paginate_by = 12
 
@@ -210,7 +253,7 @@ class RecipeCardsListView(ListView):
         if my_recipes:
             queryset = queryset.filter(saved_to_my_recipes_by=user)
 
-        # Check if saved to My Recipes
+        # For My Recipes toggle button, check if already saved
         queryset = queryset.annotate(
             is_saved=Exists(
                 MyRecipe.objects.filter(
@@ -227,9 +270,14 @@ class RecipeCardsListView(ListView):
         context['my_recipes'] = self.request.GET.get('my_recipes') == 'true'
         return context
 
-class RecipeCardsPageView(RecipeCardsListView):
-    template_name = 'planner/recipes/partial_recipe_cards_page.html'
+class RecipeCardsListView(RecipeListView):
+    template_name = 'planner/recipes/partial_recipe_cards_list.html'
 
+class RecipeCompactListView(RecipeListView):
+    template_name = 'planner/recipes/partial_recipe_compact_list.html'
+
+class RecipeCardsPageView(RecipeListView):
+    template_name = 'planner/recipes/partial_recipe_cards_page.html'
 
 class RecipeSearchView(RecipeCardsPageView):
     def get_queryset(self):

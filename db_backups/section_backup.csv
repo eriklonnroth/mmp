@@ -1,0 +1,148 @@
+id,title,order,recipe_id
+1,Prepare Batter,1,1
+2,Cook Pancakes,2,1
+3,Serve,3,1
+4,Prepare the Meat Sauce,1,2
+5,Prepare the Cheese Mixture,2,2
+6,Assemble the Lasagna,3,2
+7,Bake,4,2
+8,Prepare the Prawns,1,3
+9,Prepare the Vegetables,2,3
+10,Combine and Serve,3,3
+11,Marinate Chicken,1,4
+12,Cook the Chicken,2,4
+13,Prepare the Sauce,3,4
+14,Combine and Serve,4,4
+15,Preparing the Ingredients,1,5
+16,Making the Vinaigrette,2,5
+17,Assembling the Salad,3,5
+18,Prepare the Broth,1,6
+19,Cook the Chicken,2,6
+20,Prepare the Ramen Noodles,3,6
+21,Assemble the Ramen Bowls,4,6
+22,Poaching the Salmon,1,7
+23,Preparing the Greens,2,7
+24,Serving,3,7
+25,Prepare the Bacon,1,8
+26,Cook the Eggs,2,8
+27,Assemble the Burritos,3,8
+28,Prepare Dry Ingredients,1,9
+29,Mix Wet Ingredients,2,9
+30,Combine and Bake,3,9
+31,Cool and Serve,4,9
+32,Preparation,1,10
+33,Vegetable Preparation,2,10
+34,Roasting,3,10
+35,Serving,4,10
+36,Preparing the Tuna Steaks,1,11
+37,Cooking the Tuna Steaks,2,11
+38,Making the Garlicky Lemon Butter Sauce,3,11
+39,Serving,4,11
+40,Preparation,1,12
+41,Blending,2,12
+42,Finishing,3,12
+43,Preparing the Broth,1,13
+44,Cooking the Mushrooms,2,13
+45,Making the Risotto,3,13
+46,Finalizing the Dish,4,13
+47,Prepping the Oxtail and Initial Sauté,1,14
+48,Building the Stew Base,2,14
+49,Slow Cooking,3,14
+50,Finishing Touches,4,14
+51,Serving,5,14
+52,Prepare the Fish Cakes,1,15
+53,Coat and Fry the Fish Cakes,2,15
+54,Make the Tartar Sauce,3,15
+55,Serve,4,15
+56,Prepare the Zoodles,1,16
+57,Make the Raw Alfredo Sauce,2,16
+58,Assemble the Dish,3,16
+59,Preparation,1,17
+60,Cooking,2,17
+61,Finishing Touches,3,17
+62,Preparing the mixture,1,18
+63,Combining and shaping the energy balls,2,18
+64,Cooling and storage,3,18
+65,Preparation,1,19
+66,Seasoning the Kale,2,19
+67,Baking the Kale Chips,3,19
+68,Cook the Penne Pasta,1,20
+69,Prepare the Creamy Gorgonzola Sauce,2,20
+70,Combine and Serve,3,20
+71,Prepare the Vegetables,1,21
+72,Cook the Soup,2,21
+73,Finish and Serve,3,21
+74,Preparation,1,22
+75,Make the Cheese Sauce,2,22
+76,Combine and Bake,3,22
+77,Preparing the Beef,1,23
+78,Frying the Beef,2,23
+79,Making the Chilli Sauce,3,23
+80,Combining and Serving,4,23
+81,Prepare the Vegetables,1,24
+82,Make the Dressing,2,24
+83,Combine and Serve,3,24
+84,Preparation,1,25
+85,Cook Bacon,2,25
+86,Prepare Eggs,3,25
+87,Assemble and Cook Quesadillas,4,25
+88,Prepare the Potato Dauphinoise,1,26
+89,Cook the Duck Breasts,2,26
+90,Prepare the Redcurrant-Dijon Sauce,3,26
+91,Assemble and Serve,4,26
+92,Prepare the Crust,1,27
+93,Make the Cheesecake Filling,2,27
+94,Assemble and Bake the Cheesecake,3,27
+95,Cool and Serve the Cheesecake,4,27
+96,Prepare the Batter,1,28
+97,Cook the Flapjacks,2,28
+98,Assemble and Serve,3,28
+99,Prepare the Ginger Matcha Mix,1,29
+100,Prepare the Almond Milk Base,2,29
+101,Combine and Serve,3,29
+102,Preparing the Granola Mix,1,30
+103,Mixing the Wet Ingredients,2,30
+104,Combining and Baking,3,30
+105,Finishing Touches,4,30
+106,Cooking the Pasta,1,31
+107,Preparing the Sauce,2,31
+108,Combining Pasta and Sauce,3,31
+109,Serving,4,31
+110,Preparation,1,32
+111,Cooking,2,32
+112,Sauce and Assembly,3,32
+113,Prepare the Aromatic Base,1,33
+114,Build the Broth,2,33
+115,Cook the Seafood,3,33
+116,Serve the Bouillabaisse,4,33
+117,Prepare the Panna Cotta,1,34
+118,Make the Raspberry Sauce,2,34
+119,Serve the Panna Cotta,3,34
+120,Preparing the Bulgur,1,35
+121,Chopping and Mixing,2,35
+122,Final Assembly,3,35
+123,Serving,4,35
+124,Preparing the Pork,1,36
+125,Making the Honey Garlic Sauce,2,36
+126,Cooking and Serving,3,36
+127,Prepare the Peri Peri Sauce,1,37
+128,Marinate the Prawns,2,37
+129,Cook the Prawns,3,37
+130,Prepare the Garnish and Serve,4,37
+131,Dough Preparation,1,38
+132,Filling and Shaping Buns,2,38
+133,Baking,3,38
+134,Preparation,1,39
+135,Mixing the Ingredients,2,39
+136,Finishing Touches,3,39
+137,Serving,4,39
+138,Preparation,1,40
+139,Cooking,2,40
+140,Serving,3,40
+141,Prepare the Eggplants,1,41
+142,Make the Meat Sauce,2,41
+143,Prepare the Béchamel Sauce,3,41
+144,Assemble and Bake,4,41
+145,Prepare the Ingredients,1,42
+146,Make the Green Eggs,2,42
+147,Assemble the Sandwich,3,42
