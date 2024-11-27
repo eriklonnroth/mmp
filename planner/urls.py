@@ -13,6 +13,7 @@ urlpatterns= [
     path("recipes/<int:pk>", views.RecipeDetailView.as_view(), name="recipe_detail"),
     path("recipes/cards", views.RecipeCardsListView.as_view(), name="recipe_cards_list"),
     path("recipes/cards/page", views.RecipeCardsPageView.as_view(), name="recipe_cards_page"),
+    path('recipes/search/', views.RecipeSearchView.as_view(), name='recipe_search'),
     path("recipes/magic", views.magic_recipe, name="magic_recipe"),
     path("shopping-list", views.shopping_list, name="shopping_list"),
     path('api/generate-recipe/', views.GenerateRecipeView.as_view(), name='generate_recipe'),

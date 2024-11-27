@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.staticfiles.finders import find
 from django.core.paginator import Paginator
 from django.db import IntegrityError
-from django.db.models import Exists, OuterRef
+from django.db.models import Exists, OuterRef, Q
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.http import JsonResponse
@@ -223,6 +223,22 @@ class RecipeCardsListView(ListView):
 
 class RecipeCardsPageView(RecipeCardsListView):
     template_name = 'planner/recipes/partial_recipe_cards_page.html'
+
+
+class RecipeSearchView(RecipeCardsPageView):    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search_query = self.request.GET.get('q', '').strip()
+        
+        if search_query:
+            queryset = queryset.filter(
+                Q(dish_name__icontains=search_query) |
+                Q(description__icontains=search_query) |
+                Q(ingredients__item__icontains=search_query) |
+                Q(instruction_sections__steps__step__icontains=search_query)
+            ).distinct()
+            
+        return queryset
 
     
 
