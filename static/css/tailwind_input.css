@@ -216,6 +216,26 @@
     .toggle-my-recipes-button--saved svg {
         @apply fill-yellow-600;
     }
+
+    /* My Recipes Filter Styles */
+    .my-recipes-filter-button {
+        @apply inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md;
+    }
+
+    .my-recipes-filter-button--inactive {
+        @apply text-gray-700 bg-gray-200 hover:bg-gray-300;
+    }
+
+
+    .my-recipes-filter-button--active {
+        @apply text-white bg-yellow-600 hover:bg-yellow-700;
+    }
+
+
+    .my-recipes-filter-button svg {
+        @apply h-5 w-5 fill-current;
+    }
+
 }
 
     

@@ -17,7 +17,7 @@
                     type="search"
                     name="q"
                     placeholder="Search recipes..."
-                    class="w-full px-4 py-2 border border-gray-300 rounded-l-md focus:ring-violet-500 focus:border-violet-500"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-l-md focus:ring-blue-500 focus:border-blue-500"
                     hx-get="{% url 'recipe_search' %}"
                     hx-trigger="search"
                     hx-target="#recipe-grid"
@@ -30,7 +30,7 @@
                     </svg>
                 </div>
                 <button
-                    class="px-4 py-2 bg-teal-600 text-white rounded-r-md hover:bg-teal-700"
+                    class="px-4 py-2 bg-blue-600 text-white rounded-r-md hover:bg-blue-700"
                     hx-get="{% url 'recipe_search' %}"
                     hx-target="#recipe-grid"
                     hx-include="[name='q']"
@@ -46,14 +46,20 @@
             </a>
         </div>
 
-
-        <span>Show:</span>
-        <div class="flex gap-2">
-            <button class="my-recipes-button">
+        <div class="flex gap-2" x-data="{ myRecipesOnly: false }">
+            <button 
+                class="my-recipes-filter-button"
+                :class="myRecipesOnly ? 'my-recipes-filter-button--active' : 'my-recipes-filter-button--inactive'"
+                hx-get="{% url 'recipe_cards_page' %}"
+                hx-target="#recipe-grid"
+                :hx-vals='JSON.stringify({"my_recipes": myRecipesOnly})'
+                @click="myRecipesOnly = !myRecipesOnly"
+            >
                 {% include "planner/svg/bookmark.svg" %}
-                <span>My Recipes</span>
+                <span class="ml-2">My Recipes</span>
             </button>
         </div>
+
         <div hx-get="{% url 'recipe_cards_list' %}?limit=12&sort=-created_at" 
         hx-trigger="load">
         </div>

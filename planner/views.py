@@ -205,6 +205,11 @@ class RecipeCardsListView(ListView):
         #         'error': 'Authentication required'
         # }, status=401)
 
+        # Filter by My Recipes if requested
+        my_recipes = self.request.GET.get('my_recipes') == 'true'
+        if my_recipes:
+            queryset = queryset.filter(saved_to_my_recipes_by=user)
+
         # Check if saved to My Recipes
         queryset = queryset.annotate(
             is_saved=Exists(
@@ -219,13 +224,14 @@ class RecipeCardsListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sort'] = self.request.GET.get('sort', '-created_at')
+        context['my_recipes'] = self.request.GET.get('my_recipes') == 'true'
         return context
 
 class RecipeCardsPageView(RecipeCardsListView):
     template_name = 'planner/recipes/partial_recipe_cards_page.html'
 
 
-class RecipeSearchView(RecipeCardsPageView):    
+class RecipeSearchView(RecipeCardsPageView):
     def get_queryset(self):
         queryset = super().get_queryset()
         search_query = self.request.GET.get('q', '').strip()
@@ -240,5 +246,9 @@ class RecipeSearchView(RecipeCardsPageView):
             
         return queryset
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_query'] = self.request.GET.get('q', '').strip()
+        return context
     
 
