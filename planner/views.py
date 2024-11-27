@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.staticfiles.finders import find
+from django.core.paginator import Paginator
 from django.db import IntegrityError
 from django.db.models import Exists, OuterRef
 from django.shortcuts import render
@@ -183,10 +184,11 @@ class RecipeDetailView(DetailView):
         )
 
 
-class RecipeCardListView(ListView):
+class RecipeCardsListView(ListView):
     model = Recipe
-    template_name = 'planner/recipes/partial_recipe_card_list.html'
+    template_name = 'planner/recipes/partial_recipe_cards_list.html'
     context_object_name = 'recipes'
+    paginate_by = 12
 
     def get_queryset(self):
         queryset = Recipe.objects.all()
@@ -194,10 +196,6 @@ class RecipeCardListView(ListView):
         # Get sort parameter (default to -created_at if not specified)
         sort_by = self.request.GET.get('sort', '-created_at')
         queryset = queryset.order_by(sort_by)
-        
-        # Get limit parameter (default to 10 if not specified)
-        limit = int(self.request.GET.get('limit', 10))
-        queryset = queryset[:limit]
 
         user = self.request.user if self.request.user.is_authenticated else None
         if not user:
@@ -216,7 +214,15 @@ class RecipeCardListView(ListView):
                 )
             )
         )
-    
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sort'] = self.request.GET.get('sort', '-created_at')
+        return context
+
+class RecipeCardsPageView(RecipeCardsListView):
+    template_name = 'planner/recipes/partial_recipe_cards_page.html'
+
     
 

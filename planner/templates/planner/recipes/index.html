@@ -9,10 +9,6 @@
     <div class="body-container mb-8">
         <div class="flex justify-between items-center mb-4">
             <h1 class="text-3xl font-bold text-gray-900">Recipes</h1>
-            <button class="inline-flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700">
-                {% include "planner/svg/bookmark.svg" %}
-                <span class="hidden sm:inline">My Recipes</span>
-            </button>
         </div>
 
         <div class="flex flex-col sm:flex-row gap-2 mb-4">
@@ -33,7 +29,15 @@
             </a>
         </div>
 
-        <div hx-get="{% url 'recipe_card_list' %}?limit=8&sort=-created_at" 
+
+        <span>Show:</span>
+        <div class="flex gap-2">
+            <button class="my-recipes-button">
+                {% include "planner/svg/bookmark.svg" %}
+                <span>My Recipes</span>
+            </button>
+        </div>
+        <div hx-get="{% url 'recipe_cards_list' %}?limit=12&sort=-created_at" 
         hx-trigger="load">
         </div>
     </div>

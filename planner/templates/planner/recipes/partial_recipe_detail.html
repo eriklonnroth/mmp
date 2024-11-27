@@ -1,6 +1,9 @@
 <div class="recipe-detail" id="recipe-{{ recipe.id }}" data-testid="recipe-{{ recipe.id }}" x-init="$dispatch('recipe-loaded', { recipeId: {{ recipe.id }} })">
     <!-- Recipe Header -->
     <div class="mb-6">
+        <div class="my-2">
+            {% include "planner/recipes/partial_toggle_my_recipes.html" with recipe=recipe %}
+        </div>
         <h1 class="text-3xl font-bold text-gray-900">{{ recipe.dish_name }}</h1>
         <p class="text-gray-600 mt-2">{{ recipe.description }}</p>
         <div class="text-sm text-gray-500 mt-1">

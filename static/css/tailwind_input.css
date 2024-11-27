@@ -183,6 +183,23 @@
     }
 
 
+    /* My Recipes Button Styles */
+    .my-recipes-button {
+        @apply flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium bg-white hover:bg-gray-50;
+    }
+
+    .my-recipes-button span {
+        @apply text-gray-500 hover:text-gray-700;
+    }
+
+    .my-recipes-button svg {
+        @apply fill-yellow-600 text-yellow-600;
+    }
+
+    .toggle-my-recipes-button {
+        @apply p-2 rounded-full shadow-sm;
+    }
+
     .toggle-my-recipes-button--unsaved {
         @apply bg-white/50 text-gray-400 hover:bg-white/75
                backdrop-blur-sm;
@@ -193,11 +210,11 @@
     }
 
     .toggle-my-recipes-button--saved {
-        @apply bg-white text-gray-600;
+        @apply bg-white text-yellow-600;
     }
 
     .toggle-my-recipes-button--saved svg {
-        @apply fill-gray-600;
+        @apply fill-yellow-600;
     }
 }
 
