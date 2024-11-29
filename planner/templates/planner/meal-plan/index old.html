@@ -49,15 +49,15 @@
 
         <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3" id="groups-container">
             <template x-for="group in Object.values(groups)" :key="group.id">
-                <div class="meal-group" x-data>
-                    <div class="meal-group-header">
-                        <h3 class="meal-group-title" 
+                <div class="recipe-group" x-data>
+                    <div class="recipe-group-header">
+                        <h3 class="recipe-group-title" 
                             :contenteditable="activeGrouping === 'custom'"
                             @input="updateGroupName($event)"
                             @keydown.enter.prevent="$el.blur()"
                             x-text="group.name">
                         </h3>
-                        <button @click="$el.closest('.meal-group').remove()" 
+                        <button @click="$el.closest('.recipe-group').remove()" 
                                 x-show="activeGrouping === 'custom'"
                                 class="text-gray-400 hover:text-red-500 transition-colors">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -134,17 +134,17 @@
 {% endblock %}
 
 
-{% partialdef partial-meal-group %}
+{% partialdef partial-recipe-group %}
 
-<div class="meal-group" x-data>
-    <div class="meal-group-header">
-        <h3 class="meal-group-title" 
+<div class="recipe-group" x-data>
+    <div class="recipe-group-header">
+        <h3 class="recipe-group-title" 
             contenteditable 
             @input="updateGroupName($event)"
             @keydown.enter.prevent="$el.blur()">
             New Group
         </h3>
-        <button @click="$el.closest('.meal-group').remove()" 
+        <button @click="$el.closest('.recipe-group').remove()" 
                 class="text-gray-400 hover:text-red-500 transition-colors">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -163,4 +163,4 @@
     </div>
 </div> 
 
-{% endpartialdef partial-meal-group %}
+{% endpartialdef partial-recipe-group %}

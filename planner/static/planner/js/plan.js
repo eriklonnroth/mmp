@@ -35,7 +35,7 @@ document.addEventListener('alpine:init', () => {
         },
 
         updateGroupName(event) {
-            const groupId = event.target.closest('.recipe-group').querySelector('.recipe-list').dataset.groupId;
+            const groupId = event.target.closest('.meal-group').querySelector('.recipe-list').dataset.groupId;
             if (this.groups[groupId]) {
                 this.groups[groupId].name = event.target.innerText;
             }

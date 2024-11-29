@@ -1,10 +1,7 @@
 from django.contrib.auth.models import User
-from django.contrib.staticfiles.finders import find
-from django.core.paginator import Paginator
-from django.db import IntegrityError
 from django.db.models import Exists, OuterRef, Q
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
+from django.shortcuts import render, redirect
+from django.http import HttpResponseBadRequest, HttpResponseForbidden
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
@@ -18,7 +15,7 @@ from planner.services.recipe_repository import save_recipe_to_db
 from planner.services.recipe_to_file import save_recipe_to_file
 from planner.services.shopping_list_generator import generate_shopping_list
 from planner import forms
-from planner.models import Recipe, MyRecipe, MealPlan, Template, Group
+from planner.models import Recipe, MyRecipe, MealPlan, MealGroup
 import json
 
 
@@ -34,38 +31,50 @@ def meal_plan(request):
         admin_user = User.objects.get(username='admin')
         user = admin_user
 
-    meal_plan = MealPlan.objects.filter(user=user).first() # Currently only one meal plan per user
-    if meal_plan:
-        # Efficiently fetch templates and their groups in a single query
-        templates = Template.objects.filter(
-            meal_plan=meal_plan
-        ).prefetch_related(
-            'groups',
-            'groups__recipes'
+    recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-modified_at').first()
+
+    if recent_meal_plan:
+        return redirect('meal_plan_detail', id=recent_meal_plan.id)
+
+    return redirect('new_meal_plan')
+
+class MealPlanDetailView(DetailView):
+    model = MealPlan
+    template_name = 'planner/meal-plan/detail.html'
+    context_object_name = 'meal_plan'
+
+    def get_queryset(self):
+        # Add prefetch_related to optimize queries
+        queryset = MealPlan.objects.prefetch_related(
+            'templates',
+            'templates__groups',
+            'templates__groups__recipes'
         )
         
-        context = {
-            'meal_plan': meal_plan,
-            'templates': templates,
-        }
-    else:
-        # Handle case where user has no meal plan
-        context = {
-            'meal_plan': None,
-            'templates': [],
-        }
-    
-    return render(request, "planner/meal-plan/index.html", context)
+        user = self.request.user if self.request.user.is_authenticated else None
+        if not user:
+            admin_user = User.objects.get(username='admin')
+            user = admin_user
+        #     return JsonResponse({
+        #     'error': 'Authentication required'
+        # }, status=401)
+        
+        # Filter queryset to only show user's meal plans
+        return queryset.filter(user=user)
+
+class NewMealPlanView(View):
+    template_name = 'planner/meal-plan/new.html'
+
 
 def add_recipe_modal(request, group_id):
-    group = get_object_or_404(Group, id=group_id)
+    meal_group = get_object_or_404(MealGroup, id=group_id)
     # Verify the user has access to this group
     if request.user.is_authenticated:
-        if not group.template.meal_plan.user == request.user:
+        if not meal_group.meal_plan.user == request.user:
             return HttpResponseForbidden("You don't have access to this group")
     
     context = {
-        'group': group,
+        'meal_group': meal_group,
     }
     return render(request, "planner/meal-plan/add-recipe-to-group-modal.html", context)
 
@@ -95,7 +104,7 @@ def magic_recipe(request):
 
 @require_http_methods(['POST'])
 def action_add_group(request):   
-    return render(request, 'planner/plan.html#partial-recipe-group')
+    return render(request, 'planner/plan.html#partial-meal-group')
 
 @require_http_methods(['POST'])
 def action_generate_recipe(request):

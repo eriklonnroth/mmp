@@ -5,14 +5,14 @@ import os
 import argparse
 import json
 import glob
-from planner.models import ShoppingCategory
+from planner.models import ShoppingItem
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
 # Base models (maps to JSON response and models.py)
 class Category(str):
-    valid_categories: ClassVar[list[tuple[str, str]]] = ShoppingCategory.CATEGORIES
+    valid_categories: ClassVar[list[tuple[str, str]]] = ShoppingItem.CATEGORIES
 
     @classmethod
     def categories_list(cls) -> list[str]:
@@ -40,7 +40,7 @@ class ShoppingItem(BaseModel):
     @field_validator('category')
     @classmethod
     def validate_category(cls, v):
-        valid_categories = [cat[1] for cat in ShoppingCategory.CATEGORIES] # Full category name, e.g. Fruit & Vegetables (not fruit_veg)
+        valid_categories = [cat[1] for cat in ShoppingItem.CATEGORIES] # Full category name, e.g. Fruit & Vegetables (not fruit_veg)
         if v not in valid_categories:
             raise ValueError(f'Category must be one of: {valid_categories}')
         return v
@@ -80,7 +80,7 @@ def generate_shopping_list(recipe_files: list[str], preferred_units: str = "metr
     Mention underlying recipes in recipe_notes using format "For <dish_name>". 
     Also add recipe_notes where recipe quantities have been combined or adapted for shopping, e.g. 5 cloves of garlic -> 1 head of garlic.
     Use {preferred_units} units for all quantities, converting where necessary.
-    Categorize each item into one of the following categories: {[cat[1] for cat in ShoppingCategory.CATEGORIES]}.
+    Categorize each item into one of the following categories: {[cat[1] for cat in ShoppingItem.CATEGORIES]}.
 
     {recipes}
     """

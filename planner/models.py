@@ -1,70 +1,22 @@
 from django.db import models
-from django.db.models.signals import post_save
-from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.dispatch import receiver
-import hashlib
-import json
-
-from .utils import scale_quantity
-
-
-# Meal plan models
-class Template(models.Model):
-    TEMPLATE_TYPES = [
-        ('weekday', 'Weekday'),
-        ('meal_type', 'Meal Type'),
-        ('custom', 'Custom'),
-    ]
-    
-    name = models.CharField(max_length=255)
-    template_type = models.CharField(max_length=20, choices=TEMPLATE_TYPES)
-    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
-
-    def clean(self):
-        # Custom templates must have a user
-        if self.template_type == 'custom' and not self.user:
-            raise ValidationError("Custom templates must have a user.")
-    
-    def save(self, *args, **kwargs):
-        self.clean()
-        super().save(*args, **kwargs)
-        
-    def get_default_groups(self):        
-        if self.template_type == 'weekday':
-            return ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-        elif self.template_type == 'meal_type':
-            return ['Breakfasts', 'Lunches', 'Dinners', 'Snacks', 'Drinks']
-        else:
-            return [] # Custom templates have no predefined groups
-
+from django.db.models.signals import post_save
+from django.utils import timezone
 
 class MealPlan(models.Model):
     name = models.CharField(max_length=100)
-    template = models.ForeignKey(Template, on_delete=models.PROTECT)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        is_new = not self.pk
-
-        # When creating a new meal plan, copy the groups from the chosen template
-        if is_new and self.template:
-            for order, name in enumerate(self.template.get_default_groups()):
-                Group.objects.create(
-                    meal_plan=self,
-                    name=name,
-                    order=order
-                )
 
     class Meta:
         ordering = ['-modified_at']
 
-class Group(models.Model):
+class MealGroup(models.Model):
     name = models.CharField(max_length=100)
     meal_plan = models.ForeignKey(MealPlan, related_name='groups', on_delete=models.CASCADE)
     order = models.IntegerField(default=0)
@@ -101,68 +53,11 @@ class Recipe(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     modified_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='published')
-    ingredients_digest = models.CharField(max_length=64, blank=True)
     saved_to_my_recipes_by = models.ManyToManyField(
         User,
         through='MyRecipe',
         related_name='my_recipes'
     )
-
-    def get_scaled_recipe(self, new_servings: int) -> dict:
-        """Returns a complete scaled version of the recipe."""
-        scaled_ingredients = []
-        for ingredient in self.ingredients.all():
-            new_quantity, new_item = scale_quantity(
-                ingredient.quantity,
-                ingredient.item,
-                self.servings,
-                new_servings
-            )
-            scaled_ingredients.append({
-                'quantity': new_quantity,
-                'item': new_item,
-                'order': ingredient.order
-            })
-        
-        return {
-            'dish_name': self.dish_name,
-            'servings': new_servings,
-            'notes': self.notes,
-            'ingredients': scaled_ingredients,
-            'instruction_sections': self.instruction_sections.all(),
-        }
-
-    def scale_and_save(self, new_servings):
-        """Permanently scales the recipe to a new serving size."""
-        old_servings = self.servings
-        self.servings = new_servings
-        
-        # Batch all ingredient updates
-        ingredients_to_update = []
-        for ingredient in self.ingredients.all():
-            ingredient.quantity = scale_quantity(
-                ingredient.quantity,
-                old_servings,
-                new_servings
-            )
-            ingredients_to_update.append(ingredient)
-        
-        # Bulk update ingredients without triggering individual saves
-        Ingredient.objects.bulk_update(ingredients_to_update, ['quantity'])
-        
-        # Update the digest once after all changes
-        self.update_ingredients_digest()
-        self.save()
-
-    def update_ingredients_digest(self):
-        """Create a digest of all ingredients data including servings count"""
-        ingredients_data = list(self.ingredients.order_by('order').values('item', 'quantity'))
-        data_string = json.dumps({
-            'servings': self.servings,
-            'ingredients': ingredients_data
-        }, sort_keys=True)
-        self.ingredients_digest = hashlib.sha256(data_string.encode()).hexdigest()
-        self.save(update_fields=['ingredients_digest'])
 
     def __str__(self):
         return f"{self.dish_name}"
@@ -173,9 +68,6 @@ class Recipe(models.Model):
             models.Index(fields=['created_by', 'created_at', 'status']),
         ]
 
-@receiver(post_save, sender='planner.Ingredient')
-def update_recipe_digest(sender, instance, **kwargs):
-    instance.recipe.update_ingredients_digest()
 
 
 class Ingredient(models.Model):
@@ -235,21 +127,19 @@ class MyRecipe(models.Model):
         return f"{self.recipe.dish_name}"
 
 
-
-# Scaled recipe for specific meal plan
-class ScaledRecipe(models.Model):
-    group = models.ForeignKey(Group, related_name='recipes', on_delete=models.CASCADE)
-    recipe = models.ForeignKey('Recipe', on_delete=models.CASCADE)
-    servings = models.PositiveIntegerField()
-    order = models.PositiveIntegerField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+# Recipe added to Meal Plan Group by user
+class MealPlanRecipe(models.Model):
+    meal_group = models.ForeignKey(MealGroup, related_name='recipes', on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.PROTECT) # Prevent deletion of underlying recipe if it's used in a meal plan
     modified_at = models.DateTimeField(auto_now=True)
+    order = models.PositiveIntegerField()
 
     class Meta:
-        ordering = ['order']
-        unique_together = ['group', 'order']
-        db_table = 'planner_scaledrecipe'  # Optional: keep old table name if preserving data
+        unique_together = ['order']
+        ordering = ['meal_group', 'order']
+
+    def __str__(self):
+        return f"{self.recipe.dish_name}"
 
 
 # Shopping list models
@@ -258,35 +148,12 @@ class ShoppingList(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     modified_at = models.DateTimeField(auto_now=True)
-    content_digest = models.CharField(max_length=64, blank=True)  # SHA-256 hash
-
-    def update_content_digest(self):
-        # Collect all recipe digests and servings counts
-        digest_data = []
-        for group in self.meal_plan.groups.all():
-            for group_recipe in group.recipes.all():
-                digest_data.append({
-                    'recipe_digest': group_recipe.recipe.ingredients_digest,
-                    'servings': group_recipe.servings
-                })
-
-        # Create a digest of the entire shopping list state
-        data_string = json.dumps(digest_data, sort_keys=True)
-        self.content_digest = hashlib.sha256(data_string.encode()).hexdigest()
-        self.save(update_fields=['content_digest'])
-
-    def is_out_of_sync(self):
-        # Recalculate what the digest should be
-        old_digest = self.content_digest
-        self.update_content_digest()
-        return old_digest != self.content_digest
-
 
     def __str__(self):
         return f"Shopping List for {self.meal_plan.name}"
 
 
-class ShoppingCategory(models.Model):
+class ShoppingItem(models.Model):
     CATEGORIES = [
         ('fruit_veg', 'Fruit & Vegetables'),
         ('meat_fish', 'Meat & Fish'),
@@ -298,28 +165,48 @@ class ShoppingCategory(models.Model):
         ('frozen', 'Frozen'),
         ('non_food', 'Non-food')
     ]
-
-    name = models.CharField(max_length=50, choices=CATEGORIES, unique=True)
-    order = models.PositiveIntegerField(unique=True)
-
-    def __str__(self):
-        return self.get_name_display()
-
-    class Meta:
-        ordering = ['order']
-        verbose_name_plural = 'Categories'
-
-
-class ShoppingItem(models.Model):
     shopping_list = models.ForeignKey(ShoppingList, related_name='items', on_delete=models.CASCADE)
-    category = models.ForeignKey(ShoppingCategory, related_name='items', on_delete=models.PROTECT)
+    category = models.CharField(max_length=20, choices=CATEGORIES)
     item = models.CharField(max_length=200)
     quantity = models.CharField(max_length=100)
     is_checked = models.BooleanField(default=False)
+    modified_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.quantity} {self.item}"
+    
+    def get_category_order(self):
+        # Return index of this item's category in CATEGORIES list
+        return next(i for i, (cat, _) in enumerate(self.CATEGORIES) if cat == self.category)
 
     class Meta:
-        ordering = ['category__order', 'item']
+        ordering = ['category', 'item']
 
+
+
+
+
+
+
+
+# Signals to update parent modified_at timestamps
+@receiver(post_save, sender=MealPlanRecipe)
+def update_group_modified(sender, instance, **kwargs):
+    """Update the parent MealGroup's modified_at when a MealPlanRecipe changes"""
+    if instance.meal_group:
+        instance.meal_group.modified_at = timezone.now()
+        instance.meal_group.save(update_fields=['modified_at'])
+
+@receiver(post_save, sender=MealGroup)
+def update_meal_plan_modified(sender, instance, **kwargs):
+    """Update the parent MealPlan's modified_at when a Group changes"""
+    if instance.meal_plan:
+        instance.meal_plan.modified_at = timezone.now()
+        instance.meal_plan.save(update_fields=['modified_at'])
+
+@receiver(post_save, sender=ShoppingItem)
+def update_shopping_list_modified(sender, instance, **kwargs):
+    """Update the parent ShoppingList's modified_at when a ShoppingItem changes"""
+    if instance.shopping_list:
+        instance.shopping_list.modified_at = timezone.now()
+        instance.shopping_list.save(update_fields=['modified_at'])
