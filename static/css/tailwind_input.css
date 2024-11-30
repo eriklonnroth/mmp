@@ -31,13 +31,16 @@
         @apply cursor-grabbing;
     }
 
-    .group-by-btn {
-        @apply px-3 py-1.5 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 
-               hover:bg-gray-200 outline-none transition-colors;
+    .meal-plan-name {
+        @apply text-2xl font-bold text-gray-900 rounded transition-colors;
     }
 
-    .group-by-btn.active {
-        @apply bg-gray-300 text-gray-900 font-semibold;
+    .meal-plan-name[contenteditable="true"] {
+        @apply cursor-text hover:bg-gray-100;
+    }
+
+    .meal-plan-name:focus {
+        @apply outline-none ring-2 ring-blue-300;
     }
 
     .meal-group {
@@ -48,15 +51,15 @@
         @apply p-5 border-b border-gray-200 bg-gray-50 flex justify-between items-center;
     }
 
-    .meal-group-title {
+    .meal-group-name {
         @apply text-xl font-semibold text-gray-800 px-2 py-1 rounded transition-colors;
     }
 
-    .meal-group-title[contenteditable="true"] {
+    .meal-group-name[contenteditable="true"] {
         @apply cursor-text hover:bg-gray-100;
     }
 
-    .meal-group-title:focus {
+    .meal-group-name:focus {
         @apply outline-none ring-2 ring-blue-300;
     }
 
@@ -222,6 +225,10 @@
 
     .my-recipes-filter-button svg {
         @apply h-5 w-5 fill-current;
+    }
+
+    .add-to-meal-plan-button, .add-mpr-button {
+        @apply text-gray-400 hover:text-gray-500 font-medium inline-flex items-center space-x-1 whitespace-nowrap text-sm;
     }
 
 }

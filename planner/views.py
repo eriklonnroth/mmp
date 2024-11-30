@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db.models import Exists, OuterRef, Q
 from django.shortcuts import render, redirect
-from django.http import HttpResponseBadRequest, HttpResponseForbidden
+from django.http import HttpResponseBadRequest, HttpResponseForbidden, HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
@@ -15,7 +15,8 @@ from planner.services.recipe_repository import save_recipe_to_db
 from planner.services.recipe_to_file import save_recipe_to_file
 from planner.services.shopping_list_generator import generate_shopping_list
 from planner import forms
-from planner.models import Recipe, MyRecipe, MealPlan, MealGroup
+from planner.models import Recipe, MyRecipe, MealPlan, MealGroup, MealPlanRecipe
+from planner.services.meal_plan_templates import TEMPLATES, get_default_meal_groups
 import json
 
 
@@ -34,7 +35,7 @@ def meal_plan(request):
     recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-modified_at').first()
 
     if recent_meal_plan:
-        return redirect('meal_plan_detail', id=recent_meal_plan.id)
+        return redirect('meal_plan_detail', pk=recent_meal_plan.id)
 
     return redirect('new_meal_plan')
 
@@ -46,9 +47,9 @@ class MealPlanDetailView(DetailView):
     def get_queryset(self):
         # Add prefetch_related to optimize queries
         queryset = MealPlan.objects.prefetch_related(
-            'templates',
-            'templates__groups',
-            'templates__groups__recipes'
+            'groups',
+            'groups__mprs', # MealPlanRecipes
+            'groups__mprs__recipe'  # Underlying recipe
         )
         
         user = self.request.user if self.request.user.is_authenticated else None
@@ -62,9 +63,27 @@ class MealPlanDetailView(DetailView):
         # Filter queryset to only show user's meal plans
         return queryset.filter(user=user)
 
-class NewMealPlanView(View):
-    template_name = 'planner/meal-plan/new.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Create a list of groups with their recipes
+        groups = []
+        for group in self.object.groups.all():
+            groups.append({
+                'id': group.id,
+                'name': group.name,
+                'mprs': [{
+                    'id': mpr.id,
+                    'name': mpr.recipe.dish_name,
+                    'recipe_id': mpr.recipe.id
+                } for mpr in group.mprs.all()]
+            })
+        
+        context['groups'] = groups
+        return context
 
+def new_meal_plan(request):
+    return render(request, 'planner/meal-plan/new.html', {'templates': TEMPLATES})
 
 def add_recipe_modal(request, group_id):
     meal_group = get_object_or_404(MealGroup, id=group_id)
@@ -102,9 +121,7 @@ def magic_recipe(request):
     
     return render(request, "planner/recipes/magic.html", context)
 
-@require_http_methods(['POST'])
-def action_add_group(request):   
-    return render(request, 'planner/plan.html#partial-meal-group')
+
 
 @require_http_methods(['POST'])
 def action_generate_recipe(request):
@@ -153,6 +170,94 @@ def action_toggle_my_recipes(request, recipe_id):
         saved = True
 
     return JsonResponse({'saved': saved})
+
+@require_http_methods(['POST'])
+def action_create_meal_plan(request, template):
+    
+    user = request.user if request.user.is_authenticated else None
+    if not user:
+        admin_user = User.objects.get(username='admin')
+        user = admin_user
+    #     return JsonResponse({
+    #         'error': 'Authentication required'
+    # }, status=401)
+
+    # Create the meal plan
+    meal_plan = MealPlan.objects.create(
+        name="New Meal Plan",
+        user=user
+    )
+
+    # Create the meal groups
+    meal_groups = get_default_meal_groups(template)
+    for name in meal_groups:
+        MealGroup.objects.create(
+            name=name,
+            meal_plan=meal_plan,
+            order=MealGroup.objects.filter(meal_plan=meal_plan).count()
+        )
+    response = HttpResponse()
+    response['HX-Redirect'] = f'/meal-plan/{meal_plan.id}'
+    return response
+
+@require_http_methods(['DELETE'])
+def action_delete_meal_plan_recipe(request, mpr_id):
+    meal_plan_recipe = get_object_or_404(MealPlanRecipe, id=mpr_id)
+    meal_plan_recipe.delete()
+    return HttpResponse('')
+
+@require_http_methods(['POST'])
+def action_add_meal_group(request, meal_plan_id):
+    meal_plan = get_object_or_404(MealPlan, id=meal_plan_id)
+    
+    # Get the highest order value from existing groups
+    highest_order = MealGroup.objects.filter(meal_plan=meal_plan).order_by('-order').values_list('order', flat=True).first()
+    
+    # If there are no existing groups, start with 0, otherwise increment
+    next_order = 0 if highest_order is None else highest_order + 1
+    
+    group = MealGroup.objects.create(
+        meal_plan=meal_plan,
+        order=next_order
+    )
+    return render(request, 'planner/meal-plan/detail.html#partial-meal-group', {'group': group})
+
+@require_http_methods(['DELETE'])
+def action_delete_meal_group(request, group_id):
+    meal_group = get_object_or_404(MealGroup, id=group_id)
+    meal_group.delete()
+    return HttpResponse('')
+
+@require_http_methods(['POST'])
+def action_update_meal_group_name(request, group_id):
+    new_name = request.POST.get('meal_group_name')
+    
+    if not new_name:
+        return HttpResponseBadRequest("Name required")
+        
+    try:
+        group = get_object_or_404(MealGroup, id=group_id)
+        group.name = new_name
+        group.save()
+        return HttpResponse('')
+    except MealGroup.DoesNotExist:
+        return HttpResponse(status=404)
+
+@require_http_methods(['POST'])
+def action_update_meal_plan_name(request, meal_plan_id):
+    new_name = request.POST.get('meal_plan_name')
+    
+    if not new_name:
+        return HttpResponseBadRequest("Name required")
+        
+    try:
+        meal_plan = get_object_or_404(MealPlan, id=meal_plan_id)
+        meal_plan.name = new_name
+        meal_plan.save()
+        return HttpResponse('')
+    except MealPlan.DoesNotExist:
+        return HttpResponse(status=404)
+
 
 @method_decorator(csrf_exempt, name='dispatch')
 class GenerateRecipeView(View):

@@ -122,3 +122,18 @@
 
 #     def __str__(self):
 #         return f"Shopping List for {self.meal_plan.name}"
+
+
+# # Recipe added to Meal Plan Group by user
+# class MealPlanRecipe(models.Model):
+#     meal_group = models.ForeignKey(MealGroup, related_name='recipes', on_delete=models.CASCADE)
+#     recipe = models.ForeignKey(Recipe, on_delete=models.PROTECT) # Prevent deletion of underlying recipe if it's used in a meal plan
+#     modified_at = models.DateTimeField(auto_now=True)
+#     order = models.PositiveIntegerField()
+
+#     class Meta:
+#         unique_together = ['order']
+#         ordering = ['meal_group', 'order']
+
+#     def __str__(self):
+#         return f"{self.recipe.dish_name}"

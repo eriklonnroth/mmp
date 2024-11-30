@@ -18,23 +18,21 @@
                 <div class="flex justify-between items-center w-full">
                     <div class="flex-grow">
                         <div class="flex h-16 space-x-8">
-                            {% with request.resolver_match.url_name as url_name %}
                             <a href="{% url 'recipes' %}" 
-                               class="{% if url_name == 'recipes' %}nav-button-active{% else %}nav-button-inactive{% endif %}">
+                               class="{% if '/recipes' in request.path %}nav-button-active{% else %}nav-button-inactive{% endif %}">
                                 {% include "planner/svg/recipe-book.svg" %}
                                 Recipes
                             </a>
                             <a href="{% url 'meal_plan' %}" 
-                               class="{% if url_name == 'meal_plan' %}nav-button-active{% else %}nav-button-inactive{% endif %}">
+                               class="{% if '/meal-plan' in request.path %}nav-button-active{% else %}nav-button-inactive{% endif %}">
                                 {% include "planner/svg/calendar-alt.svg" %}
                                 Meal Plan
                             </a>
                             <a href="{% url 'shopping_list' %}" 
-                               class="{% if url_name == 'shopping_list' %}nav-button-active{% else %}nav-button-inactive{% endif %}">
+                               class="{% if '/shopping-list' in request.path %}nav-button-active{% else %}nav-button-inactive{% endif %}">
                                 {% include "planner/svg/shopping-cart.svg" %}
                                 Shopping List
                             </a>
-                            {% endwith %}
                         </div>
                     </div>
                     

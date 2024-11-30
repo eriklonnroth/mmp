@@ -16,12 +16,12 @@ document.addEventListener('alpine:init', () => {
         },
 
         initSortable() {
-            const recipeLists = document.querySelectorAll('.recipe-list');
+            const recipeLists = document.querySelectorAll('.mpr-list');
             recipeLists.forEach(el => {
                 Sortable.create(el, {
-                    group: 'recipes',
+                    group: 'mprs',
                     animation: 150,
-                    filter: '.add-recipe-btn',
+                    filter: '.add-mpr-button',
                 });
             });
         },
@@ -32,22 +32,6 @@ document.addEventListener('alpine:init', () => {
             this.$nextTick(() => {
                 this.initSortable();
             });
-        },
-
-        updateGroupName(event) {
-            const groupId = event.target.closest('.meal-group').querySelector('.recipe-list').dataset.groupId;
-            if (this.groups[groupId]) {
-                this.groups[groupId].name = event.target.innerText;
-            }
-        },
-
-        confirmRemoveRecipe(event, recipeName) {
-            if (confirm(`Remove ${recipeName}?`)) {
-                const recipeItem = event.target.closest('.recipe-item');
-                if (recipeItem) {
-                    recipeItem.remove();
-                }
-            }
         },
     }));
 });

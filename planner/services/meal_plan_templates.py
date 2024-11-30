@@ -1,17 +1,17 @@
 TEMPLATES = {
     'weekday': {
-        'name': 'Weekday',
+        'name': 'By Weekday',
         'description': 'Organise meals by day of the week',
         'meal_groups': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     },
     'meal_type': {
-        'name': 'Meal Type',
+        'name': 'By Meal Type',
         'description': 'Organise meals by type: breakfasts, lunches, dinners, snacks',
         'meal_groups': ['Breakfasts', 'Lunches', 'Dinners', 'Snacks']
     },
     'blank': {
         'name': 'Blank',
-        'description': 'Start with a blank plan and add your own meal groups',
+        'description': 'Create your own meal plan from scratch',
         'meal_groups': []
     }
 }

@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 from django.utils import timezone
 
 class MealPlan(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=20, default='New Meal Plan')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
@@ -17,7 +17,7 @@ class MealPlan(models.Model):
         ordering = ['-modified_at']
 
 class MealGroup(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=20, default='New Group')
     meal_plan = models.ForeignKey(MealPlan, related_name='groups', on_delete=models.CASCADE)
     order = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -129,13 +129,13 @@ class MyRecipe(models.Model):
 
 # Recipe added to Meal Plan Group by user
 class MealPlanRecipe(models.Model):
-    meal_group = models.ForeignKey(MealGroup, related_name='recipes', on_delete=models.CASCADE)
-    recipe = models.ForeignKey(Recipe, on_delete=models.PROTECT) # Prevent deletion of underlying recipe if it's used in a meal plan
+    meal_group = models.ForeignKey(MealGroup, related_name='mprs', on_delete=models.CASCADE) # Deletes the meal plan recipe if the parent group is deleted
+    recipe = models.ForeignKey(Recipe, on_delete=models.PROTECT) # Prevents deletion of underlying recipe if it's used in a meal plan
     modified_at = models.DateTimeField(auto_now=True)
     order = models.PositiveIntegerField()
 
     class Meta:
-        unique_together = ['order']
+        unique_together = ['meal_group', 'order']
         ordering = ['meal_group', 'order']
 
     def __str__(self):
@@ -210,3 +210,22 @@ def update_shopping_list_modified(sender, instance, **kwargs):
     if instance.shopping_list:
         instance.shopping_list.modified_at = timezone.now()
         instance.shopping_list.save(update_fields=['modified_at'])
+
+@receiver(post_save, sender=MealPlanRecipe)
+def reorder_on_delete(sender, instance, **kwargs):
+    """
+    When a MealPlanRecipe is deleted, reorder the remaining recipes in the same group
+    to ensure consecutive ordering without gaps
+    """
+    # Get all recipes in the same group with a higher order than the deleted one
+    recipes = MealPlanRecipe.objects.filter(
+        meal_group=instance.meal_group,
+        order__gt=instance.order
+    ).order_by('order')
+    
+    # Decrease their order by 1
+    for i, recipe in enumerate(recipes):
+        new_order = instance.order + i
+        if recipe.order != new_order:
+            recipe.order = new_order
+            recipe.save(update_fields=['order'])

@@ -1,0 +1,145 @@
+{% extends "planner/layout.html" %}
+{% load static %}
+{% load partials %}
+
+{% block title %}
+    Meal Plan
+{% endblock %}
+
+{% block head %}
+    <script src="{% static 'planner/js/plan.js' %}"></script>
+{% endblock %}
+
+
+{% block body %}
+    <div x-data="mealPlan" class="container mx-auto max-w-5xl" x-init="init">
+        <div class="my-12">
+            <div class="flex justify-between items-center mb-6">
+
+
+                <div class="meal-plan-name-wrapper inline-block @click.stop">
+                    <h1 
+                        id="title"
+                        class="meal-plan-name px-2 py-1"
+                        contenteditable
+                        @keydown.enter.prevent="$el.blur()"
+                        hx-post="{% url 'action_update_meal_plan_name' meal_plan.id %}"
+                        hx-trigger="blur[event.target.textContent.trim() !== '{{ meal_plan.name }}']"
+                        hx-vals='js:{ "meal_plan_name": event.target.textContent.trim() }'
+                        hx-swap="none">
+                        {{ meal_plan.name }}
+                        </h1>
+                </div>
+
+                <button class="inline-flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                    </svg>
+                    <span class="hidden sm:inline">My Meal Plans</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3" id="groups-container">
+            
+            {% for group in groups %}
+                {% partial partial-meal-group %}
+            {% endfor %}
+
+            <!-- Add Group Button -->
+            <button id="add-group-button"
+                class="flex items-center justify-center h-full min-h-[200px] border-2 border-dashed border-gray-300 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-colors group"
+                hx-post="{% url 'action_add_meal_group' meal_plan.id %}"
+                hx-target="#add-group-button"
+                hx-swap="beforebegin"
+                hx-indicator="#loading"
+                hx-trigger="click"
+                >
+                <div class="flex flex-col items-center text-gray-400 group-hover:text-gray-500">
+                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    <span class="mt-2 font-medium">Add Group</span>
+                </div>
+            </button>
+        </div>
+
+        <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-lg">
+            <div class="container mx-auto max-w-5xl">
+                <button class="save-plan-button w-full px-6 py-4 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 font-semibold transition-colors">
+                    Save Meal Plan
+                </button>
+            </div>
+        </div>
+
+        <div class="h-24"></div>
+    </div>
+
+    <div id="loading" class="htmx-indicator">
+        Loading...
+    </div>
+
+{% endblock %}
+
+
+{% partialdef partial-meal-group %}
+
+<div class="meal-group" x-data :key="{{ group.id }}">
+    <div class="meal-group-header">
+        <h3 class="meal-group-name"
+            name="meal_group_name"
+            contenteditable
+            @keydown.enter.prevent="$el.blur()"
+            hx-post="{% url 'action_update_meal_group_name' group.id %}"
+            hx-trigger="blur[event.target.textContent.trim() !== '{{ group.name }}']"
+            hx-vals='js:{ "meal_group_name": event.target.textContent.trim() }'
+            hx-swap="none">
+            {{ group.name }}
+        </h3>
+        <button class="text-gray-400 hover:text-red-500 transition-colors"
+            hx-delete="{% url 'action_delete_meal_group' group.id %}"
+            hx-confirm="Delete {{ group.name }}?"
+            hx-target="closest .meal-group"
+            hx-swap="outerHTML">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+        </button>
+    </div>
+    <div class="p-5">
+        <ul class="mpr-list divide-y divide-gray-100" data-group-id="{{ group.id }}">
+            {% for mpr in group.mprs.all %}
+                {% partial partial-mpr %}
+            {% endfor %}
+        </ul>
+        <div class="py-3 px-2">
+            <button class="add-mpr-button">
+                <span>+</span>
+                <span>Add recipe</span>
+            </button>
+        </div>
+    </div>
+</div> 
+
+{% endpartialdef partial-meal-group %}
+
+
+{% partialdef partial-mpr %}
+
+    <li class="recipe-item" 
+        :data-recipe-id="{{ mpr.id }}">
+        <span class="text-gray-700 select-none flex-grow">
+            {{ mpr.name }}
+        </span>
+        <button class="text-gray-400 hover:text-red-500 transition-colors ml-2"
+            hx-delete="{% url 'action_delete_meal_plan_recipe' mpr.id %}"
+            hx-target="closest .recipe-item"
+            hx-swap="outerHTML"
+            hx-confirm="Remove {{ mpr.name }}?">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+    </li>
+
+{% endpartialdef partial-mpr %}
