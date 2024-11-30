@@ -19,6 +19,12 @@ from planner.models import Recipe, MyRecipe, MealPlan, MealGroup, MealPlanRecipe
 from planner.services.meal_plan_templates import TEMPLATES, get_default_meal_groups
 import json
 
+class UserAuthMixin:
+    def get_authenticated_user(self):
+        user = self.request.user if self.request.user.is_authenticated else None
+        if not user:
+            user = User.objects.get(username='admin')
+        return user
 
 def index(request):
     return render(request, "planner/index.html")
@@ -39,7 +45,7 @@ def meal_plan(request):
 
     return redirect('new_meal_plan')
 
-class MealPlanDetailView(DetailView):
+class MealPlanDetailView(UserAuthMixin, DetailView):
     model = MealPlan
     template_name = 'planner/meal-plan/detail.html'
     context_object_name = 'meal_plan'
@@ -48,25 +54,17 @@ class MealPlanDetailView(DetailView):
         # Add prefetch_related to optimize queries
         queryset = MealPlan.objects.prefetch_related(
             'groups',
-            'groups__mprs', # MealPlanRecipes
-            'groups__mprs__recipe'  # Underlying recipe
+            'groups__mprs',
+            'groups__mprs__recipe'
         )
         
-        user = self.request.user if self.request.user.is_authenticated else None
-        if not user:
-            admin_user = User.objects.get(username='admin')
-            user = admin_user
-        #     return JsonResponse({
-        #     'error': 'Authentication required'
-        # }, status=401)
-        
-        # Filter queryset to only show user's meal plans
-        return queryset.filter(user=user)
+        return queryset.filter(user=self.get_authenticated_user())
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        # Create a list of groups with their recipes
+        context['meal_plans'] = MealPlan.objects.filter(user=self.get_authenticated_user()).exclude(id=self.object.id).order_by('-modified_at')
+        
         groups = []
         for group in self.object.groups.all():
             groups.append({
@@ -174,14 +172,8 @@ def action_toggle_my_recipes(request, recipe_id):
 @require_http_methods(['POST'])
 def action_create_meal_plan(request, template):
     
-    user = request.user if request.user.is_authenticated else None
-    if not user:
-        admin_user = User.objects.get(username='admin')
-        user = admin_user
-    #     return JsonResponse({
-    #         'error': 'Authentication required'
-    # }, status=401)
-
+    user = UserAuthMixin().get_authenticated_user()
+    
     # Create the meal plan
     meal_plan = MealPlan.objects.create(
         name="New Meal Plan",
