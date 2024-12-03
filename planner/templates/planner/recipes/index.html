@@ -42,17 +42,28 @@
             </a>
         </div>
 
-        <div class="flex gap-2" x-data="{ myRecipesOnly: false }">
+        <div class="flex gap-2" x-data="{ myRecipesOnly: false, inMealPlanOnly: false }">
             <button 
                 class="my-recipes-filter-button"
-                :class="myRecipesOnly ? 'my-recipes-filter-button--active' : 'my-recipes-filter-button--inactive'"
+                :class="myRecipesOnly ? 'active' : ''"
                 hx-get="{% url 'recipe_cards_page' %}"
                 hx-target="#recipe-grid"
                 :hx-vals='JSON.stringify({"my_recipes": myRecipesOnly})'
-                @click="myRecipesOnly = !myRecipesOnly"
+                @click="myRecipesOnly = !myRecipesOnly; if(myRecipesOnly) inMealPlanOnly = false"
             >
                 {% include "planner/svg/bookmark.svg" %}
                 <span class="ml-2">My Recipes</span>
+            </button>
+            <button 
+                class="in-meal-plan-filter-button"
+                :class="inMealPlanOnly ? 'active' : ''"
+                hx-get="{% url 'recipe_cards_page' %}"
+                hx-target="#recipe-grid"
+                :hx-vals='JSON.stringify({"in_meal_plan": inMealPlanOnly})'
+                @click="inMealPlanOnly = !inMealPlanOnly; if(inMealPlanOnly) myRecipesOnly = false"
+            >
+                {% include "planner/svg/calendar-alt.svg" %}
+                <span class="ml-2">In Meal Plan</span>
             </button>
         </div>
 

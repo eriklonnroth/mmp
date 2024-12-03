@@ -12,8 +12,8 @@
 
     /* Meal Plan Styles */
     .recipe-item {
-        @apply flex items-center justify-between py-3 px-2 hover:bg-gray-50 rounded-md transition-colors
-               border border-gray-100 cursor-grab;
+        @apply flex items-center justify-between py-3 px-4 bg-gray-50 hover:bg-gray-100 rounded-md transition-colors
+               border border-gray-200 cursor-grab;
     }
 
     /* When hovering over drop target */
@@ -61,6 +61,10 @@
 
     .meal-group-name:focus {
         @apply outline-none ring-2 ring-blue-300;
+    }
+
+    .add-mpr-button {
+        @apply text-gray-400 hover:text-gray-500 font-medium inline-flex items-center space-x-1 whitespace-nowrap text-sm;
     }
 
     .recipe-list {
@@ -243,15 +247,10 @@
 
     /* My Recipes Filter Styles */
     .my-recipes-filter-button {
-        @apply inline-flex items-center px-3 py-2 text-sm font-medium rounded-md;
+        @apply inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 bg-gray-200 hover:bg-gray-300;
     }
 
-    .my-recipes-filter-button--inactive {
-        @apply text-gray-700 bg-gray-200 hover:bg-gray-300;
-    }
-
-
-    .my-recipes-filter-button--active {
+    .my-recipes-filter-button.active {
         @apply text-white bg-yellow-600 hover:bg-yellow-700;
     }
 
@@ -260,8 +259,17 @@
         @apply h-5 w-5 fill-current;
     }
 
-    .add-to-meal-plan-button, .add-mpr-button {
-        @apply text-gray-400 hover:text-gray-500 font-medium inline-flex items-center space-x-1 whitespace-nowrap text-sm;
+    /* In Meal Plan Filter Styles */
+    .in-meal-plan-filter-button {
+        @apply inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 bg-gray-200 hover:bg-gray-300;
+    }
+
+    .in-meal-plan-filter-button.active {
+        @apply text-white bg-green-600 hover:bg-green-700;
+    }
+
+    .in-meal-plan-filter-button svg {
+        @apply h-5 w-5 fill-current;
     }
 
     /* Meal Plan Toggle Styles */

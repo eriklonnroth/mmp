@@ -222,7 +222,7 @@ def action_create_meal_plan(request, user, template):
 
 @require_http_methods(['DELETE'])
 @with_user
-def action_delete_meal_plan(user, meal_plan_id):
+def action_delete_meal_plan(request, user, meal_plan_id):
     meal_plan = get_object_or_404(MealPlan, id=meal_plan_id)
     meal_plan.delete()
     recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-modified_at').first()
@@ -394,6 +394,11 @@ class RecipeListView(UserAuthMixin, ListView):
                     filter=Q(mealplanrecipe__meal_group__meal_plan=recent_meal_plan)
                 )
             )
+        
+        # Filter by In Meal Plan if requested
+        in_meal_plan = self.request.GET.get('in_meal_plan') == 'true'
+        if in_meal_plan:
+            queryset = queryset.filter(in_recent_meal_plan=True)
 
         # Filter by My Recipes if requested
         my_recipes = self.request.GET.get('my_recipes') == 'true'

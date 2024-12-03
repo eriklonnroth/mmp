@@ -12,7 +12,7 @@
 
 
 {% block body %}
-    <div x-data="mealPlan" class="container mx-auto max-w-5xl" x-init="init">
+    <div class="container mx-auto max-w-5xl">
         <div class="my-12">
             <div class="flex justify-between items-center mb-6">
 
@@ -54,9 +54,7 @@
                             <div class="py-1">
                                 <button class="flex w-full text-left px-4 py-2 text-sm text-red-700 hover:bg-gray-100 items-center"
                                     hx-delete="{% url 'action_delete_meal_plan' meal_plan.id %}"
-                                    hx-confirm="Are you sure you want to delete this meal plan?"
-                                    hx-target="closest .container"
-                                    hx-swap="outerHTML">
+                                    hx-confirm="Are you sure you want to delete this meal plan?">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                     </svg>
@@ -93,7 +91,7 @@
             </div>
         </div>
 
-        <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3" id="groups-container">
+        <div x-data="mealPlan" class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3" id="groups-container">
             
             {% for group in groups %}
                 {% partial partial-meal-group %}
@@ -150,15 +148,14 @@
         </button>
     </div>
     <div class="p-5">
-        <ul class="mpr-list divide-y divide-gray-100" data-group-id="{{ group.id }}">
-            {% for mpr in group.mprs.all %}
+        <ul class="mpr-list space-y-2" data-group-id="{{ group.id }}">
+            {% for mpr in group.mprs %}
                 {% partial partial-mpr %}
             {% endfor %}
         </ul>
         <div class="py-3 px-2">
             <button class="add-mpr-button">
-                <span>+</span>
-                <span>Add recipe</span>
+                <span>+ Add recipe</span>
             </button>
         </div>
     </div>
