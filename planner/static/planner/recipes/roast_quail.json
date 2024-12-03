@@ -1,0 +1,105 @@
+{
+  "dish_name": "Roast Quail",
+  "description": "A scrumptious and elegant roast quail dish, perfect for a special occasion or a fancy dinner party. The quail is seasoned with a blend of herbs and spices, then roasted to golden-brown perfection.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "item": "Quails",
+      "quantity": "4 whole"
+    },
+    {
+      "item": "Olive oil",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Butter, melted",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Garlic, minced",
+      "quantity": "3 cloves"
+    },
+    {
+      "item": "Thyme leaves, fresh",
+      "quantity": "1 tablespoon"
+    },
+    {
+      "item": "Rosemary, chopped fresh",
+      "quantity": "1 tablespoon"
+    },
+    {
+      "item": "Lemon zest",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Salt",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Black pepper",
+      "quantity": "1/2 teaspoon"
+    },
+    {
+      "item": "White wine",
+      "quantity": "100 ml"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Preparation",
+      "steps": [
+        {
+          "step": "Preheat the oven to 220°C (428°F)."
+        },
+        {
+          "step": "Rinse each quail under cold running water and pat dry with paper towels."
+        },
+        {
+          "step": "In a small bowl, combine the olive oil, melted butter, minced garlic, fresh thyme leaves, chopped rosemary, lemon zest, salt, and black pepper. Mix well to create a fragrant herb butter mixture."
+        }
+      ]
+    },
+    {
+      "section_title": "Seasoning and Stuffing",
+      "steps": [
+        {
+          "step": "Place the quail on a clean working surface."
+        },
+        {
+          "step": "Using a brush, generously coat each quail with the prepared herb butter mixture, ensuring every part is well covered, including inside the cavity of the quail."
+        },
+        {
+          "step": "If desired, tuck a sprig of thyme inside each quail for additional flavor."
+        }
+      ]
+    },
+    {
+      "section_title": "Roasting",
+      "steps": [
+        {
+          "step": "Arrange the seasoned quails breast-side up on a roasting pan with a wire rack to elevate them."
+        },
+        {
+          "step": "Pour the white wine into the base of the pan. This will help keep the quail moist as they roast."
+        },
+        {
+          "step": "Transfer the pan to the preheated oven and roast for about 20-25 minutes, or until the quails are golden brown and the juices run clear when pierced with a knife."
+        }
+      ]
+    },
+    {
+      "section_title": "Serving",
+      "steps": [
+        {
+          "step": "Remove the roasted quails from the oven and let them rest for about 5 minutes before serving."
+        },
+        {
+          "step": "Garnish with additional rosemary sprigs if desired."
+        },
+        {
+          "step": "Serve immediately with your choice of side dishes, such as roasted vegetables or a fresh green salad."
+        }
+      ]
+    }
+  ]
+}

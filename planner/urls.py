@@ -15,7 +15,7 @@ recipe_patterns = [
     path("recipes/compact/", views.RecipeCompactListView.as_view(), name="recipe_compact_list"),
     path("recipes/cards/page/", views.RecipeCardsPageView.as_view(), name="recipe_cards_page"),
     path("recipes/search/", views.RecipeSearchView.as_view(), name="recipe_search"),
-    path("recipes/magic/", views.magic_recipe, name="magic_recipe"),
+    path("recipes/create/", views.create_recipe, name="create_recipe")
 ]
 
 # Meal Plan routes
@@ -34,8 +34,10 @@ shopping_list_patterns = [
 # HTMX Actions
 action_patterns = [
     path("action_create_meal_plan/<str:template>/", views.action_create_meal_plan, name="action_create_meal_plan"),
+    path("action_delete_meal_plan/<int:meal_plan_id>/", views.action_delete_meal_plan, name="action_delete_meal_plan"),
     path("action_generate_recipe/", views.action_generate_recipe, name="action_generate_recipe"),
     path("action_toggle_my_recipes/<int:recipe_id>/", views.action_toggle_my_recipes, name="action_toggle_my_recipes"),
+    path("action_toggle_mpr/<int:meal_group_id>/<int:recipe_id>/", views.action_toggle_mpr, name="action_toggle_mpr"),
     path("action_delete_meal_plan_recipe/<int:mpr_id>/", views.action_delete_meal_plan_recipe, name="action_delete_meal_plan_recipe"),
     path("action_add_meal_group/<int:meal_plan_id>/", views.action_add_meal_group, name="action_add_meal_group"),
     path("action_delete_meal_group/<int:group_id>/", views.action_delete_meal_group, name="action_delete_meal_group"),

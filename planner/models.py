@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 from django.utils import timezone
 
 class MealPlan(models.Model):
-    name = models.CharField(max_length=20, default='New Meal Plan')
+    name = models.CharField(max_length=20)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
@@ -135,7 +135,7 @@ class MealPlanRecipe(models.Model):
     order = models.PositiveIntegerField()
 
     class Meta:
-        unique_together = ['meal_group', 'order']
+        unique_together = ['meal_group', 'recipe']
         ordering = ['meal_group', 'order']
 
     def __str__(self):

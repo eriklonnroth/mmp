@@ -1,7 +1,7 @@
 from django import forms
 
 
-class MagicRecipeForm(forms.Form):
+class CreateRecipeForm(forms.Form):
     dish_idea = forms.CharField(
         label="What would you like to cook?",
         max_length=255,

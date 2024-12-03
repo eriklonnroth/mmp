@@ -1,7 +1,7 @@
 <button 
     x-cloak
     class="toggle-my-recipes-button" 
-    :class="saved ? 'toggle-my-recipes-button--saved' : 'toggle-my-recipes-button--unsaved'"
+    :class="saved ? 'saved' : ''"
     hx-post="{% url 'action_toggle_my_recipes' recipe.id %}"
     hx-swap="none"
     x-data="{ saved: {{ recipe.is_saved|yesno:'true,false' }} }"

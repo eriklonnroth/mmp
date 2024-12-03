@@ -132,7 +132,7 @@
         @apply line-through;
     }
 
-    /* Magic Recipe Form Styles */
+    /* Create Recipe Form Styles */
     .form-field {
         @apply w-full px-4 py-2 border rounded-md border-gray-300
                focus:ring-violet-500 focus:border-violet-500;
@@ -186,26 +186,59 @@
     }
 
 
-    /* My Recipes Toggle Styles */
+    /* Toggle My Recipes Button Styles */
     .toggle-my-recipes-button {
-        @apply p-2 rounded-full shadow-sm;
+        @apply p-2 rounded-full shadow-sm  bg-white/50 text-gray-400 hover:bg-white/75
+        backdrop-blur-sm;
     }
 
-    .toggle-my-recipes-button--unsaved {
-        @apply bg-white/50 text-gray-400 hover:bg-white/75
-               backdrop-blur-sm;
-    }
-
-    .toggle-my-recipes-button--unsaved svg {
+    .toggle-my-recipes-button svg {
         @apply fill-gray-400;
     }
 
-    .toggle-my-recipes-button--saved {
+
+    .toggle-my-recipes-button.saved {
         @apply bg-white text-yellow-600;
     }
 
-    .toggle-my-recipes-button--saved svg {
+    .toggle-my-recipes-button.saved svg {
         @apply fill-yellow-600;
+    }
+
+    /* Toggle MPR Button Styles */
+    .mpr-menu-button {
+        @apply p-2 rounded-full shadow-sm  bg-white/50 text-gray-400 hover:bg-white/75
+        backdrop-blur-sm;
+    }
+
+    .mpr-menu-button svg {
+        @apply fill-gray-400;
+    }
+
+    .mpr-menu-button.in-mp {
+        @apply bg-white text-green-600;
+    }
+
+    .mpr-menu-button.in-mp svg {
+        @apply fill-green-600;
+    }
+    
+ 
+    /* Toggle MPR Menu Item Styles */
+    .mpr-menu {
+        @apply absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 max-h-64 overflow-y-auto;
+    }
+
+    .recent-meal-plan-button {
+        @apply flex items-center w-full px-4 py-2 text-sm font-semibold bg-gray-100 text-gray-700 border-b border-gray-200;
+    }
+
+    .toggle-meal-group-button {
+        @apply w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100;
+    }
+
+    .toggle-meal-group-button.in-mg {
+        @apply bg-green-200;
     }
 
     /* My Recipes Filter Styles */
@@ -229,6 +262,28 @@
 
     .add-to-meal-plan-button, .add-mpr-button {
         @apply text-gray-400 hover:text-gray-500 font-medium inline-flex items-center space-x-1 whitespace-nowrap text-sm;
+    }
+
+    /* Meal Plan Toggle Styles */
+    .toggle-mpr-button {
+        @apply p-2 rounded-full shadow-sm;
+    }
+
+    .toggle-mpr-button--inactive {
+        @apply bg-white/50 text-gray-400 hover:bg-white/75
+               backdrop-blur-sm;
+    }
+
+    .toggle-mpr-button--inactive svg {
+        @apply fill-gray-400;
+    }
+
+    .toggle-mpr-button--active {
+        @apply bg-white text-blue-600;
+    }
+
+    .toggle-mpr-button--active svg {
+        @apply fill-blue-600;
     }
 
 }

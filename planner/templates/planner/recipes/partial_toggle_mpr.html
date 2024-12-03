@@ -1,0 +1,49 @@
+<div x-data="{ open: false, in_mp: {{ recipe.in_recent_meal_plan|yesno:'true,false' }} }">
+    <button 
+        x-cloak
+        class="mpr-menu-button"
+        @click="open = !open"
+        :class="in_mp ? 'in-mp' : ''">
+        {% include "planner/svg/calendar-alt.svg" %}
+    </button>
+
+    {% if recent_meal_plan %}
+
+    <div 
+        x-show="open"
+        @click.away="open = false"
+        x-transition:enter="transition ease-out duration-100"
+        x-transition:enter-start="transform opacity-0 scale-95"
+        x-transition:enter-end="transform opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-75"
+        x-transition:leave-start="transform opacity-100 scale-100"
+        x-transition:leave-end="transform opacity-0 scale-95"
+        class="mpr-menu">
+        
+
+                <div class="mpr-menu-container">
+                    <button class="recent-meal-plan-button">
+                        {{ recent_meal_plan.name }}
+                    </button>
+                    
+                    {% for group in recent_meal_plan.groups.all %}
+                    <div x-data="{ in_mg: {% if group.id in recipe.recent_meal_group_ids %}true{% else %}false{% endif %} }">
+                        <button
+                            x-cloak
+                            hx-post="{% url 'action_toggle_mpr' group.id recipe.id %}"
+                            hx-swap=none
+                            class="toggle-meal-group-button"
+                            :class="in_mg ? 'in-mg' : ''"
+                            @htmx:after-request="in_mg = JSON.parse(event.detail.xhr.response).in_mg; in_mp = JSON.parse(event.detail.xhr.response).in_mp">
+                            {{ group.name }}
+                        </button>
+                    </div>
+
+                    {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+    </div>
+</div>

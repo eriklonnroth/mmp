@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    Magic Recipe
+    Create Recipe
 {% endblock %}
 
 {% block body %}
@@ -21,11 +21,11 @@
     </a>
 
     <div class="page-title mb-8" x-show="!recipeGenerated" x-cloak>
-        <h1 class="text-3xl font-bold text-gray-900 mb-2">Magic Recipe</h1>
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Create Recipe</h1>
         <p class="text-gray-600 mt-2">Let our AI generate a recipe tailored to your preferences!</p>
     </div>
 
-    <div class="magic-form-wrapper space-y-4" x-show="!recipeGenerated" x-cloak>
+    <div class="recipe-form-wrapper space-y-4" x-show="!recipeGenerated" x-cloak>
         <form hx-post="{% url 'action_generate_recipe' %}" 
               hx-target="#generated-recipe"
               hx-swap="innerHTML"
@@ -74,8 +74,8 @@
                 
                 <!-- Generate Recipe Button -->
                 <button type="submit" 
-                        class="form-submit">
-                    ✨ Generate Recipe
+                    class="form-submit">
+                    Generate Recipe
                 </button>
 
                 <!-- Loading Indicator -->
@@ -95,7 +95,7 @@
          <div class="container mx-auto max-w-2xl flex justify-between gap-4">
             
             <button class="generated-recipe-control-button" 
-                    hx-get="{% url 'magic_recipe' %}"
+                    hx-get="{% url 'create_recipe' %}"
                     hx-push-url="true"
                     hx-target="body">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -117,7 +117,7 @@
     </div>
 
     <div id="generated-recipe" class="mb-16"
-         x-on:recipe-loaded.window="recipeId = $event.detail.recipeId">
+         @recipe-loaded.window="recipeId = $event.detail.recipeId">
         {% if id_in_url %}
             {% include "planner/recipes/partial_recipe.html" with recipe=id_in_url %}
         {% endif %}

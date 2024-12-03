@@ -27,19 +27,14 @@ class Command(BaseCommand):
                 self.stdout.write(f"Skipping spoonacular recipe: {recipe_file.name}")
                 continue
             
-            try:
-                recipe = parse_recipe_file(recipe_file)
-                
-                # Check if recipe already exists
-                if Recipe.objects.filter(dish_name=recipe.dish_name).exists():
-                    self.stdout.write(f"Skipping existing recipe: {recipe.dish_name}")
-                    continue
-                
-                save_recipe_to_db(recipe, status='published')
-                self.stdout.write(
-                    self.style.SUCCESS(f"Successfully saved recipe: {recipe_file.name}")
-                )
-            except Exception as e:
-                self.stdout.write(
-                    self.style.ERROR(f"Error processing {recipe_file.name}: {str(e)}")
-                )
+            recipe = parse_recipe_file(recipe_file)
+            
+            # Check if recipe already exists
+            if Recipe.objects.filter(dish_name=recipe.dish_name).exists():
+                self.stdout.write(f"Skipping existing recipe: {recipe.dish_name}")
+                continue
+            
+            save_recipe_to_db(recipe, status='published')
+            self.stdout.write(
+                self.style.SUCCESS(f"Successfully saved recipe: {recipe_file.name}")
+            )

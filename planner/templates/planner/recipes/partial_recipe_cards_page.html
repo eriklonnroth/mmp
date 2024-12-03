@@ -4,7 +4,10 @@
         <div class="relative">
             <div class="pb-[100%]"></div>
             <img src="https://placehold.co/400x300" alt="Recipe" class="absolute inset-0 w-full h-full object-cover">
-            <div class="absolute top-2 right-2">
+            <div class="absolute top-2 right-2 flex gap-2">
+                {% if recent_meal_plan %}
+                    {% include "planner/recipes/partial_toggle_mpr.html" with recent_meal_plan=recent_meal_plan recipe=recipe %}
+                {% endif %}
                 {% include "planner/recipes/partial_toggle_my_recipes.html" with recipe=recipe %}
             </div>
         </div>
