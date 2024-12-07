@@ -25,7 +25,7 @@ meal_plan_patterns = [
     path("meal-plan/", views.meal_plan, name="meal_plan"),
     path("meal-plan/new/", views.new_meal_plan, name="new_meal_plan"),
     path("meal-plan/<int:pk>/", views.MealPlanDetailView.as_view(), name="meal_plan_detail"),
-    path("meal-plan/add-recipe-modal/<int:group_id>/", views.add_recipe_modal, name="add_recipe_modal"),
+    path("meal-plan/add-meal-modal/<int:meal_group_id>/", views.add_meal_modal, name="add_meal_modal"),
 ]
 
 # Shopping List routes

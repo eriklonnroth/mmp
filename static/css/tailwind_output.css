@@ -1140,7 +1140,7 @@ tr:has(.shopping-list-checkbox:checked) td {
   right: 0px;
   z-index: 50;
   margin-top: 0.5rem;
-  max-height: 16rem;
+  max-height: 18rem;
   width: 14rem;
   overflow-y: auto;
   border-radius: 0.375rem;
@@ -1341,6 +1341,10 @@ tr:has(.shopping-list-checkbox:checked) td {
   inset: 0px;
 }
 
+.-right-2 {
+  right: -0.5rem;
+}
+
 .bottom-0 {
   bottom: 0px;
 }
@@ -1396,11 +1400,6 @@ tr:has(.shopping-list-checkbox:checked) td {
 .my-12 {
   margin-top: 3rem;
   margin-bottom: 3rem;
-}
-
-.my-2 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
 }
 
 .mb-16 {
@@ -1471,10 +1470,6 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .block {
   display: block;
-}
-
-.inline-block {
-  display: inline-block;
 }
 
 .inline {
@@ -1597,8 +1592,36 @@ tr:has(.shopping-list-checkbox:checked) td {
   width: 100%;
 }
 
+.w-96 {
+  width: 24rem;
+}
+
+.w-72 {
+  width: 18rem;
+}
+
+.w-80 {
+  width: 20rem;
+}
+
+.min-w-0 {
+  min-width: 0px;
+}
+
 .min-w-full {
   min-width: 100%;
+}
+
+.min-w-64 {
+  min-width: 16rem;
+}
+
+.min-w-80 {
+  min-width: 20rem;
+}
+
+.min-w-96 {
+  min-width: 24rem;
 }
 
 .max-w-2xl {
@@ -1611,6 +1634,10 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .max-w-7xl {
   max-width: 80rem;
+}
+
+.flex-1 {
+  flex: 1 1 0%;
 }
 
 .flex-shrink-0 {
@@ -1671,6 +1698,10 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .items-center {
   align-items: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .justify-center {
@@ -2273,6 +2304,22 @@ tr:has(.shopping-list-checkbox:checked) td {
     width: 50%;
   }
 
+  .sm\:w-1\/4 {
+    width: 25%;
+  }
+
+  .sm\:w-1\/3 {
+    width: 33.333333%;
+  }
+
+  .sm\:w-80 {
+    width: 20rem;
+  }
+
+  .sm\:w-96 {
+    width: 24rem;
+  }
+
   .sm\:grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
@@ -2288,6 +2335,10 @@ tr:has(.shopping-list-checkbox:checked) td {
 }
 
 @media (min-width: 768px) {
+  .md\:w-1\/3 {
+    width: 33.333333%;
+  }
+
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

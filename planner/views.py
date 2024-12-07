@@ -2,10 +2,10 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.aggregates import ArrayAgg
 from django.db.models import Exists, OuterRef, Q
 from django.shortcuts import render, redirect
-from django.http import HttpResponseBadRequest, HttpResponseForbidden, HttpResponse
+from django.http import HttpResponseBadRequest, HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-from django.template.loader import render_to_string
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
@@ -48,7 +48,7 @@ def profile(request):
 
 @with_user
 def meal_plan(request, user):
-    recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-modified_at').first()
+    recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-last_viewed_at').first()
     if recent_meal_plan:
         return redirect('meal_plan_detail', pk=recent_meal_plan.id)
     return redirect('new_meal_plan')
@@ -68,10 +68,16 @@ class MealPlanDetailView(UserAuthMixin, DetailView):
         
         return queryset.filter(user=self.get_authenticated_user(self.request))
 
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        obj.last_viewed_at = timezone.now()
+        obj.save(update_fields=['last_viewed_at'])
+        return obj
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        context['meal_plans'] = MealPlan.objects.filter(user=self.get_authenticated_user(self.request)).exclude(id=self.object.id).order_by('-modified_at')
+        context['meal_plans'] = MealPlan.objects.filter(user=self.get_authenticated_user(self.request)).exclude(id=self.object.id).order_by('-last_viewed_at')
         
         groups = []
         for group in self.object.groups.all():
@@ -92,13 +98,11 @@ def new_meal_plan(request):
     return render(request, 'planner/meal-plan/new.html', {'templates': TEMPLATES})
 
 @with_user
-def add_recipe_modal(request, user, group_id):
-    meal_group = get_object_or_404(MealGroup, id=group_id)
-    if meal_group.meal_plan.user != user:
-        return HttpResponseForbidden("You don't have access to this group")
+def add_meal_modal(request, user, meal_group_id):
+    meal_group = get_object_or_404(MealGroup, id=meal_group_id)
     
     context = {'group': meal_group}
-    return render(request, "planner/meal-plan/partial_add_recipe_modal.html", context)
+    return render(request, "planner/meal-plan/partial_add_meal_modal.html", context)
 
 @with_user
 def recipes(request, user):
@@ -237,7 +241,7 @@ def action_create_meal_plan(request, user, template):
 def action_delete_meal_plan(request, user, meal_plan_id):
     meal_plan = get_object_or_404(MealPlan, id=meal_plan_id)
     meal_plan.delete()
-    recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-modified_at').first()
+    recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-last_viewed_at').first()
     response = HttpResponse('')
     if recent_meal_plan:
         response['HX-Redirect'] = f'/meal-plan/{recent_meal_plan.id}'
@@ -350,7 +354,7 @@ class GenerateShoppingListView(View):
                 "error": f"Error generating shopping list: {str(e)}"
             }, status=500)
 
-class RecipeDetailView(DetailView):
+class RecipeDetailView(UserAuthMixin, DetailView):
     model = Recipe
     template_name = 'planner/recipes/detail.html'
     context_object_name = 'recipe'
@@ -362,14 +366,25 @@ class RecipeDetailView(DetailView):
             'instruction_sections__steps'
         )
         
-        user = self.request.user if self.request.user.is_authenticated else None
-        if not user:
-            admin_user = User.objects.get(username='admin')
-            user = admin_user
-        #     return JsonResponse({
-        #     'error': 'Authentication required'
-        # }, status=401)
-            
+        user = self.get_authenticated_user(self.request)
+        
+        # For In Meal Plan toggle button
+        recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-last_viewed_at').first()
+        if recent_meal_plan:
+            queryset = queryset.annotate(
+                in_recent_meal_plan=Exists(
+                    MealPlanRecipe.objects.filter(
+                        meal_group__meal_plan=recent_meal_plan,
+                        recipe=OuterRef('pk')
+                    )
+                ),
+                recent_meal_group_ids=ArrayAgg(
+                    'mealplanrecipe__meal_group__id',
+                    filter=Q(mealplanrecipe__meal_group__meal_plan=recent_meal_plan)
+                )
+            )
+        
+        # For My Recipes toggle button
         queryset = queryset.annotate(
             is_saved=Exists(
                 MyRecipe.objects.filter(
@@ -380,6 +395,19 @@ class RecipeDetailView(DetailView):
         )
         
         return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.get_authenticated_user(self.request)
+
+        recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-last_viewed_at').first()
+        if recent_meal_plan:
+            context['recent_meal_plan'] = recent_meal_plan
+        meal_group_id = self.request.GET.get('meal_group_id')
+        if meal_group_id:
+            context['meal_group'] = get_object_or_404(MealGroup, id=meal_group_id)
+        
+        return context
 
 
 class RecipeListView(UserAuthMixin, ListView):
@@ -392,7 +420,8 @@ class RecipeListView(UserAuthMixin, ListView):
         queryset = super().get_queryset()
         user = self.get_authenticated_user(self.request)
 
-        recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-modified_at').first()
+        # For In Meal Plan toggle button
+        recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-last_viewed_at').first()
         if recent_meal_plan:
             queryset = queryset.annotate(
                 in_recent_meal_plan=Exists(
@@ -439,7 +468,7 @@ class RecipeListView(UserAuthMixin, ListView):
         context['my_recipes'] = self.request.GET.get('my_recipes') == 'true'
         
         user = self.get_authenticated_user(self.request)
-        recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-modified_at').first()
+        recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-last_viewed_at').first()
         if recent_meal_plan:
             context['recent_meal_plan'] = recent_meal_plan
         meal_group_id = self.request.GET.get('meal_group_id')

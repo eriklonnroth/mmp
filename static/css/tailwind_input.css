@@ -230,7 +230,7 @@
  
     /* Toggle MPR Menu Item Styles */
     .mpr-menu {
-        @apply absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 max-h-64 overflow-y-auto;
+        @apply absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 max-h-72 overflow-y-auto;
     }
 
     .recent-meal-plan-button {

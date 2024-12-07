@@ -9,6 +9,7 @@ class MealPlan(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+    last_viewed_at = models.DateTimeField(auto_now=True)
     
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

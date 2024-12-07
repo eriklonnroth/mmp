@@ -12,7 +12,7 @@
 
 
 {% block body %}
-    <div class="container mx-auto max-w-5xl" x-data="{ recipeModalOpen: false }">
+    <div class="container mx-auto max-w-5xl" x-data="{ modalOpen: false }">
         <div class="my-12">
             <div class="flex justify-between items-center mb-6">
 
@@ -114,7 +114,7 @@
                 </div>
             </button>
         </div>
-        <div id="add-recipe-modal"></div>
+        <div id="add-meal-modal"></div>
     </div>
 
     <div id="loading" class="htmx-indicator">
@@ -158,11 +158,11 @@
         </ul>
         <div class="py-3 px-2">
             <button class="add-mpr-button" 
-                @click="recipeModalOpen = true"
-                hx-get="{% url 'add_recipe_modal' group.id %}"
-                hx-target="#add-recipe-modal"
+                @click="modalOpen = true"
+                hx-get="{% url 'add_meal_modal' group.id %}"
+                hx-target="#add-meal-modal"
                 hx-swap="innerHTML">
-                + Add recipe
+                + Add meal
             </button>
         </div>
     </div>
@@ -175,13 +175,11 @@
 
     <li class="recipe-item" 
         :data-recipe-id="{{ mpr.id }}">
-        <div class="text-gray-700 select-none flex-grow">
-            <a href="{% url 'recipe_detail' mpr.recipe_id %}" >
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
+        <div class="text-gray-700 select-none flex-grow flex items-center">
+            <a href="{% url 'recipe_detail' mpr.recipe_id %}" class="flex-shrink-0">
+                {% include "planner/svg/details.svg" %}
             </a>
-            <span>
+            <span class="ml-2 min-w-0 flex-1">
                 {{ mpr.name }}
             </span>
         </div>

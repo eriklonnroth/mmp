@@ -1,4 +1,6 @@
-<div x-data="{ open: false, in_mp: {{ recipe.in_recent_meal_plan|yesno:'true,false' }} }">
+{% if recent_meal_plan.groups.all.exists %}
+
+<div x-data="{ open: false, in_mp: {{ recipe.in_recent_meal_plan|yesno:'true,false' }} }" class="relative">
     <button 
         x-cloak
         class="mpr-menu-button"
@@ -6,8 +8,6 @@
         :class="in_mp ? 'in-mp' : ''">
         {% include "planner/svg/calendar-alt.svg" %}
     </button>
-
-    {% if recent_meal_plan %}
 
     <div 
         x-show="open"
@@ -18,7 +18,7 @@
         x-transition:leave="transition ease-in duration-75"
         x-transition:leave-start="transform opacity-100 scale-100"
         x-transition:leave-end="transform opacity-0 scale-95"
-        class="mpr-menu">
+        class="mpr-menu absolute -right-2 mt-2 z-50">
         
 
                 <div class="mpr-menu-container">
@@ -47,7 +47,7 @@
 
         </div>
 
-    {% endif %}
-
     </div>
 </div>
+
+{% endif %}
