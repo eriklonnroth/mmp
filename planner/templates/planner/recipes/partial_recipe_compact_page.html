@@ -1,21 +1,33 @@
 {% for recipe in recipes %}
-    <div id="recipe-{{ recipe.id }}" class="bg-white rounded-lg shadow-md overflow-hidden mb-2">
+    <div id="recipe-{{ recipe.id }}" x-data="{ in_mg: {% if meal_group.id in recipe.recent_meal_group_ids %}true{% else %}false{% endif %} }" class="bg-white rounded-lg shadow-md overflow-hidden mb-2">
         <div class="flex items-center p-2">
-            <!-- Left: Image thumbnail -->
+
             <div class="relative w-16 h-16 flex-shrink-0">
                 <img src="https://placehold.co/400x300" alt="Recipe" class="w-full h-full object-cover rounded">
             </div>
             
-            <!-- Middle: Recipe name -->
             <div class="flex-grow px-4">
                 <a href="{% url 'recipe_detail' recipe.id %}" class="hover:text-gray-600">
                     <h3 class="text-md font-semibold text-gray-900 line-clamp-1">{{ recipe.dish_name }}</h3>
                 </a>
             </div>
             
-            <!-- Right: Toggle button -->
             <div class="flex-shrink-0">
-                {% include "planner/recipes/partial_toggle_my_recipes.html" with recipe=recipe %}
+                <button
+                    class="toggle-mpr-in-modal-button"
+                    hx-post="{% url 'action_toggle_mpr' meal_group_id=meal_group.id recipe_id=recipe.id %}"
+                    hx-target="#meal-group-{{ meal_group.id }} .mpr-list"
+                    hx-swap="beforeend"
+                    :class="in_mg ? 'in-mg' : ''"
+                    @htmx:after-request="
+                        const trigger = JSON.parse(event.detail.xhr.getResponseHeader('HX-Trigger'));
+                        in_mg = trigger.in_mg;
+                        if (!in_mg) event.detail.target.lastElementChild?.remove();
+                    "
+                >
+                    <span x-show="!in_mg">Add</span>
+                    <span x-show="in_mg">Remove</span>
+                </button>
             </div>
         </div>
     </div>
@@ -26,8 +38,8 @@
     <div id="scroll-sentinel"
         class="h-0 w-0 col-span-full"
         hx-trigger="intersect once"
-        hx-get="{% url 'recipe_cards_page' %}?page={{ page_obj.number|add:1 }}&sort={{ sort }}"
-        hx-target="#recipe-compact-list"
+        hx-get="{% url 'recipe_compact_list' %}?meal_group_id={{ meal_group.id }}&page={{ page_obj.number|add:1 }}&sort={{ sort }}"
+        hx-target="#recipe-results"
         hx-swap="beforeend">
     </div>
 

@@ -14,7 +14,9 @@ recipe_patterns = [
     path("recipes/cards/", views.RecipeCardsListView.as_view(), name="recipe_cards_list"),
     path("recipes/compact/", views.RecipeCompactListView.as_view(), name="recipe_compact_list"),
     path("recipes/cards/page/", views.RecipeCardsPageView.as_view(), name="recipe_cards_page"),
-    path("recipes/search/", views.RecipeSearchView.as_view(), name="recipe_search"),
+    path("recipes/compact/page/", views.RecipeCompactPageView.as_view(), name="recipe_compact_page"),
+    path("recipes/search/cards/", views.RecipeSearchCards.as_view(), name="recipe_search_cards"),
+    path("recipes/search/compact/", views.RecipeSearchCompact.as_view(), name="recipe_search_compact"),
     path("recipes/create/", views.create_recipe, name="create_recipe")
 ]
 

@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseBadRequest, HttpResponseForbidden, HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.template.loader import render_to_string
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
@@ -96,8 +97,8 @@ def add_recipe_modal(request, user, group_id):
     if meal_group.meal_plan.user != user:
         return HttpResponseForbidden("You don't have access to this group")
     
-    context = {'meal_group': meal_group}
-    return render(request, "planner/meal-plan/add-recipe-to-group-modal.html", context)
+    context = {'group': meal_group}
+    return render(request, "planner/meal-plan/partial_add_recipe_modal.html", context)
 
 @with_user
 def recipes(request, user):
@@ -170,6 +171,7 @@ def action_toggle_mpr(request, meal_group_id, recipe_id):
     meal_group = get_object_or_404(MealGroup, id=meal_group_id)
     recipe = get_object_or_404(Recipe, id=recipe_id)
     mpr = MealPlanRecipe.objects.filter(meal_group=meal_group, recipe=recipe).first()
+    response = HttpResponse('')
 
     if mpr:
         mpr.delete()
@@ -188,15 +190,25 @@ def action_toggle_mpr(request, meal_group_id, recipe_id):
         
     else:
         next_order = MealPlanRecipe.objects.filter(meal_group=meal_group).count()
-        MealPlanRecipe.objects.create(
+        mpr = MealPlanRecipe.objects.create(
             meal_group=meal_group,
             recipe=recipe,
             order=next_order
         )
+        mpr_data = {
+            'id': mpr.id,
+            'name': mpr.recipe.dish_name,
+            'recipe_id': mpr.recipe.id
+        }
         in_mp = True
         in_mg = True
+        response = render(request, 'planner/meal-plan/detail.html#partial-mpr', {'mpr': mpr_data})
 
-    return JsonResponse({'in_mg': in_mg, 'in_mp': in_mp})
+    response['HX-Trigger'] = json.dumps({
+        'in_mg': in_mg,
+        'in_mp': in_mp
+    })
+    return response
 
 @require_http_methods(['POST'])
 @with_user
@@ -430,19 +442,25 @@ class RecipeListView(UserAuthMixin, ListView):
         recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-modified_at').first()
         if recent_meal_plan:
             context['recent_meal_plan'] = recent_meal_plan
+        meal_group_id = self.request.GET.get('meal_group_id')
+        if meal_group_id:
+            context['meal_group'] = get_object_or_404(MealGroup, id=meal_group_id)
         
         return context
 
 class RecipeCardsListView(RecipeListView):
     template_name = 'planner/recipes/partial_recipe_cards_list.html'
 
-class RecipeCompactListView(RecipeListView):
-    template_name = 'planner/recipes/partial_recipe_compact_list.html'
-
 class RecipeCardsPageView(RecipeListView):
     template_name = 'planner/recipes/partial_recipe_cards_page.html'
 
-class RecipeSearchView(RecipeCardsPageView):
+class RecipeCompactListView(RecipeListView):
+    template_name = 'planner/recipes/partial_recipe_compact_list.html'
+
+class RecipeCompactPageView(RecipeListView):
+    template_name = 'planner/recipes/partial_recipe_compact_page.html'
+
+class RecipeSearchView(RecipeListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         search_query = self.request.GET.get('q', '').strip()
@@ -461,3 +479,9 @@ class RecipeSearchView(RecipeCardsPageView):
         context = super().get_context_data(**kwargs)
         context['search_query'] = self.request.GET.get('q', '').strip()
         return context
+
+class RecipeSearchCards(RecipeSearchView, RecipeCardsPageView):
+    pass
+
+class RecipeSearchCompact(RecipeSearchView, RecipeCompactPageView):
+    pass

@@ -26,7 +26,7 @@
         class="h-0 w-0 col-span-full"
         hx-trigger="intersect once"
         hx-get="{% url 'recipe_cards_page' %}?page={{ page_obj.number|add:1 }}&sort={{ sort }}"
-        hx-target="#recipe-grid"
+        hx-target="#recipe-results"
         hx-swap="beforeend">
     </div>
 

@@ -1285,6 +1285,42 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 /* Meal Plan Toggle Styles */
 
+/* Toggle MPR In Modal Button Styles */
+
+.toggle-mpr-in-modal-button {
+  margin-right: 0.5rem;
+  border-radius: 0.25rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.toggle-mpr-in-modal-button:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(21 128 61 / var(--tw-bg-opacity));
+}
+
+.toggle-mpr-in-modal-button.in-mg {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
+}
+
+.toggle-mpr-in-modal-button.in-mg:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
+}
+
 .static {
   position: static;
 }
@@ -1435,6 +1471,10 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .block {
   display: block;
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 .inline {
@@ -2271,5 +2311,3 @@ tr:has(.shopping-list-checkbox:checked) td {
     padding-right: 2rem;
   }
 }
-
-    

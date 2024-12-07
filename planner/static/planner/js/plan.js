@@ -1,5 +1,5 @@
 document.addEventListener('alpine:init', () => {
-    Alpine.data('mealPlan', () => ({
+    Alpine.data('sortableContainer', () => ({
 
         init() {
             this.$nextTick(() => {
@@ -8,8 +8,8 @@ document.addEventListener('alpine:init', () => {
         },
 
         initSortable() {
-            const recipeLists = document.querySelectorAll('.mpr-list');
-            recipeLists.forEach(el => {
+            const mprs = document.querySelectorAll('.mpr-list');
+            mprs.forEach(el => {
                 Sortable.create(el, {
                     group: 'mprs',
                     animation: 150,

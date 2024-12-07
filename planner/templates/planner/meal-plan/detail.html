@@ -12,7 +12,7 @@
 
 
 {% block body %}
-    <div class="container mx-auto max-w-5xl">
+    <div class="container mx-auto max-w-5xl" x-data="{ recipeModalOpen: false }">
         <div class="my-12">
             <div class="flex justify-between items-center mb-6">
 
@@ -91,7 +91,7 @@
             </div>
         </div>
 
-        <div x-data="mealPlan" class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3" id="groups-container">
+        <div x-data="sortableContainer" class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3" id="groups-container">
             
             {% for group in groups %}
                 {% partial partial-meal-group %}
@@ -114,18 +114,21 @@
                 </div>
             </button>
         </div>
+        <div id="add-recipe-modal"></div>
     </div>
 
     <div id="loading" class="htmx-indicator">
         Loading...
     </div>
 
+
+
 {% endblock %}
 
 
 {% partialdef partial-meal-group %}
 
-<div class="meal-group" x-data :key="{{ group.id }}">
+<div class="meal-group" id="meal-group-{{ group.id }}" :key="{{ group.id }}">
     <div class="meal-group-header">
         <h3 class="meal-group-name"
             name="meal_group_name"
@@ -154,12 +157,16 @@
             {% endfor %}
         </ul>
         <div class="py-3 px-2">
-            <button class="add-mpr-button">
-                <span>+ Add recipe</span>
+            <button class="add-mpr-button" 
+                @click="recipeModalOpen = true"
+                hx-get="{% url 'add_recipe_modal' group.id %}"
+                hx-target="#add-recipe-modal"
+                hx-swap="innerHTML">
+                + Add recipe
             </button>
         </div>
     </div>
-</div> 
+</div>
 
 {% endpartialdef partial-meal-group %}
 
@@ -168,9 +175,16 @@
 
     <li class="recipe-item" 
         :data-recipe-id="{{ mpr.id }}">
-        <span class="text-gray-700 select-none flex-grow">
-            {{ mpr.name }}
-        </span>
+        <div class="text-gray-700 select-none flex-grow">
+            <a href="{% url 'recipe_detail' mpr.recipe_id %}" >
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+            </a>
+            <span>
+                {{ mpr.name }}
+            </span>
+        </div>
         <button class="text-gray-400 hover:text-red-500 transition-colors ml-2"
             hx-delete="{% url 'action_delete_meal_plan_recipe' mpr.id %}"
             hx-target="closest .recipe-item"
