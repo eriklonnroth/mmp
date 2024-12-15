@@ -12,7 +12,16 @@
 
     /* Magic AI Buttons */
     .create-recipe-button, .generate-shopping-list-button {
-        @apply inline-flex items-center justify-center px-4 py-2 sm:ml-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-violet-600 to-violet-800 hover:from-violet-700 hover:to-violet-900;
+        @apply inline-flex items-center justify-center h-10 px-8 sm:ml-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-violet-600 to-violet-800 hover:from-violet-700 hover:to-violet-900;
+    }
+
+
+    /* Disabled state */
+    .create-recipe-button:disabled, .generate-shopping-list-button:disabled {
+        @apply from-violet-400 to-violet-600 
+               cursor-not-allowed 
+               hover:from-violet-400 hover:to-violet-600 
+               opacity-75;
     }
 
     /* Meal Plan Styles */
@@ -36,15 +45,15 @@
         @apply cursor-grabbing;
     }
 
-    .meal-plan-name {
+    .meal-plan-name, .shopping-list-name {
         @apply text-2xl font-bold text-gray-900 rounded transition-colors;
     }
 
-    .meal-plan-name[contenteditable="true"] {
+    .meal-plan-name[contenteditable="true"], .shopping-list-name[contenteditable="true"] {
         @apply cursor-text hover:bg-gray-100;
     }
 
-    .meal-plan-name:focus {
+    .meal-plan-name:focus, .shopping-list-name:focus {
         @apply outline-none ring-2 ring-blue-300;
     }
 

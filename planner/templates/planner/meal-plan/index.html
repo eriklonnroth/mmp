@@ -1,0 +1,20 @@
+{% extends "planner/layout.html" %}
+{% load static %}
+
+{% block title %}
+    Meal Plan
+{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto max-w-5xl">
+        <div class="mb-8">
+            <div class="flex justify-between items-center mb-6">
+                <h1 id="title" class="text-3xl font-bold text-gray-900">Meal Plan</h1>
+            </div>
+            <!-- Placeholder -->
+            <div class="meal-plan-wrapper mt-8">
+               <p>Create a <a href="{% url 'meal_plan_new' %}">new Meal Plan</a> to get started.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

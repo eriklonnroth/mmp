@@ -46,8 +46,16 @@ def with_user(view_func):
 def index(request):
     return render(request, "planner/index.html")
 
-def profile(request):
-    return render(request, "planner/settings/profile.html")
+@with_user
+def profile(request, user):
+    initial_data = {
+        'dietary_preferences': user.profile.dietary_preferences,
+        'default_servings': user.profile.default_servings,
+        'preferred_units': user.profile.preferred_units,
+    }
+    form = forms.UpdateProfileForm(initial=initial_data)
+    context = {'form': form}
+    return render(request, "planner/settings/profile.html", context)
 
 @with_user
 def recipes(request, user):
@@ -70,9 +78,15 @@ def shopping_list(request, user):
 
 
 # RECIPE VIEWS
-def create_recipe(request):
-    # Initialize form
-    form = forms.CreateRecipeForm()
+@with_user
+def create_recipe(request, user):
+    # Initialize Recipe form with user's profile defaults
+    initial_data = {
+        'dietary_preferences': user.profile.dietary_preferences,
+        'servings': user.profile.default_servings,
+        'units': user.profile.preferred_units,
+    }
+    form = forms.CreateRecipeForm(initial=initial_data)
     context = {'form': form}
     
     # Check for recipe ID in query params
@@ -334,6 +348,9 @@ class ShoppingListDetailView(UserAuthMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        user = self.get_authenticated_user(self.request)
+        context['shopping_lists'] = ShoppingList.objects.filter(user=user).exclude(id=self.object.id).order_by('-last_viewed_at')
+
         items_by_category = {}
         for category_code, category_name in ShoppingItem.CATEGORIES:
             items_by_category[category_code] = []
@@ -393,9 +410,35 @@ def action_generate_recipe(request, user):
 @with_user
 def action_generate_shopping_list(request, meal_plan_id, user):
     meal_plan = get_object_or_404(MealPlan, id=meal_plan_id)
-    shopping_list = generate_shopping_list(meal_plan)
-    saved_shopping_list = save_shopping_list_to_db(shopping_list, user=user)
-    return redirect('shopping_list_detail', pk=saved_shopping_list.id)
+    try:
+        shopping_list = generate_shopping_list(meal_plan)
+        saved_shopping_list = save_shopping_list_to_db(shopping_list, user=user)
+        response = HttpResponse()
+        response['HX-Redirect'] = f'/shopping-list/{saved_shopping_list.id}'
+        return response
+    except Exception as e:
+        return HttpResponseBadRequest(f"Error generating shopping list: {str(e)}")
+
+@require_http_methods(['POST'])
+def action_update_shopping_list_name(request, shopping_list_id):
+    new_name = request.POST.get('shopping_list_name')
+    shopping_list = get_object_or_404(ShoppingList, id=shopping_list_id)
+    shopping_list.name = new_name
+    shopping_list.save()
+    return HttpResponse('')
+
+@require_http_methods(['DELETE'])
+@with_user
+def action_delete_shopping_list(request, user, shopping_list_id):
+    shopping_list = get_object_or_404(ShoppingList, id=shopping_list_id)
+    shopping_list.delete()
+    recent_shopping_list = ShoppingList.objects.filter(user=user).order_by('-last_viewed_at').first()
+    response = HttpResponse('')
+    if recent_shopping_list:
+        response['HX-Redirect'] = f'/shopping-list/{recent_shopping_list.id}'
+    else:
+        response['HX-Redirect'] = f'/meal-plan/'
+    return response
 
 @require_http_methods(['POST'])
 @with_user
@@ -579,6 +622,20 @@ def action_delete_shopping_item(request, item_id):
     shopping_item = get_object_or_404(ShoppingItem, id=item_id)
     shopping_item.delete()
     return HttpResponse('')
+
+
+@require_http_methods(['POST'])
+@with_user
+def action_update_profile(request, user):
+    form = forms.UpdateProfileForm(request.POST)
+    if form.is_valid():
+        user.profile.dietary_preferences = form.cleaned_data['dietary_preferences']
+        user.profile.default_servings = form.cleaned_data['default_servings']
+        user.profile.preferred_units = form.cleaned_data['preferred_units']
+        user.profile.save()
+        return HttpResponse('')
+    else:
+        return HttpResponseBadRequest(str(form.errors))
 
 
 

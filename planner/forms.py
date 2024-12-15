@@ -47,7 +47,7 @@ class CreateRecipeForm(forms.Form):
     )
     
     units = forms.ChoiceField(
-        label="Measurement Units",
+        label="Measurement units",
         choices=[
             ('metric', 'Metric (g, ml, °C)'),
             ('us', 'US (oz, cups, °F)')
@@ -78,4 +78,40 @@ class AddShoppingItemForm(forms.Form):
         choices=ShoppingItem.CATEGORIES,
         required=False,
         widget=forms.Select(attrs={'class': 'form-field'})
+    )
+
+class UpdateProfileForm(forms.Form):
+    dietary_preferences = forms.CharField(
+        label="Dietary preferences",
+        max_length=255,
+        required=False,
+        widget=forms.TextInput(attrs={
+            'placeholder': 'e.g. Vegan, Gluten-free, Low-carb...',
+            'class': 'form-field'
+        })
+    )
+
+    default_servings = forms.IntegerField(
+        label="Default servings",
+        min_value=1,
+        max_value=12,
+        initial=4,
+        widget=forms.Select(
+            choices=[(i, f"{i} serving{'s' if i > 1 else ''}") for i in range(1, 11)],
+            attrs={
+                'class': 'form-field'
+            }
+        )
+    )
+
+    preferred_units = forms.ChoiceField(
+        label="Preferred measurement units",
+        choices=[
+            ('metric', 'Metric (g, ml, °C)'),
+            ('us', 'US (oz, cups, °F)')
+        ],
+        initial='metric',
+        widget=forms.Select(attrs={
+            'class': 'form-field'
+        })
     )

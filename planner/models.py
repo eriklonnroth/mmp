@@ -4,6 +4,14 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.utils import timezone
 
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    dietary_preferences = models.CharField(max_length=255, blank=True, null=True)
+    default_servings = models.IntegerField(default=4)
+    preferred_units = models.CharField(max_length=10, default='metric')
+
+
 class MealPlan(models.Model):
     name = models.CharField(max_length=20)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -190,7 +198,16 @@ class ShoppingItem(models.Model):
 
 
 
-# Signals to update parent modified_at timestamps
+# SIGNALS
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
 @receiver(post_save, sender=MealPlanRecipe)
 def update_group_modified(sender, instance, **kwargs):
     """Update the parent MealGroup's modified_at when a MealPlanRecipe changes"""
