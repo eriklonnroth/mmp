@@ -8,36 +8,33 @@
 {% block body %}
     
     
-<div class="body-container mx-auto max-w-2xl px-4 pb-8"
-    x-data="{ recipeGenerated: false, recipeId: null }">
+<div class="body-container mx-auto max-w-2xl px-4 pb-8">
 
-
-    <!-- Back Link -->
-    <a href="{% url 'recipes' %}" class="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 mb-6">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <!-- Back link with page reload -->
+    <a href="{{ request.META.HTTP_REFERER|default:'/' }}" class="inline-flex items-center text-sm text-gray-600 hover:text-gray-900">
+        <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
-        Back to Recipes
+        Back
     </a>
 
-    <div class="page-title mb-8" x-show="!recipeGenerated" x-cloak>
+    <div class="page-title my-4">
         <h1 class="text-3xl font-bold text-gray-900 mb-2">Create Recipe</h1>
-        <p class="text-gray-600 mt-2">Let our AI generate a recipe tailored to your preferences!</p>
+        <p class="text-gray-600 mt-4">Let's cook up a recipe tailored to your preferences!</p>
     </div>
 
-    <div class="recipe-form-wrapper space-y-4" x-show="!recipeGenerated" x-cloak>
+    <div class="recipe-form-wrapper space-y-4">
         <form hx-post="{% url 'action_generate_recipe' %}" 
-              hx-target="#generated-recipe"
-              hx-swap="innerHTML"
-              hx-push-url="true"
-              hx-disabled-elt="#recipe-form-fieldset"
-              @htmx:after-swap.window="recipeGenerated = true"
-              class="space-y-2">
+                hx-swap="none"
+                hx-disabled-elt="#recipe-form-fieldset"
+                hx-on::error="console.error('Error:', event.detail.xhr.responseText)"
+                class="space-y-2">
             
             <fieldset id="recipe-form-fieldset">
+
                 <!-- Recipe Idea Section -->
                 <div class="mt-8 mb-6">
-                    <h2 class="form-section-title">Recipe Idea</h2>
+                    <h2 class="form-section-title">Inspiration</h2>
                     <div class="form-group">
                         {{ form.dish_idea.label_tag }}
                         {{ form.dish_idea }}
@@ -48,7 +45,7 @@
                     </div>
                 </div>
 
-                <!-- Profile Settings Section -->
+                <!-- Preferences Section -->
                 <div class="mt-8 mb-6">
                     <div class="pt-6 pb-2">
                         <h2 class="form-section-title">Preferences</h2>
@@ -82,46 +79,9 @@
                 <div class="htmx-indicator flex justify-center py-4">
                     <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-500"></div>
                 </div>
+                
             </fieldset>
         </form>
     </div>
-
-    <!-- Generated Recipe Controls -->
-    <div id="generated-recipe-controls" 
-         x-show="recipeId"
-         x-cloak
-         class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg px-4 py-4">
-        
-         <div class="container mx-auto max-w-2xl flex justify-between gap-4">
-            
-            <button class="generated-recipe-control-button" 
-                    hx-get="{% url 'create_recipe' %}"
-                    hx-push-url="true"
-                    hx-target="body">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-                Start Over
-            </button>
-
-            <button class="generated-recipe-control-button"
-                    :hx-post="'/action_save_to_my_recipes/' + recipeId"
-                    hx-target="span">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
-                </svg>
-                <span>Save to My Recipes</span>
-            </button>
-
-        </div>
-    </div>
-
-    <div id="generated-recipe" class="mb-16"
-         @recipe-loaded.window="recipeId = $event.detail.recipeId">
-        {% if id_in_url %}
-            {% include "planner/recipes/partial_recipe.html" with recipe=id_in_url %}
-        {% endif %}
-    </div>
-</div>
 
 {% endblock %}

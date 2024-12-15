@@ -104,8 +104,7 @@
                     <form hx-post="{% url 'action_add_shopping_item' shopping_list.id %}" 
                           hx-swap="none"
                           hx-disabled-elt="#add-shopping-item-form-fieldset"
-                          class="space-y-2"> 
-                        {% csrf_token %}
+                          class="space-y-2">
                         <fieldset id="add-shopping-item-form-fieldset">
                             <div class="form-group">
                                 {{ form.name.label_tag }}

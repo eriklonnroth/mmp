@@ -1,0 +1,85 @@
+{
+  "title": "Classic Old Fashioned Cocktail",
+  "description": "A timeless cocktail that combines the smooth warmth of whiskey with the aromatic flavors of Angostura bitters and a hint of citrus.",
+  "servings": 1,
+  "ingredients": [
+    {
+      "name": "Sugar cube",
+      "quantity": "1"
+    },
+    {
+      "name": "Angostura bitters",
+      "quantity": "3 dashes"
+    },
+    {
+      "name": "Water, cold",
+      "quantity": "10 ml (2 teaspoons)"
+    },
+    {
+      "name": "Rye or Bourbon whiskey",
+      "quantity": "60 ml"
+    },
+    {
+      "name": "Orange peel, twisted",
+      "quantity": "1 strip"
+    },
+    {
+      "name": "Ice cube",
+      "quantity": "1 large"
+    },
+    {
+      "name": "Maraschino cherry, optional",
+      "quantity": "1"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Prepare the Glass",
+      "steps": [
+        {
+          "text": "Place the sugar cube in an Old Fashioned glass."
+        },
+        {
+          "text": "Add the 3 dashes of Angostura bitters directly onto the sugar cube."
+        },
+        {
+          "text": "Pour 10 ml (2 teaspoons) of cold water over the sugar and bitters."
+        },
+        {
+          "text": "Muddle the ingredients in the bottom of the glass until the sugar is mostly dissolved."
+        }
+      ]
+    },
+    {
+      "section_title": "Mix the Drink",
+      "steps": [
+        {
+          "text": "Fill the glass with one large ice cube or several smaller ones."
+        },
+        {
+          "text": "Pour 60 ml of rye or bourbon whiskey over the ice."
+        }
+      ]
+    },
+    {
+      "section_title": "Garnish and Serve",
+      "steps": [
+        {
+          "text": "Using a peeler or sharp knife, cut a strip of orange peel, ensuring minimal pith."
+        },
+        {
+          "text": "Gently twist the peel over the glass to release its oils, then rub it along the inside rim of the glass."
+        },
+        {
+          "text": "Drop the twisted peel into the glass as a garnish."
+        },
+        {
+          "text": "If desired, add a maraschino cherry as a final garnish."
+        },
+        {
+          "text": "Stir gently to combine the flavors before serving."
+        }
+      ]
+    }
+  ]
+}

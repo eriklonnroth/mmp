@@ -1,0 +1,133 @@
+{
+  "title": "Mushroom Arancini",
+  "description": "Crispy and golden on the outside, creamy and packed with umami flavor on the inside, these Mushroom Arancini are made with a rich mushroom risotto, coated in breadcrumbs, and fried to perfection.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "name": "Arborio rice",
+      "quantity": "200 g"
+    },
+    {
+      "name": "Mushrooms, finely chopped",
+      "quantity": "150 g"
+    },
+    {
+      "name": "Vegetable broth",
+      "quantity": "600 ml"
+    },
+    {
+      "name": "Onion, diced",
+      "quantity": "1 small"
+    },
+    {
+      "name": "Garlic cloves, minced",
+      "quantity": "2"
+    },
+    {
+      "name": "Parmesan cheese, grated",
+      "quantity": "50 g"
+    },
+    {
+      "name": "Butter",
+      "quantity": "30 g"
+    },
+    {
+      "name": "Olive oil",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "name": "White wine",
+      "quantity": "100 ml"
+    },
+    {
+      "name": "Salt",
+      "quantity": "to taste"
+    },
+    {
+      "name": "Black pepper",
+      "quantity": "to taste"
+    },
+    {
+      "name": "Mozzarella cheese, diced",
+      "quantity": "100 g"
+    },
+    {
+      "name": "All-purpose flour",
+      "quantity": "50 g"
+    },
+    {
+      "name": "Eggs, beaten",
+      "quantity": "2"
+    },
+    {
+      "name": "Breadcrumbs",
+      "quantity": "200 g"
+    },
+    {
+      "name": "Vegetable oil, for frying",
+      "quantity": "as needed"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Prepare the Mushroom Risotto",
+      "steps": [
+        {
+          "text": "Heat the olive oil and butter in a large pan over medium heat."
+        },
+        {
+          "text": "Add the onion and garlic, sauté until the onion becomes translucent."
+        },
+        {
+          "text": "Stir in the mushrooms and cook until tender and the moisture has evaporated."
+        },
+        {
+          "text": "Add the Arborio rice and toast for 2-3 minutes, stirring frequently."
+        },
+        {
+          "text": "Pour in the white wine, stirring continuously until absorbed."
+        },
+        {
+          "text": "Add the vegetable broth, a ladle at a time, stirring frequently, until the rice is cooked al dente. This should take about 18-20 minutes."
+        },
+        {
+          "text": "Stir in the Parmesan cheese, salt, and pepper. Allow the risotto to cool completely."
+        }
+      ]
+    },
+    {
+      "section_title": "Form the Arancini Balls",
+      "steps": [
+        {
+          "text": "Take a small amount of cooled risotto and flatten it in your hand."
+        },
+        {
+          "text": "Place a piece of mozzarella cheese in the center and enclose it with the risotto to form a ball."
+        },
+        {
+          "text": "Repeat this process until all the risotto is used."
+        }
+      ]
+    },
+    {
+      "section_title": "Coat and Fry the Arancini",
+      "steps": [
+        {
+          "text": "Place the flour, beaten eggs, and breadcrumbs into separate bowls."
+        },
+        {
+          "text": "Roll each arancini ball in the flour, then dip in the eggs, and finally coat with breadcrumbs."
+        },
+        {
+          "text": "Heat vegetable oil in a deep pot to 180°C (350°F)."
+        },
+        {
+          "text": "Fry the arancini in batches until golden brown and crispy, about 3-4 minutes per batch."
+        },
+        {
+          "text": "Drain on paper towels and serve hot."
+        }
+      ]
+    }
+  ]
+}

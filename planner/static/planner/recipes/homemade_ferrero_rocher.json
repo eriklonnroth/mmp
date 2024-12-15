@@ -1,0 +1,87 @@
+{
+  "title": "Homemade Ferrero Rocher",
+  "description": "A delightful homemade version of the classic Ferrero Rocher chocolate, featuring a hazelnut enrobed in creamy chocolate and crunchy nuts.",
+  "servings": 6,
+  "ingredients": [
+    {
+      "name": "Whole hazelnuts",
+      "quantity": "12 pieces"
+    },
+    {
+      "name": "Nutella",
+      "quantity": "170 grams"
+    },
+    {
+      "name": "Wafer cookies",
+      "quantity": "8 pieces, crushed"
+    },
+    {
+      "name": "Dark chocolate",
+      "quantity": "100 grams"
+    },
+    {
+      "name": "Milk chocolate",
+      "quantity": "100 grams"
+    },
+    {
+      "name": "Crushed hazelnuts",
+      "quantity": "50 grams"
+    },
+    {
+      "name": "Vegetable oil",
+      "quantity": "1 tablespoon"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Prepare the Hazelnut Centers",
+      "steps": [
+        {
+          "text": "Roast the whole hazelnuts in a pan over medium heat for 5-7 minutes until golden brown and the skin is easy to peel off."
+        },
+        {
+          "text": "Allow the hazelnuts to cool, then remove the skins by rubbing them with a clean cloth."
+        }
+      ]
+    },
+    {
+      "section_title": "Make the Filling",
+      "steps": [
+        {
+          "text": "In a bowl, mix 100 grams of Nutella with the crushed wafer cookies until you have a thick paste."
+        },
+        {
+          "text": "Spoon a small amount of the Nutella-wafer paste into your palm, insert a roasted hazelnut in the center, and shape it into a small ball. Repeat this process for all hazelnuts."
+        }
+      ]
+    },
+    {
+      "section_title": "Set up the Chocolate Coating",
+      "steps": [
+        {
+          "text": "In a heatproof bowl, combine the dark chocolate, milk chocolate, and vegetable oil."
+        },
+        {
+          "text": "Melt the mixture over a simmering pot of water (double boiler method), stirring occasionally, until smooth and glossy."
+        }
+      ]
+    },
+    {
+      "section_title": "Assemble the Ferrero Rocher",
+      "steps": [
+        {
+          "text": "Dip each Nutella-hazelnut ball into the melted chocolate, ensuring an even coating."
+        },
+        {
+          "text": "Roll the chocolate-coated ball in the crushed hazelnuts to cover completely."
+        },
+        {
+          "text": "Allow the coated chocolates to set on a parchment-lined tray at room temperature until the chocolate hardens."
+        },
+        {
+          "text": "Once set, store the homemade Ferrero Rocher in an airtight container. Enjoy!"
+        }
+      ]
+    }
+  ]
+}

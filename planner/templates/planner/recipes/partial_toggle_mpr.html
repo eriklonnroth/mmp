@@ -18,32 +18,33 @@
         x-transition:leave="transition ease-in duration-75"
         x-transition:leave-start="transform opacity-100 scale-100"
         x-transition:leave-end="transform opacity-0 scale-95"
-        class="mpr-menu absolute -right-2 mt-2 z-50">
+        class="mpr-menu absolute -right-11 mt-2 z-50">
         
 
-                <div class="mpr-menu-container">
-                    <button class="recent-meal-plan-button">
-                        {{ recent_meal_plan.name }}
-                    </button>
-                    
-                    {% for group in recent_meal_plan.groups.all %}
-                    <div x-data="{ in_mg: {% if group.id in recipe.recent_meal_group_ids %}true{% else %}false{% endif %} }">
-                        <button
-                            x-cloak
-                            hx-post="{% url 'action_toggle_mpr' group.id recipe.id %}"
-                            hx-swap=none
-                            class="toggle-meal-group-button"
-                            :class="in_mg ? 'in-mg' : ''"
-                            @htmx:after-request="
-                                const trigger = JSON.parse(event.detail.xhr.getResponseHeader('HX-Trigger'));
-                                in_mg = trigger.in_mg;
-                                in_mp = trigger.in_mp;
-                            ">
-                            {{ group.name }}
-                        </button>
-                    </div>
+        <div class="mpr-menu-container">
+            <button class="recent-meal-plan-button">
+                {{ recent_meal_plan.name }}
+            </button>
+            
+            {% for group in recent_meal_plan.groups.all %}
+            
+            <div x-data="{ in_mg: {% if group.id in recipe.recent_meal_group_ids %}true{% else %}false{% endif %} }">
+                <button
+                    x-cloak
+                    hx-post="{% url 'action_toggle_mpr' group.id recipe.id %}"
+                    hx-swap=none
+                    class="toggle-meal-group-button"
+                    :class="in_mg ? 'in-mg' : ''"
+                    @htmx:after-request="
+                        const trigger = JSON.parse(event.detail.xhr.getResponseHeader('HX-Trigger'));
+                        in_mg = trigger.in_mg;
+                        in_mp = trigger.in_mp;
+                    ">
+                    {{ group.name }}
+                </button>
+            </div>
 
-                    {% endfor %}
+            {% endfor %}
 
         </div>
 

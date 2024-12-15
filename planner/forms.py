@@ -24,7 +24,7 @@ class CreateRecipeForm(forms.Form):
     )
     
     dietary_preferences = forms.CharField(
-        label="Dietary Preferences (optional)",
+        label="Dietary preferences (optional)",
         max_length=255,
         required=False,
         widget=forms.TextInput(attrs={

@@ -1,0 +1,115 @@
+{
+  "title": "Colourful One Pot Pasta",
+  "description": "A vibrant and easy-to-make one pot pasta dish that brings together fresh vegetables and savory seasonings for a quick yet delicious meal.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "name": "Pasta, fusilli or penne",
+      "quantity": "300 grams"
+    },
+    {
+      "name": "Olive oil",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "name": "Onion, diced",
+      "quantity": "1"
+    },
+    {
+      "name": "Garlic cloves, minced",
+      "quantity": "2"
+    },
+    {
+      "name": "Red bell pepper, diced",
+      "quantity": "1"
+    },
+    {
+      "name": "Yellow bell pepper, diced",
+      "quantity": "1"
+    },
+    {
+      "name": "Zucchini, sliced",
+      "quantity": "1 medium"
+    },
+    {
+      "name": "Cherry tomatoes, halved",
+      "quantity": "200 grams"
+    },
+    {
+      "name": "Vegetable broth",
+      "quantity": "750 milliliters"
+    },
+    {
+      "name": "Salt",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "name": "Black pepper",
+      "quantity": "1/2 teaspoon"
+    },
+    {
+      "name": "Italian seasoning",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "name": "Parmesan cheese, grated",
+      "quantity": "50 grams"
+    },
+    {
+      "name": "Basil leaves, freshly chopped",
+      "quantity": "Handful"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Preparation",
+      "steps": [
+        {
+          "text": "Gather all ingredients and ensure vegetables are washed and prepared as directed."
+        }
+      ]
+    },
+    {
+      "section_title": "Cooking the Pasta",
+      "steps": [
+        {
+          "text": "Heat the olive oil in a large pot over medium heat."
+        },
+        {
+          "text": "Add the diced onion and minced garlic. Sauté for 3-4 minutes until the onion becomes translucent."
+        },
+        {
+          "text": "Stir in the diced red and yellow bell peppers. Cook for another 2-3 minutes."
+        }
+      ]
+    },
+    {
+      "section_title": "Combining Ingredients",
+      "steps": [
+        {
+          "text": "Add the sliced zucchini and halved cherry tomatoes to the pot. Stir to combine."
+        },
+        {
+          "text": "Pour in the vegetable broth, making sure all ingredients are covered."
+        },
+        {
+          "text": "Add the pasta, salt, black pepper, and Italian seasoning. Stir well."
+        }
+      ]
+    },
+    {
+      "section_title": "Simmering and Finishing",
+      "steps": [
+        {
+          "text": "Bring the mixture to a boil, then reduce the heat to a simmer. Cover the pot and cook for about 15-18 minutes, stirring occasionally, until the pasta is al dente and the liquid is mostly absorbed."
+        },
+        {
+          "text": "Remove from heat and stir in the grated Parmesan cheese until melted."
+        },
+        {
+          "text": "Garnish with freshly chopped basil leaves before serving."
+        }
+      ]
+    }
+  ]
+}

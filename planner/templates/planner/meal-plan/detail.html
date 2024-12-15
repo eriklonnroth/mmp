@@ -87,6 +87,7 @@
 
                 <button class="generate-shopping-list-button"
                     hx-post="{% url 'action_generate_shopping_list' meal_plan.id %}"
+                    hx-on::error="console.error('Error:', event.detail.xhr.responseText)"
                     hx-swap="none">
                     ✨ Generate Shopping List
                 </button>

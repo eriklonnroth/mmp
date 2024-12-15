@@ -1,0 +1,104 @@
+{
+  "title": "Chicken Schnitzels",
+  "description": "Crispy and golden brown chicken schnitzels, a delicious European dish where chicken breasts are flattened, breaded, and pan-fried to perfection.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "name": "Chicken breasts",
+      "quantity": "4 large"
+    },
+    {
+      "name": "All-purpose flour",
+      "quantity": "100 grams"
+    },
+    {
+      "name": "Eggs",
+      "quantity": "2 large"
+    },
+    {
+      "name": "Water",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "name": "Breadcrumbs, plain",
+      "quantity": "150 grams"
+    },
+    {
+      "name": "Salt",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "name": "Black pepper, ground",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "name": "Vegetable oil",
+      "quantity": "100 milliliters"
+    },
+    {
+      "name": "Lemon wedges",
+      "quantity": "for serving"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Prepare the Chicken",
+      "steps": [
+        {
+          "text": "Place each chicken breast between sheets of plastic wrap or parchment paper."
+        },
+        {
+          "text": "Using a meat mallet or rolling pin, gently pound the chicken breasts to an even thickness of about 1 cm."
+        }
+      ]
+    },
+    {
+      "section_title": "Bread the Chicken",
+      "steps": [
+        {
+          "text": "In a shallow dish, mix the flour with salt and pepper."
+        },
+        {
+          "text": "In another bowl, whisk together the eggs and water until well combined."
+        },
+        {
+          "text": "Place the breadcrumbs in a third shallow dish."
+        },
+        {
+          "text": "Dredge each chicken breast in the flour mixture, ensuring it is coated evenly."
+        },
+        {
+          "text": "Dip the flour-coated chicken into the egg mixture, allowing any excess to drip off."
+        },
+        {
+          "text": "Finally, press the chicken into the breadcrumbs, thoroughly coating both sides."
+        }
+      ]
+    },
+    {
+      "section_title": "Cook the Schnitzels",
+      "steps": [
+        {
+          "text": "Heat the vegetable oil in a large frying pan over medium-high heat."
+        },
+        {
+          "text": "Once the oil is hot, add the breaded chicken breasts to the pan without overcrowding. You may need to cook them in batches."
+        },
+        {
+          "text": "Fry each schnitzel for about 3-4 minutes per side, or until golden brown and cooked through."
+        },
+        {
+          "text": "Transfer the cooked schnitzels to a plate lined with paper towels to drain any excess oil."
+        }
+      ]
+    },
+    {
+      "section_title": "Serve",
+      "steps": [
+        {
+          "text": "Serve the chicken schnitzels hot with lemon wedges on the side for squeezing."
+        }
+      ]
+    }
+  ]
+}

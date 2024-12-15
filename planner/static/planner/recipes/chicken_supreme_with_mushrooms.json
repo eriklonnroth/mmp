@@ -1,0 +1,111 @@
+{
+  "title": "Chicken Supreme with Mushrooms",
+  "description": "A rich and creamy Chicken Supreme with Mushrooms dish, perfect for a delightful dinner. This recipe features tender chicken breasts smothered in a flavorful mushroom cream sauce.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "name": "Chicken breasts",
+      "quantity": "4"
+    },
+    {
+      "name": "Olive oil",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "name": "Butter",
+      "quantity": "1 tablespoon"
+    },
+    {
+      "name": "Onion, finely chopped",
+      "quantity": "1 medium"
+    },
+    {
+      "name": "Garlic cloves, minced",
+      "quantity": "2"
+    },
+    {
+      "name": "Mushrooms, sliced",
+      "quantity": "200 grams"
+    },
+    {
+      "name": "White wine",
+      "quantity": "125 milliliters"
+    },
+    {
+      "name": "Chicken stock",
+      "quantity": "250 milliliters"
+    },
+    {
+      "name": "Double cream",
+      "quantity": "150 milliliters"
+    },
+    {
+      "name": "Salt",
+      "quantity": "to taste"
+    },
+    {
+      "name": "Black pepper, ground",
+      "quantity": "to taste"
+    },
+    {
+      "name": "Fresh parsley, chopped",
+      "quantity": "2 tablespoons"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Prepare the Chicken",
+      "steps": [
+        {
+          "text": "Season chicken breasts with salt and black pepper on both sides."
+        },
+        {
+          "text": "In a large pan, heat olive oil over medium-high heat."
+        },
+        {
+          "text": "Add the chicken breasts and cook for 6-7 minutes on each side or until golden brown and cooked through."
+        },
+        {
+          "text": "Remove the chicken from the pan and set aside on a plate."
+        }
+      ]
+    },
+    {
+      "section_title": "Make the Sauce",
+      "steps": [
+        {
+          "text": "In the same pan, add butter and let it melt."
+        },
+        {
+          "text": "Add the finely chopped onion and sauté for 2-3 minutes until softened."
+        },
+        {
+          "text": "Add the minced garlic and sliced mushrooms, and cook for another 5 minutes until the mushrooms are golden and tender."
+        },
+        {
+          "text": "Pour in the white wine and let it simmer for 2 minutes to reduce slightly."
+        },
+        {
+          "text": "Stir in the chicken stock and bring to a simmer."
+        },
+        {
+          "text": "Reduce the heat to low and add the double cream, stirring well. Allow the sauce to thicken for about 4-5 minutes."
+        }
+      ]
+    },
+    {
+      "section_title": "Combine and Serve",
+      "steps": [
+        {
+          "text": "Return the chicken breasts to the pan, coating them with the creamy mushroom sauce."
+        },
+        {
+          "text": "Cook for an additional 3-4 minutes, ensuring the chicken is hot and well-coated with the sauce."
+        },
+        {
+          "text": "Garnish with freshly chopped parsley before serving."
+        }
+      ]
+    }
+  ]
+}

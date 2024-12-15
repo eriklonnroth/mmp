@@ -264,8 +264,11 @@ class MealPlanDetailView(UserAuthMixin, DetailView):
             'groups__mprs',
             'groups__mprs__recipe'
         )
+
+        user = self.get_authenticated_user(self.request)
+        queryset = queryset.filter(user=user)
         
-        return queryset.filter(user=self.get_authenticated_user(self.request))
+        return queryset
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset)
@@ -276,7 +279,8 @@ class MealPlanDetailView(UserAuthMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        context['meal_plans'] = MealPlan.objects.filter(user=self.get_authenticated_user(self.request)).exclude(id=self.object.id).order_by('-last_viewed_at')
+        user = self.get_authenticated_user(self.request)
+        context['meal_plans'] = MealPlan.objects.filter(user=user).exclude(id=self.object.id).order_by('-last_viewed_at')
         
         groups = []
         for group in self.object.groups.all():
@@ -374,9 +378,11 @@ def action_generate_recipe(request, user):
             parsed_recipe = parse_recipe_string(recipe_string)
             save_recipe_to_file(parsed_recipe)
             saved_recipe = save_recipe_to_db(parsed_recipe, user=user, status='draft')
-            response = render(request, 'planner/recipes/partial_recipe.html', {'recipe': saved_recipe})
-            response['HX-Push'] = f'?id={saved_recipe.id}'
+            
+            response = HttpResponse()
+            response['HX-Redirect'] = f'/recipes/{saved_recipe.id}'
             return response
+
         except Exception as e:
             return HttpResponseBadRequest(f"Error generating recipe: {str(e)}")
     else:

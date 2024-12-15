@@ -43,9 +43,6 @@ class RecipeRepository:
                     order=j
                 )
 
-        # Update ingredients digest
-        db_recipe.update_ingredients_digest()
-        
         return db_recipe
 
 # Helper function
