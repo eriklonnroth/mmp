@@ -7,19 +7,12 @@ from .recipe_generator import Recipe
 
 class RecipeRepository:
     @staticmethod
-    def admin_user():
-        return User.objects.get(username='admin')
-
-    @staticmethod
     def save_recipe(recipe: Recipe, user=None, status='published') -> DBRecipe:
         """Save Recipe object to database"""
-        if user is None:
-            user = RecipeRepository.admin_user()
-        
         # Create the recipe
         db_recipe = DBRecipe.objects.create(
             status=status,
-            dish_name=recipe.dish_name,
+            title=recipe.title,
             servings=recipe.servings,
             description=recipe.description,
             created_by=user,
@@ -34,7 +27,7 @@ class RecipeRepository:
                 order=i
             )
 
-        # Create instruction sections and steps
+        # Create instruction sections
         for i, section in enumerate(recipe.instructions, 1):
             db_section = DBInstructionSection.objects.create(
                 recipe=db_recipe,
@@ -46,7 +39,7 @@ class RecipeRepository:
             for j, step in enumerate(section.steps, 1):
                 DBInstructionStep.objects.create(
                     section=db_section,
-                    step=step.step,
+                    text=step.text,
                     order=j
                 )
 
@@ -55,8 +48,7 @@ class RecipeRepository:
         
         return db_recipe
 
-# Helper functions
+# Helper function
 def save_recipe_to_db(recipe: Recipe, user=None, status='published') -> DBRecipe:
-    """Helper function to save a Recipe to the database"""
     service = RecipeRepository()
     return service.save_recipe(recipe, user, status)

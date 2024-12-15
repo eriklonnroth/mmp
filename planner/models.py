@@ -47,7 +47,7 @@ class Recipe(models.Model):
         ('draft', 'Draft'),
         ('published', 'Published'),
     ]
-    dish_name = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
     servings = models.PositiveIntegerField()
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -61,7 +61,7 @@ class Recipe(models.Model):
     )
 
     def __str__(self):
-        return f"{self.dish_name}"
+        return f"{self.title}"
 
     class Meta:
         ordering = ['-modified_at']
@@ -101,11 +101,11 @@ class InstructionSection(models.Model):
 
 class InstructionStep(models.Model):
     section = models.ForeignKey(InstructionSection, related_name='steps', on_delete=models.CASCADE)
-    step = models.TextField()
+    text = models.TextField()
     order = models.PositiveIntegerField()
 
     def __str__(self):
-        return f"{self.step}"
+        return f"{self.text}"
 
     class Meta:
         ordering = ['order']
@@ -125,7 +125,7 @@ class MyRecipe(models.Model):
         ordering = ['-saved_at']
 
     def __str__(self):
-        return f"{self.recipe.dish_name}"
+        return f"{self.recipe.title}"
 
 
 # Recipe added to Meal Plan Group by user
@@ -140,19 +140,19 @@ class MealPlanRecipe(models.Model):
         ordering = ['meal_group', 'order']
 
     def __str__(self):
-        return f"{self.recipe.dish_name}"
+        return f"{self.recipe.title}"
 
 
 # Shopping list models
 class ShoppingList(models.Model):
-    meal_plan = models.OneToOneField('MealPlan', on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
+    name = models.CharField(max_length=40, default='Shopping List')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+    last_viewed_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Shopping List for {self.meal_plan.name}"
-
+        return f"{self.name}"
 
 class ShoppingItem(models.Model):
     CATEGORIES = [
@@ -161,27 +161,27 @@ class ShoppingItem(models.Model):
         ('dairy', 'Dairy & Deli'),
         ('bakery', 'Bakery'),
         ('pantry', 'Pantry'),
-        ('drinks', 'Drinks'),
         ('snacks', 'Snacks'),
         ('frozen', 'Frozen'),
+        ('drinks', 'Drinks'),
         ('non_food', 'Non-food')
     ]
     shopping_list = models.ForeignKey(ShoppingList, related_name='items', on_delete=models.CASCADE)
     category = models.CharField(max_length=20, choices=CATEGORIES)
-    item = models.CharField(max_length=200)
+    name = models.CharField(max_length=100)
     quantity = models.CharField(max_length=100)
+    recipe = models.ForeignKey(Recipe, on_delete=models.PROTECT, blank=True, null=True)
     is_checked = models.BooleanField(default=False)
     modified_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.quantity} {self.item}"
+        return f"{self.quantity} {self.name}"
     
-    def get_category_order(self):
-        # Return index of this item's category in CATEGORIES list
-        return next(i for i, (cat, _) in enumerate(self.CATEGORIES) if cat == self.category)
-
     class Meta:
-        ordering = ['category', 'item']
+        ordering = ['category', 'name']
+
+
+
 
 
 

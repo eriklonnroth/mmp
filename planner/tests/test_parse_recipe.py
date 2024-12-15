@@ -13,7 +13,7 @@ def recipe_path():
 class TestRecipeParser:
     def test_parse_basic_info(self, recipe_path):
         recipe = parse_recipe_file(recipe_path('classic_beef_lasagna.json'))
-        assert recipe.dish_name == "Classic Beef Lasagna"
+        assert recipe.title == "Classic Beef Lasagna"
         assert recipe.servings == 3
         assert "delicious and hearty beef lasagna" in recipe.description
 
@@ -51,7 +51,7 @@ class TestRecipeParser:
     def test_validation_errors(self):
         # Test missing required fields first
         missing_fields_data = {
-            "dish_name": "Bad Recipe",
+            "title": "Bad Recipe",
             "servings": 4,
             # Missing required fields: description, ingredients, instructions
         }
@@ -63,7 +63,7 @@ class TestRecipeParser:
         
         # Test invalid ingredient format
         bad_ingredients_data = {
-            "dish_name": "Bad Recipe",
+            "title": "Bad Recipe",
             "servings": 4,
             "description": "A test recipe",
             "ingredients": [
@@ -79,7 +79,7 @@ class TestRecipeParser:
         
         # Test invalid instruction format
         bad_instructions_data = {
-            "dish_name": "Bad Recipe",
+            "title": "Bad Recipe",
             "servings": 4,
             "description": "A test recipe",
             "ingredients": [
@@ -100,14 +100,14 @@ class TestRecipeParser:
         with open(recipe_path('classic_beef_lasagna.json'), 'r') as f:
             json_str = f.read()
         recipe_from_string = parse_recipe_string(json_str)
-        assert recipe_from_string.dish_name == "Classic Beef Lasagna"
+        assert recipe_from_string.title == "Classic Beef Lasagna"
         assert len(recipe_from_string.instructions) == 4
-        assert "Return to the oven" in recipe_from_string.instructions[3].steps[2].step
+        assert "Return to the oven" in recipe_from_string.instructions[3].steps[2].text
         
     def test_json_decode_errors(self):
         # Test invalid JSON syntax (missing quotes around string)
         invalid_syntax = '''{
-            dish_name: "Test Recipe",
+            title: "Test Recipe",
             "servings": 4
         }'''
         with pytest.raises(json.JSONDecodeError, match="Expecting property name enclosed in double quotes"):
@@ -115,7 +115,7 @@ class TestRecipeParser:
             
         # Test unclosed brackets
         unclosed_brackets = '''{
-            "dish_name": "Test Recipe",
+            "title": "Test Recipe",
             "servings": 4,
             "ingredients": [
                 {"item": "test", "quantity": "1 cup"
@@ -125,7 +125,7 @@ class TestRecipeParser:
             
         # Test trailing comma
         trailing_comma = '''{
-            "dish_name": "Test Recipe",
+            "title": "Test Recipe",
             "servings": 4,
             "ingredients": [],
         }'''
@@ -133,6 +133,6 @@ class TestRecipeParser:
             parse_recipe_string(trailing_comma)
             
         # Test single quotes instead of double quotes
-        single_quotes = "{'dish_name': 'Test Recipe'}"
+        single_quotes = "{'title': 'Test Recipe'}"
         with pytest.raises(json.JSONDecodeError, match="Expecting property name enclosed in double quotes"):
             parse_recipe_string(single_quotes)

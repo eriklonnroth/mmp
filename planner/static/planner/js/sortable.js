@@ -14,6 +14,14 @@ document.addEventListener('alpine:init', () => {
                     group: 'mprs',
                     animation: 150,
                     filter: '.add-mpr-button',
+                    onEnd: function(evt) {
+                        const mprId = evt.item.getAttribute('data-recipe-id');
+                        const newGroupId = evt.to.getAttribute('data-group-id');
+                        
+                        htmx.ajax('POST', `/action_update_mpr/${mprId}/${newGroupId}/`, {
+                            swap: 'none'
+                        });
+                    },
                 });
             });
         },

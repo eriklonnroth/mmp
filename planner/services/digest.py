@@ -4,7 +4,7 @@
 #         ('draft', 'Draft'),
 #         ('published', 'Published'),
 #     ]
-#     dish_name = models.CharField(max_length=100)
+#     title = models.CharField(max_length=100)
 #     servings = models.PositiveIntegerField()
 #     description = models.TextField(blank=True)
 #     created_at = models.DateTimeField(auto_now_add=True)
@@ -20,7 +20,7 @@
 #     )
 
 #     def __str__(self):
-#         return f"{self.dish_name}"
+#         return f"{self.title}"
 
 #     class Meta:
 #         ordering = ['-modified_at']
@@ -45,7 +45,7 @@
 #             })
         
 #         return {
-#             'dish_name': self.dish_name,
+#             'title': self.title,
 #             'servings': new_servings,
 #             'notes': self.notes,
 #             'ingredients': scaled_ingredients,
@@ -136,4 +136,4 @@
 #         ordering = ['meal_group', 'order']
 
 #     def __str__(self):
-#         return f"{self.recipe.dish_name}"
+#         return f"{self.recipe.title}"

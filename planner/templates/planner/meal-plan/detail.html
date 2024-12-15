@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block head %}
-    <script src="{% static 'planner/js/plan.js' %}"></script>
+    <script src="{% static 'planner/js/sortable.js' %}"></script>
 {% endblock %}
 
 
@@ -85,7 +85,9 @@
                     </div>
                 </div>
 
-                <button class="generate-shopping-list-button inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-violet-600 to-violet-800 hover:from-violet-700 hover:to-violet-900">
+                <button class="generate-shopping-list-button"
+                    hx-post="{% url 'action_generate_shopping_list' meal_plan.id %}"
+                    hx-swap="none">
                     ✨ Generate Shopping List
                 </button>
             </div>

@@ -1,0 +1,143 @@
+{
+  "title": "Julia Child's Beef Bourguignon",
+  "description": "A classic French dish that features beef braised with red wine, beef stock, and aromatic vegetables, resulting in a rich and flavorful stew.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "item": "Beef chuck, cut into 5 cm cubes",
+      "quantity": "1 kg"
+    },
+    {
+      "item": "Salt",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "item": "Black pepper, freshly ground",
+      "quantity": "1/2 teaspoon"
+    },
+    {
+      "item": "Olive oil",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Bacon, cut into lardons",
+      "quantity": "150 grams"
+    },
+    {
+      "item": "Carrots, diced",
+      "quantity": "2 medium"
+    },
+    {
+      "item": "Onion, sliced",
+      "quantity": "1 large"
+    },
+    {
+      "item": "Garlic, minced",
+      "quantity": "3 cloves"
+    },
+    {
+      "item": "Flour",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Red wine, Burgundy or Pinot Noir",
+      "quantity": "750 ml"
+    },
+    {
+      "item": "Beef stock",
+      "quantity": "500 ml"
+    },
+    {
+      "item": "Tomato paste",
+      "quantity": "1 tablespoon"
+    },
+    {
+      "item": "Thyme, dried",
+      "quantity": "1/2 teaspoon"
+    },
+    {
+      "item": "Bay leaf",
+      "quantity": "1"
+    },
+    {
+      "item": "Pearl onions, peeled",
+      "quantity": "300 grams"
+    },
+    {
+      "item": "Mushrooms, quartered",
+      "quantity": "200 grams"
+    },
+    {
+      "item": "Butter",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "item": "Parsley, chopped",
+      "quantity": "For garnish"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Preparation",
+      "steps": [
+        {
+          "text": "Preheat the oven to 180°C (350°F)."
+        },
+        {
+          "text": "Season the beef cubes with salt and black pepper."
+        },
+        {
+          "text": "In a heavy-bottomed pot, heat 1 tablespoon of olive oil over medium heat and fry the bacon for 8 minutes, until crispy. Remove bacon with a slotted spoon and set aside."
+        }
+      ]
+    },
+    {
+      "section_title": "Searing and Braising",
+      "steps": [
+        {
+          "text": "In the same pot with the bacon fat, sear the beef cubes in batches until well-browned on all sides. Remove and set aside."
+        },
+        {
+          "text": "Add the diced carrots and sliced onion to the pot and cook until softened, about 5 minutes."
+        },
+        {
+          "text": "Add the minced garlic and cook for 1 minute."
+        },
+        {
+          "text": "Return the beef and bacon to the pot, then sprinkle with flour and toss to coat. Cook for 5 minutes, stirring occasionally."
+        },
+        {
+          "text": "Pour in the red wine and beef stock, ensuring the beef is just covered. Add the tomato paste, thyme, and bay leaf, and bring to a simmer."
+        },
+        {
+          "text": "Cover the pot with a lid and transfer to the oven. Braise for 2 to 2.5 hours until the beef is tender."
+        }
+      ]
+    },
+    {
+      "section_title": "Finishing Touches",
+      "steps": [
+        {
+          "text": "While the beef is braising, in a skillet, heat the remaining tablespoon of olive oil and butter. Add the pearl onions and mushrooms, cooking until browned, about 10 minutes."
+        },
+        {
+          "text": "Once the beef is tender, place the pot back on the stove and add the browned onions and mushrooms. Simmer for another 15 minutes."
+        },
+        {
+          "text": "Remove the bay leaf before serving."
+        }
+      ]
+    },
+    {
+      "section_title": "Serving",
+      "steps": [
+        {
+          "text": "Serve the Beef Bourguignon hot, garnished with chopped parsley."
+        },
+        {
+          "text": "Traditionally served with boiled potatoes, crusty bread, or buttered noodles."
+        }
+      ]
+    }
+  ]
+}

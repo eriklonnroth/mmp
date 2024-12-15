@@ -1,0 +1,59 @@
+{% extends "planner/layout.html" %}
+{% load static %}
+{% load partials %}
+
+{% block title %}
+    Shopping List
+{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto max-w-5xl">
+        <div class="my-12">
+            <h1 class="text-2xl font-bold">Shopping List</h1>
+        </div>
+    </div>
+
+
+    <!-- Shopping list table -->
+    <div class="shopping-list-wrapper my-8">
+        <table class="shopping-list-table">
+            <thead>
+                <tr>
+                    <th scope="col" class="!text-xl w-10">☑</th>
+                    <th scope="col" class="max-w-128 w-fit">Item</th>
+                    <th scope="col" class="max-w-48 w-fit">Quantity</th>
+                    <th scope="col" class="max-w-128 w-fit">Used In</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                    {% partial partial-category-row %}
+                    {% for item in category.items %}
+                        {% partial partial-item-row %}
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+
+{% partialdef partial-category-row %}
+    <tr>
+        <td colspan="4" class="category-row">{{ category.name }}</td>
+    </tr>
+{% endpartialdef partial-category-row %}
+
+{% partialdef partial-item-row %}
+
+    <tr>
+        <td>
+            <input type="checkbox" class="shopping-list-checkbox">
+        </td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.recipe_title }}</td>
+
+    </tr>
+
+{% endpartialdef partial-item-row %}

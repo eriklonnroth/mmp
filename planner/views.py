@@ -16,8 +16,9 @@ from planner.services.recipe_parser import parse_recipe_string
 from planner.services.recipe_repository import save_recipe_to_db
 from planner.services.recipe_to_file import save_recipe_to_file
 from planner.services.shopping_list_generator import generate_shopping_list
+from planner.services.shopping_list_repository import save_shopping_list_to_db
 from planner import forms
-from planner.models import Recipe, MyRecipe, MealPlan, MealGroup, MealPlanRecipe
+from planner.models import Recipe, MyRecipe, MealPlan, MealGroup, MealPlanRecipe, ShoppingList, ShoppingItem
 from planner.services.meal_plan_templates import TEMPLATES, get_default_meal_groups
 import json
 from functools import wraps
@@ -35,16 +36,22 @@ def with_user(view_func):
     @wraps(view_func)
     def wrapper(request, *args, **kwargs):
         user = UserAuthMixin().get_authenticated_user(request)
-        return view_func(request, user, *args, **kwargs)
+        kwargs['user'] = user
+        return view_func(request, *args, **kwargs)
     return wrapper
 
 
 
+# MAIN NAV VIEWS
 def index(request):
     return render(request, "planner/index.html")
 
 def profile(request):
     return render(request, "planner/settings/profile.html")
+
+@with_user
+def recipes(request, user):
+    return render(request, "planner/recipes/index.html")
 
 @with_user
 def meal_plan(request, user):
@@ -53,6 +60,198 @@ def meal_plan(request, user):
         return redirect('meal_plan_detail', pk=recent_meal_plan.id)
     return redirect('new_meal_plan')
 
+@with_user
+def shopping_list(request, user):
+    recent_shopping_list = ShoppingList.objects.filter(user=user).order_by('-last_viewed_at').first()
+    if recent_shopping_list:
+        return redirect('shopping_list_detail', pk=recent_shopping_list.id)
+    return render(request, 'planner/shopping-list/index.html')
+
+
+
+# RECIPE VIEWS
+def create_recipe(request):
+    # Initialize form
+    form = forms.CreateRecipeForm()
+    context = {'form': form}
+    
+    # Check for recipe ID in query params
+    recipe_id = request.GET.get('id')
+    if recipe_id:
+        try:
+            recipe = Recipe.objects.get(id=recipe_id)
+            # Add recipe to context and render it in the target div
+            context['id_in_url'] = recipe
+        except (Recipe.DoesNotExist, ValueError):
+            # Silently ignore invalid IDs
+            pass
+    
+    return render(request, "planner/recipes/create.html", context)
+
+class RecipeDetailView(UserAuthMixin, DetailView):
+    model = Recipe
+    template_name = 'planner/recipes/detail.html'
+    context_object_name = 'recipe'
+
+    def get_queryset(self):
+        queryset = Recipe.objects.prefetch_related(
+            'ingredients',
+            'instruction_sections',
+            'instruction_sections__steps'
+        )
+        
+        user = self.get_authenticated_user(self.request)
+        
+        # For In Meal Plan toggle button
+        recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-last_viewed_at').first()
+        if recent_meal_plan:
+            queryset = queryset.annotate(
+                in_recent_meal_plan=Exists(
+                    MealPlanRecipe.objects.filter(
+                        meal_group__meal_plan=recent_meal_plan,
+                        recipe=OuterRef('pk')
+                    )
+                ),
+                recent_meal_group_ids=ArrayAgg(
+                    'mealplanrecipe__meal_group__id',
+                    filter=Q(mealplanrecipe__meal_group__meal_plan=recent_meal_plan)
+                )
+            )
+        
+        # For My Recipes toggle button
+        queryset = queryset.annotate(
+            is_saved=Exists(
+                MyRecipe.objects.filter(
+                    user=user,
+                    recipe=OuterRef('pk')
+                )
+            )
+        )
+        
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.get_authenticated_user(self.request)
+
+        recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-last_viewed_at').first()
+        if recent_meal_plan:
+            context['recent_meal_plan'] = recent_meal_plan
+        meal_group_id = self.request.GET.get('meal_group_id')
+        if meal_group_id:
+            context['meal_group'] = get_object_or_404(MealGroup, id=meal_group_id)
+        
+        return context
+
+
+class RecipeListView(UserAuthMixin, ListView):
+    model = Recipe
+    context_object_name = 'recipes'
+    paginate_by = 12
+    allowed_sort_fields = ['-created_at', 'created_at', '-modified_at', 'modified_at', 'title']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        user = self.get_authenticated_user(self.request)
+
+        # For In Meal Plan toggle button
+        recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-last_viewed_at').first()
+        if recent_meal_plan:
+            queryset = queryset.annotate(
+                in_recent_meal_plan=Exists(
+                    MealPlanRecipe.objects.filter(
+                        meal_group__meal_plan=recent_meal_plan,
+                        recipe=OuterRef('pk')
+                    )
+                ),
+                recent_meal_group_ids=ArrayAgg(
+                    'mealplanrecipe__meal_group__id',
+                    filter=Q(mealplanrecipe__meal_group__meal_plan=recent_meal_plan)
+                )
+            )
+        
+        # Filter by In Meal Plan if requested
+        in_meal_plan = self.request.GET.get('in_meal_plan') == 'true'
+        if in_meal_plan:
+            queryset = queryset.filter(in_recent_meal_plan=True)
+
+        # Filter by My Recipes if requested
+        my_recipes = self.request.GET.get('my_recipes') == 'true'
+        if my_recipes:
+            queryset = queryset.filter(saved_to_my_recipes_by=user)
+
+        # For My Recipes toggle button
+        queryset = queryset.annotate(
+            is_saved=Exists(
+                MyRecipe.objects.filter(
+                    user=user,
+                    recipe=OuterRef('pk')
+                )
+            )
+        )
+
+        # Get sort parameter (default to -created_at if not specified)
+        sort_by = self.request.GET.get('sort', '-created_at')
+        queryset = queryset.order_by(sort_by)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sort'] = self.request.GET.get('sort', '-created_at')
+        context['my_recipes'] = self.request.GET.get('my_recipes') == 'true'
+        
+        user = self.get_authenticated_user(self.request)
+        recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-last_viewed_at').first()
+        if recent_meal_plan:
+            context['recent_meal_plan'] = recent_meal_plan
+        meal_group_id = self.request.GET.get('meal_group_id')
+        if meal_group_id:
+            context['meal_group'] = get_object_or_404(MealGroup, id=meal_group_id)
+        
+        return context
+
+class RecipeCardsListView(RecipeListView):
+    template_name = 'planner/recipes/partial_recipe_cards_list.html'
+
+class RecipeCardsPageView(RecipeListView):
+    template_name = 'planner/recipes/partial_recipe_cards_page.html'
+
+class RecipeCompactListView(RecipeListView):
+    template_name = 'planner/recipes/partial_recipe_compact_list.html'
+
+class RecipeCompactPageView(RecipeListView):
+    template_name = 'planner/recipes/partial_recipe_compact_page.html'
+
+class RecipeSearchView(RecipeListView):
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search_query = self.request.GET.get('q', '').strip()
+        
+        if search_query:
+            queryset = queryset.filter(
+                Q(title__icontains=search_query) |
+                Q(description__icontains=search_query) |
+                Q(ingredients__item__icontains=search_query) |
+                Q(instruction_sections__steps__text__icontains=search_query)
+            ).distinct()
+            
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_query'] = self.request.GET.get('q', '').strip()
+        return context
+
+class RecipeSearchCards(RecipeSearchView, RecipeCardsPageView):
+    pass
+
+class RecipeSearchCompact(RecipeSearchView, RecipeCompactPageView):
+    pass
+
+
+
+# MEAL PLAN VIEWS
 class MealPlanDetailView(UserAuthMixin, DetailView):
     model = MealPlan
     template_name = 'planner/meal-plan/detail.html'
@@ -86,7 +285,7 @@ class MealPlanDetailView(UserAuthMixin, DetailView):
                 'name': group.name,
                 'mprs': [{
                     'id': mpr.id,
-                    'name': mpr.recipe.dish_name,
+                    'name': mpr.recipe.title,
                     'recipe_id': mpr.recipe.id
                 } for mpr in group.mprs.all()]
             })
@@ -104,33 +303,58 @@ def add_meal_modal(request, user, meal_group_id):
     context = {'group': meal_group}
     return render(request, "planner/meal-plan/partial_add_meal_modal.html", context)
 
-@with_user
-def recipes(request, user):
-    return render(request, "planner/recipes/index.html")
 
-def shopping_list(request):
-    return render(request, "planner/shopping-list/index.html")
 
-def create_recipe(request):
-    # Initialize form
-    form = forms.CreateRecipeForm()
-    context = {'form': form}
+
+# SHOPPING LIST VIEWS
+class ShoppingListDetailView(UserAuthMixin, DetailView):
+    model = ShoppingList
+    template_name = 'planner/shopping-list/detail.html'
+    context_object_name = 'shopping_list'
+
+    def get_queryset(self):
+        queryset = ShoppingList.objects.prefetch_related(
+            'items',
+            'items__recipe'
+        )
+        user = self.get_authenticated_user(self.request)
+        queryset = queryset.filter(user=user)
+        return queryset
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        obj.last_viewed_at = timezone.now()
+        obj.save(update_fields=['last_viewed_at'])
+        return obj
     
-    # Check for recipe ID in query params
-    recipe_id = request.GET.get('id')
-    if recipe_id:
-        try:
-            recipe = Recipe.objects.get(id=recipe_id)
-            # Add recipe to context and render it in the target div
-            context['id_in_url'] = recipe
-        except (Recipe.DoesNotExist, ValueError):
-            # Silently ignore invalid IDs
-            pass
-    
-    return render(request, "planner/recipes/create.html", context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+
+        items_by_category = {}
+        for category_code, category_name in ShoppingItem.CATEGORIES:
+            items_by_category[category_code] = []
+        
+        # Add items to their respective categories
+        for item in self.object.items.all():
+            item.recipe_title = item.recipe.title if item.recipe else ''
+            items_by_category[item.category].append(item)
+        
+        # Create final structured data
+        categories = []
+        for category_code, category_name in ShoppingItem.CATEGORIES:
+            category_dict = {
+                'code': category_code,
+                'name': category_name,
+                'items': items_by_category[category_code]
+            }
+            categories.append(category_dict)
+        
+        context['categories'] = categories
+        return context
 
 
-
+# HTMX Actions
 @require_http_methods(['POST'])
 @with_user
 def action_generate_recipe(request, user):
@@ -147,14 +371,22 @@ def action_generate_recipe(request, user):
             parsed_recipe = parse_recipe_string(recipe_string)
             save_recipe_to_file(parsed_recipe)
             saved_recipe = save_recipe_to_db(parsed_recipe, user=user, status='draft')
-            response = render(request, 'planner/recipes/partial_recipe.html', 
-                            {'recipe': saved_recipe})
+            response = render(request, 'planner/recipes/partial_recipe.html', {'recipe': saved_recipe})
             response['HX-Push'] = f'?id={saved_recipe.id}'
             return response
         except Exception as e:
             return HttpResponseBadRequest(f"Error generating recipe: {str(e)}")
     else:
         return HttpResponseBadRequest(str(form.errors))
+
+
+@require_http_methods(['POST'])
+@with_user
+def action_generate_shopping_list(request, meal_plan_id, user):
+    meal_plan = get_object_or_404(MealPlan, id=meal_plan_id)
+    shopping_list = generate_shopping_list(meal_plan)
+    saved_shopping_list = save_shopping_list_to_db(shopping_list, user=user)
+    return redirect('shopping_list_detail', pk=saved_shopping_list.id)
 
 @require_http_methods(['POST'])
 @with_user
@@ -201,7 +433,7 @@ def action_toggle_mpr(request, meal_group_id, recipe_id):
         )
         mpr_data = {
             'id': mpr.id,
-            'name': mpr.recipe.dish_name,
+            'name': mpr.recipe.title,
             'recipe_id': mpr.recipe.id
         }
         in_mp = True
@@ -213,6 +445,16 @@ def action_toggle_mpr(request, meal_group_id, recipe_id):
         'in_mp': in_mp
     })
     return response
+
+@require_http_methods(['POST'])
+def action_update_mpr(request, mpr_id, new_group_id):
+    mpr = get_object_or_404(MealPlanRecipe, id=mpr_id)
+    new_group = get_object_or_404(MealGroup, id=new_group_id)
+    
+    mpr.meal_group = new_group
+    mpr.save()
+    
+    return HttpResponse('')
 
 @require_http_methods(['POST'])
 @with_user
@@ -303,6 +545,10 @@ def action_update_meal_plan_name(request, meal_plan_id):
     return HttpResponse('')
 
 
+
+
+
+# Possibly delete these
 @method_decorator(csrf_exempt, name='dispatch')
 class GenerateRecipeView(View):
     def post(self, request, *args, **kwargs):
@@ -353,164 +599,3 @@ class GenerateShoppingListView(View):
             return JsonResponse({
                 "error": f"Error generating shopping list: {str(e)}"
             }, status=500)
-
-class RecipeDetailView(UserAuthMixin, DetailView):
-    model = Recipe
-    template_name = 'planner/recipes/detail.html'
-    context_object_name = 'recipe'
-
-    def get_queryset(self):
-        queryset = Recipe.objects.prefetch_related(
-            'ingredients',
-            'instruction_sections',
-            'instruction_sections__steps'
-        )
-        
-        user = self.get_authenticated_user(self.request)
-        
-        # For In Meal Plan toggle button
-        recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-last_viewed_at').first()
-        if recent_meal_plan:
-            queryset = queryset.annotate(
-                in_recent_meal_plan=Exists(
-                    MealPlanRecipe.objects.filter(
-                        meal_group__meal_plan=recent_meal_plan,
-                        recipe=OuterRef('pk')
-                    )
-                ),
-                recent_meal_group_ids=ArrayAgg(
-                    'mealplanrecipe__meal_group__id',
-                    filter=Q(mealplanrecipe__meal_group__meal_plan=recent_meal_plan)
-                )
-            )
-        
-        # For My Recipes toggle button
-        queryset = queryset.annotate(
-            is_saved=Exists(
-                MyRecipe.objects.filter(
-                    user=user,
-                    recipe=OuterRef('pk')
-                )
-            )
-        )
-        
-        return queryset
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        user = self.get_authenticated_user(self.request)
-
-        recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-last_viewed_at').first()
-        if recent_meal_plan:
-            context['recent_meal_plan'] = recent_meal_plan
-        meal_group_id = self.request.GET.get('meal_group_id')
-        if meal_group_id:
-            context['meal_group'] = get_object_or_404(MealGroup, id=meal_group_id)
-        
-        return context
-
-
-class RecipeListView(UserAuthMixin, ListView):
-    model = Recipe
-    context_object_name = 'recipes'
-    paginate_by = 12
-    allowed_sort_fields = ['-created_at', 'created_at', '-modified_at', 'modified_at', 'dish_name']
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        user = self.get_authenticated_user(self.request)
-
-        # For In Meal Plan toggle button
-        recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-last_viewed_at').first()
-        if recent_meal_plan:
-            queryset = queryset.annotate(
-                in_recent_meal_plan=Exists(
-                    MealPlanRecipe.objects.filter(
-                        meal_group__meal_plan=recent_meal_plan,
-                        recipe=OuterRef('pk')
-                    )
-                ),
-                recent_meal_group_ids=ArrayAgg(
-                    'mealplanrecipe__meal_group__id',
-                    filter=Q(mealplanrecipe__meal_group__meal_plan=recent_meal_plan)
-                )
-            )
-        
-        # Filter by In Meal Plan if requested
-        in_meal_plan = self.request.GET.get('in_meal_plan') == 'true'
-        if in_meal_plan:
-            queryset = queryset.filter(in_recent_meal_plan=True)
-
-        # Filter by My Recipes if requested
-        my_recipes = self.request.GET.get('my_recipes') == 'true'
-        if my_recipes:
-            queryset = queryset.filter(saved_to_my_recipes_by=user)
-
-        # For My Recipes toggle button
-        queryset = queryset.annotate(
-            is_saved=Exists(
-                MyRecipe.objects.filter(
-                    user=user,
-                    recipe=OuterRef('pk')
-                )
-            )
-        )
-
-        # Get sort parameter (default to -created_at if not specified)
-        sort_by = self.request.GET.get('sort', '-created_at')
-        queryset = queryset.order_by(sort_by)
-
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['sort'] = self.request.GET.get('sort', '-created_at')
-        context['my_recipes'] = self.request.GET.get('my_recipes') == 'true'
-        
-        user = self.get_authenticated_user(self.request)
-        recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-last_viewed_at').first()
-        if recent_meal_plan:
-            context['recent_meal_plan'] = recent_meal_plan
-        meal_group_id = self.request.GET.get('meal_group_id')
-        if meal_group_id:
-            context['meal_group'] = get_object_or_404(MealGroup, id=meal_group_id)
-        
-        return context
-
-class RecipeCardsListView(RecipeListView):
-    template_name = 'planner/recipes/partial_recipe_cards_list.html'
-
-class RecipeCardsPageView(RecipeListView):
-    template_name = 'planner/recipes/partial_recipe_cards_page.html'
-
-class RecipeCompactListView(RecipeListView):
-    template_name = 'planner/recipes/partial_recipe_compact_list.html'
-
-class RecipeCompactPageView(RecipeListView):
-    template_name = 'planner/recipes/partial_recipe_compact_page.html'
-
-class RecipeSearchView(RecipeListView):
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        search_query = self.request.GET.get('q', '').strip()
-        
-        if search_query:
-            queryset = queryset.filter(
-                Q(dish_name__icontains=search_query) |
-                Q(description__icontains=search_query) |
-                Q(ingredients__item__icontains=search_query) |
-                Q(instruction_sections__steps__step__icontains=search_query)
-            ).distinct()
-            
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['search_query'] = self.request.GET.get('q', '').strip()
-        return context
-
-class RecipeSearchCards(RecipeSearchView, RecipeCardsPageView):
-    pass
-
-class RecipeSearchCompact(RecipeSearchView, RecipeCompactPageView):
-    pass

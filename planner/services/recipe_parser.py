@@ -58,7 +58,7 @@ class RecipeParser:
     def validate(self) -> Recipe:
         """Validate entire recipe data"""
         # Check for required fields first
-        required_fields = ['dish_name', 'servings', 'description', 'ingredients', 'instructions']
+        required_fields = ['title', 'servings', 'description', 'ingredients', 'instructions']
         missing_fields = [field for field in required_fields if field not in self.recipe_data]
         if missing_fields:
             raise ValueError(f"Missing required fields: {', '.join(missing_fields)}")
@@ -72,7 +72,7 @@ class RecipeParser:
             
             # Finally, create the complete recipe with validated components
             return Recipe(
-                dish_name=self.recipe_data['dish_name'],
+                title=self.recipe_data['title'],
                 servings=self.recipe_data['servings'],
                 description=self.recipe_data['description'],
                 ingredients=validated_ingredients,

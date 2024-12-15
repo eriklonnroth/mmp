@@ -1,88 +1,56 @@
 from openai import OpenAI
-from pydantic import BaseModel, field_validator
-from typing import ClassVar
+from pydantic import BaseModel
 import os
-import argparse
-import json
-import glob
-from planner.models import ShoppingItem
+from planner.models import MealPlan as MealPlan, ShoppingItem as DBShoppingItem
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
 # Base models (maps to JSON response and models.py)
-class Category(str):
-    valid_categories: ClassVar[list[tuple[str, str]]] = ShoppingItem.CATEGORIES
-
-    @classmethod
-    def categories_list(cls) -> list[str]:
-        return [cat[0] for cat in cls.valid_categories]
-
-    @classmethod
-    def validate(cls, v):
-        if v not in cls.categories_list():
-            raise ValueError(f'Category must be one of: {cls.categories_list()}')
-        return v
-        
-    @classmethod
-    def __get_validators__(cls): # Pydantic method
-        yield cls.validate
-        
-
-from pydantic import BaseModel, field_validator
-
 class ShoppingItem(BaseModel):
-    item: str
+    name: str
     quantity: str
-    recipe_notes: str
     category: str
-
-    @field_validator('category')
-    @classmethod
-    def validate_category(cls, v):
-        valid_categories = [cat[1] for cat in ShoppingItem.CATEGORIES] # Full category name, e.g. Fruit & Vegetables (not fruit_veg)
-        if v not in valid_categories:
-            raise ValueError(f'Category must be one of: {valid_categories}')
-        return v
-
+    recipe: int # Foreign key to recipe
 
 class ShoppingList(BaseModel):
-    shopping_list: list[ShoppingItem]
+    items: list[ShoppingItem]
 
-# Load recipes from static directory
-def load_recipes():
-    recipe_dir = "planner/static/planner/recipes"
-    recipe_files = glob.glob(os.path.join(recipe_dir, "*.json"))
-    
-    recipes = []
-    for recipe_file in recipe_files:
-        with open(recipe_file, 'r') as f:
-            recipe = json.load(f)
-            # Strip away unnecessary fields from recipe
-            stripped_recipe = {
-                "dish_name": recipe["dish_name"],
-                "servings": recipe["servings"],
-                "description": recipe["description"],
-                "ingredients": recipe["ingredients"]
-            }
-            recipes.append(stripped_recipe)
-    return recipes
+# Load underlying recipes from MealPlan
+def load_preliminary_shopping_list(meal_plan: MealPlan):
+    shopping_list = []
+
+    for group in meal_plan.groups.all():
+        for mpr in group.mprs.all():
+            recipe = mpr.recipe
+            ingredients = recipe.ingredients.all()
+            for ing in ingredients:
+                shopping_item = ShoppingItem(
+                    name=ing.name,
+                    quantity=ing.quantity,
+                    category=None,
+                    recipe=recipe.id
+                )
+                shopping_list.append(shopping_item)
+    return shopping_list
 
 # OpenAI API function
-def generate_shopping_list(recipe_files: list[str], preferred_units: str = "metric") -> ShoppingList:
+def generate_shopping_list(meal_plan: MealPlan, preferred_units: str = "metric") -> ShoppingList:
     """
     Generates a shopping list in JSON format. See https://platform.openai.com/docs/guides/structured-outputs
     """
-    recipes = load_recipes()
+    shopping_list = load_preliminary_shopping_list(meal_plan)
         
     user_input = f"""
-    Make me a JSON shopping list using shopping-appropriate quantities by grouping similar ingredients from the recipes below. 
-    Mention underlying recipes in recipe_notes using format "For <dish_name>". 
-    Also add recipe_notes where recipe quantities have been combined or adapted for shopping, e.g. 5 cloves of garlic -> 1 head of garlic.
-    Use {preferred_units} units for all quantities, converting where necessary.
-    Categorize each item into one of the following categories: {[cat[1] for cat in ShoppingItem.CATEGORIES]}.
-
-    {recipes}
+    For each ShoppingItem in the ShoppingList:
+        1. Where necessary, adjust the item name to be shopping-appropriate, e.g. "carrots, julienned" becomes "carrots", "steamed rice" becomes "rice".
+        2. Where necessary, adjust the quantity to be shopping-appropriate and ensure it is in {preferred_units} units.
+        3. Set the category to be one of the following: {[cat[1] for cat in DBShoppingItem.CATEGORIES]}.
+        4. Leave the recipe field unchanged.
+        5. Remove the entire ShoppingItem if it is one of: salt, pepper, olive oil.
+    
+    ShoppingList:
+    {shopping_list}
     """
 
     try:
@@ -96,29 +64,11 @@ def generate_shopping_list(recipe_files: list[str], preferred_units: str = "metr
         )
         
         shopping_list = completion.choices[0].message.parsed
-        return shopping_list
+        shopping_list_with_name = shopping_list.model_copy(
+            update={'name': f"Shopping List for '{meal_plan.name}'"}
+        )
+        return shopping_list_with_name
+
     except Exception as e:
         print(f"Error generating shopping list: {e}")
         raise e
-
-
-# Parse command line arguments
-def parse_arguments():
-    parser = argparse.ArgumentParser(description='Generate a shopping list')
-    parser.add_argument(
-        '--recipes',
-        required=True,
-        help='Comma-separated list of filenames (e.g., korma.json,lasagna.json)',
-        type=lambda x: [s.strip() for s in x.split(',')]
-    )
-    
-    return parser.parse_args()
-
-def main():
-    args = parse_arguments()
-    shopping_list = generate_shopping_list(args.recipes)
-    return shopping_list
-
-if __name__ == "__main__":
-    shopping_list = main()
-    print(shopping_list.model_dump_json(indent=2))

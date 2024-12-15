@@ -1,7 +1,7 @@
 {
     "type": "object",
     "properties": {
-        "dish_name": {
+        "title": {
             "type": "string",
             "description": "A memorable name for the dish",
             "examples": [
@@ -59,13 +59,13 @@
                         "items": {
                             "type": "object",
                             "properties": {
-                                "step": {
+                                "text": {
                                     "type": "string",
                                     "description": "A single step in the instructions."
                                 }
                             },
                             "required": [
-                                "step"
+                                "text"
                             ]
                         }
                     }
@@ -78,7 +78,7 @@
         }
     },
     "required": [
-        "dish_name",
+        "title",
         "description",
         "servings",
         "ingredients",

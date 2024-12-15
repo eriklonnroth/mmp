@@ -31,6 +31,7 @@ meal_plan_patterns = [
 # Shopping List routes
 shopping_list_patterns = [
     path("shopping-list/", views.shopping_list, name="shopping_list"),
+    path("shopping-list/<int:pk>/", views.ShoppingListDetailView.as_view(), name="shopping_list_detail"),
 ]
 
 # HTMX Actions
@@ -45,6 +46,8 @@ action_patterns = [
     path("action_delete_meal_group/<int:group_id>/", views.action_delete_meal_group, name="action_delete_meal_group"),
     path("action_update_meal_group_name/<int:group_id>/", views.action_update_meal_group_name, name="action_update_meal_group_name"),
     path("action_update_meal_plan_name/<int:meal_plan_id>/", views.action_update_meal_plan_name, name="action_update_meal_plan_name"),
+    path("action_update_mpr/<int:mpr_id>/<int:new_group_id>/", views.action_update_mpr, name="action_update_mpr"),
+    path("action_generate_shopping_list/<int:meal_plan_id>/", views.action_generate_shopping_list, name="action_generate_shopping_list"),
 ]
 
 # API routes

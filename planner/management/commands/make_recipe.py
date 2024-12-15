@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand
+from django.contrib.auth.models import User
 from planner.services.recipe_generator import generate_recipe
 from planner.services.recipe_parser import parse_recipe_string
 from planner.services.recipe_repository import save_recipe_to_db
@@ -30,15 +31,15 @@ class Command(BaseCommand):
         parsed_recipe = parse_recipe_string(recipe_str)
         
         # Print the generated dish name
-        self.stdout.write(self.style.SUCCESS(f"Generated recipe: {parsed_recipe.dish_name}"))
+        self.stdout.write(self.style.SUCCESS(f"Generated recipe: {parsed_recipe.title}"))
         
         # Save to database if requested
-        if options['db']:                               
-            db_recipe = save_recipe_to_db(parsed_recipe, status='published')
+        if options['db']:
+            user = User.objects.get(username='admin')
+            db_recipe = save_recipe_to_db(parsed_recipe, status='published', user=user)
             self.stdout.write(self.style.SUCCESS(
                 f"Saved recipe to database with ID: {db_recipe.id}"
-            ))              
-
+            ))
 
         # Save to file if requested
         if options['file']:                            

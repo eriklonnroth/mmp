@@ -10,14 +10,14 @@ class Ingredient(BaseModel):
     quantity: str
 
 class InstructionStep(BaseModel):
-    step: str
+    text: str
 
 class InstructionSection(BaseModel):
     section_title: str
     steps: list[InstructionStep]
 
 class Recipe(BaseModel):
-    dish_name: str
+    title: str
     description: str
     servings: int
     ingredients: list[Ingredient]  # List of ingredient items with their quantities

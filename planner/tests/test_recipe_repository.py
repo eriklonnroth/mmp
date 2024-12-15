@@ -25,7 +25,7 @@ class TestRecipeRepository:
         db_recipe = save_recipe_to_db(recipe, user, status)
         
         # Test basic info was saved correctly
-        assert db_recipe.dish_name == recipe.dish_name
+        assert db_recipe.title == recipe.title
         assert db_recipe.servings == recipe.servings
         assert db_recipe.description == recipe.description
         assert db_recipe.created_by == user
@@ -44,7 +44,7 @@ class TestRecipeRepository:
         bake_section = sections.get(title="Bake")
         steps = bake_section.steps.all()
         assert len(steps) == 4
-        assert "bake for an additional 10-15 minutes" in steps.get(order=3).step
+        assert "bake for an additional 10-15 minutes" in steps.get(order=3).text
 
         # Test the inherited status is the same as the recipe status
         assert steps.get(order=3).section.recipe.status == status

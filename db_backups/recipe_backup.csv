@@ -1,4 +1,4 @@
-id,dish_name,servings,description,created_at,modified_at,ingredients_digest,created_by_id,status
+id,title,servings,description,created_at,modified_at,ingredients_digest,created_by_id,status
 7,Poached Salmon with Greens,4,"A delicate and flavorful dish featuring poached salmon served on a bed of sautéed greens, perfect for a light and healthy meal.",2024-11-20 17:13:58.203954+02,2024-11-20 17:13:58.203964+02,4e231b811da19d79a936019b1c6e87cf79113bfad6f238c9385c5a98ef23d74c,1,draft
 2,Classic Beef Lasagna,3,"A delicious and hearty beef lasagna that's perfect for a cozy meal. Made with layers of tender pasta, rich meat sauce, and a creamy ricotta-mozzarella-parmesan blend.",2024-11-20 17:13:57.986235+02,2024-11-20 17:13:57.986243+02,939ae27f8defd40a4a156f5b19ec3c70f7cc6c2f0e7fb0e0b75559aefb0f7bff,1,draft
 13,Mushroom Risotto,4,"A creamy, savory risotto featuring earthy mushrooms, perfectly cooked arborio rice, and a touch of parmesan. Ideal for a comforting meal.",2024-11-20 18:41:37.636373+02,2024-11-20 18:41:37.63642+02,68da0c2073679edab7de6d4542f31da98461d5e85d0e1a2272b34fc40ca858a2,1,published

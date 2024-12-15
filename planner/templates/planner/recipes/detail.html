@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    {{ recipe.dish_name }}
+    {{ recipe.title }}
 {% endblock %}
 
 {% block body %}
@@ -31,7 +31,7 @@
                 </div>
                 
                 <!-- Recipe Header -->
-                <h1 class="text-3xl font-bold text-gray-900">{{ recipe.dish_name }}</h1>
+                <h1 class="text-3xl font-bold text-gray-900">{{ recipe.title }}</h1>
                 <p class="text-gray-600 mt-2">{{ recipe.description }}</p>
                 <p class="text-sm text-gray-500 mt-1">
                     {{ recipe.servings }} servings
@@ -75,7 +75,7 @@
                         <h3 class="text-lg font-medium text-gray-800 mb-3">{{ section.title }}</h3>
                         <ol class="list-decimal list-inside space-y-3">
                             {% for step in section.steps.all %}
-                                <li class="text-gray-700">{{ step.step }}</li>
+                                <li class="text-gray-700">{{ step.text }}</li>
                             {% endfor %}
                         </ol>
                     </div>

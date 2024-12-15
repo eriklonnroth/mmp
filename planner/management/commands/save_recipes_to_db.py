@@ -30,8 +30,8 @@ class Command(BaseCommand):
             recipe = parse_recipe_file(recipe_file)
             
             # Check if recipe already exists
-            if Recipe.objects.filter(dish_name=recipe.dish_name).exists():
-                self.stdout.write(f"Skipping existing recipe: {recipe.dish_name}")
+            if Recipe.objects.filter(title=recipe.title).exists():
+                self.stdout.write(f"Skipping existing recipe: {recipe.title}")
                 continue
             
             save_recipe_to_db(recipe, status='published')

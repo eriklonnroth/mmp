@@ -144,7 +144,7 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("dish_name", models.CharField(max_length=100)),
+                ("title", models.CharField(max_length=100)),
                 ("servings", models.PositiveIntegerField()),
                 ("description", models.TextField(blank=True)),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
