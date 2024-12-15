@@ -34,7 +34,7 @@ class TestRecipeRepository:
         # Test ingredients were saved
         ingredients = db_recipe.ingredients.all()
         assert len(ingredients) == len(recipe.ingredients)
-        assert ingredients.first().item == recipe.ingredients[0].item
+        assert ingredients.first().name == recipe.ingredients[0].name
         
         # Test instruction sections were saved
         sections = db_recipe.instruction_sections.all()

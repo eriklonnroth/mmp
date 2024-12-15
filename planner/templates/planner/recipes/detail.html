@@ -15,7 +15,7 @@
 
                     <!-- Back link with page reload -->
                     <a href="{{ request.META.HTTP_REFERER|default:'/' }}" class="inline-flex items-center text-sm text-gray-600 hover:text-gray-900">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                         </svg>
                         Back
@@ -59,7 +59,7 @@
                                 {{ ingredient.quantity }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                {{ ingredient.item }}
+                                {{ ingredient.name }}
                             </td>
                         </tr>
                         {% endfor %}

@@ -1,0 +1,98 @@
+{
+  "title": "Tiger Cake",
+  "description": "A delicious and visually stunning cake featuring swirls of chocolate and vanilla, giving it the appearance of tiger stripes. Perfect for a stylish dessert that impresses.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "name": "Flour, all-purpose",
+      "quantity": "150 g"
+    },
+    {
+      "name": "Sugar, granulated",
+      "quantity": "100 g"
+    },
+    {
+      "name": "Baking powder",
+      "quantity": "1 tsp"
+    },
+    {
+      "name": "Salt",
+      "quantity": "1/4 tsp"
+    },
+    {
+      "name": "Butter, unsalted and softened",
+      "quantity": "125 g"
+    },
+    {
+      "name": "Eggs",
+      "quantity": "2 large"
+    },
+    {
+      "name": "Vanilla extract",
+      "quantity": "1 tsp"
+    },
+    {
+      "name": "Milk",
+      "quantity": "100 ml"
+    },
+    {
+      "name": "Cocoa powder, unsweetened",
+      "quantity": "2 tbsp"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Preparation",
+      "steps": [
+        {
+          "text": "Preheat your oven to 180°C (350°F)."
+        },
+        {
+          "text": "Grease and flour a 20 cm (8-inch) round cake pan."
+        }
+      ]
+    },
+    {
+      "section_title": "Mix the Batter",
+      "steps": [
+        {
+          "text": "In a bowl, combine flour, sugar, baking powder, and salt."
+        },
+        {
+          "text": "Add softened butter, eggs, vanilla extract, and milk to the dry ingredients and mix until smooth."
+        },
+        {
+          "text": "Divide the batter into two equal parts in separate bowls."
+        }
+      ]
+    },
+    {
+      "section_title": "Create the Stripes",
+      "steps": [
+        {
+          "text": "In one portion of the batter, whisk in the cocoa powder to create a chocolate batter."
+        },
+        {
+          "text": "In the prepared cake pan, pour a spoonful of vanilla batter in the center."
+        },
+        {
+          "text": "On top of the vanilla batter, pour a spoonful of chocolate batter."
+        },
+        {
+          "text": "Continue alternating spoonfuls of vanilla and chocolate batter until both batters are used up, creating a concentric ring pattern."
+        }
+      ]
+    },
+    {
+      "section_title": "Bake the Cake",
+      "steps": [
+        {
+          "text": "Place the cake pan in the preheated oven and bake for 30-35 minutes or until a toothpick inserted into the center comes out clean."
+        },
+        {
+          "text": "Allow the cake to cool in the pan for 10 minutes before transferring to a wire rack to cool completely."
+        }
+      ]
+    }
+  ]
+}

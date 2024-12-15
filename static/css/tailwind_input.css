@@ -183,10 +183,6 @@
                opacity-75;
     }
 
-    .form-section-title {
-        @apply text-lg font-semibold text-gray-900 mb-2;
-    }
-
     .generated-recipe-control-button {
         @apply flex-1 flex items-center justify-center gap-2 py-2 px-4 mx-2 
                bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 
@@ -310,6 +306,22 @@
 
     .toggle-mpr-in-modal-button.in-mg {
         @apply bg-red-600 hover:bg-red-700;
+    }
+
+    /* Add Shopping Item Button Styles */
+    .add-shopping-item-button {
+        @apply fixed bottom-8 right-8 w-14 h-14 rounded-full bg-violet-600 
+               hover:bg-violet-700 text-white shadow-lg flex items-center 
+               justify-center transition-colors;
+    }
+
+    .add-shopping-item-button svg {
+        @apply w-6 h-6;
+    }
+
+    .submit-button {
+        @apply px-4 py-2 text-sm font-medium text-white bg-violet-600 
+               hover:bg-violet-700 rounded-md transition-colors;
     }
 
 }

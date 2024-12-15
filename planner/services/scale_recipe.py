@@ -7,7 +7,7 @@ def is_close_to_one(value: float) -> bool:
     """Check if a number is effectively one (handles floating point imprecision)."""
     return abs(value - 1.0) < 0.1
 
-def scale_quantity(quantity: str, item: str, original_servings: int, new_servings: int) -> tuple[str, str]:
+def scale_quantity(quantity: str, name: str, original_servings: int, new_servings: int) -> tuple[str, str]:
     """Scale a quantity and handle pluralization using Django's pluralize."""
     ratio = new_servings / original_servings
     pattern = r'(\d+(?:\.\d+)?|\d+/\d+|\d+\s+\d+/\d+)'
@@ -43,8 +43,8 @@ def scale_quantity(quantity: str, item: str, original_servings: int, new_serving
         if len(words) > 1:  # Has units like "cups", "tablespoons"
             words[1] = words[1] + pluralize(value)
             new_quantity = ' '.join(words)
-        # Pluralize the item if needed
-        new_item = item + pluralize(value)
-        return new_quantity, new_item
+        # Pluralize the name if needed
+        new_name = name + pluralize(value)
+        return new_quantity, new_name
     
-    return new_quantity, item
+    return new_quantity, name

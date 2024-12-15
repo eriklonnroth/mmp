@@ -1,4 +1,5 @@
 from django import forms
+from .models import ShoppingItem
 
 
 class CreateRecipeForm(forms.Form):
@@ -55,4 +56,26 @@ class CreateRecipeForm(forms.Form):
         widget=forms.Select(attrs={
             'class': 'form-field'
         })
+    )
+
+class AddShoppingItemForm(forms.Form):
+    name = forms.CharField(
+        label="Item",
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-field'})
+    )
+
+    quantity = forms.CharField(
+        label="Quantity",
+        max_length=100,
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-field'})
+    )
+
+    category = forms.ChoiceField(
+        label="Category",
+        choices=ShoppingItem.CATEGORIES,
+        required=False,
+        widget=forms.Select(attrs={'class': 'form-field'})
     )

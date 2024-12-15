@@ -32,15 +32,15 @@
 #         """Returns a complete scaled version of the recipe."""
 #         scaled_ingredients = []
 #         for ingredient in self.ingredients.all():
-#             new_quantity, new_item = scale_quantity(
+#             new_quantity, new_name = scale_quantity(
 #                 ingredient.quantity,
-#                 ingredient.item,
+#                 ingredient.name,
 #                 self.servings,
 #                 new_servings
 #             )
 #             scaled_ingredients.append({
 #                 'quantity': new_quantity,
-#                 'item': new_item,
+#                 'name': new_name,
 #                 'order': ingredient.order
 #             })
         

@@ -7,10 +7,10 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container mx-auto max-w-5xl">
-        <div class="my-12">
-            <h1 class="text-2xl font-bold">Shopping List</h1>
-        </div>
+
+<div class="body-container my-12" x-data="{ showAddItemModal: false }">
+    <div class="my-12">
+        <h1 class="text-2xl font-bold">Shopping List</h1>
     </div>
 
 
@@ -23,6 +23,7 @@
                     <th scope="col" class="max-w-128 w-fit">Item</th>
                     <th scope="col" class="max-w-48 w-fit">Quantity</th>
                     <th scope="col" class="max-w-128 w-fit">Used In</th>
+                    <th scope="col" class="w-4"></th>
                 </tr>
             </thead>
             <tbody>
@@ -36,24 +37,95 @@
         </table>
     </div>
 
+    <!-- Add shopping item -->
+    <div>
+        <button class="add-shopping-item-button" @click="showAddItemModal = true">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+        </button>
+    </div>
+
+    {% partial partial-item-modal %}
+
+</div>
+
 {% endblock %}
 
 {% partialdef partial-category-row %}
     <tr>
-        <td colspan="4" class="category-row">{{ category.name }}</td>
+        <td colspan="5" class="category-row">{{ category.name }}</td>
     </tr>
 {% endpartialdef partial-category-row %}
 
 {% partialdef partial-item-row %}
 
-    <tr>
+    <tr class="shopping-item-row" data-category="{{ category.code }}" data-item="{{ item.id }}">
         <td>
             <input type="checkbox" class="shopping-list-checkbox">
         </td>
         <td>{{ item.name }}</td>
         <td>{{ item.quantity }}</td>
         <td>{{ item.recipe_title }}</td>
+        <td>
+            <button class="text-gray-400 hover:text-red-500 transition-colors" 
+                    hx-delete="{% url 'action_delete_shopping_item' item.id %}"
+                    hx-confirm="Delete '{{ item.name }}: {{ item.quantity }}'?"
+                    hx-target="closest tr"
+                    hx-swap="outerHTML">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+            </button>
+        </td>
 
     </tr>
 
 {% endpartialdef partial-item-row %}
+
+{% partialdef partial-item-modal %}
+    <div class="fixed inset-0 flex items-center justify-center z-50 p-4 bg-black/50" x-show="showAddItemModal" x-transition>
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+            <div class="modal-header border-b p-4">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-xl font-semibold">Add to Shopping List</h2>
+                    <button type="button" 
+                            class="text-gray-400 hover:text-gray-500"
+                            @click="showAddItemModal = false">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-6">
+                <div class="add-shopping-item-form-wrapper space-y-4">
+                    <form hx-post="{% url 'action_add_shopping_item' shopping_list.id %}" 
+                          hx-swap="none"
+                          hx-disabled-elt="#add-shopping-item-form-fieldset"
+                          class="space-y-2"> 
+                        {% csrf_token %}
+                        <fieldset id="add-shopping-item-form-fieldset">
+                            <div class="form-group">
+                                {{ form.name.label_tag }}
+                                {{ form.name }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.quantity.label_tag }}
+                                {{ form.quantity }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.category.label_tag }}
+                                {{ form.category }}
+                            </div>
+
+                            <button type="submit" class="form-submit">Add Item</button>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endpartialdef partial-item-modal %}

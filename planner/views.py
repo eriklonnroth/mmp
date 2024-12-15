@@ -232,7 +232,7 @@ class RecipeSearchView(RecipeListView):
             queryset = queryset.filter(
                 Q(title__icontains=search_query) |
                 Q(description__icontains=search_query) |
-                Q(ingredients__item__icontains=search_query) |
+                Q(ingredients__name__icontains=search_query) |
                 Q(instruction_sections__steps__text__icontains=search_query)
             ).distinct()
             
@@ -329,7 +329,6 @@ class ShoppingListDetailView(UserAuthMixin, DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
 
         items_by_category = {}
         for category_code, category_name in ShoppingItem.CATEGORIES:
@@ -351,6 +350,10 @@ class ShoppingListDetailView(UserAuthMixin, DetailView):
             categories.append(category_dict)
         
         context['categories'] = categories
+
+        form = forms.AddShoppingItemForm()
+        context['form'] = form
+
         return context
 
 
@@ -544,6 +547,34 @@ def action_update_meal_plan_name(request, meal_plan_id):
     meal_plan.save()
     return HttpResponse('')
 
+@require_http_methods(['POST'])
+def action_add_shopping_item(request, shopping_list_id):
+    form = forms.AddShoppingItemForm(request.POST)
+    if form.is_valid():
+        shopping_list = get_object_or_404(ShoppingList, id=shopping_list_id)
+        
+        # Create new shopping item
+        ShoppingItem.objects.create(
+            shopping_list=shopping_list,
+            name=form.cleaned_data['name'].capitalize(),
+            quantity=form.cleaned_data['quantity'],
+            category=form.cleaned_data['category'] or 'fruit_veg'
+        )
+
+        response = HttpResponse()
+        response['HX-Redirect'] = f'/shopping-list/{shopping_list_id}'
+        return response
+
+    else:
+        return HttpResponseBadRequest(str(form.errors))
+
+@require_http_methods(['DELETE'])
+def action_delete_shopping_item(request, item_id):
+    shopping_item = get_object_or_404(ShoppingItem, id=item_id)
+    shopping_item.delete()
+    return HttpResponse('')
+
+
 
 
 
@@ -599,3 +630,5 @@ class GenerateShoppingListView(View):
             return JsonResponse({
                 "error": f"Error generating shopping list: {str(e)}"
             }, status=500)
+
+        

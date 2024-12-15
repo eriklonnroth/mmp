@@ -48,6 +48,8 @@ action_patterns = [
     path("action_update_meal_plan_name/<int:meal_plan_id>/", views.action_update_meal_plan_name, name="action_update_meal_plan_name"),
     path("action_update_mpr/<int:mpr_id>/<int:new_group_id>/", views.action_update_mpr, name="action_update_mpr"),
     path("action_generate_shopping_list/<int:meal_plan_id>/", views.action_generate_shopping_list, name="action_generate_shopping_list"),
+    path("action_add_shopping_item/<int:shopping_list_id>/", views.action_add_shopping_item, name="action_add_shopping_item"),
+    path("action_delete_shopping_item/<int:item_id>/", views.action_delete_shopping_item, name="action_delete_shopping_item"),
 ]
 
 # API routes

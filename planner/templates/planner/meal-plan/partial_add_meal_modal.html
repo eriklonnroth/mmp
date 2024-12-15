@@ -1,11 +1,11 @@
-<div x-show="modalOpen" id="add-meal-modal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
+<div x-show="showMealModal" id="add-meal-modal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
     <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4">
         <div class="modal-header border-b p-4">
             <div class="flex justify-between items-center">
-                <h2 class="text-xl font-semibold">Add meal to {{ group.name }}</h2>
+                <h2 class="text-xl font-semibold">Add to {{ group.name }}</h2>
                 <button type="button" 
                         class="text-gray-400 hover:text-gray-500"
-                        @click="modalOpen = false">
+                        @click="showMealModal = false">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>

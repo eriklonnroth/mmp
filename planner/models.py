@@ -73,13 +73,13 @@ class Recipe(models.Model):
 
 class Ingredient(models.Model):
     recipe = models.ForeignKey(Recipe, related_name='ingredients', on_delete=models.CASCADE)
-    item = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
     quantity = models.CharField(max_length=50)
     order = models.PositiveIntegerField()
     modified_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.quantity} {self.item}"
+        return f"{self.quantity} {self.name}"
 
     class Meta:
         ordering = ['order']
@@ -169,7 +169,7 @@ class ShoppingItem(models.Model):
     shopping_list = models.ForeignKey(ShoppingList, related_name='items', on_delete=models.CASCADE)
     category = models.CharField(max_length=20, choices=CATEGORIES)
     name = models.CharField(max_length=100)
-    quantity = models.CharField(max_length=100)
+    quantity = models.CharField(max_length=100, blank=True, null=True)
     recipe = models.ForeignKey(Recipe, on_delete=models.PROTECT, blank=True, null=True)
     is_checked = models.BooleanField(default=False)
     modified_at = models.DateTimeField(auto_now=True)

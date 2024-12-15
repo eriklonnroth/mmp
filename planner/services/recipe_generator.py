@@ -6,7 +6,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Base models (maps to JSON response and models.py)
 class Ingredient(BaseModel):
-    item: str
+    name: str
     quantity: str
 
 class InstructionStep(BaseModel):
@@ -20,7 +20,7 @@ class Recipe(BaseModel):
     title: str
     description: str
     servings: int
-    ingredients: list[Ingredient]  # List of ingredient items with their quantities
+    ingredients: list[Ingredient]  # List of ingredient names with their quantities
     instructions: list[InstructionSection]  # List of instruction sections, each containing ordered steps
 
 

@@ -22,7 +22,7 @@ class RecipeRepository:
         for i, ing in enumerate(recipe.ingredients, 1):
             DBIngredient.objects.create(
                 recipe=db_recipe,
-                item=ing.item,
+                name=ing.name,
                 quantity=ing.quantity,
                 order=i
             )

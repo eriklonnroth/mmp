@@ -11,7 +11,7 @@ class ShoppingItem(BaseModel):
     name: str
     quantity: str
     category: str
-    recipe: int # Foreign key to recipe
+    recipe_id: int # Foreign key to recipe
 
 class ShoppingList(BaseModel):
     items: list[ShoppingItem]
@@ -28,8 +28,8 @@ def load_preliminary_shopping_list(meal_plan: MealPlan):
                 shopping_item = ShoppingItem(
                     name=ing.name,
                     quantity=ing.quantity,
-                    category=None,
-                    recipe=recipe.id
+                    category='TBD',
+                    recipe_id=recipe.id
                 )
                 shopping_list.append(shopping_item)
     return shopping_list
@@ -45,8 +45,8 @@ def generate_shopping_list(meal_plan: MealPlan, preferred_units: str = "metric")
     For each ShoppingItem in the ShoppingList:
         1. Where necessary, adjust the item name to be shopping-appropriate, e.g. "carrots, julienned" becomes "carrots", "steamed rice" becomes "rice".
         2. Where necessary, adjust the quantity to be shopping-appropriate and ensure it is in {preferred_units} units.
-        3. Set the category to be one of the following: {[cat[1] for cat in DBShoppingItem.CATEGORIES]}.
-        4. Leave the recipe field unchanged.
+        3. Update the category to be one of the following: {[cat[1] for cat in DBShoppingItem.CATEGORIES]}. Derived items like "lemon zest" should be in the "Fruit & Vegetables" category since they are made from fresh produce (lemons).
+        4. Leave the recipe_id field unchanged.
         5. Remove the entire ShoppingItem if it is one of: salt, pepper, olive oil.
     
     ShoppingList:

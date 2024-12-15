@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
-from planner.models import ShoppingList as DBShoppingList, ShoppingItem as DBShoppingItem
+from django.shortcuts import get_object_or_404
+from planner.models import ShoppingList as DBShoppingList, ShoppingItem as DBShoppingItem, Recipe as DBRecipe
 from .shopping_list_generator import ShoppingList
 
 class ShoppingListRepository:
@@ -18,11 +19,13 @@ class ShoppingListRepository:
         )
 
         for item in shopping_list.items:
+            recipe = get_object_or_404(DBRecipe, id=item.recipe_id) if item.recipe_id else None
+
             DBShoppingItem.objects.create(
                 shopping_list=db_shopping_list,
                 name=item.name,
                 quantity=item.quantity,
-                used_in=item.used_in,
+                recipe=recipe,
                 category=ShoppingListRepository.get_category_key(item.category)
             )
 
