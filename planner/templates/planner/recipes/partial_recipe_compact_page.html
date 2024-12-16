@@ -1,9 +1,11 @@
+{% load static %}
+
 {% for recipe in recipes %}
-    <div id="recipe-{{ recipe.id }}" x-data="{ in_mg: {% if meal_group.id in recipe.recent_meal_group_ids %}true{% else %}false{% endif %} }" class="bg-white rounded-lg shadow-md overflow-hidden mb-2">
+    <div id="recipe-{{ recipe.id }}" x-data="{ in_mg: {% if meal_group.id in recipe.recent_meal_group_ids %}true{% else %}false{% endif %} }" class="bg-white w-full shadow-md rounded-lg overflow-hidden mb-2">
         <div class="flex items-center p-2">
 
-            <div class="relative w-16 h-16 flex-shrink-0">
-                <img src="https://placehold.co/400x300" alt="Recipe" class="w-full h-full object-cover rounded">
+            <div class="relative w-16 h-16">
+                <img src="{% if recipe.image.name %}{{ recipe.image.url }}{% else %}{% static 'img/recipe_placeholder.png' %}{% endif %}" alt="{{ recipe.title }}"  class="w-full h-full object-cover">
             </div>
             
             <div class="flex-grow px-4">

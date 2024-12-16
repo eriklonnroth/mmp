@@ -50,6 +50,10 @@ class MealGroup(models.Model):
         ]
 
 # Recipe models
+
+def recipe_image_path(instance, filename):
+    return f'recipes/{instance.id}/{filename}'
+
 class Recipe(models.Model):
     STATUS_CHOICES = [
         ('draft', 'Draft'),
@@ -62,12 +66,17 @@ class Recipe(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     modified_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='published')
+    image = models.ImageField(
+        upload_to=recipe_image_path,
+        blank=True,
+        null=True
+    )
     saved_to_my_recipes_by = models.ManyToManyField(
         User,
         through='MyRecipe',
         related_name='my_recipes'
     )
-
+    
     def __str__(self):
         return f"{self.title}"
 
@@ -76,7 +85,6 @@ class Recipe(models.Model):
         indexes = [
             models.Index(fields=['created_by', 'created_at', 'status']),
         ]
-
 
 
 class Ingredient(models.Model):

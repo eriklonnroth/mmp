@@ -1878,6 +1878,10 @@ tr:has(.shopping-list-checkbox:checked) td {
   overflow: hidden;
 }
 
+.\!overflow-hidden {
+  overflow: hidden !important;
+}
+
 .overflow-y-auto {
   overflow-y: auto;
 }
@@ -1997,6 +2001,11 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .bg-opacity-75 {
   --tw-bg-opacity: 0.75;
+}
+
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .object-cover {
