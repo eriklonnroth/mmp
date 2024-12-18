@@ -39,6 +39,7 @@ action_patterns = [
     path("action_create_meal_plan/<str:template>/", views.action_create_meal_plan, name="action_create_meal_plan"),
     path("action_delete_meal_plan/<int:meal_plan_id>/", views.action_delete_meal_plan, name="action_delete_meal_plan"),
     path("action_generate_recipe/", views.action_generate_recipe, name="action_generate_recipe"),
+    path("action_generate_recipe_image/<int:recipe_id>/", views.action_generate_recipe_image, name="action_generate_recipe_image"),
     path("action_toggle_my_recipes/<int:recipe_id>/", views.action_toggle_my_recipes, name="action_toggle_my_recipes"),
     path("action_toggle_mpr/<int:meal_group_id>/<int:recipe_id>/", views.action_toggle_mpr, name="action_toggle_mpr"),
     path("action_delete_meal_plan_recipe/<int:mpr_id>/", views.action_delete_meal_plan_recipe, name="action_delete_meal_plan_recipe"),

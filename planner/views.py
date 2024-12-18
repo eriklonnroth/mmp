@@ -11,6 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.views import View
 from django.views.generic import DetailView, ListView
+from planner.services.image_generator import get_or_create_recipe_image
 from planner.services.recipe_generator import generate_recipe
 from planner.services.recipe_parser import parse_recipe_string
 from planner.services.recipe_repository import save_recipe_to_db
@@ -405,6 +406,11 @@ def action_generate_recipe(request, user):
     else:
         return HttpResponseBadRequest(str(form.errors))
 
+@require_http_methods(['GET'])
+def action_generate_recipe_image(request, recipe_id):
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+    image = get_or_create_recipe_image(recipe)
+    return render(request, 'planner/recipes/detail.html#partial-recipe-image', {'image_url': image.url})
 
 @require_http_methods(['POST'])
 @with_user
@@ -642,7 +648,6 @@ def action_update_profile(request, user):
 
 
 
-# Possibly delete these
 @method_decorator(csrf_exempt, name='dispatch')
 class GenerateRecipeView(View):
     def post(self, request, *args, **kwargs):

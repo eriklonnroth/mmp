@@ -110,7 +110,6 @@
                 hx-post="{% url 'action_add_meal_group' meal_plan.id %}"
                 hx-target="#add-group-button"
                 hx-swap="beforebegin"
-                hx-indicator="#loading"
                 hx-trigger="click"
                 >
                 <div class="flex flex-col items-center text-gray-400 group-hover:text-gray-500">
@@ -122,10 +121,6 @@
             </button>
         </div>
         <div id="add-meal-modal"></div>
-    </div>
-
-    <div id="loading" class="htmx-indicator">
-        Loading...
     </div>
 
 
