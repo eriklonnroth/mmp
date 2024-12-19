@@ -520,7 +520,7 @@ def action_create_meal_plan(request, user, template):
     
     # Create the meal plan
     meal_plan = MealPlan.objects.create(
-        name=f"Meal Plan - {datetime.now().strftime('%-d %b')}",
+        name=f"{datetime.now().strftime('%-d %b')} Meal Plan",
         user=user
     )
 
@@ -560,16 +560,23 @@ def action_delete_meal_plan_recipe(request, mpr_id):
 def action_add_meal_group(request, meal_plan_id):
     meal_plan = get_object_or_404(MealPlan, id=meal_plan_id)
     
-    # Get the highest order value from existing groups
+    # Get the highest order value from existing groups in the meal plan
     highest_order = MealGroup.objects.filter(meal_plan=meal_plan).order_by('-order').values_list('order', flat=True).first()
     
     # If there are no existing groups, start with 0, otherwise increment
     next_order = 0 if highest_order is None else highest_order + 1
     
-    group = MealGroup.objects.create(
+    new_group = MealGroup.objects.create(
         meal_plan=meal_plan,
         order=next_order
     )
+
+    group = {
+        'id': new_group.id,
+        'name': new_group.name,
+        'mprs': []
+    }
+
     return render(request, 'planner/meal-plan/detail.html#partial-meal-group', {'group': group})
 
 @require_http_methods(['DELETE'])

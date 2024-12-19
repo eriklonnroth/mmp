@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container mx-auto max-w-5xl">
-        <h1 class="text-3xl font-bold text-gray-900">Profile</h1>
-    </div>
 
-    <div class="profile-wrapper mt-8">
+    <h1 class="text-3xl font-bold text-gray-900 mt-12">Profile</h1>
+
+
+    <div class="profile-wrapper">
         <form hx-post="{% url 'action_update_profile' %}"
             hx-target="#form-response-message">
             <fieldset id="profile-form-fieldset">

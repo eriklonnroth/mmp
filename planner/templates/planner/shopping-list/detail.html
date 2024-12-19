@@ -10,7 +10,7 @@
 
 <div class="body-container my-12" x-data="{ showAddItemModal: false }">
     <div class="my-12">
-        <div class="shopping-list-name-wrapper inline-flex items-center gap-2 @click.stop">
+        <div class="shopping-list-name-wrapper inline-flex items-center @click.stop">
             <h1 
                 id="title"
                 class="shopping-list-name px-2 py-1"
@@ -42,10 +42,10 @@
                     x-transition:leave="transition ease-in duration-75"
                     x-transition:leave-start="transform opacity-100 scale-100"
                     x-transition:leave-end="transform opacity-0 scale-95"
-                    class="meal-plan-switch-menu absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 max-h-64 overflow-y-auto">
+                    class="meal-plan-switch-menu absolute right-0 mt-2 w-80 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 max-h-64 overflow-y-auto">
                     
                     <div class="py-1">
-                        <button class="flex w-full text-left px-4 py-2 text-sm text-red-700 hover:bg-gray-100 items-center"
+                        <button class="flex w-full text-left p-2 text-sm text-red-700 hover:bg-gray-100 items-center"
                             hx-delete="{% url 'action_delete_shopping_list' shopping_list.id %}"
                             hx-confirm="Delete '{{ shopping_list.name }}'?">
                             <svg class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -590,8 +590,7 @@ video {
 
 /* Magic AI Buttons */
 
-.create-recipe-button, .generate-shopping-list-button {
-  display: inline-flex;
+.magic-button {
   height: 2.5rem;
   align-items: center;
   justify-content: center;
@@ -615,7 +614,7 @@ video {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.create-recipe-button:hover, .generate-shopping-list-button:hover {
+.magic-button:hover {
   --tw-gradient-from: #6d28d9 var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(109 40 217 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
@@ -623,14 +622,14 @@ video {
 }
 
 @media (min-width: 640px) {
-  .create-recipe-button, .generate-shopping-list-button {
+  .magic-button {
     margin-left: 0.5rem;
   }
 }
 
 /* Disabled state */
 
-.create-recipe-button:disabled, .generate-shopping-list-button:disabled {
+.magic-button:disabled {
   cursor: not-allowed;
   --tw-gradient-from: #a78bfa var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(167 139 250 / 0) var(--tw-gradient-to-position);
@@ -639,7 +638,7 @@ video {
   opacity: 0.75;
 }
 
-.create-recipe-button:disabled:hover, .generate-shopping-list-button:disabled:hover {
+.magic-button:disabled:hover {
   --tw-gradient-from: #a78bfa var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(167 139 250 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
@@ -808,12 +807,6 @@ video {
 .add-mpr-button:hover {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
-}
-
-.recipe-list > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 
 .nav-button-active {
@@ -1093,9 +1086,9 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 /* Toggle My Recipes Button Styles */
 
-.toggle-my-recipes-button {
+.toggle-my-recipes-button, .mpr-menu-button {
   border-radius: 9999px;
-  background-color: rgb(255 255 255 / 0.5);
+  background-color: rgb(243 244 246 / 0.5);
   padding: 0.5rem;
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
@@ -1107,17 +1100,17 @@ tr:has(.shopping-list-checkbox:checked) td {
   backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
 
-.toggle-my-recipes-button:hover {
-  background-color: rgb(255 255 255 / 0.75);
+.toggle-my-recipes-button:hover, .mpr-menu-button:hover {
+  background-color: rgb(243 244 246 / 0.75);
 }
 
-.toggle-my-recipes-button svg {
+.toggle-my-recipes-button svg, .mpr-menu-button svg {
   fill: #9ca3af;
 }
 
 .toggle-my-recipes-button.saved {
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgb(202 138 4 / var(--tw-text-opacity));
 }
@@ -1126,33 +1119,9 @@ tr:has(.shopping-list-checkbox:checked) td {
   fill: #ca8a04;
 }
 
-/* Toggle MPR Button Styles */
-
-.mpr-menu-button {
-  border-radius: 9999px;
-  background-color: rgb(255 255 255 / 0.5);
-  padding: 0.5rem;
-  --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
-  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-  --tw-backdrop-blur: blur(4px);
-  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-}
-
-.mpr-menu-button:hover {
-  background-color: rgb(255 255 255 / 0.75);
-}
-
-.mpr-menu-button svg {
-  fill: #9ca3af;
-}
-
 .mpr-menu-button.in-mp {
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgb(22 163 74 / var(--tw-text-opacity));
 }
@@ -1317,13 +1286,10 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .toggle-mpr-in-modal-button {
   margin-right: 0.5rem;
+  height: 2.5rem;
+  width: 2.5rem;
   border-radius: 0.25rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  background-color: rgb(22 163 74 / 0.75);
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 700;
@@ -1335,18 +1301,15 @@ tr:has(.shopping-list-checkbox:checked) td {
 }
 
 .toggle-mpr-in-modal-button:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(21 128 61 / var(--tw-bg-opacity));
+  background-color: rgb(21 128 61 / 0.75);
 }
 
 .toggle-mpr-in-modal-button.in-mg {
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
+  background-color: rgb(220 38 38 / 0.75);
 }
 
 .toggle-mpr-in-modal-button.in-mg:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
+  background-color: rgb(185 28 28 / 0.75);
 }
 
 /* Add Shopping Item Button Styles */
@@ -1383,29 +1346,6 @@ tr:has(.shopping-list-checkbox:checked) td {
   width: 1.5rem;
 }
 
-.submit-button {
-  border-radius: 0.375rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(124 58 237 / var(--tw-bg-opacity));
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  font-weight: 500;
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.submit-button:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(109 40 217 / var(--tw-bg-opacity));
-}
-
 .static {
   position: static;
 }
@@ -1430,14 +1370,6 @@ tr:has(.shopping-list-checkbox:checked) td {
   right: -2.75rem;
 }
 
-.bottom-0 {
-  bottom: 0px;
-}
-
-.left-0 {
-  left: 0px;
-}
-
 .right-0 {
   right: 0px;
 }
@@ -1456,6 +1388,14 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .z-50 {
   z-index: 50;
+}
+
+.order-1 {
+  order: 1;
+}
+
+.order-2 {
+  order: 2;
 }
 
 .col-span-full {
@@ -1587,10 +1527,6 @@ tr:has(.shopping-list-checkbox:checked) td {
   display: grid;
 }
 
-.hidden {
-  display: none;
-}
-
 .h-0 {
   height: 0px;
 }
@@ -1601,10 +1537,6 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .h-16 {
   height: 4rem;
-}
-
-.h-24 {
-  height: 6rem;
 }
 
 .h-4 {
@@ -1629,14 +1561,6 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .h-full {
   height: 100%;
-}
-
-.h-64 {
-  height: 16rem;
-}
-
-.h-auto {
-  height: auto;
 }
 
 .max-h-64 {
@@ -1695,6 +1619,10 @@ tr:has(.shopping-list-checkbox:checked) td {
   width: 2rem;
 }
 
+.w-80 {
+  width: 20rem;
+}
+
 .w-fit {
   width: -moz-fit-content;
   width: fit-content;
@@ -1702,10 +1630,6 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .w-full {
   width: 100%;
-}
-
-.w-64 {
-  width: 16rem;
 }
 
 .min-w-0 {
@@ -1828,18 +1752,6 @@ tr:has(.shopping-list-checkbox:checked) td {
   gap: 1.5rem;
 }
 
-.space-x-1 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(0.25rem * var(--tw-space-x-reverse));
-  margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.space-x-3 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(0.75rem * var(--tw-space-x-reverse));
-  margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(2rem * var(--tw-space-x-reverse));
@@ -1876,11 +1788,6 @@ tr:has(.shopping-list-checkbox:checked) td {
   border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
 }
 
-.divide-gray-100 > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-opacity: 1;
-  border-color: rgb(243 244 246 / var(--tw-divide-opacity));
-}
-
 .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-divide-opacity));
@@ -1890,20 +1797,12 @@ tr:has(.shopping-list-checkbox:checked) td {
   overflow: hidden;
 }
 
-.\!overflow-hidden {
-  overflow: hidden !important;
-}
-
 .overflow-y-auto {
   overflow-y: auto;
 }
 
 .whitespace-nowrap {
   white-space: nowrap;
-}
-
-.rounded {
-  border-radius: 0.25rem;
 }
 
 .rounded-full {
@@ -1986,6 +1885,11 @@ tr:has(.shopping-list-checkbox:checked) td {
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
 }
 
+.bg-gray-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
 .bg-gray-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
@@ -1994,11 +1898,6 @@ tr:has(.shopping-list-checkbox:checked) td {
 .bg-gray-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(107 114 128 / var(--tw-bg-opacity));
-}
-
-.bg-green-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
 }
 
 .bg-slate-50 {
@@ -2011,18 +1910,8 @@ tr:has(.shopping-list-checkbox:checked) td {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-gray-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-}
-
 .bg-opacity-75 {
   --tw-bg-opacity: 0.75;
-}
-
-.object-contain {
-  -o-object-fit: contain;
-     object-fit: contain;
 }
 
 .object-cover {
@@ -2314,11 +2203,6 @@ tr:has(.shopping-list-checkbox:checked) td {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-green-700:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(21 128 61 / var(--tw-bg-opacity));
-}
-
 .hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -2354,29 +2238,9 @@ tr:has(.shopping-list-checkbox:checked) td {
   border-color: rgb(59 130 246 / var(--tw-border-opacity));
 }
 
-.focus\:outline-none:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-
-.focus\:ring-2:focus {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-}
-
 .focus\:ring-blue-500:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));
-}
-
-.focus\:ring-green-500:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(34 197 94 / var(--tw-ring-opacity));
-}
-
-.focus\:ring-offset-2:focus {
-  --tw-ring-offset-width: 2px;
 }
 
 .group:hover .group-hover\:text-gray-500 {
@@ -2385,13 +2249,17 @@ tr:has(.shopping-list-checkbox:checked) td {
 }
 
 @media (min-width: 640px) {
+  .sm\:order-1 {
+    order: 1;
+  }
+
+  .sm\:order-2 {
+    order: 2;
+  }
+
   .sm\:mx-0 {
     margin-left: 0px;
     margin-right: 0px;
-  }
-
-  .sm\:inline {
-    display: inline;
   }
 
   .sm\:grid-cols-1 {

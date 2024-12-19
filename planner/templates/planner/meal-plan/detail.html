@@ -14,8 +14,8 @@
 {% block body %}
     <div class="container mx-auto max-w-5xl" x-data="{ showMealModal: false }">
         <div class="mt-12 mb-6">
-            <div class="flex flex-col justify-between sm:flex-row gap-2">
-                <div class="meal-plan-name-wrapper inline-flex items-center gap-2 @click.stop">
+            <div class="flex flex-col sm:flex-row justify-between">
+                <div class="inline-flex order-2 sm:order-1 @click.stop">
                     <h1 
                         id="title"
                         class="meal-plan-name px-2 py-1"
@@ -31,7 +31,7 @@
                     <div class="relative" x-data="{ open: false }">
                         <button 
                             @click="open = !open" 
-                            class="p-1 hover:bg-gray-100 rounded-full"
+                            class="p-2 hover:bg-gray-100 rounded-full"
                             aria-label="Switch meal plan">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -83,17 +83,19 @@
                     </div>
                 </div>
 
-                <button class="generate-shopping-list-button"
-                    hx-post="{% url 'action_generate_shopping_list' meal_plan.id %}"
-                    hx-on::error="console.error('Error:', event.detail.xhr.responseText)"
-                    hx-disabled-elt=".generate-shopping-list-button"
-                    hx-indicator=".htmx-indicator"
-                    hx-swap="none">
-                    ✨ Generate Shopping List
-                </button>
-                <!-- Loading Indicator -->
-                <div class="htmx-indicator flex justify-center py-4">
-                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-500"></div>
+                <div class="inline-flex order-1 sm:order-2">
+                    <button class="magic-button"
+                        hx-post="{% url 'action_generate_shopping_list' meal_plan.id %}"
+                        hx-on::error="console.error('Error:', event.detail.xhr.responseText)"
+                        hx-disabled-elt=".generate-shopping-list-button"
+                        hx-indicator=".htmx-indicator"
+                        hx-swap="none">
+                        ✨ Generate Shopping List
+                    </button>
+                    <!-- Loading Indicator -->
+                    <div class="htmx-indicator flex justify-center py-4">
+                        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-500"></div>
+                    </div>
                 </div>
             </div>
         </div>

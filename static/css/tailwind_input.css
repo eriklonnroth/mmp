@@ -11,13 +11,13 @@
 @layer components {
 
     /* Magic AI Buttons */
-    .create-recipe-button, .generate-shopping-list-button {
-        @apply inline-flex items-center justify-center h-10 px-8 sm:ml-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-violet-600 to-violet-800 hover:from-violet-700 hover:to-violet-900;
+    .magic-button {
+        @apply items-center justify-center h-10 px-8 sm:ml-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-violet-600 to-violet-800 hover:from-violet-700 hover:to-violet-900;
     }
 
 
     /* Disabled state */
-    .create-recipe-button:disabled, .generate-shopping-list-button:disabled {
+    .magic-button:disabled {
         @apply from-violet-400 to-violet-600 
                cursor-not-allowed 
                hover:from-violet-400 hover:to-violet-600 
@@ -209,36 +209,26 @@
 
 
     /* Toggle My Recipes Button Styles */
-    .toggle-my-recipes-button {
-        @apply p-2 rounded-full shadow-sm  bg-white/50 text-gray-400 hover:bg-white/75
+    .toggle-my-recipes-button, .mpr-menu-button {
+        @apply p-2 rounded-full shadow-sm  bg-gray-100/50 text-gray-400 hover:bg-gray-100/75
         backdrop-blur-sm;
     }
 
-    .toggle-my-recipes-button svg {
+    .toggle-my-recipes-button svg, .mpr-menu-button svg {
         @apply fill-gray-400;
     }
 
 
     .toggle-my-recipes-button.saved {
-        @apply bg-white text-yellow-600;
+        @apply bg-gray-100 text-yellow-600;
     }
 
     .toggle-my-recipes-button.saved svg {
         @apply fill-yellow-600;
     }
 
-    /* Toggle MPR Button Styles */
-    .mpr-menu-button {
-        @apply p-2 rounded-full shadow-sm  bg-white/50 text-gray-400 hover:bg-white/75
-        backdrop-blur-sm;
-    }
-
-    .mpr-menu-button svg {
-        @apply fill-gray-400;
-    }
-
     .mpr-menu-button.in-mp {
-        @apply bg-white text-green-600;
+        @apply bg-gray-100 text-green-600;
     }
 
     .mpr-menu-button.in-mp svg {
@@ -314,11 +304,11 @@
 
     /* Toggle MPR In Modal Button Styles */
     .toggle-mpr-in-modal-button {
-        @apply text-white text-sm font-bold bg-green-600 hover:bg-green-700 py-2 px-4 mr-2 rounded transition-colors;
+        @apply text-white text-sm font-bold bg-green-600/75 hover:bg-green-700/75 h-10 w-10 mr-2 rounded transition-colors;
     }
 
     .toggle-mpr-in-modal-button.in-mg {
-        @apply bg-red-600 hover:bg-red-700;
+        @apply bg-red-600/75 hover:bg-red-700/75;
     }
 
     /* Add Shopping Item Button Styles */

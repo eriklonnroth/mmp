@@ -7,11 +7,13 @@
 
 {% block body %}
     <div class="body-container my-12">
-        <div class="flex flex-col justify-between sm:flex-row gap-2 mb-4">
+        <div class="flex flex-col sm:flex-row justify-between gap-2 mb-4">
+            
+            <div class="order-2 sm:order-1">
+                {% include "planner/recipes/partial_search_form.html" %}
+            </div>
 
-            {% include "planner/recipes/partial_search_form.html" %}
-
-            <a href="{% url 'create_recipe' %}" class="create-recipe-button">
+            <a href="{% url 'create_recipe' %}" class="magic-button inline-flex mb-4 order-1 sm:order-2">
                 ✨ Create Recipe
             </a>
         </div>
