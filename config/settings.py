@@ -30,6 +30,10 @@ INSTALLED_APPS = [
     'django_browser_reload',
     'django.contrib.admin',
     'django.contrib.auth',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -39,12 +43,13 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -59,7 +64,8 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',            
+                'django.contrib.messages.context_processors.messages',  
+                'django.template.context_processors.request',          
                 ],
         },
     },
@@ -80,6 +86,26 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT'),
+    }
+}
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': '123',
+            'secret': '456',
+            'key': '',
+            'EMAIL_AUTHENTICATION': True,
+        }
     }
 }
 

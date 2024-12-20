@@ -12,7 +12,7 @@
         <p class="text-lg text-gray-600">Select a template to get started</p>
     </div>
 
-    <div class="template-cards-container mx-auto max-w-5xl my-12 space-y-4">
+    <div class="template-cards-container mx-auto max-w-5xl space-y-4">
         {% for template_key, template_data in templates.items %}
             {% partial partial-template-card %}
         {% endfor %}
@@ -21,10 +21,10 @@
 
 {% partialdef partial-template-card %}
 
-    <div class="template-card bg-white rounded-lg shadow-md p-4">
+    <div class="template-card bg-white rounded-lg shadow-md max-w-xl p-4">
         <h2 class="text-xl font-bold text-gray-900 mb-2">{{ template_data.name }}</h2>
         <p class="text-gray-600">{{ template_data.description }}</p>
-        <button class="select-template-button mt-4 bg-blue-500 text-white px-4 py-2 rounded-md"
+        <button class="select-template-button mt-4 bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded-md"
             hx-post="{% url 'action_create_meal_plan' template_key %}"
         >Select Template</button>
     </div>

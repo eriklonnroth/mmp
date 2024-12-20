@@ -1,0 +1,101 @@
+{
+  "title": "Low-Fat Spaghetti with Chicken and Mushrooms",
+  "description": "A delicious and healthy low-fat pasta dish featuring tender chicken, earthy mushrooms, and a light creamy sauce with hints of garlic and parmesan. Perfect for a satisfying dinner without the guilt.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "name": "Spaghetti",
+      "quantity": "250 g"
+    },
+    {
+      "name": "Chicken breast, cubed",
+      "quantity": "400 g"
+    },
+    {
+      "name": "Mushrooms, sliced",
+      "quantity": "200 g"
+    },
+    {
+      "name": "Olive oil",
+      "quantity": "2 tbsp"
+    },
+    {
+      "name": "Garlic, minced",
+      "quantity": "2 cloves"
+    },
+    {
+      "name": "Chicken broth, low-sodium",
+      "quantity": "200 ml"
+    },
+    {
+      "name": "Plain Greek yogurt, low-fat",
+      "quantity": "100 g"
+    },
+    {
+      "name": "Parmesan cheese, grated",
+      "quantity": "30 g"
+    },
+    {
+      "name": "Salt",
+      "quantity": "1 tsp"
+    },
+    {
+      "name": "Black pepper",
+      "quantity": "1/2 tsp"
+    },
+    {
+      "name": "Parsley, chopped",
+      "quantity": "2 tbsp"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Preparation",
+      "steps": [
+        {
+          "text": "Boil water in a large pot and cook spaghetti according to package instructions until al dente. Drain and set aside."
+        },
+        {
+          "text": "While the pasta is cooking, season the chicken breast cubes with a pinch of salt and black pepper."
+        }
+      ]
+    },
+    {
+      "section_title": "Cooking",
+      "steps": [
+        {
+          "text": "Heat olive oil in a large pan over medium heat. Add the chicken and cook until browned and cooked through, about 7-8 minutes. Remove chicken and set aside."
+        },
+        {
+          "text": "In the same pan, add sliced mushrooms and sauté for 5 minutes until they release their juices and are tender."
+        },
+        {
+          "text": "Add minced garlic to the pan and sauté for another 1 minute until fragrant."
+        },
+        {
+          "text": "Pour in the chicken broth to deglaze the pan, scraping up any browned bits. Let it simmer for 3 minutes to reduce slightly."
+        }
+      ]
+    },
+    {
+      "section_title": "Combining and Serving",
+      "steps": [
+        {
+          "text": "Reduce the heat to low and stir in the plain Greek yogurt until smooth."
+        },
+        {
+          "text": "Return the cooked chicken to the pan and mix well to coat with the sauce."
+        },
+        {
+          "text": "Add the cooked spaghetti to the pan and toss everything together until the pasta is well coated with the sauce."
+        },
+        {
+          "text": "Stir in grated Parmesan cheese and adjust the seasoning with salt and black pepper to taste."
+        },
+        {
+          "text": "Garnish with chopped parsley before serving. Enjoy your low-fat spaghetti with chicken and mushrooms!"
+        }
+      ]
+    }
+  ]
+}
