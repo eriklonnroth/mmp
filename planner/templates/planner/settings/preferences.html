@@ -1,0 +1,42 @@
+{% extends "planner/layout.html" %}
+
+{% block title %}
+    Preferences
+{% endblock %}
+
+{% block body %}
+    <div class="body-container max-w-2xl px-4 pb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mt-12">Preferences</h1>
+
+        <p class="text-gray-600 mt-4">
+            Set your default recipe preferences to save time during <a href="{% url 'create_recipe' %}" class="hyperlink">recipe creation</a>.
+        </p>
+
+        <div class="preferences-wrapper">
+            <form hx-post="{% url 'action_update_preferences' %}"
+                hx-target="#form-response-message">
+                <fieldset id="preferences-form-fieldset">
+
+                    <div class="mt-8 mb-6">
+                        <div class="form-group">
+                            {{ form.dietary_preferences.label_tag }}
+                            {{ form.dietary_preferences }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.default_servings.label_tag }}
+                            {{ form.default_servings }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.preferred_units.label_tag }}
+                            {{ form.preferred_units }}
+                        </div>
+                    </div>
+                </fieldset>
+
+                <button class="form-submit w-48" type="submit">Save</button>
+
+            </form>
+            <p id="form-response-message" class="mt-4"></p>
+        </div>
+    </div>
+{% endblock %}

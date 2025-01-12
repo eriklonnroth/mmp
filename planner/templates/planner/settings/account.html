@@ -1,0 +1,31 @@
+{% extends "planner/layout.html" %}
+
+{% block title %}
+    Account
+{% endblock %}
+
+{% block body %}
+
+
+    <h1 class="text-3xl font-bold text-gray-900 mt-12">Account</h1>
+
+    <p class="text-gray-600 mt-4"> Signed in as {{ request.user.email }} </p>
+
+
+    <div class="mt-8 text-md">
+        <ul class="space-y-2 font-semibold">
+            <li>
+                <button class="secondary-button w-48">
+                    <a href="{% url 'account_reset_password' %}">
+                        Reset Password
+                    </a>
+                </button>
+            </li>
+            <li>
+                <button class="warning-button w-48" hx-delete="{% url 'action_delete_account' %}" hx-confirm="Are you sure you want to delete the account {{ request.user.email }}? This cannot be undone.">
+                    Delete Account
+                </button>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

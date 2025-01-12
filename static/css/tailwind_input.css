@@ -10,6 +10,8 @@
 
 @layer components {
 
+    /* BUTTONS */
+
     /* Magic AI Buttons */
     .magic-button {
         @apply items-center justify-center h-10 px-8 sm:ml-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-violet-600 to-violet-800 hover:from-violet-700 hover:to-violet-900;
@@ -22,6 +24,18 @@
                cursor-not-allowed 
                hover:from-violet-400 hover:to-violet-600 
                opacity-75;
+    }
+
+    .secondary-button {
+        @apply items-center justify-center h-10 px-8 border border-violet-300 rounded-md shadow-sm text-sm font-medium text-violet-600 bg-gradient-to-r bg-violet-100 hover:bg-violet-200
+    }
+
+    .warning-button {
+        @apply items-center justify-center h-10 px-8 border border-red-300 rounded-md shadow-sm text-sm font-medium text-red-600 bg-gradient-to-r bg-red-100 hover:bg-red-200
+    }
+
+    .hyperlink {
+        @apply text-violet-600 hover:text-violet-700;
     }
 
     /* Meal Plan Styles */
@@ -154,7 +168,7 @@
         @apply line-through;
     }
 
-    /* Create Recipe Form Styles */
+    /* Form Styles */
     .form-field {
         @apply w-full px-2 py-2 border rounded-md border-gray-300
                focus:ring-violet-500 focus:border-violet-500;
@@ -178,14 +192,14 @@
         @apply text-gray-500;
     }
 
-    .form-submit {
+    .form-submit, .auth-button {
         @apply w-full px-4 py-2 !mt-6 bg-gradient-to-r from-violet-600 to-violet-800 
                hover:from-violet-700 hover:to-violet-900 text-white rounded-md 
                focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2
                transition-all duration-200;
     }
 
-    .form-submit:disabled {
+    .form-submit:disabled, .auth-button:disabled {
         @apply from-violet-400 to-violet-600 
                cursor-not-allowed 
                hover:from-violet-400 hover:to-violet-600 
@@ -325,6 +339,58 @@
     .submit-button {
         @apply px-4 py-2 text-sm font-medium text-white bg-violet-600 
                hover:bg-violet-700 rounded-md transition-colors;
+    }
+
+    /* AllAuth Styles */
+
+    .auth-entrance-container {
+        @apply flex flex-col justify-center space-y-4;
+    }
+
+    .auth-notice, .auth-message {
+        @apply text-gray-700;
+    }
+
+    .auth-h1 {
+        @apply text-3xl font-bold text-gray-900 mt-12 mb-4;
+    }
+
+    .auth-h2 {
+        @apply text-xl font-bold;
+    }
+
+    .auth-button {
+        @apply px-4 py-2 my-4 text-sm font-medium text-white bg-violet-600 
+               hover:bg-violet-700 rounded-md transition-colors;
+    }
+
+    .auth-form {
+        @apply space-y-4 my-8;
+    }
+
+    .auth-form input {
+        @apply w-80 px-2 py-2 border rounded-md border-gray-300
+               focus:ring-violet-500 focus:border-violet-500;
+    }
+
+    .auth-form input:disabled {
+        @apply bg-gray-100 cursor-not-allowed border-gray-200 text-gray-500;
+    }
+
+    .auth-form label {
+        @apply hidden;
+    }
+
+    .auth-button {
+        @apply w-80 h-10 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-violet-600 to-violet-800 hover:from-violet-700 hover:to-violet-900;
+    }
+
+    .auth-form .helptext {
+        @apply text-gray-400 my-2;
+    }
+
+    .auth-provider-list {
+        @apply my-4 space-y-4;
     }
 
 }

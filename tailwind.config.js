@@ -2,7 +2,8 @@
 module.exports = {
   content: [
     "./**/*.html",
-    './**/forms.py',
+    "./**/forms.py",
+    "./templates/**/*.html"
   ],
   theme: {},
   plugins: [],

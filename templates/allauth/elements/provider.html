@@ -1,0 +1,11 @@
+{% load static %}
+
+<li>
+    {% if attrs.name == "Google" %}
+        <a title="{{ attrs.name }}" href="{{ attrs.href }}">
+            <img src="{% static 'img/google/sign_in_with_google.svg' %}" alt="{{ attrs.name }}" class="h-12">
+        </a>
+    {% else %}
+        <a class="text-blue-500" title="{{ attrs.name }}" href="{{ attrs.href }}">{{ attrs.name }}</a>
+    {% endif %}
+</li>

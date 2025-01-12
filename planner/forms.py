@@ -80,7 +80,7 @@ class AddShoppingItemForm(forms.Form):
         widget=forms.Select(attrs={'class': 'form-field'})
     )
 
-class UpdateProfileForm(forms.Form):
+class UpdatePreferencesForm(forms.Form):
     dietary_preferences = forms.CharField(
         label="Dietary preferences",
         max_length=255,
@@ -105,7 +105,7 @@ class UpdateProfileForm(forms.Form):
     )
 
     preferred_units = forms.ChoiceField(
-        label="Preferred measurement units",
+        label="Preferred units",
         choices=[
             ('metric', 'Metric (g, ml, °C)'),
             ('us', 'US (oz, cups, °F)')

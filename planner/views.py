@@ -41,22 +41,24 @@ def with_user(view_func):
         return view_func(request, *args, **kwargs)
     return wrapper
 
-
-
 # MAIN NAV VIEWS
 def index(request):
     return render(request, "planner/index.html")
 
 @with_user
-def profile(request, user):
+def preferences(request, user):
     initial_data = {
-        'dietary_preferences': user.profile.dietary_preferences,
-        'default_servings': user.profile.default_servings,
-        'preferred_units': user.profile.preferred_units,
-    }
-    form = forms.UpdateProfileForm(initial=initial_data)
+        'dietary_preferences': user.preferences.dietary_preferences,
+        'default_servings': user.preferences.default_servings,
+        'preferred_units': user.preferences.preferred_units,
+    }   
+    form = forms.UpdatePreferencesForm(initial=initial_data)
     context = {'form': form}
-    return render(request, "planner/settings/profile.html", context)
+    return render(request, "planner/settings/preferences.html", context)
+
+@with_user
+def account(request, user):
+    return render(request, "planner/settings/account.html")
 
 @with_user
 def recipes(request, user):
@@ -81,11 +83,11 @@ def shopping_list(request, user):
 # RECIPE VIEWS
 @with_user
 def create_recipe(request, user):
-    # Initialize Recipe form with user's profile defaults
+    # Initialize Recipe form with user's default preferences
     initial_data = {
-        'dietary_preferences': user.profile.dietary_preferences,
-        'servings': user.profile.default_servings,
-        'units': user.profile.preferred_units,
+        'dietary_preferences': user.preferences.dietary_preferences,
+        'servings': user.preferences.default_servings,
+        'units': user.preferences.preferred_units,
     }
     form = forms.CreateRecipeForm(initial=initial_data)
     context = {'form': form}
@@ -380,8 +382,8 @@ class ShoppingListDetailView(UserAuthMixin, DetailView):
 
 
 # HTMX Actions
-@require_http_methods(['POST'])
 @with_user
+@require_http_methods(['POST'])
 def action_generate_recipe(request, user):
     form = forms.CreateRecipeForm(request.POST)
     if form.is_valid():
@@ -412,8 +414,8 @@ def action_generate_recipe_image(request, recipe_id):
     image = get_or_create_recipe_image(recipe)
     return render(request, 'planner/recipes/detail.html#partial-recipe-image', {'image_url': image.url})
 
-@require_http_methods(['POST'])
 @with_user
+@require_http_methods(['POST'])
 def action_generate_shopping_list(request, meal_plan_id, user):
     meal_plan = get_object_or_404(MealPlan, id=meal_plan_id)
     try:
@@ -433,8 +435,8 @@ def action_update_shopping_list_name(request, shopping_list_id):
     shopping_list.save()
     return HttpResponse('')
 
-@require_http_methods(['DELETE'])
 @with_user
+@require_http_methods(['DELETE'])
 def action_delete_shopping_list(request, user, shopping_list_id):
     shopping_list = get_object_or_404(ShoppingList, id=shopping_list_id)
     shopping_list.delete()
@@ -446,8 +448,8 @@ def action_delete_shopping_list(request, user, shopping_list_id):
         response['HX-Redirect'] = f'/meal-plan/'
     return response
 
-@require_http_methods(['POST'])
 @with_user
+@require_http_methods(['POST'])
 def action_toggle_my_recipes(request, user, recipe_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
 
@@ -514,8 +516,8 @@ def action_update_mpr(request, mpr_id, new_group_id):
     
     return HttpResponse('')
 
-@require_http_methods(['POST'])
 @with_user
+@require_http_methods(['POST'])
 def action_create_meal_plan(request, user, template):
     
     # Create the meal plan
@@ -536,8 +538,8 @@ def action_create_meal_plan(request, user, template):
     response['HX-Redirect'] = f'/meal-plan/{meal_plan.id}'
     return response
 
-@require_http_methods(['DELETE'])
 @with_user
+@require_http_methods(['DELETE'])
 def action_delete_meal_plan(request, user, meal_plan_id):
     meal_plan = get_object_or_404(MealPlan, id=meal_plan_id)
     meal_plan.delete()
@@ -549,6 +551,7 @@ def action_delete_meal_plan(request, user, meal_plan_id):
         response['HX-Redirect'] = f'/meal-plan/new'
     return response
 
+@with_user
 @require_http_methods(['DELETE'])
 def action_delete_meal_plan_recipe(request, mpr_id):
     meal_plan_recipe = get_object_or_404(MealPlanRecipe, id=mpr_id)
@@ -556,6 +559,7 @@ def action_delete_meal_plan_recipe(request, mpr_id):
 
     return HttpResponse('')
 
+@with_user
 @require_http_methods(['POST'])
 def action_add_meal_group(request, meal_plan_id):
     meal_plan = get_object_or_404(MealPlan, id=meal_plan_id)
@@ -579,12 +583,14 @@ def action_add_meal_group(request, meal_plan_id):
 
     return render(request, 'planner/meal-plan/detail.html#partial-meal-group', {'group': group})
 
+@with_user
 @require_http_methods(['DELETE'])
 def action_delete_meal_group(request, group_id):
     meal_group = get_object_or_404(MealGroup, id=group_id)
     meal_group.delete()
     return HttpResponse('')
 
+@with_user
 @require_http_methods(['POST'])
 def action_update_meal_group_name(request, group_id):
     new_name = request.POST.get('meal_group_name')
@@ -597,6 +603,7 @@ def action_update_meal_group_name(request, group_id):
     group.save()
     return HttpResponse('')
 
+@with_user
 @require_http_methods(['POST'])
 def action_update_meal_plan_name(request, meal_plan_id):
     new_name = request.POST.get('meal_plan_name')
@@ -609,6 +616,7 @@ def action_update_meal_plan_name(request, meal_plan_id):
     meal_plan.save()
     return HttpResponse('')
 
+@with_user
 @require_http_methods(['POST'])
 def action_add_shopping_item(request, shopping_list_id):
     form = forms.AddShoppingItemForm(request.POST)
@@ -630,6 +638,7 @@ def action_add_shopping_item(request, shopping_list_id):
     else:
         return HttpResponseBadRequest(str(form.errors))
 
+@with_user
 @require_http_methods(['DELETE'])
 def action_delete_shopping_item(request, item_id):
     shopping_item = get_object_or_404(ShoppingItem, id=item_id)
@@ -637,22 +646,24 @@ def action_delete_shopping_item(request, item_id):
     return HttpResponse('')
 
 
-@require_http_methods(['POST'])
 @with_user
-def action_update_profile(request, user):
-    form = forms.UpdateProfileForm(request.POST)
+@require_http_methods(['POST'])
+def action_update_preferences(request, user):
+    form = forms.UpdatePreferencesForm(request.POST)
     if form.is_valid():
-        user.profile.dietary_preferences = form.cleaned_data['dietary_preferences']
-        user.profile.default_servings = form.cleaned_data['default_servings']
-        user.profile.preferred_units = form.cleaned_data['preferred_units']
-        user.profile.save()
+        user.preferences.dietary_preferences = form.cleaned_data['dietary_preferences']
+        user.preferences.default_servings = form.cleaned_data['default_servings']
+        user.preferences.preferred_units = form.cleaned_data['preferred_units']
+        user.preferences.save()
         return HttpResponse('')
     else:
         return HttpResponseBadRequest(str(form.errors))
 
-
-
-
+@with_user
+@require_http_methods(['DELETE'])
+def action_delete_account(request, user):
+    user.delete()
+    return redirect('index')
 
 
 @method_decorator(csrf_exempt, name='dispatch')

@@ -22,11 +22,7 @@ class Command(BaseCommand):
         recipe_files = recipe_dir.glob('*.json')
         
         for recipe_file in recipe_files:
-            # Skip spoonacular files for now as they have a different format
-            if recipe_file.name.startswith('spoonacular_'):
-                self.stdout.write(f"Skipping spoonacular recipe: {recipe_file.name}")
-                continue
-            
+
             recipe = parse_recipe_file(recipe_file)
             
             # Check if recipe already exists

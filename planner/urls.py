@@ -4,7 +4,8 @@ from . import views
 # Core pages
 core_patterns = [
     path("", views.index, name="index"),
-    path("settings/profile/", views.profile, name="profile"),
+    path("settings/preferences/", views.preferences, name="preferences"),
+    path("settings/account/", views.account, name="account"),
 ]
 
 # Recipe routes
@@ -53,7 +54,8 @@ action_patterns = [
     path("action_update_shopping_list_name/<int:shopping_list_id>/", views.action_update_shopping_list_name, name="action_update_shopping_list_name"),
     path("action_add_shopping_item/<int:shopping_list_id>/", views.action_add_shopping_item, name="action_add_shopping_item"),
     path("action_delete_shopping_item/<int:item_id>/", views.action_delete_shopping_item, name="action_delete_shopping_item"),
-    path("action_update_profile/", views.action_update_profile, name="action_update_profile"),
+    path("action_update_preferences/", views.action_update_preferences, name="action_update_preferences"),
+    path("action_delete_account/", views.action_delete_account, name="action_delete_account"),
 ]
 
 # API routes

@@ -10,16 +10,16 @@
     
 <div class="body-container mx-auto max-w-2xl px-4 pb-8">
 
-    <!-- Back link with page reload -->
+    {% comment %} <!-- Back link with page reload -->
     <a href="{{ request.META.HTTP_REFERER|default:'/' }}" class="inline-flex items-center text-sm text-gray-600 hover:text-gray-900">
         <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
         Back
-    </a>
+    </a> {% endcomment %}
 
     <div class="page-title my-4">
-        <h1 class="text-3xl font-bold text-gray-900 mb-2">Create Recipe</h1>
+        <h1 class="text-3xl font-bold text-gray-900 mt-12 mb-4">Create Recipe</h1>
         <p class="text-gray-600 mt-4">Let's cook up a recipe tailored to your preferences!</p>
     </div>
 
@@ -50,8 +50,8 @@
                     <div class="pt-6 pb-2">
                         <h2 class="form-section-title">Preferences</h2>
                         <p class="text-sm text-gray-600 mt-1 inline">
-                            Set default preferences in 
-                            <a href="{% url 'profile' %}" class="text-violet-500 hover:text-violet-600">Profile</a>
+                            Set your defaults in 
+                            <a href="{% url 'preferences' %}" class="hyperlink">Preferences</a>
                         </p>
                     </div>
                     

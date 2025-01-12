@@ -3,12 +3,12 @@
 {% load partials %}
 
 {% block title %}
-    Create A Meal Plan
+    Create Meal Plan
 {% endblock %}
 
 {% block body %}
     <div class="container mx-auto max-w-5xl my-12">
-        <h1 class="text-3xl font-bold text-gray-900 mb-4">Create A Meal Plan</h1>
+        <h1 class="text-3xl font-bold text-gray-900 mb-4">Create Meal Plan</h1>
         <p class="text-lg text-gray-600">Select a template to get started</p>
     </div>
 
@@ -24,7 +24,7 @@
     <div class="template-card bg-white rounded-lg shadow-md max-w-xl p-4">
         <h2 class="text-xl font-bold text-gray-900 mb-2">{{ template_data.name }}</h2>
         <p class="text-gray-600">{{ template_data.description }}</p>
-        <button class="select-template-button mt-4 bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded-md"
+        <button class="secondary-button mt-4"
             hx-post="{% url 'action_create_meal_plan' template_key %}"
         >Select Template</button>
     </div>
