@@ -57,7 +57,7 @@
                         {% if shopping_lists %}
                             <div class="border-t border-gray-100 my-1">
                         {% for sl in shopping_lists %}
-                            <a href="{% url 'shopping_list_detail' sl.id %}" 
+                            <a href="{{ sl.get_absolute_url }}" 
                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {% if sl.id == shopping_list.id %}bg-gray-50{% endif %}">
                                 {{ sl.name }}
                             </a>

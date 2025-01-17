@@ -71,7 +71,7 @@
                                 {% if meal_plans %}
                                     <div class="border-t border-gray-100 my-1">
                                 {% for mp in meal_plans %}
-                                    <a href="{% url 'meal_plan_detail' mp.id %}" 
+                                    <a href="{{ mp.get_absolute_url }}" 
                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {% if mp.id == meal_plan.id %}bg-gray-50{% endif %}">
                                         {{ mp.name }}
                                     </a>
@@ -180,7 +180,7 @@
     <li class="recipe-item" 
         :data-recipe-id="{{ mpr.id }}">
         <div class="text-gray-700 select-none flex-grow flex items-center">
-            <a href="{% url 'recipe_detail' mpr.recipe_id %}" class="flex-shrink-0">
+            <a href="{{ mpr.recipe_url }}" class="flex-shrink-0">
                 {% include "planner/svg/details.svg" %}
             </a>
             <span class="ml-2 min-w-0 flex-1">

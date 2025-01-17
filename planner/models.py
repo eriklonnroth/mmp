@@ -1,9 +1,11 @@
+import uuid
 from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.utils import timezone
-
+from django.utils.text import slugify
+from django.urls import reverse
 
 class Preferences(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -12,7 +14,10 @@ class Preferences(models.Model):
     preferred_units = models.CharField(max_length=10, default='metric')
 
 
+# Meal Plan models
+
 class MealPlan(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     name = models.CharField(max_length=20)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -21,6 +26,9 @@ class MealPlan(models.Model):
     
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('meal_plan_detail', kwargs={'uuid': self.uuid})
 
     class Meta:
         ordering = ['-modified_at']
@@ -59,6 +67,7 @@ class Recipe(models.Model):
         ('draft', 'Draft'),
         ('published', 'Published'),
     ]
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     title = models.CharField(max_length=100)
     servings = models.PositiveIntegerField()
     description = models.TextField(blank=True)
@@ -76,6 +85,10 @@ class Recipe(models.Model):
         through='MyRecipe',
         related_name='my_recipes'
     )
+
+    def get_absolute_url(self):
+        title_slug = slugify(self.title)
+        return f"/recipes/{title_slug}-{self.uuid}/"
     
     def __str__(self):
         return f"{self.title}"
@@ -161,6 +174,7 @@ class MealPlanRecipe(models.Model):
 
 # Shopping list models
 class ShoppingList(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     name = models.CharField(max_length=40, default='Shopping List')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -169,6 +183,9 @@ class ShoppingList(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+    def get_absolute_url(self):
+        return reverse('shopping_list_detail', kwargs={'uuid': self.uuid})
 
 class ShoppingItem(models.Model):
     CATEGORIES = [

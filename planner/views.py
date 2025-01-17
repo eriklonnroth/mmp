@@ -68,14 +68,14 @@ def recipes(request, user):
 def meal_plan(request, user):
     recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-last_viewed_at').first()
     if recent_meal_plan:
-        return redirect('meal_plan_detail', pk=recent_meal_plan.id)
+        return redirect(recent_meal_plan.get_absolute_url())
     return redirect('new_meal_plan')
 
 @with_user
 def shopping_list(request, user):
     recent_shopping_list = ShoppingList.objects.filter(user=user).order_by('-last_viewed_at').first()
     if recent_shopping_list:
-        return redirect('shopping_list_detail', pk=recent_shopping_list.id)
+        return redirect(recent_shopping_list.get_absolute_url())
     return render(request, 'planner/shopping-list/index.html')
 
 
@@ -109,6 +109,10 @@ class RecipeDetailView(UserAuthMixin, DetailView):
     model = Recipe
     template_name = 'planner/recipes/detail.html'
     context_object_name = 'recipe'
+
+    def get_object(self):
+        # The URL regex captures just the UUID portion
+        return get_object_or_404(Recipe, uuid=self.kwargs['uuid'])
 
     def get_queryset(self):
         queryset = Recipe.objects.prefetch_related(
@@ -275,7 +279,6 @@ class MealPlanDetailView(UserAuthMixin, DetailView):
     context_object_name = 'meal_plan'
 
     def get_queryset(self):
-        # Add prefetch_related to optimize queries
         queryset = MealPlan.objects.prefetch_related(
             'groups',
             'groups__mprs',
@@ -288,7 +291,9 @@ class MealPlanDetailView(UserAuthMixin, DetailView):
         return queryset
 
     def get_object(self, queryset=None):
-        obj = super().get_object(queryset)
+        if queryset is None:
+            queryset = self.get_queryset()
+        obj = get_object_or_404(queryset, uuid=self.kwargs['uuid'])
         obj.last_viewed_at = timezone.now()
         obj.save(update_fields=['last_viewed_at'])
         return obj
@@ -307,7 +312,7 @@ class MealPlanDetailView(UserAuthMixin, DetailView):
                 'mprs': [{
                     'id': mpr.id,
                     'name': mpr.recipe.title,
-                    'recipe_id': mpr.recipe.id
+                    'recipe_url': mpr.recipe.get_absolute_url()
                 } for mpr in group.mprs.all()]
             })
         
@@ -343,7 +348,9 @@ class ShoppingListDetailView(UserAuthMixin, DetailView):
         return queryset
 
     def get_object(self, queryset=None):
-        obj = super().get_object(queryset)
+        if queryset is None:
+            queryset = self.get_queryset()
+        obj = get_object_or_404(queryset, uuid=self.kwargs['uuid'])
         obj.last_viewed_at = timezone.now()
         obj.save(update_fields=['last_viewed_at'])
         return obj
@@ -400,7 +407,7 @@ def action_generate_recipe(request, user):
             saved_recipe = save_recipe_to_db(parsed_recipe, user=user, status='draft')
             
             response = HttpResponse()
-            response['HX-Redirect'] = f'/recipes/{saved_recipe.id}'
+            response['HX-Redirect'] = saved_recipe.get_absolute_url()
             return response
 
         except Exception as e:
@@ -416,13 +423,13 @@ def action_generate_recipe_image(request, recipe_id):
 
 @with_user
 @require_http_methods(['POST'])
-def action_generate_shopping_list(request, meal_plan_id, user):
+def action_generate_shopping_list(request, user, meal_plan_id):
     meal_plan = get_object_or_404(MealPlan, id=meal_plan_id)
     try:
         shopping_list = generate_shopping_list(meal_plan)
         saved_shopping_list = save_shopping_list_to_db(shopping_list, user=user)
         response = HttpResponse()
-        response['HX-Redirect'] = f'/shopping-list/{saved_shopping_list.id}'
+        response['HX-Redirect'] = saved_shopping_list.get_absolute_url()
         return response
     except Exception as e:
         return HttpResponseBadRequest(f"Error generating shopping list: {str(e)}")
@@ -443,7 +450,7 @@ def action_delete_shopping_list(request, user, shopping_list_id):
     recent_shopping_list = ShoppingList.objects.filter(user=user).order_by('-last_viewed_at').first()
     response = HttpResponse('')
     if recent_shopping_list:
-        response['HX-Redirect'] = f'/shopping-list/{recent_shopping_list.id}'
+        response['HX-Redirect'] = recent_shopping_list.get_absolute_url()
     else:
         response['HX-Redirect'] = f'/meal-plan/'
     return response
@@ -535,7 +542,7 @@ def action_create_meal_plan(request, user, template):
             order=MealGroup.objects.filter(meal_plan=meal_plan).count()
         )
     response = HttpResponse()
-    response['HX-Redirect'] = f'/meal-plan/{meal_plan.id}'
+    response['HX-Redirect'] = meal_plan.get_absolute_url()
     return response
 
 @with_user
@@ -546,12 +553,11 @@ def action_delete_meal_plan(request, user, meal_plan_id):
     recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-last_viewed_at').first()
     response = HttpResponse('')
     if recent_meal_plan:
-        response['HX-Redirect'] = f'/meal-plan/{recent_meal_plan.id}'
+        response['HX-Redirect'] = recent_meal_plan.get_absolute_url()
     else: 
         response['HX-Redirect'] = f'/meal-plan/new'
     return response
 
-@with_user
 @require_http_methods(['DELETE'])
 def action_delete_meal_plan_recipe(request, mpr_id):
     meal_plan_recipe = get_object_or_404(MealPlanRecipe, id=mpr_id)
@@ -559,7 +565,6 @@ def action_delete_meal_plan_recipe(request, mpr_id):
 
     return HttpResponse('')
 
-@with_user
 @require_http_methods(['POST'])
 def action_add_meal_group(request, meal_plan_id):
     meal_plan = get_object_or_404(MealPlan, id=meal_plan_id)
@@ -583,14 +588,12 @@ def action_add_meal_group(request, meal_plan_id):
 
     return render(request, 'planner/meal-plan/detail.html#partial-meal-group', {'group': group})
 
-@with_user
 @require_http_methods(['DELETE'])
 def action_delete_meal_group(request, group_id):
     meal_group = get_object_or_404(MealGroup, id=group_id)
     meal_group.delete()
     return HttpResponse('')
 
-@with_user
 @require_http_methods(['POST'])
 def action_update_meal_group_name(request, group_id):
     new_name = request.POST.get('meal_group_name')
@@ -603,7 +606,6 @@ def action_update_meal_group_name(request, group_id):
     group.save()
     return HttpResponse('')
 
-@with_user
 @require_http_methods(['POST'])
 def action_update_meal_plan_name(request, meal_plan_id):
     new_name = request.POST.get('meal_plan_name')
@@ -616,7 +618,6 @@ def action_update_meal_plan_name(request, meal_plan_id):
     meal_plan.save()
     return HttpResponse('')
 
-@with_user
 @require_http_methods(['POST'])
 def action_add_shopping_item(request, shopping_list_id):
     form = forms.AddShoppingItemForm(request.POST)
@@ -632,13 +633,12 @@ def action_add_shopping_item(request, shopping_list_id):
         )
 
         response = HttpResponse()
-        response['HX-Redirect'] = f'/shopping-list/{shopping_list_id}'
+        response['HX-Redirect'] = shopping_list.get_absolute_url()
         return response
 
     else:
         return HttpResponseBadRequest(str(form.errors))
 
-@with_user
 @require_http_methods(['DELETE'])
 def action_delete_shopping_item(request, item_id):
     shopping_item = get_object_or_404(ShoppingItem, id=item_id)

@@ -1,5 +1,7 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
+
+UUID = r'(?:[^/]*-)?(?P<uuid>[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})'
 
 # Core pages
 core_patterns = [
@@ -11,7 +13,8 @@ core_patterns = [
 # Recipe routes
 recipe_patterns = [
     path("recipes/", views.recipes, name="recipes"),
-    path("recipes/<int:pk>/", views.RecipeDetailView.as_view(), name="recipe_detail"),
+    # path("recipes/<int:pk>/", views.RecipeDetailView.as_view(), name="recipe_detail"),
+    re_path(f'^recipes/{UUID}/?$', views.RecipeDetailView.as_view(), name='recipe_detail'),
     path("recipes/cards/", views.RecipeCardsListView.as_view(), name="recipe_cards_list"),
     path("recipes/compact/", views.RecipeCompactListView.as_view(), name="recipe_compact_list"),
     path("recipes/cards/page/", views.RecipeCardsPageView.as_view(), name="recipe_cards_page"),
@@ -25,14 +28,16 @@ recipe_patterns = [
 meal_plan_patterns = [
     path("meal-plan/", views.meal_plan, name="meal_plan"),
     path("meal-plan/new/", views.new_meal_plan, name="new_meal_plan"),
-    path("meal-plan/<int:pk>/", views.MealPlanDetailView.as_view(), name="meal_plan_detail"),
+    # path("meal-plan/<int:pk>/", views.MealPlanDetailView.as_view(), name="meal_plan_detail"),
+    re_path(f'^meal-plan/{UUID}/?$', views.MealPlanDetailView.as_view(), name='meal_plan_detail'),
     path("meal-plan/add-meal-modal/<int:meal_group_id>/", views.add_meal_modal, name="add_meal_modal"),
 ]
 
 # Shopping List routes
 shopping_list_patterns = [
     path("shopping-list/", views.shopping_list, name="shopping_list"),
-    path("shopping-list/<int:pk>/", views.ShoppingListDetailView.as_view(), name="shopping_list_detail"),
+    # path("shopping-list/<int:pk>/", views.ShoppingListDetailView.as_view(), name="shopping_list_detail"),
+    re_path(f'^shopping-list/{UUID}/?$', views.ShoppingListDetailView.as_view(), name='shopping_list_detail'),
 ]
 
 # HTMX Actions
