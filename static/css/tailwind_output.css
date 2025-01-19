@@ -2001,6 +2001,10 @@ tr:has(.shopping-list-checkbox:checked) td {
   animation: spin 1s linear infinite;
 }
 
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
 .select-none {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -2546,6 +2550,10 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .opacity-75 {
   opacity: 0.75;
+}
+
+.opacity-50 {
+  opacity: 0.5;
 }
 
 .shadow-lg {

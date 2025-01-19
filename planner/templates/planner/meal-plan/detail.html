@@ -12,7 +12,7 @@
 
 
 {% block body %}
-    <div class="container mx-auto max-w-5xl" x-data="{ showMealModal: false }">
+    <div class="container mx-auto max-w-5xl" x-data="{ showMealModal: false, mpr_count: {{ mpr_count }} }">
         <div class="mt-12 mb-6">
             <div class="flex flex-col sm:flex-row justify-between">
                 <div class="inline-flex order-2 sm:order-1 @click.stop">
@@ -87,9 +87,10 @@
                     <button class="magic-button"
                         hx-post="{% url 'action_generate_shopping_list' meal_plan.id %}"
                         hx-on::error="console.error('Error:', event.detail.xhr.responseText)"
-                        hx-disabled-elt=".generate-shopping-list-button"
+                        hx-disabled-elt=this
                         hx-indicator=".htmx-indicator"
-                        hx-swap="none">
+                        hx-swap="none"
+                        :disabled="mpr_count === 0">
                         ✨ Generate Shopping List
                     </button>
                     <!-- Loading Indicator -->
@@ -188,9 +189,12 @@
             </span>
         </div>
         <button class="text-gray-400 hover:text-red-500 transition-colors ml-2"
-            hx-delete="{% url 'action_delete_meal_plan_recipe' mpr.id %}"
+            hx-delete="{% url 'action_delete_mpr' mpr.id %}"
             hx-target="closest .recipe-item"
             hx-swap="outerHTML"
+            @htmx:after-request="
+                        const trigger = JSON.parse(event.detail.xhr.getResponseHeader('HX-Trigger'));
+                        mpr_count = trigger.mpr_count;"
             hx-confirm="Remove '{{ mpr.name }}'?">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>

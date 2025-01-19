@@ -311,7 +311,10 @@ class MealPlanDetailView(UserAuthMixin, DetailView):
         context['meal_plans'] = MealPlan.objects.filter(user=user).exclude(id=self.object.id).order_by('-last_viewed_at')
         
         groups = []
+        mpr_count = 0  # Initialize counter
         for group in self.object.groups.all():
+            mprs = group.mprs.all()
+            mpr_count += len(mprs)  # Count MPRs
             groups.append({
                 'id': group.id,
                 'name': group.name,
@@ -319,10 +322,11 @@ class MealPlanDetailView(UserAuthMixin, DetailView):
                     'id': mpr.id,
                     'name': mpr.recipe.title,
                     'recipe_url': mpr.recipe.get_absolute_url()
-                } for mpr in group.mprs.all()]
+                } for mpr in mprs]
             })
         
         context['groups'] = groups
+        context['mpr_count'] = mpr_count  # Add to context
         return context
 
 def new_meal_plan(request):
@@ -431,6 +435,11 @@ def action_generate_recipe_image(request, recipe_id):
 @require_http_methods(['POST'])
 def action_generate_shopping_list(request, user, meal_plan_id):
     meal_plan = get_object_or_404(MealPlan, id=meal_plan_id)
+    
+    # Check if meal plan has any recipes
+    if not MealPlanRecipe.objects.filter(meal_group__meal_plan=meal_plan).exists():
+        return HttpResponseBadRequest("Cannot generate shopping list: No meals in plan")
+        
     try:
         shopping_list = generate_shopping_list(meal_plan)
         saved_shopping_list = save_shopping_list_to_db(shopping_list, user=user)
@@ -509,15 +518,22 @@ def action_toggle_mpr(request, meal_group_id, recipe_id):
             'name': mpr.recipe.title,
             'recipe_id': mpr.recipe.id
         }
-        in_mp = True
         in_mg = True
+        in_mp = True
         response = render(request, 'planner/meal-plan/detail.html#partial-mpr', {'mpr': mpr_data})
+
+    # Get updated total MPR count
+    mpr_count = MealPlanRecipe.objects.filter(
+        meal_group__meal_plan=meal_group.meal_plan
+    ).count()
 
     response['HX-Trigger'] = json.dumps({
         'in_mg': in_mg,
-        'in_mp': in_mp
+        'in_mp': in_mp,
+        'mpr_count': mpr_count
     })
     return response
+
 
 @require_http_methods(['POST'])
 def action_update_mpr(request, mpr_id, new_group_id):
@@ -565,11 +581,19 @@ def action_delete_meal_plan(request, user, meal_plan_id):
     return response
 
 @require_http_methods(['DELETE'])
-def action_delete_meal_plan_recipe(request, mpr_id):
-    meal_plan_recipe = get_object_or_404(MealPlanRecipe, id=mpr_id)
-    meal_plan_recipe.delete()
+def action_delete_mpr(request, mpr_id):
+    mpr = get_object_or_404(MealPlanRecipe, id=mpr_id)
+    mpr.delete()
 
-    return HttpResponse('')
+    mpr_count = MealPlanRecipe.objects.filter(
+        meal_group__meal_plan=mpr.meal_group.meal_plan
+    ).count()
+
+    response = HttpResponse()
+    response['HX-Trigger'] = json.dumps({
+        'mpr_count': mpr_count
+    })
+    return response
 
 @require_http_methods(['POST'])
 def action_add_meal_group(request, meal_plan_id):

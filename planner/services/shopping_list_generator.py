@@ -40,6 +40,9 @@ def generate_shopping_list(meal_plan: MealPlan, preferred_units: str = "metric")
     Generates a shopping list in JSON format. See https://platform.openai.com/docs/guides/structured-outputs
     """
     shopping_list = load_preliminary_shopping_list(meal_plan)
+    
+    if not shopping_list:
+        raise ValueError("No recipes found in meal plan to generate shopping list")
         
     user_input = f"""
     For each ShoppingItem in the ShoppingList:

@@ -24,6 +24,7 @@
                     @htmx:after-request="
                         const trigger = JSON.parse(event.detail.xhr.getResponseHeader('HX-Trigger'));
                         in_mg = trigger.in_mg;
+                        mpr_count = trigger.mpr_count;
                         if (!in_mg) event.detail.target.lastElementChild?.remove();
                     "
                 >
