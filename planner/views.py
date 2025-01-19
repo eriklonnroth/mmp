@@ -45,6 +45,12 @@ def with_user(view_func):
 def index(request):
     return render(request, "planner/index.html")
 
+def terms(request):
+    return render(request, "planner/terms.html")
+
+def privacy_policy(request):
+    return render(request, "planner/privacy-policy.html")
+
 @with_user
 def preferences(request, user):
     initial_data = {

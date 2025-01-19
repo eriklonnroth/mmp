@@ -54,9 +54,10 @@
 {% endblock %}
 
 {% block footer %}
-<footer class="bg-gray-800 text-white py-6">
+<footer class="bg-gray-800 text-gray-300 py-6">
     <div class="container mx-auto text-center">
-        <p>&copy; 2025 Make My Meal Plan. All rights reserved.</p>
+        <p>&copy; 2025 Make My Meal Plan</p>
+        <p><a href="{% url 'terms' %}">Terms of Service</a> | <a href="{% url 'privacy_policy' %}">Privacy Policy</a></p>
     </div>
 </footer>
 {% endblock %}

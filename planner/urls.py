@@ -8,6 +8,8 @@ core_patterns = [
     path("", views.index, name="index"),
     path("settings/preferences/", views.preferences, name="preferences"),
     path("settings/account/", views.account, name="account"),
+    path("terms/", views.terms, name="terms"),
+    path("privacy-policy/", views.privacy_policy, name="privacy_policy"),
 ]
 
 # Recipe routes
