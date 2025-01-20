@@ -4,7 +4,7 @@ from .models import ShoppingItem
 
 class CreateRecipeForm(forms.Form):
     dish_idea = forms.CharField(
-        label="What would you like to cook?",
+        label="What would you like to make?",
         max_length=255,
         required=True,
         widget=forms.TextInput(attrs={

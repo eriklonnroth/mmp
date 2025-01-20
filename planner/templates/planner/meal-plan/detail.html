@@ -83,7 +83,7 @@
                     </div>
                 </div>
 
-                <div class="inline-flex order-1 sm:order-2">
+                <div class="inline-flex order-1 sm:order-2 flex-col items-center">
                     <button class="magic-button"
                         hx-post="{% url 'action_generate_shopping_list' meal_plan.id %}"
                         hx-on::error="console.error('Error:', event.detail.xhr.responseText)"
@@ -94,7 +94,7 @@
                         ✨ Generate Shopping List
                     </button>
                     <!-- Loading Indicator -->
-                    <div class="htmx-indicator flex justify-center py-4">
+                    <div class="htmx-indicator mt-2">
                         <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-500"></div>
                     </div>
                 </div>
