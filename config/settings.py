@@ -4,7 +4,7 @@ import os
 import dj_database_url
 
 
-ENV = os.getenv('ENV', 'development') # defaults to development, server is set to production
+ENV = os.getenv('ENV', 'development') # defaults to development, server is set to 'production'
 
 # Load environment variables from .env file
 if ENV == 'development':
@@ -24,11 +24,14 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = ENV == 'development'
 
-ALLOWED_HOSTS = ['makemymealplan.com', 'www.makemymealplan.com', '167.71.130.88']
-CSRF_TRUSTED_ORIGINS = ['https://makemymealplan.com', 'https://www.makemymealplan.com', 'https://167.71.130.88']
-CSRF_COOKIE_SECURE = True  # Only if using HTTPS
-SESSION_COOKIE_SECURE = True  # Only if using HTTPS
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # For reverse proxies
+if ENV == 'development':
+    ALLOWED_HOSTS = []
+else:
+    ALLOWED_HOSTS = ['makemymealplan.com', 'www.makemymealplan.com', '167.71.130.88']
+    CSRF_TRUSTED_ORIGINS = ['https://makemymealplan.com', 'https://www.makemymealplan.com', 'https://167.71.130.88']
+    CSRF_COOKIE_SECURE = True  # Only if using HTTPS
+    SESSION_COOKIE_SECURE = True  # Only if using HTTPS
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # For reverse proxies
 
 # Application definition
 
