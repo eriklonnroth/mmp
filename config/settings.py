@@ -31,6 +31,7 @@ else:
     CSRF_TRUSTED_ORIGINS = ['https://makemymealplan.com', 'https://www.makemymealplan.com', 'https://167.71.130.88']
     CSRF_COOKIE_SECURE = True  # Only if using HTTPS
     SESSION_COOKIE_SECURE = True  # Only if using HTTPS
+    SESSION_COOKIE_DOMAIN = ".makemymealplan.com"
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # For reverse proxies
 
 # Application definition
