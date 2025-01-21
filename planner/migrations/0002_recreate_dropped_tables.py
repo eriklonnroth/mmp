@@ -85,8 +85,8 @@ class Migration(migrations.Migration):
         #         'ordering': ['category__order', 'item'],
         #     },
         # ),
-        migrations.AddConstraint(
-            model_name='group',
-            constraint=models.UniqueConstraint(fields=('meal_plan', 'order'), name='unique_meal_plan_group_order'),
-        ),
+        # migrations.AddConstraint(
+        #     model_name='group',
+        #     constraint=models.UniqueConstraint(fields=('meal_plan', 'order'), name='unique_meal_plan_group_order'),
+        # ),
     ] 
