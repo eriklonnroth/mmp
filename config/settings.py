@@ -194,7 +194,11 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+
+if ENV == 'development':
+    MEDIA_ROOT = BASE_DIR / 'media'
+else:
+    MEDIA_ROOT = '/app/media'
 
 
 # Default primary key field type
