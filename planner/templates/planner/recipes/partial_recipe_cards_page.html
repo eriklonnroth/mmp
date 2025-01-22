@@ -5,7 +5,7 @@
         <div class="relative">
             <div class="pb-[100%]"></div>
             <a href="{{ recipe.get_absolute_url }}">
-                <img src="{% if recipe.image.name %}{{ recipe.image.url }}{% else %}{% static 'img/recipe_placeholder.png' %}{% endif %}" alt="{{ recipe.title }}" class="absolute inset-0 w-full h-full object-cover">
+                <img src="{% if recipe.image.name %}{{ recipe.image_medium.url }}{% else %}{% static 'img/recipe_placeholder.png' %}{% endif %}" alt="{{ recipe.title }}" class="absolute inset-0 w-full h-full object-cover">
             </a>
             <div class="absolute top-2 right-2 flex gap-2">
                 {% if recent_meal_plan %}

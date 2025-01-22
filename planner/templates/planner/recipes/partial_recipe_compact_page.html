@@ -5,7 +5,7 @@
         <div class="flex items-center p-2">
 
             <div class="relative w-16 h-16">
-                <img src="{% if recipe.image.name %}{{ recipe.image.url }}{% else %}{% static 'img/recipe_placeholder.png' %}{% endif %}" alt="{{ recipe.title }}"  class="w-full h-full object-cover">
+                <img src="{% if recipe.image.name %}{{ recipe.image_thumb.url }}{% else %}{% static 'img/recipe_placeholder.png' %}{% endif %}" alt="{{ recipe.title }}"  class="w-full h-full object-cover">
             </div>
             
             <div class="flex-grow px-4">
