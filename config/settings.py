@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -194,12 +195,23 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-MEDIA_URL = '/media/'
+# S3/DO Spaces settings
+AWS_ACCESS_KEY_ID = os.getenv('DO_SPACES_KEY')
+AWS_SECRET_ACCESS_KEY = os.getenv('DO_SPACES_SECRET')
+AWS_S3_REGION_NAME = 'lon1'
+AWS_S3_ENDPOINT_URL = 'https://lon1.digitaloceanspaces.com'
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 
 if ENV == 'development':
+    MEDIA_URL = '/media/'
     MEDIA_ROOT = BASE_DIR / 'media'
 else:
-    MEDIA_ROOT = '/app/media'
+    MEDIA_URL = 'https://erik.lon1.digitaloceanspaces.com/mmp/media/'
 
 
 # Default primary key field type
