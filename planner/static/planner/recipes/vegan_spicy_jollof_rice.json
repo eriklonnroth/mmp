@@ -1,0 +1,133 @@
+{
+  "title": "Vegan Spicy Jollof Rice",
+  "description": "A spicy and flavorful West African rice dish, made vegan-friendly, perfect for a satisfying meal or a feast with friends.",
+  "servings": 4,
+  "ingredients": [
+    {
+      "name": "Long-grain rice",
+      "quantity": "300 g"
+    },
+    {
+      "name": "Red bell pepper, diced",
+      "quantity": "1 large"
+    },
+    {
+      "name": "Green bell pepper, diced",
+      "quantity": "1 large"
+    },
+    {
+      "name": "Onion, diced",
+      "quantity": "1 large"
+    },
+    {
+      "name": "Tomato paste",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "name": "Canned tomatoes",
+      "quantity": "400 g"
+    },
+    {
+      "name": "Vegetable broth",
+      "quantity": "500 ml"
+    },
+    {
+      "name": "Coconut oil",
+      "quantity": "2 tablespoons"
+    },
+    {
+      "name": "Garlic cloves, minced",
+      "quantity": "3"
+    },
+    {
+      "name": "Ginger, grated",
+      "quantity": "1 tablespoon"
+    },
+    {
+      "name": "Scotch bonnet pepper, minced (optional)",
+      "quantity": "1"
+    },
+    {
+      "name": "Bay leaves",
+      "quantity": "2"
+    },
+    {
+      "name": "Thyme",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "name": "Paprika",
+      "quantity": "1 teaspoon"
+    },
+    {
+      "name": "Cayenne pepper",
+      "quantity": "1/2 teaspoon"
+    },
+    {
+      "name": "Salt",
+      "quantity": "to taste"
+    },
+    {
+      "name": "Black pepper",
+      "quantity": "to taste"
+    }
+  ],
+  "instructions": [
+    {
+      "section_title": "Preparation",
+      "steps": [
+        {
+          "text": "Rinse the long-grain rice under cold water until the water runs clear. Set aside."
+        },
+        {
+          "text": "Blend diced red and green bell peppers, half of the diced onion, canned tomatoes, and tomato paste in a blender until smooth. Set aside."
+        }
+      ]
+    },
+    {
+      "section_title": "Cooking the Base",
+      "steps": [
+        {
+          "text": "In a large pot, heat coconut oil over medium heat."
+        },
+        {
+          "text": "Add the remaining diced onion and sauté until translucent."
+        },
+        {
+          "text": "Stir in minced garlic and grated ginger, cooking for another minute."
+        },
+        {
+          "text": "Pour the blended pepper and tomato mixture into the pot. Cook for about 10 minutes, stirring occasionally."
+        }
+      ]
+    },
+    {
+      "section_title": "Cooking the Rice",
+      "steps": [
+        {
+          "text": "Add rinsed rice to the pot, stirring to coat with the sauce."
+        },
+        {
+          "text": "Pour in the vegetable broth; add Scotch bonnet (if using), bay leaves, thyme, paprika, cayenne pepper, salt, and black pepper."
+        },
+        {
+          "text": "Cover the pot with a tight-fitting lid and reduce the heat to low. Simmer for 25-30 minutes or until the rice is tender, stirring occasionally to prevent sticking."
+        }
+      ]
+    },
+    {
+      "section_title": "Finishing Touches",
+      "steps": [
+        {
+          "text": "Once the rice is cooked and fluffy, adjust seasoning if necessary."
+        },
+        {
+          "text": "Remove bay leaves and Scotch bonnet before serving."
+        },
+        {
+          "text": "Fluff the jollof rice with a fork, and garnish with additional diced peppers if desired."
+        }
+      ]
+    }
+  ]
+}

@@ -6,6 +6,7 @@
         <title>{% block title %}My Meal Planner{% endblock %}</title>
         {% csrf_token %}
         <link rel="stylesheet" type="text/css" href="{% static '/css/tailwind_output.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.14.3/cdn.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.3/Sortable.min.js"></script>
         <script src="https://unpkg.com/htmx.org@1.9.10"></script>
