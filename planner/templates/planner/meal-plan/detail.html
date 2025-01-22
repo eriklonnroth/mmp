@@ -83,8 +83,8 @@
                     </div>
                 </div>
 
-                <div class="inline-flex order-1 sm:order-2 flex-col items-center">
-                    <button class="magic-button"
+                <div class="inline-flex order-1 sm:order-2 flex-col items-center w-full sm:w-auto">
+                    <button class="magic-button w-full sm:w-auto"
                         hx-post="{% url 'action_generate_shopping_list' meal_plan.id %}"
                         hx-on::error="console.error('Error:', event.detail.xhr.responseText)"
                         hx-disabled-elt=this
