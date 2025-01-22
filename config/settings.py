@@ -180,6 +180,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # S3/DO Spaces settings
 AWS_ACCESS_KEY_ID = os.getenv('DO_SPACES_KEY')
 AWS_SECRET_ACCESS_KEY = os.getenv('DO_SPACES_SECRET')
+AWS_DEFAULT_ACL = 'public-read'
 AWS_S3_REGION_NAME = 'lon1'
 AWS_S3_ENDPOINT_URL = 'https://lon1.digitaloceanspaces.com'
 AWS_S3_OBJECT_PARAMETERS = {
@@ -192,6 +193,7 @@ if ENV == 'development':
 else:
     MEDIA_URL = 'https://erik.lon1.digitaloceanspaces.com/mmp/media/'
     DEFAULT_FILE_STORAGE = 'planner.services.s3_storage.MediaStorage'
+    IMAGEKIT_DEFAULT_FILE_STORAGE = 'planner.services.s3_storage.MediaStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
