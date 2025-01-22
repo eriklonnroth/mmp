@@ -4,7 +4,9 @@
     <div id="recipe-{{ recipe.id }}" class="bg-white rounded-lg shadow-md overflow-hidden">
         <div class="relative">
             <div class="pb-[100%]"></div>
-            <img src="{% if recipe.image.name %}{{ recipe.image.url }}{% else %}{% static 'img/recipe_placeholder.png' %}{% endif %}" alt="{{ recipe.title }}" class="absolute inset-0 w-full h-full object-cover">
+            <a href="{{ recipe.get_absolute_url }}">
+                <img src="{% if recipe.image.name %}{{ recipe.image.url }}{% else %}{% static 'img/recipe_placeholder.png' %}{% endif %}" alt="{{ recipe.title }}" class="absolute inset-0 w-full h-full object-cover">
+            </a>
             <div class="absolute top-2 right-2 flex gap-2">
                 {% if recent_meal_plan %}
                     {% include "planner/recipes/partial_toggle_mpr.html" with recent_meal_plan=recent_meal_plan recipe=recipe %}
@@ -13,7 +15,7 @@
             </div>
         </div>
         <div class="p-4 h-[80px]">
-            <a href="{{ recipe.get_absolute_url }}">
+            <a href="{{ recipe.get_absolute_url }}" class="block">
                 <h3 class="text-md font-semibold text-gray-900 line-clamp-2">{{ recipe.title }}</h3>
             </a>
         </div>

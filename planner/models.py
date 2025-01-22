@@ -6,6 +6,9 @@ from django.db.models.signals import post_save
 from django.utils import timezone
 from django.utils.text import slugify
 from django.urls import reverse
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
+
 
 class Preferences(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -75,11 +78,20 @@ class Recipe(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     modified_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='published')
-    image = models.ImageField(
-        upload_to=recipe_image_path,
-        blank=True,
-        null=True
+    image = models.ImageField(upload_to=recipe_image_path, blank=True, null=True)
+    image_thumb = ImageSpecField(
+        source='image',
+        processors=[ResizeToFill(128, 128)],
+        format='PNG',
+        options={'quality': 80}
     )
+    image_medium = ImageSpecField(
+        source='image',
+        processors=[ResizeToFill(512, 512)],
+        format='PNG',
+        options={'quality': 90}
+    )
+
     saved_to_my_recipes_by = models.ManyToManyField(
         User,
         through='MyRecipe',
