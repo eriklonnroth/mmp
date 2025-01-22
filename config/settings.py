@@ -192,8 +192,6 @@ if ENV == 'development':
 else:
     MEDIA_URL = 'https://erik.lon1.digitaloceanspaces.com/mmp/media/'
     DEFAULT_FILE_STORAGE = 'planner.services.s3_storage.MediaStorage'
-    IMAGEKIT_DEFAULT_FILE_STORAGE = 'planner.services.s3_storage.MediaStorage'
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
