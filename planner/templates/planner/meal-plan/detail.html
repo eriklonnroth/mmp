@@ -18,7 +18,7 @@
                 <div class="inline-flex order-2 sm:order-1 @click.stop">
                     <h1 
                         id="title"
-                        class="meal-plan-name px-2 py-1"
+                        class="meal-plan-name px-2 py-1 mb-0"
                         contenteditable
                         @keydown.enter.prevent="$el.blur()"
                         hx-post="{% url 'action_update_meal_plan_name' meal_plan.id %}"

@@ -1620,6 +1620,14 @@ tr:has(.shopping-list-checkbox:checked) td {
   top: 0.5rem;
 }
 
+.left-1\/2 {
+  left: 50%;
+}
+
+.top-full {
+  top: 100%;
+}
+
 .z-50 {
   z-index: 50;
 }
@@ -1729,6 +1737,10 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .mt-8 {
   margin-top: 2rem;
+}
+
+.mb-0 {
+  margin-bottom: 0px;
 }
 
 .line-clamp-1 {
@@ -1928,6 +1940,11 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .flex-grow {
   flex-grow: 1;
+}
+
+.-translate-x-1\/2 {
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .scale-100 {

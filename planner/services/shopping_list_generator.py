@@ -50,7 +50,7 @@ def generate_shopping_list(meal_plan: MealPlan, preferred_units: str = "metric")
         2. Where necessary, adjust the quantity to be shopping-appropriate and ensure it is in {preferred_units} units.
         3. Update the category to be one of the following: {[cat[1] for cat in DBShoppingItem.CATEGORIES]}. Derived items like "lemon zest" should be in the "Fruit & Vegetables" category since they are made from fresh produce (lemons).
         4. Leave the recipe_id field unchanged.
-        5. Remove the entire ShoppingItem if it is one of: salt, pepper, olive oil.
+        5. Remove the entire ShoppingItem if it is one of: water, salt, pepper, olive oil.
     
     ShoppingList:
     {shopping_list}
