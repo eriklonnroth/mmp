@@ -1956,6 +1956,16 @@ tr:has(.shopping-list-checkbox:checked) td {
   animation: spin 1s linear infinite;
 }
 
+@keyframes pulse {
+  50% {
+    opacity: .5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
 .select-none {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -2170,6 +2180,11 @@ tr:has(.shopping-list-checkbox:checked) td {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-gray-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-75 {
@@ -2471,12 +2486,22 @@ tr:has(.shopping-list-checkbox:checked) td {
   transition-duration: 150ms;
 }
 
+.transition-opacity {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .duration-100 {
   transition-duration: 100ms;
 }
 
 .duration-75 {
   transition-duration: 75ms;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
 }
 
 .ease-in {
