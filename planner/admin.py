@@ -36,6 +36,7 @@ class RecipeAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
     ordering = ('-modified_at',)
     list_per_page = 50
+    actions = ['make_draft', 'make_published']
 
     inlines = [IngredientInline, InstructionSectionInline]
 
@@ -59,6 +60,16 @@ class RecipeAdmin(admin.ModelAdmin):
         if not change:  # If this is a new recipe
             obj.created_by = request.user
         super().save_model(request, obj, form, change)
+
+    def make_draft(self, request, queryset):
+        updated = queryset.update(status='draft')
+        self.message_user(request, f'{updated} recipes were marked as draft.')
+    make_draft.short_description = "Mark selected recipes as draft"
+
+    def make_published(self, request, queryset):
+        updated = queryset.update(status='published')
+        self.message_user(request, f'{updated} recipes were marked as published.')
+    make_published.short_description = "Mark selected recipes as published"
 
 @admin.register(InstructionSection)
 class InstructionSectionAdmin(admin.ModelAdmin):
