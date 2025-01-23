@@ -2,14 +2,23 @@
 
 {% for recipe in recipes %}
     <div id="recipe-{{ recipe.id }}" x-data="{ in_mg: {% if meal_group.id in recipe.recent_meal_group_ids %}true{% else %}false{% endif %} }" class="bg-white w-full shadow-md rounded-lg overflow-hidden mb-2">
-        <div class="flex items-center p-2">
+        <div class="flex items-center p-2" x-data="{ img_loaded: false }">
 
-            <div class="relative w-16 h-16">
-                <img src="{% if recipe.image.name %}{{ recipe.image_thumb.url }}{% else %}{% static 'img/recipe_placeholder.png' %}{% endif %}" alt="{{ recipe.title }}"  class="w-full h-full object-cover">
+            <div class="relative w-16 h-16 bg-gray-100">
+                <!-- Show pulsing grey background while image loads -->
+                <div class="absolute inset-0 animate-pulse bg-gray-200" x-show="!img_loaded"></div>
+                <img 
+                    src="{% if recipe.image.name %}{{ recipe.image_thumb.url }}{% else %}{% static 'img/recipe_placeholder.png' %}{% endif %}" 
+                    alt="{{ recipe.title }}" 
+                    loading="lazy"
+                    class="w-full h-full object-cover transition-opacity duration-300"
+                    :class="img_loaded ? 'opacity-100' : 'opacity-0'"
+                    @load="img_loaded = true"
+                >
             </div>
             
             <div class="flex-grow px-4">
-                <a href="{{ recipe.get_absolute_url }}" class="hover:text-gray-600">
+                <a href="{{ recipe.get_absolute_url }}">
                     <h3 class="text-sm sm:text-md font-semibold text-gray-900 line-clamp-1">{{ recipe.title }}</h3>
                 </a>
             </div>

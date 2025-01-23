@@ -4,8 +4,8 @@
     <div id="recipe-{{ recipe.id }}" class="bg-white rounded-lg shadow-md overflow-hidden">
         <div class="relative" x-data="{ img_loaded: false }">
             <div class="pb-[100%] bg-gray-100"></div>
-             <!-- Show placeholder/skeleton while image loads -->
-             <div class="absolute inset-0 animate-pulse bg-gray-200"></div>
+             <!-- Show pulsing grey background while image loads -->
+             <div class="absolute inset-0 animate-pulse bg-gray-200" x-show="!img_loaded"></div>
                 
             <a href="{{ recipe.get_absolute_url }}">
                 <img 
