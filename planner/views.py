@@ -118,17 +118,10 @@ class RecipeDetailView(UserAuthMixin, DetailView):
     template_name = 'planner/recipes/detail.html'
     context_object_name = 'recipe'
 
-    def get_object(self):
-        # The URL regex captures just the UUID portion
-        return get_object_or_404(Recipe, uuid=self.kwargs['uuid'])
-
-    def get_queryset(self):
-        queryset = Recipe.objects.prefetch_related(
-            'ingredients',
-            'instruction_sections',
-            'instruction_sections__steps'
-        )
-        
+    def get_object(self, queryset=None):
+        if queryset is None:
+            queryset = self.get_queryset()
+            
         user = self.get_authenticated_user(self.request)
         
         # For In Meal Plan toggle button
@@ -157,7 +150,16 @@ class RecipeDetailView(UserAuthMixin, DetailView):
             )
         )
         
-        return queryset
+        # Get the object with the annotations
+        obj = get_object_or_404(queryset, uuid=self.kwargs['uuid'])
+        return obj
+
+    def get_queryset(self):
+        return Recipe.objects.prefetch_related(
+            'ingredients',
+            'instruction_sections',
+            'instruction_sections__steps'
+        )
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -182,6 +184,12 @@ class RecipeListView(UserAuthMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         user = self.get_authenticated_user(self.request)
+
+        # Filter recipes to only show published ones or user's own drafts
+        queryset = queryset.filter(
+            Q(status='published') | 
+            Q(status='draft', created_by=user)
+        )
 
         # For In Meal Plan toggle button
         recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-last_viewed_at').first()
@@ -416,6 +424,9 @@ def action_generate_recipe(request, user):
             )
             parsed_recipe = parse_recipe_string(recipe_string)
             saved_recipe = save_recipe_to_db(parsed_recipe, user=user, status='draft')
+            
+            # Automatically add to My Recipes
+            saved_recipe.saved_to_my_recipes_by.add(user)
             
             response = HttpResponse()
             response['HX-Redirect'] = saved_recipe.get_absolute_url()
