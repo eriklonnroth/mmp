@@ -127,7 +127,7 @@
     }
 
     .shopping-list-table th {
-        @apply px-6 py-3 text-left font-medium tracking-wider;
+        @apply px-6 py-3 text-left font-medium tracking-wider text-sm sm:text-base;
     }
 
     .shopping-list-table tbody {
@@ -135,7 +135,7 @@
     }
 
     .shopping-list-table td {
-        @apply px-6 py-4 whitespace-nowrap;
+        @apply px-6 py-4 whitespace-nowrap text-sm sm:text-base;
     }
 
     .shopping-list-table td:last-child {

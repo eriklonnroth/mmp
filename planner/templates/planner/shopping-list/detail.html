@@ -72,14 +72,14 @@
 
 
     <!-- Shopping list table -->
-    <div class="shopping-list-wrapper my-8">
-        <table class="shopping-list-table">
+    <div class="shopping-list-wrapper my-8 overflow-x-auto">
+        <table class="shopping-list-table w-full">
             <thead>
                 <tr>
                     <th scope="col" class="!text-xl w-10">☑</th>
                     <th scope="col" class="max-w-128 w-fit">Item</th>
                     <th scope="col" class="max-w-48 w-fit">Quantity</th>
-                    <th scope="col" class="max-w-128 w-fit">Used In</th>
+                    <th scope="col" class="max-w-128 w-fit hidden lg:table-cell">Used In</th>
                     <th scope="col" class="w-4"></th>
                 </tr>
             </thead>
@@ -123,7 +123,7 @@
         </td>
         <td>{{ item.name }}</td>
         <td>{{ item.quantity }}</td>
-        <td>{{ item.recipe_title }}</td>
+        <td class="hidden lg:table-cell">{{ item.recipe_title }}</td>
         <td>
             <button class="text-gray-400 hover:text-red-500 transition-colors" 
                     hx-delete="{% url 'action_delete_shopping_item' item.id %}"

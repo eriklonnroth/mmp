@@ -959,8 +959,17 @@ video {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   text-align: left;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   font-weight: 500;
   letter-spacing: 0.05em;
+}
+
+@media (min-width: 640px) {
+  .shopping-list-table th {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 }
 
 .shopping-list-table tbody > :not([hidden]) ~ :not([hidden]) {
@@ -982,6 +991,15 @@ video {
   padding-right: 1.5rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .shopping-list-table td {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 }
 
 .shopping-list-table td:last-child {
@@ -2039,6 +2057,10 @@ tr:has(.shopping-list-checkbox:checked) td {
   overflow: hidden;
 }
 
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
 .overflow-y-auto {
   overflow-y: auto;
 }
@@ -2566,12 +2588,6 @@ tr:has(.shopping-list-checkbox:checked) td {
     margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
-  .sm\:space-x-8 > :not([hidden]) ~ :not([hidden]) {
-    --tw-space-x-reverse: 0;
-    margin-right: calc(2rem * var(--tw-space-x-reverse));
-    margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
-  }
-
   .sm\:space-x-6 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-x-reverse: 0;
     margin-right: calc(1.5rem * var(--tw-space-x-reverse));
@@ -2613,6 +2629,10 @@ tr:has(.shopping-list-checkbox:checked) td {
 }
 
 @media (min-width: 1024px) {
+  .lg\:table-cell {
+    display: table-cell;
+  }
+
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
