@@ -224,7 +224,7 @@
 
     /* Toggle My Recipes Button Styles */
     .toggle-my-recipes-button, .mpr-menu-button {
-        @apply p-2 rounded-full shadow-sm  bg-gray-100/50 text-gray-400 hover:bg-gray-100/75
+        @apply p-2 rounded-full shadow-sm  bg-gray-300/50 text-gray-400 hover:bg-gray-300/75
         backdrop-blur-sm;
     }
 
@@ -234,7 +234,7 @@
 
 
     .toggle-my-recipes-button.saved {
-        @apply bg-gray-100 text-yellow-600;
+        @apply bg-gray-300/50 text-yellow-600;
     }
 
     .toggle-my-recipes-button.saved svg {
@@ -242,7 +242,7 @@
     }
 
     .mpr-menu-button.in-mp {
-        @apply bg-gray-100 text-green-600;
+        @apply bg-gray-300/50 text-green-600;
     }
 
     .mpr-menu-button.in-mp svg {

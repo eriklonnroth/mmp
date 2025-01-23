@@ -1174,7 +1174,7 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .toggle-my-recipes-button, .mpr-menu-button {
   border-radius: 9999px;
-  background-color: rgb(243 244 246 / 0.5);
+  background-color: rgb(209 213 219 / 0.5);
   padding: 0.5rem;
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
@@ -1187,7 +1187,7 @@ tr:has(.shopping-list-checkbox:checked) td {
 }
 
 .toggle-my-recipes-button:hover, .mpr-menu-button:hover {
-  background-color: rgb(243 244 246 / 0.75);
+  background-color: rgb(209 213 219 / 0.75);
 }
 
 .toggle-my-recipes-button svg, .mpr-menu-button svg {
@@ -1195,8 +1195,7 @@ tr:has(.shopping-list-checkbox:checked) td {
 }
 
 .toggle-my-recipes-button.saved {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+  background-color: rgb(209 213 219 / 0.5);
   --tw-text-opacity: 1;
   color: rgb(202 138 4 / var(--tw-text-opacity));
 }
@@ -1206,8 +1205,7 @@ tr:has(.shopping-list-checkbox:checked) td {
 }
 
 .mpr-menu-button.in-mp {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+  background-color: rgb(209 213 219 / 0.5);
   --tw-text-opacity: 1;
   color: rgb(22 163 74 / var(--tw-text-opacity));
 }
@@ -2611,11 +2609,6 @@ tr:has(.shopping-list-checkbox:checked) td {
   .sm\:text-base {
     font-size: 1rem;
     line-height: 1.5rem;
-  }
-
-  .sm\:text-lg {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
   }
 }
 
