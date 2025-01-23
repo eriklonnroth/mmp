@@ -147,8 +147,10 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_USER_DISPLAY = 'user.email'
 ACCOUNT_SESSION_REMEMBER = True
-LOGIN_REDIRECT_URL = '/meal-plan'
 ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
+
+LOGIN_REDIRECT_URL = '/meal-plan'
+
 
 
 # Internationalization
@@ -174,9 +176,6 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-
 # S3/DO Spaces settings
 AWS_ACCESS_KEY_ID = os.getenv('DO_SPACES_KEY')
 AWS_SECRET_ACCESS_KEY = os.getenv('DO_SPACES_SECRET')
@@ -192,11 +191,10 @@ if ENV == 'development':
     MEDIA_ROOT = BASE_DIR / 'media'
 else:
     MEDIA_URL = 'https://erik.lon1.digitaloceanspaces.com/mmp/media/'
-    # DEFAULT_FILE_STORAGE = 'planner.services.s3_storage.MediaStorage'
-    # IMAGEKIT_DEFAULT_FILE_STORAGE = 'planner.services.s3_storage.MediaStorage'
+
     STORAGES = {
         'default': {
-            'BACKEND': 'planner.services.s3_storage.MediaStorage',
+            'BACKEND': 'planner.services.s3_storage.MediaStorage', # uses s3boto3
         },
         'staticfiles': {
             'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage',

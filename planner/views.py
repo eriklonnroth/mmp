@@ -15,7 +15,6 @@ from planner.services.image_generator import get_or_create_recipe_image
 from planner.services.recipe_generator import generate_recipe
 from planner.services.recipe_parser import parse_recipe_string
 from planner.services.recipe_repository import save_recipe_to_db
-from planner.services.recipe_to_file import save_recipe_to_file
 from planner.services.shopping_list_generator import generate_shopping_list
 from planner.services.shopping_list_repository import save_shopping_list_to_db
 from planner import forms
@@ -43,7 +42,10 @@ def with_user(view_func):
 
 # MAIN NAV VIEWS
 def index(request):
-    return render(request, "planner/index.html")
+    if request.user.is_authenticated:
+        return redirect('meal_plan')
+    else:
+        return render(request, "planner/index.html")
 
 def terms(request):
     return render(request, "planner/terms.html")
@@ -413,7 +415,6 @@ def action_generate_recipe(request, user):
                 units=form.cleaned_data.get('units', 'metric')
             )
             parsed_recipe = parse_recipe_string(recipe_string)
-            save_recipe_to_file(parsed_recipe)
             saved_recipe = save_recipe_to_db(parsed_recipe, user=user, status='draft')
             
             response = HttpResponse()
