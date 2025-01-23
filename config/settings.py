@@ -198,9 +198,6 @@ else:
         'default': {
             'BACKEND': 'planner.services.s3_storage.MediaStorage',
         },
-        'imagekit': {
-            'BACKEND': 'planner.services.s3_storage.MediaStorage',
-        },
         'staticfiles': {
             'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
         },
