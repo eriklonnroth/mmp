@@ -115,9 +115,9 @@
             <!-- Recipe Metadata -->
             <div class="mt-8 pt-6 border-t border-gray-200">
                 <div class="flex items-center text-sm text-gray-500">
-                    <span>Created by {{ recipe.created_by.username }}</span>
+                    <span>{{ recipe.status }}</span>
                     <span class="mx-2">•</span>
-                    <span>{{ recipe.modified_at|date:"j M Y" }}</span>
+                    <span>{{ recipe.created_at|date:"j M Y" }}</span>
                 </div>
             </div>
 
