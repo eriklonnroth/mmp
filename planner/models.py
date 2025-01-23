@@ -91,19 +91,6 @@ class Recipe(models.Model):
         format='PNG',
         options={'quality': 90}
     )
-    # image_thumb = ProcessedImageField(
-    #     upload_to='/CACHE/images/',
-    #     processors=[ResizeToFill(128, 128)],
-    #     format='PNG',
-    #     options={'quality': 80}
-    # )
-    # image_medium = ProcessedImageField(
-    #     upload_to='/CACHE/images/',
-    #     processors=[ResizeToFill(512, 512)],
-    #     format='PNG',
-    #     options={'quality': 90}
-    # )
-
     saved_to_my_recipes_by = models.ManyToManyField(
         User,
         through='MyRecipe',
