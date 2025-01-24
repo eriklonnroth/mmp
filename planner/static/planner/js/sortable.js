@@ -12,6 +12,8 @@ document.addEventListener('alpine:init', () => {
             mprs.forEach(el => {
                 Sortable.create(el, {
                     group: 'mprs',
+                    delay: 150,
+                    delayOnTouchOnly: true,
                     animation: 150,
                     filter: '.add-mpr-button',
                     onEnd: function(evt) {
