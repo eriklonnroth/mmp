@@ -155,7 +155,7 @@
             </svg>
         </button>
     </div>
-    <div class="p-5">
+    <div class="p-4">
         <ul class="mpr-list space-y-2" data-group-id="{{ group.id }}">
             {% for mpr in group.mprs %}
                 {% partial partial-mpr %}
@@ -180,8 +180,11 @@
 
     <li class="recipe-item" 
         :data-recipe-id="{{ mpr.id }}">
-        <div class="text-gray-700 select-none flex items-center">
-            <a href="{{ mpr.recipe_url }}" class="flex items-center py-1">
+        <div class="select-none flex items-center">
+            <span class="text-gray-400 h-4 -ml-3 mr-2">
+            {% include "planner/svg/drag-dots.svg" %}
+            </span>
+            <a href="{{ mpr.recipe_url }}" class="flex items-center py-1 text-gray-700 touch-manipulation">
                 {{ mpr.name }}
             </a>
         </div>

@@ -1671,6 +1671,11 @@ tr:has(.shopping-list-checkbox:checked) td {
   margin-bottom: 2rem;
 }
 
+.-mx-2 {
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+}
+
 .mb-0 {
   margin-bottom: 0px;
 }
@@ -1733,6 +1738,26 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .mt-8 {
   margin-top: 2rem;
+}
+
+.ml-0 {
+  margin-left: 0px;
+}
+
+.-ml-1 {
+  margin-left: -0.25rem;
+}
+
+.-ml-2 {
+  margin-left: -0.5rem;
+}
+
+.-ml-3 {
+  margin-left: -0.75rem;
+}
+
+.-ml-4 {
+  margin-left: -1rem;
 }
 
 .line-clamp-1 {
@@ -1968,6 +1993,10 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .animate-spin {
   animation: spin 1s linear infinite;
+}
+
+.touch-manipulation {
+  touch-action: manipulation;
 }
 
 .select-none {
@@ -2287,6 +2316,10 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .pt-6 {
   padding-top: 1.5rem;
+}
+
+.pl-0 {
+  padding-left: 0px;
 }
 
 .text-left {
