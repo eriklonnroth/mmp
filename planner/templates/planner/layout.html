@@ -64,7 +64,7 @@
                             </div>
                         </div>
                     {% else %}
-                    <div class="flex space-x-2 sm:space-x-4">
+                    <div class="flex space-x-2 sm:space-x-4 h-full">
                         <a href="{% url 'account_signup' %}" class="{% if '/accounts/signup' in request.path %}nav-button-active{% else %}nav-button-inactive{% endif %} flex items-center h-full text-sm sm:text-base">Sign Up</a>    
                         <a href="{% url 'account_login' %}" class="{% if '/accounts/login' in request.path %}nav-button-active{% else %}nav-button-inactive{% endif %} flex items-center h-full text-sm sm:text-base">Sign In</a>
                     </div>

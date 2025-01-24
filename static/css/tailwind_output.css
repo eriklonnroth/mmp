@@ -1620,14 +1620,6 @@ tr:has(.shopping-list-checkbox:checked) td {
   top: 0.5rem;
 }
 
-.left-1\/2 {
-  left: 50%;
-}
-
-.top-full {
-  top: 100%;
-}
-
 .z-50 {
   z-index: 50;
 }
@@ -1642,10 +1634,6 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .col-span-full {
   grid-column: 1 / -1;
-}
-
-.-m-2 {
-  margin: -0.5rem;
 }
 
 .mx-2 {
@@ -1681,6 +1669,10 @@ tr:has(.shopping-list-checkbox:checked) td {
 .my-8 {
   margin-top: 2rem;
   margin-bottom: 2rem;
+}
+
+.mb-0 {
+  margin-bottom: 0px;
 }
 
 .mb-12 {
@@ -1741,10 +1733,6 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.mb-0 {
-  margin-bottom: 0px;
 }
 
 .line-clamp-1 {
@@ -1944,11 +1932,6 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .flex-grow {
   flex-grow: 1;
-}
-
-.-translate-x-1\/2 {
-  --tw-translate-x: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .scale-100 {
@@ -2560,11 +2543,6 @@ tr:has(.shopping-list-checkbox:checked) td {
 .hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
-}
-
-.hover\:text-gray-600:hover {
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
 .hover\:text-gray-900:hover {
