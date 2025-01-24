@@ -1,5 +1,5 @@
 {% load allauth %}
-<form method="{{ attrs.method }}" action="{{ attrs.action }}" class="auth-form">
+<form method="{{ attrs.method }}" action="{{ attrs.action }}" class="auth-form" onsubmit="this.querySelector('button[type=submit]').disabled = true">
     {% slot body %}
     {% endslot %}
     {% slot actions %}
