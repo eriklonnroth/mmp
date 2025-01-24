@@ -1,5 +1,5 @@
 from django.shortcuts import redirect
-from django.urls import resolve
+from django.urls import resolve, Resolver404
 
 class LoginRequiredMiddleware:
     def __init__(self, get_response):
@@ -19,9 +19,15 @@ class LoginRequiredMiddleware:
             # Add any other public paths here
         ]
 
-        # Check if we should enforce authentication
-        if not request.user.is_authenticated and path not in public_paths:
-            return redirect('account_login')
+        # First check if the URL is valid
+        try:
+            resolve(path)
+            # Only redirect if the URL is valid and requires authentication
+            if not request.user.is_authenticated and path not in public_paths:
+                return redirect('account_login')
+        except Resolver404:
+            # Let Django handle 404s naturally
+            pass
 
         response = self.get_response(request)
         return response
