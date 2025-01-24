@@ -7,3 +7,6 @@ class MediaStorage(S3Boto3Storage):
     bucket_name = 'erik'
     region_name = 'lon1'
     endpoint_url = 'https://lon1.digitaloceanspaces.com'
+    object_parameters = {
+        'CacheControl': 'max-age=2592000, public'  # 30 days
+    }
