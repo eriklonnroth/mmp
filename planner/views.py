@@ -1,9 +1,8 @@
 from django.contrib.auth.models import User
 from django.contrib.postgres.aggregates import ArrayAgg
-from django.db.models import Exists, OuterRef, Q
+from django.db.models import Exists, OuterRef, Q, Case, When, Value, IntegerField
 from django.shortcuts import render, redirect
-from django.http import HttpResponseBadRequest, HttpResponse
-from django.http import JsonResponse
+from django.http import HttpResponseBadRequest, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.utils.decorators import method_decorator
@@ -179,7 +178,6 @@ class RecipeListView(UserAuthMixin, ListView):
     model = Recipe
     context_object_name = 'recipes'
     paginate_by = 12
-    allowed_sort_fields = ['-created_at', 'created_at', '-modified_at', 'modified_at', 'title']
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -189,7 +187,22 @@ class RecipeListView(UserAuthMixin, ListView):
         queryset = queryset.filter(
             Q(status='published') | 
             Q(status='draft', created_by=user)
+        ).prefetch_related(
+            'saved_to_my_recipes_by',
+            'mealplanrecipe_set__meal_group__meal_plan'
         )
+
+        # Get sort parameter (default to -created_at if not specified)
+        sort_by = self.request.GET.get('sort', '-created_at')
+        
+        # Order by created_by=user first, then by the selected sort parameter
+        queryset = queryset.annotate(
+            is_creator=Case(
+                When(created_by=user, then=Value(1)),
+                default=Value(0),
+                output_field=IntegerField(),
+            )
+        ).order_by('-is_creator', sort_by)
 
         # For In Meal Plan toggle button
         recent_meal_plan = MealPlan.objects.filter(user=user).order_by('-last_viewed_at').first()
@@ -226,10 +239,6 @@ class RecipeListView(UserAuthMixin, ListView):
                 )
             )
         )
-
-        # Get sort parameter (default to -created_at if not specified)
-        sort_by = self.request.GET.get('sort', '-created_at')
-        queryset = queryset.order_by(sort_by)
 
         return queryset
 

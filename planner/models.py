@@ -82,14 +82,14 @@ class Recipe(models.Model):
     image_thumb = ImageSpecField(
         source='image',
         processors=[ResizeToFill(128, 128)],
-        format='PNG',
-        options={'quality': 80}
+        format='JPEG',
+        options={'quality': 70}
     )
     image_medium = ImageSpecField(
         source='image',
         processors=[ResizeToFill(512, 512)],
-        format='PNG',
-        options={'quality': 90}
+        format='JPEG',
+        options={'quality': 70}
     )
     saved_to_my_recipes_by = models.ManyToManyField(
         User,
@@ -184,6 +184,7 @@ class MealPlanRecipe(models.Model):
 
 
 # Shopping list models
+
 class ShoppingList(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     name = models.CharField(max_length=40, default='Shopping List')

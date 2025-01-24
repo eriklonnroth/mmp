@@ -184,9 +184,10 @@ AWS_DEFAULT_ACL = 'public-read'
 AWS_S3_REGION_NAME = 'lon1'
 AWS_S3_ENDPOINT_URL = 'https://lon1.digitaloceanspaces.com'
 AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
+    'CacheControl': 'max-age=2592000, public' # 30 days
 }
 
+# Storage settings
 if ENV == 'development':
     MEDIA_URL = '/media/'
     MEDIA_ROOT = BASE_DIR / 'media'
