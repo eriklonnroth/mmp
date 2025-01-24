@@ -180,11 +180,9 @@
 
     <li class="recipe-item" 
         :data-recipe-id="{{ mpr.id }}">
-        <div class="text-gray-700 select-none flex-grow flex items-center">
-            <a href="{{ mpr.recipe_url }}" class="flex items-center flex-1 min-w-0">
-                <span class="ml-2 min-w-0 flex-1">
-                    {{ mpr.name }}
-                </span>
+        <div class="text-gray-700 select-none flex items-center">
+            <a href="{{ mpr.recipe_url }}" class="flex items-center py-1">
+                {{ mpr.name }}
             </a>
         </div>
         <button class="text-gray-400 hover:text-red-500 transition-colors ml-2"
