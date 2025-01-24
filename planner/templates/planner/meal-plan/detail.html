@@ -181,12 +181,11 @@
     <li class="recipe-item" 
         :data-recipe-id="{{ mpr.id }}">
         <div class="text-gray-700 select-none flex-grow flex items-center">
-            <a href="{{ mpr.recipe_url }}" class="flex-shrink-0">
-                {% include "planner/svg/inspect.svg" %}
+            <a href="{{ mpr.recipe_url }}" class="flex items-center flex-1 min-w-0">
+                <span class="ml-2 min-w-0 flex-1">
+                    {{ mpr.name }}
+                </span>
             </a>
-            <span class="ml-2 min-w-0 flex-1">
-                {{ mpr.name }}
-            </span>
         </div>
         <button class="text-gray-400 hover:text-red-500 transition-colors ml-2"
             hx-delete="{% url 'action_delete_mpr' mpr.id %}"
