@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.postgres.aggregates import ArrayAgg
-from django.db.models import Exists, OuterRef, Q, Case, When, Value, IntegerField
+from django.db import transaction
+from django.db.models import Exists, F, OuterRef, Q, Case, When, Value, IntegerField
 from django.shortcuts import render, redirect
 from django.http import HttpResponseBadRequest, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
@@ -557,14 +558,27 @@ def action_toggle_mpr(request, meal_group_id, recipe_id):
 
 
 @require_http_methods(['POST'])
-def action_update_mpr(request, mpr_id, new_group_id):
-    mpr = get_object_or_404(MealPlanRecipe, id=mpr_id)
-    new_group = get_object_or_404(MealGroup, id=new_group_id)
+def action_move_mpr(request):
+    to_group = get_object_or_404(MealGroup, id=request.POST['to_group'])
+    from_group = get_object_or_404(MealGroup, id=request.POST['from_group'])
     
-    mpr.meal_group = new_group
-    mpr.save()
+    # Update moved MPR's parent group
+    to_order = [int(id) for id in request.POST['to_order'].split(',')]
+    MealPlanRecipe.objects.filter(id__in=to_order).update(meal_group=to_group)
     
+    # Update MPR order in new group
+    to_group.set_mealplanrecipe_order(to_order)
+
+    # Update old group's remaining MPR order (if not same as new group and if old group isn't empty)
+    from_order = request.POST.get('from_order')
+    if from_group.id != to_group.id and from_order:
+        from_order = [int(id) for id in request.POST['from_order'].split(',')]
+        
+        # Update MPR order in old group
+        from_group.set_mealplanrecipe_order(from_order)
+
     return HttpResponse('')
+    
 
 @with_user
 @require_http_methods(['POST'])

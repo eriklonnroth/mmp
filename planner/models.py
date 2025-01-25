@@ -176,8 +176,7 @@ class MealPlanRecipe(models.Model):
     order = models.PositiveIntegerField()
 
     class Meta:
-        unique_together = ['meal_group', 'recipe']
-        ordering = ['meal_group', 'order']
+        order_with_respect_to = 'meal_group'
 
     def __str__(self):
         return f"{self.recipe.title}"
@@ -265,22 +264,3 @@ def update_shopping_list_modified(sender, instance, **kwargs):
     if instance.shopping_list:
         instance.shopping_list.modified_at = timezone.now()
         instance.shopping_list.save(update_fields=['modified_at'])
-
-@receiver(post_save, sender=MealPlanRecipe)
-def reorder_on_delete(sender, instance, **kwargs):
-    """
-    When a MealPlanRecipe is deleted, reorder the remaining recipes in the same group
-    to ensure consecutive ordering without gaps
-    """
-    # Get all recipes in the same group with a higher order than the deleted one
-    recipes = MealPlanRecipe.objects.filter(
-        meal_group=instance.meal_group,
-        order__gt=instance.order
-    ).order_by('order')
-    
-    # Decrease their order by 1
-    for i, recipe in enumerate(recipes):
-        new_order = instance.order + i
-        if recipe.order != new_order:
-            recipe.order = new_order
-            recipe.save(update_fields=['order'])

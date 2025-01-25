@@ -179,12 +179,12 @@
 {% partialdef partial-mpr %}
 
     <li class="recipe-item" 
-        :data-recipe-id="{{ mpr.id }}">
+        data-mpr-id="{{ mpr.id }}">
         <div class="select-none flex items-center">
-            <span class="text-gray-400 h-4 -ml-3 mr-2">
+            <span class="flex-shrink-0 -ml-3 mr-2 text-gray-400 ">
             {% include "planner/svg/drag-dots.svg" %}
             </span>
-            <a href="{{ mpr.recipe_url }}" class="flex items-center py-1 text-gray-700 touch-manipulation">
+            <a href="{{ mpr.recipe_url }}" class="py-1 text-gray-700 touch-manipulation">
                 {{ mpr.name }}
             </a>
         </div>
