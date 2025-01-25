@@ -23,11 +23,6 @@ document.addEventListener('alpine:init', () => {
                         const toOrder = Array.from(evt.to.children).map(el => el.dataset.mprId);
                         const fromOrder = Array.from(evt.from.children).map(el => el.dataset.mprId);
 
-                        console.log('toGroupId', toGroupId);
-                        console.log('fromGroupId', fromGroupId);
-                        console.log('toOrder', toOrder);
-                        console.log('fromOrder', fromOrder);
-                        
                         const values = {
                             to_group: toGroupId,
                             from_group: fromGroupId,
