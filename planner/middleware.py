@@ -9,9 +9,11 @@ class LoginRequiredMiddleware:
         # Get the current path
         path = request.path_info
         
-        # Skip authentication for home page and auth-related pages
+        # Skip authentication for home page, legal pages, and auth-related pages
         public_paths = [
             '/',  # Home
+            '/terms/', # Terms & Conditions
+            '/privacy-policy/',
             '/accounts/login/',  # Login
             '/accounts/signup/',  # Signup
             '/accounts/password/reset/',  # Password reset

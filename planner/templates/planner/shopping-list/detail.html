@@ -18,7 +18,7 @@
                 @keydown.enter.prevent="$el.blur()"
                 hx-post="{% url 'action_update_shopping_list_name' shopping_list.id %}"
                 hx-trigger="blur[event.target.textContent.trim() !== '{{ shopping_list.name }}']"
-                hx-vals='js:{ "shopping_list_name": event.target.textContent.trim() }'
+                hx-vals="js:{ 'shopping_list_name': event.target.textContent.trim() }"
                 hx-swap="none">
                 {{ shopping_list.name }}
             </h1>
