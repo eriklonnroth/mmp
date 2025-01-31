@@ -117,9 +117,17 @@
 
 {% partialdef partial-item-row %}
 
-    <tr class="shopping-item-row" data-category="{{ category.code }}" data-item="{{ item.id }}">
+    <tr class="shopping-item-row" 
+        data-category="{{ category.code }}" 
+        data-item="{{ item.id }}"
+        x-data="{ is_checked: {{ item.is_checked|lower }} }">
         <td>
-            <input type="checkbox" class="shopping-list-checkbox">
+            <input type="checkbox" 
+                   class="shopping-list-checkbox"
+                   x-model="is_checked"
+                   hx-post="{% url 'action_toggle_shopping_item_checked' item.id %}"
+                   hx-trigger="change"
+                   hx-swap="none">
         </td>
         <td>{{ item.name }}</td>
         <td>{{ item.quantity }}</td>

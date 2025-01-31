@@ -1671,9 +1671,8 @@ tr:has(.shopping-list-checkbox:checked) td {
   margin-bottom: 2rem;
 }
 
-.-mx-2 {
-  margin-left: -0.5rem;
-  margin-right: -0.5rem;
+.-ml-3 {
+  margin-left: -0.75rem;
 }
 
 .mb-0 {
@@ -1738,26 +1737,6 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.ml-0 {
-  margin-left: 0px;
-}
-
-.-ml-1 {
-  margin-left: -0.25rem;
-}
-
-.-ml-2 {
-  margin-left: -0.5rem;
-}
-
-.-ml-3 {
-  margin-left: -0.75rem;
-}
-
-.-ml-4 {
-  margin-left: -1rem;
 }
 
 .line-clamp-1 {
@@ -1911,10 +1890,6 @@ tr:has(.shopping-list-checkbox:checked) td {
   width: 100%;
 }
 
-.min-w-0 {
-  min-width: 0px;
-}
-
 .min-w-full {
   min-width: 100%;
 }
@@ -1945,10 +1920,6 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .max-w-xl {
   max-width: 36rem;
-}
-
-.flex-1 {
-  flex: 1 1 0%;
 }
 
 .flex-shrink-0 {
@@ -2241,10 +2212,6 @@ tr:has(.shopping-list-checkbox:checked) td {
   padding: 1rem;
 }
 
-.p-5 {
-  padding: 1.25rem;
-}
-
 .p-6 {
   padding: 1.5rem;
 }
@@ -2316,10 +2283,6 @@ tr:has(.shopping-list-checkbox:checked) td {
 
 .pt-6 {
   padding-top: 1.5rem;
-}
-
-.pl-0 {
-  padding-left: 0px;
 }
 
 .text-left {

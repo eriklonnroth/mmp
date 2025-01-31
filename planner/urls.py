@@ -61,6 +61,7 @@ action_patterns = [
     path("action_update_shopping_list_name/<int:shopping_list_id>/", views.action_update_shopping_list_name, name="action_update_shopping_list_name"),
     path("action_add_shopping_item/<int:shopping_list_id>/", views.action_add_shopping_item, name="action_add_shopping_item"),
     path("action_delete_shopping_item/<int:item_id>/", views.action_delete_shopping_item, name="action_delete_shopping_item"),
+    path('action_toggle_shopping_item_checked/<int:item_id>/', views.action_toggle_shopping_item_checked, name='action_toggle_shopping_item_checked'),
     path("action_update_preferences/", views.action_update_preferences, name="action_update_preferences"),
     path("action_delete_account/", views.action_delete_account, name="action_delete_account"),
 ]

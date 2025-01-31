@@ -710,6 +710,14 @@ def action_delete_shopping_item(request, item_id):
     shopping_item.delete()
     return HttpResponse('')
 
+@require_http_methods(['POST'])
+def action_toggle_shopping_item_checked(request, item_id):
+    shopping_item = get_object_or_404(ShoppingItem, id=item_id)
+    shopping_item.is_checked = not shopping_item.is_checked
+    shopping_item.save()
+    return HttpResponse('')
+
+
 
 @with_user
 @require_http_methods(['POST'])
@@ -781,5 +789,6 @@ class GenerateShoppingListView(View):
             return JsonResponse({
                 "error": f"Error generating shopping list: {str(e)}"
             }, status=500)
+
 
         
